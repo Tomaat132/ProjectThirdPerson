@@ -1,0 +1,180 @@
+# depslib dependency file v1.0
+1418044328 source:c:\mingw\projects\projectthirdperson\main.cpp
+	<iostream>
+	"MyGame.hpp"
+
+1416823423 c:\mingw\projects\projectthirdperson\mygame.hpp
+	"uGE\Game.hpp"
+
+1416867835 c:\mingw\projects\projectthirdperson\uge\game.hpp
+	<SFML/Window.hpp>
+	"Body.hpp"
+	"GameObject.hpp"
+
+1418045489 c:\mingw\projects\projectthirdperson\uge\body.hpp
+	"GameObject.hpp"
+	"Utils/glm.hpp"
+	"Shader.hpp"
+
+1418045239 c:\mingw\projects\projectthirdperson\uge\gameobject.hpp
+	<string>
+	<vector>
+	"utils/glm.hpp"
+	"Shader.hpp"
+
+1416828796 c:\mingw\projects\projectthirdperson\uge\utils\glm.hpp
+	<iostream>
+	<iomanip>
+	<glm/glm.hpp>
+	<glm/ext.hpp>
+
+1418136872 c:\mingw\projects\projectthirdperson\uge\shader.hpp
+	<string>
+	<GL/glew.h>
+	"Utils/glm.hpp"
+
+1418045533 source:c:\mingw\projects\projectthirdperson\mygame.cpp
+	"MyGame.hpp"
+	"uGE/SceneManager.hpp"
+	"uGE/AssetManager.hpp"
+	"uGE/Body.hpp"
+	"uGE/Camera.hpp"
+	"uGE/Controller.hpp"
+	"uGE/GameObject.hpp"
+	"uGE/Light.hpp"
+	"uGE/Mesh.hpp"
+	"uGE/Texture.hpp"
+	"uGE/Controllers/FollowController.hpp"
+	"uGE/Controllers/WasdController.hpp"
+	"uGE/Controllers/RotateController.hpp"
+
+1418119149 c:\mingw\projects\projectthirdperson\uge\scenemanager.hpp
+	<vector>
+	<SFML/Window.hpp>
+	"Utils/glm.hpp"
+
+1416862970 c:\mingw\projects\projectthirdperson\uge\assetmanager.hpp
+	<map>
+	<string>
+
+1417817889 c:\mingw\projects\projectthirdperson\uge\camera.hpp
+	"GameObject.hpp"
+
+1418045220 c:\mingw\projects\projectthirdperson\uge\controller.hpp
+
+1417709605 c:\mingw\projects\projectthirdperson\uge\light.hpp
+	"GameObject.hpp"
+
+1418135732 c:\mingw\projects\projectthirdperson\uge\mesh.hpp
+	<cstring>
+	<string>
+	<vector>
+	<map>
+	<GL/glew.h>
+	"Utils/glm.hpp"
+	"Shader.hpp"
+
+1416854724 c:\mingw\projects\projectthirdperson\uge\texture.hpp
+	<string>
+	"GL/glew.h"
+
+1418045411 c:\mingw\projects\projectthirdperson\uge\controllers\followcontroller.hpp
+	"utils/glm.hpp"
+	"Controller.hpp"
+
+1418045411 c:\mingw\projects\projectthirdperson\uge\controllers\wasdcontroller.hpp
+	"utils/glm.hpp"
+	"Controller.hpp"
+
+1418045409 c:\mingw\projects\projectthirdperson\uge\controllers\rotatecontroller.hpp
+	"Controller.hpp"
+
+1416820311 source:c:\mingw\projects\projectthirdperson\uge\animation.cpp
+	"Animation.hpp"
+
+1416820301 c:\mingw\projects\projectthirdperson\uge\animation.hpp
+
+1416863306 source:c:\mingw\projects\projectthirdperson\uge\assetmanager.cpp
+	"AssetManager.hpp"
+	"Mesh.hpp"
+	"Texture.hpp"
+
+1418138170 source:c:\mingw\projects\projectthirdperson\uge\body.cpp
+	"Body.hpp"
+	"Mesh.hpp"
+	"Texture.hpp"
+
+1418136700 source:c:\mingw\projects\projectthirdperson\uge\camera.cpp
+	"Camera.hpp"
+
+1416820522 source:c:\mingw\projects\projectthirdperson\uge\collider.cpp
+	"Collider.hpp"
+
+1416820522 c:\mingw\projects\projectthirdperson\uge\collider.hpp
+
+1418045557 source:c:\mingw\projects\projectthirdperson\uge\controller.cpp
+	"Utils/glm.hpp"
+	"Controller.hpp"
+	"GameObject.hpp"
+
+1418045577 source:c:\mingw\projects\projectthirdperson\uge\controllers\followcontroller.cpp
+	"FollowController.hpp"
+	"GameObject.hpp"
+
+1418045601 source:c:\mingw\projects\projectthirdperson\uge\controllers\rotatecontroller.cpp
+	"RotateController.hpp"
+	"Utils/glm.hpp"
+	"GameObject.hpp"
+
+1418046158 source:c:\mingw\projects\projectthirdperson\uge\controllers\wasdcontroller.cpp
+	<SFML/Window.hpp>
+	"WasdController.hpp"
+	"GameObject.hpp"
+
+1416868322 source:c:\mingw\projects\projectthirdperson\uge\game.cpp
+	"Game.hpp"
+	"SceneManager.hpp"
+
+1418046035 source:c:\mingw\projects\projectthirdperson\uge\gameobject.cpp
+	"GameObject.hpp"
+	"Controller.hpp"
+	"Body.hpp"
+	"Collider.hpp"
+
+1418136713 source:c:\mingw\projects\projectthirdperson\uge\light.cpp
+	"Light.hpp"
+
+1418136741 source:c:\mingw\projects\projectthirdperson\uge\mesh.cpp
+	"Mesh.hpp"
+	<fstream>
+	<map>
+
+1418046718 source:c:\mingw\projects\projectthirdperson\uge\scenemanager.cpp
+	"SceneManager.hpp"
+	<GL/glew.h>
+	"Utils/glm.hpp"
+	"Camera.hpp"
+	"GameObject.hpp"
+	"Light.hpp"
+	"Shader.hpp"
+
+1418136855 source:c:\mingw\projects\projectthirdperson\uge\shader.cpp
+	"Shader.hpp"
+	<fstream>
+	<iostream>
+	<sstream>
+	"Mesh.hpp"
+	"Texture.hpp"
+
+1416854511 source:c:\mingw\projects\projectthirdperson\uge\texture.cpp
+	"Texture.hpp"
+	<iostream>
+	<SFML/Graphics.hpp>
+
+1418046577 source:c:\mingw\projects\projectthirdperson\uge\time.cpp
+	"Time.hpp"
+	<iostream>
+
+1418045736 c:\mingw\projects\projectthirdperson\uge\time.hpp
+	<SFML/System.hpp>
+
