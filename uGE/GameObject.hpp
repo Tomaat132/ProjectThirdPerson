@@ -25,7 +25,9 @@ namespace uGE {
 			std::vector< GameObject * > children;
 
 			Body 	 * _body;
-			Collider * _collider; // for future use by students
+			//
+			std::vector<Collider * > _colliders; // for future use by students
+			//
 			Controller * _controller;
 
 		public:
@@ -43,6 +45,7 @@ namespace uGE {
 			void update();
 
 			void setPosition( glm::vec3 position );
+			glm::vec3 getPosition();
 
 	};
 }
