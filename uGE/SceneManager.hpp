@@ -11,6 +11,10 @@ namespace uGE {
 	class GameObject;
 	class Light;
 	class Shader;
+
+	class CollisionDetection;
+
+	//empty space to add classes above
 	class SceneManager
 	{
 		private:
@@ -18,6 +22,8 @@ namespace uGE {
 			static Light * _light;
 			static Shader * _shader;
 			static std::vector< GameObject * > _objects;
+			//
+			static CollisionDetection * _collision;
 
 		public:
 			SceneManager();
