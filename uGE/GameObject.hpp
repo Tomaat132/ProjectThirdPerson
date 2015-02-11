@@ -45,6 +45,7 @@ namespace uGE {
 			void update();
 
 			void setPosition( glm::vec3 position );
+			std::vector<Collider *> getCollider();
 			glm::vec3 getPosition();
 
 	};

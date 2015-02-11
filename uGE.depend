@@ -198,7 +198,7 @@
 	"Utils/glm.hpp"
 	"Shader.hpp"
 
-1423649126 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\gameobject.hpp
+1423661522 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\gameobject.hpp
 	<string>
 	<vector>
 	"utils/glm.hpp"
@@ -215,7 +215,7 @@
 	<GL/glew.h>
 	"Utils/glm.hpp"
 
-1423647628 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\mygame.cpp
+1423653547 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\mygame.cpp
 	"MyGame.hpp"
 	"uGE/SceneManager.hpp"
 	"uGE/AssetManager.hpp"
@@ -226,6 +226,8 @@
 	"uGE/Light.hpp"
 	"uGE/Mesh.hpp"
 	"uGE/Texture.hpp"
+	"uGE/Colliders/SphereCollider.hpp"
+	"Collider.hpp"
 	"uGE/Controllers/FollowController.hpp"
 	"uGE/Controllers/WasdController.hpp"
 	"uGE/Controllers/RotateController.hpp"
@@ -366,15 +368,15 @@
 1423575714 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\colliders\spherecollider.cpp
 	"SphereCollider.hpp"
 
-1423575675 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\colliders\spherecollider.hpp
+1423657880 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\colliders\spherecollider.hpp
 	"..\Collider.hpp"
 
-1423647506 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.cpp
+1423650491 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.cpp
 	"CollisionDetection.hpp"
 	"GameObject.hpp"
 	<vector>
 
-1423579641 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.hpp
+1423657929 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.hpp
 	<vector>
 
 >>>>>>> 2db4b92080e01e910afe2887adbba81ea1cbd969

@@ -6,6 +6,7 @@
 namespace uGE{
 
     class GameObject;//IT WILL EXIST
+    class SphereCollider;
 
     class CollisionDetection
     {
@@ -14,6 +15,7 @@ namespace uGE{
             virtual ~CollisionDetection();
             //add stuff under here
 
+            void checkSphereCollision(SphereCollider * sphere1 , SphereCollider * sphere2);
             void update(std::vector<GameObject *> _objects);
 
         protected:
