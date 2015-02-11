@@ -7,14 +7,19 @@
 namespace uGE {
 
 	GameObject::GameObject( std::string name )
-	: transform( _transform ), _name( name ), _body( 0 ), _collider( 0 ), _controller( 0 )
+	: transform( _transform ), _name( name ), _body( 0 ), _colliders( 0 ), _controller( 0 )
 	{
 	}
 
 	GameObject::~GameObject()
 	{
 		delete _body;
-		delete _collider;
+        //
+
+		for(int i = 0; i < _colliders.size() ; i++ ){
+            delete _colliders[i];
+        }
+        //
 		delete _controller;
 	}
 
@@ -48,7 +53,7 @@ namespace uGE {
 
 	void GameObject::setCollider( Collider * collider )
 	{
-		_collider = collider;
+		_colliders.push_back( collider );
 	}
 
 	void GameObject::setController( Controller * controller )
@@ -69,6 +74,13 @@ namespace uGE {
 			GameObject * child = (GameObject *) *i;
 			child->update();
 		}
+	}//end of update();
+
+	glm::vec3 GameObject::getPosition(){
+
+        glm::vec4 position = glm::vec4( _transform[3] );//rotation,rotation,rotation, position...
+        return glm::vec3( position );//vec3 because we only need the position and not the transformation. (x,y,z (w = HM01));
+	//;
 	}
 
 

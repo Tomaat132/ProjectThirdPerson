@@ -7,13 +7,17 @@
 #include "GameObject.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
+#include "CollisionDetection.hpp"
 
 namespace uGE {
+
 
 	Camera * SceneManager::_camera;
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
 	std::vector< GameObject * > SceneManager::_objects;
+
+	CollisionDetection * SceneManager::_collision;
 
 	SceneManager::SceneManager()
 	{
@@ -78,6 +82,7 @@ namespace uGE {
 
 	void SceneManager::update()
 	{
+        _collision->update(_objects);
 		_camera->update();
 		_light->update();
 		for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
