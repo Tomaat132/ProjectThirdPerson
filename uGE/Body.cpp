@@ -1,12 +1,13 @@
 #include "Body.hpp"
 #include "Mesh.hpp"
+#include "Animation.hpp"
 #include "Texture.hpp"
 
 
 namespace uGE {
 
 	Body::Body( GameObject * parent )
-	:	_parent( parent ), _mesh( 0 ), _texture( 0 ), _shader (0)
+	:	_parent( parent ), _mesh( 0 ), _animation( 0 ), _texture( 0 ), _shader (0)
 	{
 //		parent->set( this );
 	}
@@ -33,6 +34,10 @@ namespace uGE {
 	void Body::setMesh( Mesh * mesh )
 	{
 		_mesh = mesh;
+	}
+	void Body::setAnimation( Animation * animation )
+	{
+	    _animation = animation;
 	}
 	void Body::setTexture( Texture * texture )
 	{

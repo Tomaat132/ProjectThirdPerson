@@ -2,7 +2,7 @@
 
 #include "utils/glm.hpp"
 
-#include "SphereCollider.hpp"
+#include "Colliders/SphereCollider.hpp"
 #include "GameObject.hpp"
 #include <vector>
 
