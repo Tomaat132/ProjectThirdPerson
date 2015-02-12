@@ -67,7 +67,7 @@ bool MyGame::load()
 		uGE::GameObject * player = new uGE::GameObject( "Player" );
 			uGE::Body * playerBody = new uGE::Body( player );
                     //working area.
-                    player->setCollider(new uGE::SphereCollider(player,1));
+                    player->setCollider(new uGE::SphereCollider(player,1.45f));
                     //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
@@ -78,7 +78,7 @@ bool MyGame::load()
 			enemy->setPosition( glm::vec3( -2, 0, 0 ) );
 			uGE::Body * enemyBody = new uGE::Body( enemy );
 				//working area.
-				enemy->setCollider(new uGE::SphereCollider(enemy,1));
+				enemy->setCollider(new uGE::SphereCollider(enemy,1.45f));
 				//
 				enemyBody->setMesh( uGE::Mesh::load( "Assets/suzanna.obj") );
 				enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );

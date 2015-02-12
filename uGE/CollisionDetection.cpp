@@ -50,7 +50,7 @@ namespace uGE{
 
         glm::vec3 difference = sphere2->getPosition() -  sphere1->getPosition();
 
-        float dist = difference.length();
+        float dist = glm::length( difference );
 
         if(dist <= sumOfRadius){
 
