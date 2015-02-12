@@ -16,7 +16,7 @@ namespace uGE {
 		delete _body;
         //
 
-		for(int i = 0; i < _colliders.size() ; i++ ){
+		for(unsigned int i = 0; i < _colliders.size() ; i++ ){
             delete _colliders[i];
         }
         //
@@ -57,6 +57,11 @@ namespace uGE {
 	void GameObject::setCollider( Collider * collider )
 	{
 		_colliders.push_back( collider );
+	}
+
+	std::vector<Collider *> GameObject::getCollider(){
+
+	return _colliders;
 	}
 
 	void GameObject::setController( Controller * controller )

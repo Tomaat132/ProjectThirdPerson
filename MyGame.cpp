@@ -9,6 +9,10 @@
 #include "uGE/Light.hpp"
 #include "uGE/Mesh.hpp"
 #include "uGE/Texture.hpp"
+//
+#include "uGE/Colliders/SphereCollider.hpp"
+#include "Collider.hpp"
+//
 #include "uGE/Controllers/FollowController.hpp"
 #include "uGE/Controllers/WasdController.hpp"
 #include "uGE/Controllers/RotateController.hpp"
@@ -62,6 +66,9 @@ bool MyGame::load()
 			transform = glm::scale( transform, glm::vec3( 2.0f, 1.0f, 2.0f ) );
 		uGE::GameObject * player = new uGE::GameObject( "Player" );
 			uGE::Body * playerBody = new uGE::Body( player );
+                    //working area.
+                    player->setCollider(new uGE::SphereCollider(player,1));
+                    //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
 				playerBody->setShader(uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs"));
@@ -70,6 +77,9 @@ bool MyGame::load()
         uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
 			enemy->setPosition( glm::vec3( -2, 0, 0 ) );
 			uGE::Body * enemyBody = new uGE::Body( enemy );
+				//working area.
+				enemy->setCollider(new uGE::SphereCollider(enemy,1));
+				//
 				enemyBody->setMesh( uGE::Mesh::load( "Assets/suzanna.obj") );
 				enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
 				enemy->setBody( enemyBody );

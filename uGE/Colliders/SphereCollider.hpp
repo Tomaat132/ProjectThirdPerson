@@ -1,6 +1,7 @@
 #ifndef SPHERECOLLIDER_H
 #define SPHERECOLLIDER_H
 
+
 #include "..\Collider.hpp" //the " .." means that the file is in the folder above
 
 namespace uGE {
