@@ -2,13 +2,12 @@
 #include "Controller.hpp"
 #include "Body.hpp"
 #include "Collider.hpp"
-#include "Animation.hpp"
 
 
 namespace uGE {
 
 	GameObject::GameObject( std::string name )
-	: transform( _transform ), _name( name ), _body( 0 ), _collider( 0 ), _controller( 0 ), _animation( 0 )
+	: transform( _transform ), _name( name ), _body( 0 ), _colliders( 0 ), _controller( 0 )
 	{
 	}
 
@@ -22,7 +21,6 @@ namespace uGE {
         }
         //
 		delete _controller;
-		delete _animation;
 	}
 
 	void GameObject::addChild( GameObject * child )
@@ -74,11 +72,6 @@ namespace uGE {
 	void GameObject::setPosition( glm::vec3 position )
 	{
 		_transform[3] = glm::vec4( position, 1.0f );
-	}
-
-	void GameObject::setAnimation( Animation * animation )
-	{
-	    _animation = animation;
 	}
 
 	void GameObject::update()

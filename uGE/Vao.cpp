@@ -33,7 +33,7 @@ namespace uGE {
 	GLuint Vao::createVAO( std::vector< unsigned int > indices, std::vector< glm::vec3 > vertices, std::vector< glm::vec3 > normals, std::vector< glm::vec2 > uvs )
 	{
 		GLuint vao;
-		glGenVertexArrays( 1, &vao );
+		/*glGenVertexArrays( 1, &vao );
 			glBindVertexArray( vao );
 				GLuint buffers[4];
 				glGenBuffers( 4, buffers );
@@ -55,7 +55,7 @@ namespace uGE {
 							glEnableVertexAttribArray( Shader::uv );
 								glVertexAttribPointer( Shader::uv, 2, GL_FLOAT, GL_FALSE, 0, 0 );
 
-			glBindVertexArray( 0 );
+			glBindVertexArray( 0 );*/
 		return vao;
 	}
 }

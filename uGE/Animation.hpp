@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 
-#include "GameObject.hpp"
+#include "Body.hpp"
 #include "Utils/glm.hpp"
 
 namespace uGE {

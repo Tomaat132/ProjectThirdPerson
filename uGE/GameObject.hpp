@@ -13,7 +13,6 @@ namespace uGE {
 	class Body;
 	class Collider;
 	class Controller;
-	class Animation;
 	class GameObject
 	{
 		public:
@@ -30,7 +29,6 @@ namespace uGE {
 			std::vector<Collider * > _colliders; // for future use by students
 			//
 			Controller * _controller;
-			Animation * _animation;
 
 		public:
 			GameObject( std::string name );
@@ -43,7 +41,6 @@ namespace uGE {
 			Body* getBody();
 			void setCollider( Collider * collider );
 			void setController( Controller * controller );
-			void setAnimation( Animation * animation );
 			void render( Shader * shader, glm::mat4 & parentTransform );
 			void update();
 

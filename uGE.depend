@@ -1,22 +1,22 @@
 # depslib dependency file v1.0
-1423560406 source:e:\github\project third person\main.cpp
+1423745856 source:e:\github\project third person\main.cpp
 	<iostream>
 	"MyGame.hpp"
 
 1423560406 e:\github\project third person\mygame.hpp
 	"uGE\Game.hpp"
 
-1423560406 e:\github\project third person\uge\game.hpp
+1423745857 e:\github\project third person\uge\game.hpp
 	<SFML/Window.hpp>
 	"Body.hpp"
 	"GameObject.hpp"
 
-1423560406 e:\github\project third person\uge\body.hpp
+1423746699 e:\github\project third person\uge\body.hpp
 	"GameObject.hpp"
 	"Utils/glm.hpp"
 	"Shader.hpp"
 
-1423653518 e:\github\project third person\uge\gameobject.hpp
+1423746570 e:\github\project third person\uge\gameobject.hpp
 	<string>
 	<vector>
 	"utils/glm.hpp"
@@ -33,7 +33,7 @@
 	<GL/glew.h>
 	"Utils/glm.hpp"
 
-1423666717 source:e:\github\project third person\mygame.cpp
+1423746824 source:e:\github\project third person\mygame.cpp
 	"MyGame.hpp"
 	"uGE/SceneManager.hpp"
 	"uGE/AssetManager.hpp"
@@ -45,11 +45,14 @@
 	"uGE/Light.hpp"
 	"uGE/Mesh.hpp"
 	"uGE/Texture.hpp"
+	"uGE/Colliders/SphereCollider.hpp"
+	"Collider.hpp"
 	"uGE/Controllers/FollowController.hpp"
 	"uGE/Controllers/WasdController.hpp"
 	"uGE/Controllers/RotateController.hpp"
+	"uGE/Controllers/ParticleController.hpp"
 
-1423560406 e:\github\project third person\uge\scenemanager.hpp
+1423745857 e:\github\project third person\uge\scenemanager.hpp
 	<vector>
 	<SFML/Window.hpp>
 	"Utils/glm.hpp"
@@ -90,33 +93,36 @@
 1423560406 e:\github\project third person\uge\controllers\rotatecontroller.hpp
 	"Controller.hpp"
 
-1423666432 source:e:\github\project third person\uge\animation.cpp
+1423741409 source:e:\github\project third person\uge\animation.cpp
 	"Animation.hpp"
 
-1423740197 e:\github\project third person\uge\animation.hpp
+1423746580 e:\github\project third person\uge\animation.hpp
 	<fstream>
 	<iostream>
 	<string>
-	"GameObject.hpp"
+	"Body.hpp"
 	"Utils/glm.hpp"
 
-1423560406 source:e:\github\project third person\uge\assetmanager.cpp
+1423745856 source:e:\github\project third person\uge\assetmanager.cpp
 	"AssetManager.hpp"
 	"Mesh.hpp"
 	"Texture.hpp"
 
-1423560406 source:e:\github\project third person\uge\body.cpp
+1423746783 source:e:\github\project third person\uge\body.cpp
 	"Body.hpp"
 	"Mesh.hpp"
+	"Animation.hpp"
 	"Texture.hpp"
 
 1423560406 source:e:\github\project third person\uge\camera.cpp
 	"Camera.hpp"
 
-1423560406 source:e:\github\project third person\uge\collider.cpp
+1423745856 source:e:\github\project third person\uge\collider.cpp
 	"Collider.hpp"
+	"GameObject.hpp"
 
-1423560406 e:\github\project third person\uge\collider.hpp
+1423745856 e:\github\project third person\uge\collider.hpp
+	"glm.hpp"
 
 1423560406 source:e:\github\project third person\uge\controller.cpp
 	"Utils/glm.hpp"
@@ -132,7 +138,7 @@
 	"Utils/glm.hpp"
 	"GameObject.hpp"
 
-1423560406 source:e:\github\project third person\uge\controllers\wasdcontroller.cpp
+1423745857 source:e:\github\project third person\uge\controllers\wasdcontroller.cpp
 	<SFML/Window.hpp>
 	"WasdController.hpp"
 	"GameObject.hpp"
@@ -141,12 +147,11 @@
 	"Game.hpp"
 	"SceneManager.hpp"
 
-1423652931 source:e:\github\project third person\uge\gameobject.cpp
+1423747048 source:e:\github\project third person\uge\gameobject.cpp
 	"GameObject.hpp"
 	"Controller.hpp"
 	"Body.hpp"
 	"Collider.hpp"
-	"Animation.hpp"
 
 1423560406 source:e:\github\project third person\uge\light.cpp
 	"Light.hpp"
@@ -156,16 +161,18 @@
 	<fstream>
 	<map>
 
-1423560406 source:e:\github\project third person\uge\scenemanager.cpp
+1423745857 source:e:\github\project third person\uge\scenemanager.cpp
 	"SceneManager.hpp"
 	<GL/glew.h>
 	"Utils/glm.hpp"
 	"Camera.hpp"
 	"GameObject.hpp"
+	"Body.hpp"
 	"Light.hpp"
 	"Shader.hpp"
+	"CollisionDetection.hpp"
 
-1423560406 source:e:\github\project third person\uge\shader.cpp
+1423745857 source:e:\github\project third person\uge\shader.cpp
 	"Shader.hpp"
 	<fstream>
 	<iostream>
@@ -184,4 +191,44 @@
 
 1423560406 e:\github\project third person\uge\time.hpp
 	<SFML/System.hpp>
+
+1423745856 e:\github\project third person\uge\colliders\spherecollider.hpp
+	"..\Collider.hpp"
+
+1423745857 e:\github\project third person\uge\controllers\particlecontroller.hpp
+	"utils/glm.hpp"
+	"Controller.hpp"
+
+1423745856 source:e:\github\project third person\uge\colliders\spherecollider.cpp
+	"SphereCollider.hpp"
+
+1423747000 source:e:\github\project third person\uge\collisiondetection.cpp
+	"CollisionDetection.hpp"
+	"utils/glm.hpp"
+	"Colliders/SphereCollider.hpp"
+	"GameObject.hpp"
+	<vector>
+
+1423745856 e:\github\project third person\uge\collisiondetection.hpp
+	<vector>
+
+1423745857 source:e:\github\project third person\uge\controllers\particlecontroller.cpp
+	"ParticleController.hpp"
+	"GameObject.hpp"
+	<iostream>
+
+1423560406 source:e:\github\project third person\uge\transform.cpp
+	"Transform.hpp"
+
+1423560406 e:\github\project third person\uge\transform.hpp
+	"Utils/glm.hpp"
+
+1423747221 source:e:\github\project third person\uge\vao.cpp
+	"Vao.hpp"
+	"Shader.hpp"
+
+1423560406 e:\github\project third person\uge\vao.hpp
+	<vector>
+	<GL/glew.h>
+	"Utils/glm.hpp"
 
