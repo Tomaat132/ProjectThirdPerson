@@ -29,7 +29,6 @@ namespace uGE {
 			return mesh;
 		}
 	}
-
 /*
 	Sound * AssetManager::loadSound( std::string filename ) {
 		auto found = sounds.find( filename );
@@ -42,7 +41,6 @@ namespace uGE {
 		}
 	}
 */
-
 	Texture * AssetManager::loadTexture( std::string filename ) {
 		auto found = textures.find( filename );
 		if ( found != textures.end() ) {

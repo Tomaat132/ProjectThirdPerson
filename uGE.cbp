@@ -40,6 +40,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
@@ -65,10 +66,16 @@
 		<Unit filename="uGE/Camera.hpp" />
 		<Unit filename="uGE/Collider.cpp" />
 		<Unit filename="uGE/Collider.hpp" />
+		<Unit filename="uGE/Colliders/SphereCollider.cpp" />
+		<Unit filename="uGE/Colliders/SphereCollider.hpp" />
+		<Unit filename="uGE/CollisionDetection.cpp" />
+		<Unit filename="uGE/CollisionDetection.hpp" />
 		<Unit filename="uGE/Controller.cpp" />
 		<Unit filename="uGE/Controller.hpp" />
 		<Unit filename="uGE/Controllers/FollowController.cpp" />
 		<Unit filename="uGE/Controllers/FollowController.hpp" />
+		<Unit filename="uGE/Controllers/ParticleController.cpp" />
+		<Unit filename="uGE/Controllers/ParticleController.hpp" />
 		<Unit filename="uGE/Controllers/RotateController.cpp" />
 		<Unit filename="uGE/Controllers/RotateController.hpp" />
 		<Unit filename="uGE/Controllers/WasdController.cpp" />
@@ -89,7 +96,11 @@
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />
 		<Unit filename="uGE/Time.hpp" />
+		<Unit filename="uGE/Transform.cpp" />
+		<Unit filename="uGE/Transform.hpp" />
 		<Unit filename="uGE/Utils/glm.hpp" />
+		<Unit filename="uGE/Vao.cpp" />
+		<Unit filename="uGE/Vao.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

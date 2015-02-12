@@ -14,6 +14,7 @@ namespace uGE {
 			GameObject 	* _parent;
 			Mesh 		* _mesh;
 			Texture 	* _texture;
+			Shader      * _shader;
 
 		public:
 			Body( GameObject * parent );
@@ -21,6 +22,8 @@ namespace uGE {
 			void render( Shader * shader, glm::mat4 & transform );
 			void setMesh( Mesh * mesh );
 			void setTexture( Texture * texture );
+			void setShader( Shader * shader );
+			Shader * getShader();
 	};
 }
 #endif // BODY_H

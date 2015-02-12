@@ -26,7 +26,9 @@ namespace uGE {
 			std::vector< GameObject * > children;
 
 			Body 	 * _body;
-			Collider * _collider; // for future use by students
+			//
+			std::vector<Collider * > _colliders; // for future use by students
+			//
 			Controller * _controller;
 			Animation * _animation;
 
@@ -38,14 +40,16 @@ namespace uGE {
 
 			void addChild( GameObject * child );
 			void setBody( Body * body );
+			Body* getBody();
 			void setCollider( Collider * collider );
 			void setController( Controller * controller );
 			void setAnimation( Animation * animation );
-
 			void render( Shader * shader, glm::mat4 & parentTransform );
 			void update();
 
 			void setPosition( glm::vec3 position );
+			std::vector<Collider *> getCollider();
+			glm::vec3 getPosition();
 
 	};
 }

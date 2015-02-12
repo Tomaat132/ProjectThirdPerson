@@ -5,15 +5,20 @@
 
 #include "Camera.hpp"
 #include "GameObject.hpp"
+#include "Body.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
+#include "CollisionDetection.hpp"
 
 namespace uGE {
+
 
 	Camera * SceneManager::_camera;
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
 	std::vector< GameObject * > SceneManager::_objects;
+
+	CollisionDetection * SceneManager::_collision;
 
 	SceneManager::SceneManager()
 	{
@@ -60,24 +65,34 @@ namespace uGE {
 
 	void SceneManager::render( sf::Window * window )
 	{
+         //   _shader->use(); // select the shader to use
+                glEnable( GL_DEPTH_TEST ); // must be enables after after use program
+                glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-			_shader->use(); // select the shader to use
-				glEnable( GL_DEPTH_TEST ); // must be enables after after use program
-				glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-				if( _camera ) _camera->render( _shader );
-				if( _light ) _light->render( _shader );
 
 				glm::mat4 parent; // id
 				for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
 					GameObject * object = (GameObject*) *i;
-					object->render( _shader, parent );
+					Shader* shaderToUse = NULL;
+
+					if(object->getBody() != NULL){
+                        shaderToUse = object->getBody()->getShader();
+					}
+					if(shaderToUse == NULL) shaderToUse = _shader;
+                    shaderToUse->use(); // select the shader to use
+                    //glEnable( GL_DEPTH_TEST ); // must be enables after after use program
+                    //glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+                    if( _camera ) _camera->render( shaderToUse );
+                    if( _light ) _light->render( shaderToUse );
+
+					object->render( shaderToUse, parent );
 				}
 		window->display();
 	}
 
 	void SceneManager::update()
 	{
+        _collision->update(_objects);
 		_camera->update();
 		_light->update();
 		for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
