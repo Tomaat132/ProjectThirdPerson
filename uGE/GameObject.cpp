@@ -50,7 +50,10 @@ namespace uGE {
 	{
 		_body = body;
 	}
-
+    Body* GameObject::getBody()
+	{
+		return _body;
+	}
 	void GameObject::setCollider( Collider * collider )
 	{
 		_colliders.push_back( collider );

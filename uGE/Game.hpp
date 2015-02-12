@@ -20,7 +20,6 @@ namespace uGE {
 
 			virtual bool load() = 0;
 			bool run();
-
 	};
 }
 #endif // GAME_H

@@ -6,7 +6,7 @@
 namespace uGE {
 
 	Body::Body( GameObject * parent )
-	:	_parent( parent ), _mesh( 0 ), _texture( 0 )
+	:	_parent( parent ), _mesh( 0 ), _texture( 0 ), _shader (0)
 	{
 //		parent->set( this );
 	}
@@ -18,6 +18,7 @@ namespace uGE {
 
 	void Body::render( Shader * shader, glm::mat4 & transform )
 	{
+	    //if(!_shader) return;
 		if ( shader && _mesh ) {
 			shader->setUniform( shader->model, transform );
 			shader->setTexture( shader->colorMap, _texture );
@@ -36,5 +37,13 @@ namespace uGE {
 	void Body::setTexture( Texture * texture )
 	{
 		_texture = texture;
+	}
+	void Body::setShader( Shader * shader )
+	{
+		_shader = shader;
+	}
+	Shader* Body::getShader()
+	{
+		return _shader;
 	}
 }

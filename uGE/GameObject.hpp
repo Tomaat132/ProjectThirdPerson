@@ -38,9 +38,9 @@ namespace uGE {
 
 			void addChild( GameObject * child );
 			void setBody( Body * body );
+			Body* getBody();
 			void setCollider( Collider * collider );
 			void setController( Controller * controller );
-
 			void render( Shader * shader, glm::mat4 & parentTransform );
 			void update();
 

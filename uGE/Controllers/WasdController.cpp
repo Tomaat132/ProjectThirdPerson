@@ -22,6 +22,8 @@ namespace uGE {
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) translate -= glm::vec3( 0,0,0.1 );
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate += 0.05;
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate -= 0.05;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Z ) ) translate += glm::vec3( 0,0.1,0 );
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::X ) ) translate -= glm::vec3( 0,0.1,0 );
 
 		// note, does not check collision, just moves on xz plane !
 		transform = glm::translate( transform, translate );

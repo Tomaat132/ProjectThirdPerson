@@ -88,7 +88,6 @@ namespace uGE {
 	Shader * Shader::load( std::string vs, std::string fs )
 	{
 		GLuint program = linkProgram( vs, fs );
-
 		if ( program !=  0 ) { // success
 			Shader * shader = new Shader( program );
 			//shader->_program = program;

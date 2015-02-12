@@ -40,6 +40,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
@@ -73,6 +74,8 @@
 		<Unit filename="uGE/Controller.hpp" />
 		<Unit filename="uGE/Controllers/FollowController.cpp" />
 		<Unit filename="uGE/Controllers/FollowController.hpp" />
+		<Unit filename="uGE/Controllers/ParticleController.cpp" />
+		<Unit filename="uGE/Controllers/ParticleController.hpp" />
 		<Unit filename="uGE/Controllers/RotateController.cpp" />
 		<Unit filename="uGE/Controllers/RotateController.hpp" />
 		<Unit filename="uGE/Controllers/WasdController.cpp" />
