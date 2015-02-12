@@ -2,6 +2,7 @@
 
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
+#include "uGE/Animation.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
@@ -44,6 +45,7 @@ bool MyGame::load()
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
 			player->setBody( playerBody );
 			player->setController( new uGE::WasdController( player ) );
+			player->setAnimation( uGE::Animation::LoadAnimation("eyes.mov") );
 
 		uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
 			enemy->setPosition( glm::vec3( -2, 0, 0 ) );
