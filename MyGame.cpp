@@ -2,6 +2,7 @@
 
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
+#include "uGE/Animation.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
@@ -68,13 +69,15 @@ bool MyGame::load()
 			uGE::Body * playerBody = new uGE::Body( player );
                     //working area.
                     player->setCollider(new uGE::SphereCollider(player,1.45f));
+                    playerBody->setAnimation( uGE::Animation::LoadAnimation("eyes.mov") );
                     //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
 				playerBody->setShader(uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs"));
 			player->setBody( playerBody );
 			player->setController( new uGE::WasdController( player ) );
-        uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
+
+		uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
 			enemy->setPosition( glm::vec3( -2, 0, 0 ) );
 			uGE::Body * enemyBody = new uGE::Body( enemy );
 				//working area.

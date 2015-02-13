@@ -3,8 +3,8 @@
 #include "utils/glm.hpp"
 
 #include <iostream>
+#include "Colliders/SphereCollider.hpp"
 
-#include "SphereCollider.hpp"
 #include "GameObject.hpp"
 #include <vector>
 
