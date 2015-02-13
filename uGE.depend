@@ -33,7 +33,7 @@
 	<GL/glew.h>
 	"Utils/glm.hpp"
 
-1423653547 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\mygame.cpp
+1423734002 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\mygame.cpp
 	"MyGame.hpp"
 	"uGE/SceneManager.hpp"
 	"uGE/AssetManager.hpp"
@@ -139,7 +139,7 @@
 	"Game.hpp"
 	"SceneManager.hpp"
 
-1423650374 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\gameobject.cpp
+1423665220 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\gameobject.cpp
 	"GameObject.hpp"
 	"Controller.hpp"
 	"Body.hpp"
@@ -189,11 +189,14 @@
 1423657880 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\colliders\spherecollider.hpp
 	"..\Collider.hpp"
 
-1423650491 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.cpp
+1423735631 source:c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.cpp
 	"CollisionDetection.hpp"
+	"utils/glm.hpp"
+	<iostream>
+	"SphereCollider.hpp"
 	"GameObject.hpp"
 	<vector>
 
-1423657929 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.hpp
+1423746989 c:\users\jurjen\desktop\project 3q third person\projectthirdperson\uge\collisiondetection.hpp
 	<vector>
 
