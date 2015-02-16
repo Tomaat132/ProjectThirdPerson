@@ -35,6 +35,7 @@ namespace uGE {
 				GLuint colorMap;
 				GLuint lightCount;
 				GLuint light;
+				GLuint camera;
 				GLuint time;
 
 			void use();

@@ -54,7 +54,7 @@ bool MyGame::load()
 
 bool MyGame::load()
 {
-	uGE::SceneManager::add( uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs") );
+	uGE::SceneManager::add( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs") );
 		uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 3, -8 ) );
 		uGE::Light * light = new uGE::Light( "Sun" );
 
@@ -73,7 +73,6 @@ bool MyGame::load()
                     //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
-				playerBody->setShader(uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs"));
 			player->setBody( playerBody );
 			player->setController( new uGE::WasdController( player ) );
 
@@ -86,7 +85,7 @@ bool MyGame::load()
 				enemyBody->setMesh( uGE::Mesh::load( "Assets/suzanna.obj") );
 				enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
 				enemy->setBody( enemyBody );
-				enemy->setController( new uGE::ParticleController( enemy , camera ) );
+				enemy->setController( new uGE::RotateController( enemy ) );
 
 		camera->setController( new uGE::FollowController( camera, player ) );
 
