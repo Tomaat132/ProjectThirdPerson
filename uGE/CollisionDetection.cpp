@@ -79,7 +79,7 @@ namespace uGE{
                     glm::vec3 DifferencE = colliderB->getPosition() - colliderA->getPosition() ;
 
                     //std::cout<< DifferencE << " the difference of A&B "<< std::endl;
-                    std::cout<< glm::length(DifferencE)<<"the lenght of the difference" << std::endl;
+                        //std::cout<< glm::length(DifferencE)<<"the lenght of the difference" << std::endl;
                     //std::cout<< colliderA->getPosition() << " the collider A position " << std::endl;
                     //std::cout<< colliderB->getPosition() << " colliderB position"<< std::endl;
 

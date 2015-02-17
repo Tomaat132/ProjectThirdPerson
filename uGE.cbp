@@ -94,6 +94,8 @@
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
+		<Unit filename="uGE/TestXMLdae.cpp" />
+		<Unit filename="uGE/TestXMLdae.hpp" />
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />
@@ -101,6 +103,8 @@
 		<Unit filename="uGE/Transform.cpp" />
 		<Unit filename="uGE/Transform.hpp" />
 		<Unit filename="uGE/Utils/glm.hpp" />
+		<Unit filename="uGE/Utils/tinyxml2.cpp" />
+		<Unit filename="uGE/Utils/tinyxml2.h" />
 		<Unit filename="uGE/Vao.cpp" />
 		<Unit filename="uGE/Vao.hpp" />
 		<Extensions>
