@@ -21,6 +21,7 @@ namespace uGE {
 		colorMap		= glGetUniformLocation( _program, "colorMap" );
 		lightCount	= glGetUniformLocation( _program, "lightCount" );
 		light				= glGetUniformLocation( _program, "light" );
+		camera				= glGetUniformLocation( _program, "camera" );
 		time				= glGetUniformLocation( _program, "time" );
 	}
 

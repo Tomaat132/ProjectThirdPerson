@@ -10,7 +10,7 @@ out vec4 fragment; // to screenbuffer
 
 void main() {
 
-	//fragment = diffuse * texture( colorMap, texCoord );
-	fragment = vec4(1.0, 0.0, 0.0, 1.0);
+	fragment = diffuse * texture( colorMap, texCoord );
+	//fragment = vec4(1.0, 0.0, 0.0, 1.0);
 
 }
