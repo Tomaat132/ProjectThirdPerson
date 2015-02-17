@@ -3,8 +3,8 @@
 
 namespace uGE {
 
-	Collider::Collider(GameObject * aParent)
-	:parent(aParent)//when we use collider, it is automatically aParent
+	Collider::Collider( GameObject * aParent )
+	:parent( aParent )
 	{
 		//ctor
 	}
@@ -14,10 +14,8 @@ namespace uGE {
 		//dtor
 	}
 
-	glm::vec3 Collider::getPosition() {
-
-
-
+	glm::vec3 Collider::getPosition()
+	{
         return parent->getPosition();
 	}
 }

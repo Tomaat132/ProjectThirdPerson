@@ -15,9 +15,6 @@ namespace uGE {
 
 	void Light::render( Shader * shader )
 	{
-		//std::cout << "Light" << std::endl;
-		//glm::vec3 position = glm::vec3( _transform[3] );
-		//glm::vec3 position = glm::vec3( 0,2,5 );
 		shader->setUniform( shader->light, glm::vec3( _transform[3] ) );// provide translate column of matrix
 	}
 }

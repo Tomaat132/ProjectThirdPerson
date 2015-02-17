@@ -9,6 +9,7 @@ namespace uGE {
 
 	class Collider
 	{
+
 		public:
 			Collider(GameObject * aParent);
 			virtual ~Collider();
@@ -16,10 +17,8 @@ namespace uGE {
 			glm::vec3 getPosition();
 
 		protected:
+            GameObject * parent;
 
-		GameObject * parent;
-
-		private:
 	};
 }
 #endif // COLLIDER_H

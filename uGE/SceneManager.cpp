@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 
 #include "Utils/glm.hpp"
+#include "Utils/FPS.hpp"
 
 #include "Camera.hpp"
 #include "GameObject.hpp"
@@ -59,8 +60,6 @@ namespace uGE {
 			}
 		}
 		return true; // continue running
-
-
 	}
 
 	void SceneManager::render( sf::Window * window )
@@ -92,6 +91,7 @@ namespace uGE {
 
 	void SceneManager::update()
 	{
+	    //FPS::update();
         _collision->update(_objects);
 		_camera->update();
 		_light->update();
@@ -99,7 +99,6 @@ namespace uGE {
 			GameObject * object = (GameObject*) *i;
 			object->update();
 		}
-
 	}
 
 }

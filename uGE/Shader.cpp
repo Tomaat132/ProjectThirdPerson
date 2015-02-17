@@ -38,13 +38,7 @@ namespace uGE {
 
 	void Shader::render( GLuint size )
 	{
-		//std::cout << "Shader render " << mesh->getName() << std::endl;
-//		GLuint name = mesh->getName();
-		//glBindVertexArray( name );
-		//std::cout << "Shader render between" << mesh->size() << std::endl;
-
 		glDrawElements( GL_TRIANGLES, size, GL_UNSIGNED_INT, 0 );
-		//std::cout << "Shader render after" << mesh->getName() << std::endl;
 	}
 
 	void Shader::setUniform( GLuint location, float value )

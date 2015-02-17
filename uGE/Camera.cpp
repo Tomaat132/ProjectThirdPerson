@@ -20,6 +20,5 @@ namespace uGE {
 		shader->setUniform( shader->projection, _projection );
 		shader->setUniform( shader->view, glm::inverse( _transform ) );
 		shader->setUniform( shader->camera, glm::vec3( _transform[3] )) ;
-		//std::cout<< _transform
 	}
 }

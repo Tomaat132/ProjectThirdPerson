@@ -10,7 +10,6 @@ class MyGame : public uGE::Game
 		virtual ~MyGame();
 
 		bool load();
-
 };
 
 #endif // MYGAME_H

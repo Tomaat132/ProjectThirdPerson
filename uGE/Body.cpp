@@ -9,7 +9,7 @@ namespace uGE {
 	Body::Body( GameObject * parent )
 	:	_parent( parent ), _mesh( 0 ), _animation( 0 ), _texture( 0 ), _shader (0)
 	{
-//		parent->set( this );
+        //ctor
 	}
 
 	Body::~Body()
