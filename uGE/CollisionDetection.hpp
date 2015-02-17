@@ -17,6 +17,7 @@ namespace uGE{
 
             void checkSphereCollision(SphereCollider * sphere1 , SphereCollider * sphere2);
             void update(std::vector<GameObject *> _objects);
+            void doSphereCollision(std::vector<GameObject *> _objects);
 
         protected:
         private:

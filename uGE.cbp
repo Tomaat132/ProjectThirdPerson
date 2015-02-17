@@ -19,6 +19,7 @@
 					<Add directory="uGE/" />
 					<Add directory="uGE/Managers" />
 					<Add directory="uGE/GL" />
+					<Add directory="uGE/Colliders" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -33,6 +34,7 @@
 					<Add directory="uGE/" />
 					<Add directory="uGE/Managers" />
 					<Add directory="uGE/GL" />
+					<Add directory="uGE/Colliders" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
