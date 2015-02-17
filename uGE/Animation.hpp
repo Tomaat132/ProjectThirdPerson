@@ -13,19 +13,25 @@ namespace uGE {
 
 	class Animation
 	{
+        private:
+            GLuint _name;
+		    GLuint _buffTotal[2]; //total buffers
+			std::vector< glm::vec3 > _animTrans; // all translations
+			std::vector< glm::vec3 > _animRot; // all rotations
+
 		public:
-			Animation(GameObject * _parent);
+			Animation();
 			virtual ~Animation();
+
+			GLuint getTransBuffer();
+			GLuint getRotBuffer();
+			unsigned int size();
 
 			static Animation * LoadAnimation(std::string filename);
 			void PlayAnimation();
 
-		protected:
-            glm::vec3 aniTrans[];
-            glm::vec3 aniRot[];
-
 		private:
-		    GameObject * _parent;
+		    GLuint createBuffers();
 	};
 }
 #endif // ANIMATION_H

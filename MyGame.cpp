@@ -69,7 +69,7 @@ bool MyGame::load()
 			uGE::Body * playerBody = new uGE::Body( player );
                     //working area.
                     player->setCollider(new uGE::SphereCollider(player,1.45f));
-                    playerBody->setAnimation( uGE::Animation::LoadAnimation("eyes.mov") );
+                    playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
                     //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
