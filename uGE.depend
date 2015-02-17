@@ -33,7 +33,7 @@
 	<GL/glew.h>
 	"Utils/glm.hpp"
 
-1423746824 source:e:\github\project third person\mygame.cpp
+1424166778 source:e:\github\project third person\mygame.cpp
 	"MyGame.hpp"
 	"uGE/SceneManager.hpp"
 	"uGE/AssetManager.hpp"
@@ -93,10 +93,11 @@
 1423560406 e:\github\project third person\uge\controllers\rotatecontroller.hpp
 	"Controller.hpp"
 
-1423741409 source:e:\github\project third person\uge\animation.cpp
+1424029028 source:e:\github\project third person\uge\animation.cpp
 	"Animation.hpp"
+	"Mesh.hpp"
 
-1423746580 e:\github\project third person\uge\animation.hpp
+1424027977 e:\github\project third person\uge\animation.hpp
 	<fstream>
 	<iostream>
 	<string>
@@ -202,7 +203,7 @@
 1423745856 source:e:\github\project third person\uge\colliders\spherecollider.cpp
 	"SphereCollider.hpp"
 
-1423747000 source:e:\github\project third person\uge\collisiondetection.cpp
+1424025093 source:e:\github\project third person\uge\collisiondetection.cpp
 	"CollisionDetection.hpp"
 	"utils/glm.hpp"
 	"Colliders/SphereCollider.hpp"

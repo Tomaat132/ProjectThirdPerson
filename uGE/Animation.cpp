@@ -46,7 +46,7 @@ namespace uGE {
                 sscanf(line.c_str(), "%f %f %f %f %f %f", &transl.x, &transl.y, &transl.z, &rotat.x, &rotat.y, &rotat.z);
                 translation.push_back(transl);
                 rotation.push_back(rotat);
-                //std::cout << "rotationArray: " << line << std::endl;
+                std::cout << "rotationArray: " << "." << std::endl;
                 animation->_animTrans.push_back(transl);
                 animation->_animRot.push_back(rotat);
             }

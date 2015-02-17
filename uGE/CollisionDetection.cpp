@@ -54,7 +54,7 @@ namespace uGE{
 
         if(dist <= sumOfRadius){
 
-            std::cout<< "printing collision"<< std::endl;
+            //std::cout<< "printing collision"<< std::endl;
         }
 
         //distance = (float radius2 - float radius1);
