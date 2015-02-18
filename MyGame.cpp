@@ -65,6 +65,7 @@ bool MyGame::load()
 			floor->setBody( floorBody );
 			glm::mat4 & transform = floor->transform;
 			transform = glm::scale( transform, glm::vec3( 2.0f, 1.0f, 2.0f ) );
+
 		uGE::GameObject * player = new uGE::GameObject( "Player" );
 			uGE::Body * playerBody = new uGE::Body( player );
                     //working area.
