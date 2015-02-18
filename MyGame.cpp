@@ -68,10 +68,11 @@ bool MyGame::load()
         enemy->setController( new uGE::RotateController( enemy ) );
 
     camera->setController( new uGE::FollowController( camera, player ) );
+    //camera->setController( new uGE::PlayerController( camera ) );
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
-	uGE::SceneManager::add( floor );
+	//uGE::SceneManager::add( floor );
 	uGE::SceneManager::add( player );
 	uGE::SceneManager::add( enemy );
 

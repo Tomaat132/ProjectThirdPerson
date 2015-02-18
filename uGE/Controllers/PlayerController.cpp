@@ -15,7 +15,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 0.1f;
+	    float speed = 0.4f;
 		glm::mat4 & transform = _parent->transform;
 		glm::vec3 translate;
 		float rotate = 0.0f;

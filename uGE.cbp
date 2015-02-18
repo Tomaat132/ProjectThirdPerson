@@ -20,6 +20,7 @@
 					<Add directory="uGE/Managers" />
 					<Add directory="uGE/GL" />
 					<Add directory="uGE/Colliders" />
+					<Add directory="uGE/Controllers" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -35,6 +36,7 @@
 					<Add directory="uGE/Managers" />
 					<Add directory="uGE/GL" />
 					<Add directory="uGE/Colliders" />
+					<Add directory="uGE/Controllers" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -78,6 +80,8 @@
 		<Unit filename="uGE/Controllers/FollowController.hpp" />
 		<Unit filename="uGE/Controllers/ParticleController.cpp" />
 		<Unit filename="uGE/Controllers/ParticleController.hpp" />
+		<Unit filename="uGE/Controllers/PlayerController.cpp" />
+		<Unit filename="uGE/Controllers/PlayerController.hpp" />
 		<Unit filename="uGE/Controllers/RotateController.cpp" />
 		<Unit filename="uGE/Controllers/RotateController.hpp" />
 		<Unit filename="uGE/Controllers/WasdController.cpp" />
