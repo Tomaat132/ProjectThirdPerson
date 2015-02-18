@@ -21,6 +21,7 @@ namespace uGE {
 	{
 	    //if(!_shader) return;
 		if ( shader && _mesh ) {
+            shader->setUniform( shader->outlineColor, _outlineColor );
 			shader->setUniform( shader->model, transform );
 			shader->setTexture( shader->colorMap, _texture );
 			shader->setAttrib( _mesh->getIndexBuffer() );
@@ -35,6 +36,11 @@ namespace uGE {
 	{
 		_mesh = mesh;
 	}
+
+	void Body::setOutlineColor( glm::vec4 color )
+	{
+		_outlineColor = color;
+	}
 	void Body::setAnimation( Animation * animation )
 	{
 	    _animation = animation;
@@ -43,9 +49,10 @@ namespace uGE {
 	{
 		_texture = texture;
 	}
-	void Body::setShader( Shader * shader )
+	void Body::setShader( Shader * shader)
 	{
 		_shader = shader;
+
 	}
 	Shader* Body::getShader()
 	{
