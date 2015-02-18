@@ -36,6 +36,7 @@ namespace uGE {
 				GLuint lightCount;
 				GLuint light;
 				GLuint camera;
+				GLuint outlineColor;
 				GLuint time;
 
 			void use();
@@ -48,6 +49,7 @@ namespace uGE {
 			void setUniform( GLuint location, float value );
 			void setUniform( GLuint location, glm::mat4 matrix );
 			void setUniform( GLuint location, glm::vec3 vector );
+			void setUniform( GLuint location, glm::vec4 color );
 
 			static Shader * load( std::string vs, std::string fs );
 

@@ -244,7 +244,7 @@
 	"Body.hpp"
 	"GameObject.hpp"
 
-1424080428 c:\users\user\documents\github\projectthirdperson2\uge\body.hpp
+1424097126 c:\users\user\documents\github\projectthirdperson2\uge\body.hpp
 	"GameObject.hpp"
 	"Utils/glm.hpp"
 	"Shader.hpp"
@@ -261,7 +261,7 @@
 	<glm/glm.hpp>
 	<glm/ext.hpp>
 
-1424089200 c:\users\user\documents\github\projectthirdperson2\uge\shader.hpp
+1424095221 c:\users\user\documents\github\projectthirdperson2\uge\shader.hpp
 	<string>
 	<GL/glew.h>
 	"Utils/glm.hpp"
@@ -288,7 +288,7 @@
 	<string>
 	"GL/glew.h"
 
-1424090986 source:c:\users\user\documents\github\projectthirdperson2\uge\camera.cpp
+1424096684 source:c:\users\user\documents\github\projectthirdperson2\uge\camera.cpp
 	"Camera.hpp"
 
 1423736631 c:\users\user\documents\github\projectthirdperson2\uge\camera.hpp
@@ -388,7 +388,7 @@
 1424080428 c:\users\user\documents\github\projectthirdperson2\uge\collisiondetection.hpp
 	<vector>
 
-1424089174 source:c:\users\user\documents\github\projectthirdperson2\uge\shader.cpp
+1424095832 source:c:\users\user\documents\github\projectthirdperson2\uge\shader.cpp
 	"Shader.hpp"
 	<fstream>
 	<iostream>
@@ -414,7 +414,7 @@
 1423736631 c:\users\user\documents\github\projectthirdperson2\uge\transform.hpp
 	"Utils/glm.hpp"
 
-1424092480 source:c:\users\user\documents\github\projectthirdperson2\mygame.cpp
+1424267407 source:c:\users\user\documents\github\projectthirdperson2\mygame.cpp
 	"MyGame.hpp"
 	"uGE/SceneManager.hpp"
 	"uGE/AssetManager.hpp"
@@ -431,6 +431,7 @@
 	"uGE/Controllers/FollowController.hpp"
 	"uGE/Controllers/WasdController.hpp"
 	"uGE/Controllers/RotateController.hpp"
+	"uGE/Controllers/PlayerController.hpp"
 	"uGE/Controllers/ParticleController.hpp"
 
 1424080428 c:\users\user\documents\github\projectthirdperson2\uge\animation.hpp
@@ -443,7 +444,7 @@
 1424080428 source:c:\users\user\documents\github\projectthirdperson2\uge\animation.cpp
 	"Animation.hpp"
 
-1424080428 source:c:\users\user\documents\github\projectthirdperson2\uge\body.cpp
+1424097104 source:c:\users\user\documents\github\projectthirdperson2\uge\body.cpp
 	"Body.hpp"
 	"Mesh.hpp"
 	"Animation.hpp"
@@ -465,4 +466,8 @@
 	<vector>
 	<GL/glew.h>
 	"Utils/glm.hpp"
+
+1424260501 c:\users\user\documents\github\projectthirdperson2\uge\controllers\playercontroller.hpp
+	"utils/glm.hpp"
+	"Controller.hpp"
 

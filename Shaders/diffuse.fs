@@ -6,23 +6,24 @@ uniform	mat4 projection;
 uniform	mat4 view;
 uniform	mat4 model;
 uniform vec3 camera;
+uniform vec4 outlineColor;
 
 in vec2 texCoord;
 
 in vec3 aVertex;
 in vec3 aNormal;
 
-//in float diffuse;
-
 out vec4 fragment; // to screenbuffer
 
 void main() {
-    float specular;
+    float specular = 1f;
     vec4 wLight  = vec4( light, 1.0f );
     vec4 wCamera  = vec4( camera, 1.0f );
 	vec4 wVertex = model * vec4( aVertex, 1.0f ); // transform vertex to world
 	vec4 wNormal = model * vec4( aNormal, 0.0f ); // rotate normal to world, note the 0.0 for w. Only works with symetric scaling
+
     float diffused =  dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
+    specular =  dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
 
     vec4 cameraDirection = wCamera - wVertex;
 
@@ -36,7 +37,9 @@ void main() {
     else toonish = 0.2;
     if(dot(wNormal, normalize(cameraDirection)) < 0.2) {
         toonish = 0.0f;
-        fragment = vec4(0.0, 0.0, 0.0, 1.0);        // color for the outline
+     //   if(outlineColor != 0)
+        fragment = outlineColor;        // color for the outline
+       // else fragment = vec4(0.0, 0.0, 0.0, 1.0);
     }
     else fragment = toonish * texture( colorMap, texCoord );
 

@@ -17,6 +17,7 @@ namespace uGE {
 			Animation   * _animation;
 			Texture 	* _texture;
 			Shader      * _shader;
+			glm::vec4 _outlineColor;
 
 		public:
 			Body( GameObject * parent );
@@ -25,7 +26,8 @@ namespace uGE {
 			void setMesh( Mesh * mesh );
 			void setAnimation( Animation * animation );
 			void setTexture( Texture * texture );
-			void setShader( Shader * shader );
+			void setShader( Shader * shader);
+            void setOutlineColor( glm::vec4 color );
 			Shader * getShader();
 	};
 }

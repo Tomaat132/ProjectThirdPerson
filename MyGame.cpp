@@ -17,6 +17,7 @@
 #include "uGE/Controllers/FollowController.hpp"
 #include "uGE/Controllers/WasdController.hpp"
 #include "uGE/Controllers/RotateController.hpp"
+#include "uGE/Controllers/PlayerController.hpp"
 #include "uGE/Controllers/ParticleController.hpp"
 
 
@@ -55,7 +56,7 @@ bool MyGame::load()
 bool MyGame::load()
 {
 	uGE::SceneManager::add( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs") );
-		uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 3, -8 ) );
+		uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
 		uGE::Light * light = new uGE::Light( "Sun" );
 
 		uGE::GameObject * floor = new uGE::GameObject( "Floor" );
@@ -73,8 +74,10 @@ bool MyGame::load()
                     //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+				playerBody->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs"));
+				//playerBody->setOutlineColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 			player->setBody( playerBody );
-			player->setController( new uGE::WasdController( player ) );
+			player->setController( new uGE::PlayerController( player ) );
 
 		uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
 			enemy->setPosition( glm::vec3( -2, 0, 0 ) );

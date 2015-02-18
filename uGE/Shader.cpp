@@ -22,6 +22,7 @@ namespace uGE {
 		lightCount	= glGetUniformLocation( _program, "lightCount" );
 		light				= glGetUniformLocation( _program, "light" );
 		camera				= glGetUniformLocation( _program, "camera" );
+		outlineColor			= glGetUniformLocation( _program, "outlineColor" );
 		time				= glGetUniformLocation( _program, "time" );
 	}
 
@@ -60,6 +61,11 @@ namespace uGE {
 	void Shader::setUniform( GLuint location, glm::vec3 vector )
 	{
 		glUniform3fv( location, 1, glm::value_ptr( vector ) );
+	}
+
+    void Shader::setUniform( GLuint location, glm::vec4 color )
+	{
+	    glUniform4fv( location, 1, glm::value_ptr( color ) );
 	}
 
 	void Shader::setTexture( GLuint location, Texture * texture )
