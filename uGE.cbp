@@ -86,6 +86,7 @@
 		<Unit filename="uGE/Game.hpp" />
 		<Unit filename="uGE/GameObject.cpp" />
 		<Unit filename="uGE/GameObject.hpp" />
+		<Unit filename="uGE/LevelLoader.cpp" />
 		<Unit filename="uGE/Light.cpp" />
 		<Unit filename="uGE/Light.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
@@ -103,6 +104,8 @@
 		<Unit filename="uGE/Utils/FPS.cpp" />
 		<Unit filename="uGE/Utils/FPS.hpp" />
 		<Unit filename="uGE/Utils/glm.hpp" />
+		<Unit filename="uGE/Utils/tinyxml2.cpp" />
+		<Unit filename="uGE/Utils/tinyxml2.h" />
 		<Unit filename="uGE/Vao.cpp" />
 		<Unit filename="uGE/Vao.hpp" />
 		<Extensions>

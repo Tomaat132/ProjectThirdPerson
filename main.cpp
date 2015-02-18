@@ -2,6 +2,8 @@
 
 #include "MyGame.hpp"
 
+#include "LevelLoader.hpp"
+
 int main()
 {
 	MyGame * game = new MyGame();
