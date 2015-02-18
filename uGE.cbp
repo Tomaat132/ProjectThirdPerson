@@ -87,6 +87,7 @@
 		<Unit filename="uGE/GameObject.cpp" />
 		<Unit filename="uGE/GameObject.hpp" />
 		<Unit filename="uGE/LevelLoader.cpp" />
+		<Unit filename="uGE/LevelLoader.hpp" />
 		<Unit filename="uGE/Light.cpp" />
 		<Unit filename="uGE/Light.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
@@ -95,6 +96,8 @@
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
+		<Unit filename="uGE/TestXMLdae.cpp" />
+		<Unit filename="uGE/TestXMLdae.hpp" />
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />

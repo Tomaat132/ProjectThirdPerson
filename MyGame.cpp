@@ -10,6 +10,7 @@
 #include "uGE/Light.hpp"
 #include "uGE/Mesh.hpp"
 #include "uGE/Texture.hpp"
+#include "uGE/LevelLoader.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "Collider.hpp"
@@ -36,9 +37,12 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 3, -8 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
+    uGE::LevelLoader loader = uGE::LevelLoader();
+    loader.loadLevel( "level_0_3" );
+
     uGE::GameObject * floor = new uGE::GameObject( "Floor" );
         uGE::Body * floorBody = new uGE::Body( floor );
-            floorBody->setMesh( uGE::AssetManager::loadMesh( "Assets/plane.obj" ) );
+            floorBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/plane.obj" ) );
             floorBody->setTexture( uGE::AssetManager::loadTexture( "Assets/land.jpg") );
         floor->setBody( floorBody );
         glm::mat4 & transform = floor->transform;
@@ -47,7 +51,7 @@ bool MyGame::load()
     uGE::GameObject * player = new uGE::GameObject( "Player" );
         uGE::Body * playerBody = new uGE::Body( player );
         playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
-            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
         player->setCollider(new uGE::SphereCollider(player,1.45f));
@@ -56,7 +60,7 @@ bool MyGame::load()
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
         uGE::Body * enemyBody = new uGE::Body( enemy );
-            enemyBody->setMesh( uGE::Mesh::load( "Assets/suzanna.obj") );
+            enemyBody->setMesh( uGE::Mesh::load( "Assets/Models/suzanna.obj") );
             enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         enemy->setBody( enemyBody );
         enemy->setCollider(new uGE::SphereCollider(enemy,1.45f));
