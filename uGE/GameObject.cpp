@@ -2,7 +2,6 @@
 #include "Controller.hpp"
 #include "Body.hpp"
 #include "Collider.hpp"
-#include "Animation.hpp"
 
 
 namespace uGE {
@@ -22,15 +21,9 @@ namespace uGE {
         }
 	}
 
-	void GameObject::addChild( GameObject * child ) //Use this to build your scattered pieces into your GameObject (eyes, feet, etc.)
+	void GameObject::addChild( GameObject * child )
 	{
 		children.push_back( child );
-	}
-
-	GameObject * GameObject::getChildWithName(std::string childName)
-	{
-	    //return the child however that works...
-	    return 0;
 	}
 
 	std::string GameObject::getName()
@@ -73,11 +66,6 @@ namespace uGE {
 		_controller = controller;
 	}
 
-	void GameObject::setAnimTransform( glm::mat4 & animTransform )
-	{
-	    _animTransform = animTransform;
-	}
-
 	void GameObject::setPosition( glm::vec3 position )
 	{
 		_transform[3] = glm::vec4( position, 1.0f );
@@ -86,15 +74,6 @@ namespace uGE {
 	void GameObject::update()
 	{
 		if ( _controller ) _controller->update();
-		if ( this->getName() == "Player" )
-        {
-            if(this->getBody()->getAnimation())
-            {
-                //std::cout << "Player+Body+Animation" << std::endl;
-                this->getBody()->getAnimation()->update();
-                //std::cout << this->getBody()->getAnimation() << std::endl;
-            }
-        }
 
 		for ( auto i = children.begin(); i != children.end(); ++i ) {
 			GameObject * child = (GameObject *) *i;
