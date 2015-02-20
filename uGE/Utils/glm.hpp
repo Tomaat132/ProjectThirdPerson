@@ -7,7 +7,6 @@
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
-#include <glm/gtx/transform.hpp>
 
 /* the functions:
  * std::ostream & operator << ( std::ostream & out, glm::vec3 v );
