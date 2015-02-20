@@ -2,13 +2,13 @@
 
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
+#include "uGE/Animation.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
 #include "uGE/GameObject.hpp"
 #include "uGE/Light.hpp"
 #include "uGE/Mesh.hpp"
-#include "uGE/Animation.hpp"
 #include "uGE/Texture.hpp"
 #include "uGE/LevelLoader.hpp"
 //
@@ -41,22 +41,22 @@ bool MyGame::load()
     uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "level_0_3" );
 
-		uGE::GameObject * floor = new uGE::GameObject( "Floor" );
-			uGE::Body * floorBody = new uGE::Body( floor );
-				floorBody->setMesh( uGE::AssetManager::loadMesh( "Assets/plane.obj" ) );
-				floorBody->setTexture( uGE::AssetManager::loadTexture( "Assets/land.jpg") );
-			floor->setBody( floorBody );
-			glm::mat4 & transform = floor->transform;
-			transform = glm::scale( transform, glm::vec3( 2.0f, 1.0f, 2.0f ) );
+    uGE::GameObject * floor = new uGE::GameObject( "Floor" );
+        uGE::Body * floorBody = new uGE::Body( floor );
+            floorBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/plane.obj" ) );
+            floorBody->setTexture( uGE::AssetManager::loadTexture( "Assets/land.jpg") );
+        floor->setBody( floorBody );
+        glm::mat4 & transform = floor->transform;
+        transform = glm::scale( transform, glm::vec3( 2.0f, 1.0f, 2.0f ) );
 
-		uGE::GameObject * player = new uGE::GameObject( "Player" );
-			uGE::Body * playerBody = new uGE::Body( player );
-				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
-                playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
-				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
-			player->setBody( playerBody );
-			player->setCollider(new uGE::SphereCollider(player,1.45f));
-			player->setController( new uGE::WasdController( player ) );
+    uGE::GameObject * player = new uGE::GameObject( "Player" );
+        uGE::Body * playerBody = new uGE::Body( player );
+        playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+        player->setBody( playerBody );
+        player->setCollider(new uGE::SphereCollider(player,1.45f));
+        player->setController( new uGE::PlayerController( player ) );
 
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
