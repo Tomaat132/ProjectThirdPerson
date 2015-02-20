@@ -11,7 +11,6 @@ namespace uGE {
 		std::cout << "Max textures size " << GL_MAX_TEXTURE_SIZE << std::endl;
 		std::cout << "GLSL version " << glGetString( GL_SHADING_LANGUAGE_VERSION ) << std::endl;
 
-
 		glEnable( GL_DEPTH_TEST );
 		glClearColor( 0.1f, 0.1f, 0.3f, 1.0f );
 	}

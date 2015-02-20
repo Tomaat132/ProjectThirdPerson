@@ -22,6 +22,7 @@ namespace uGE {
 		lightCount	= glGetUniformLocation( _program, "lightCount" );
 		light				= glGetUniformLocation( _program, "light" );
 		camera				= glGetUniformLocation( _program, "camera" );
+		outlineColor			= glGetUniformLocation( _program, "outlineColor" );
 		time				= glGetUniformLocation( _program, "time" );
 	}
 
@@ -38,13 +39,7 @@ namespace uGE {
 
 	void Shader::render( GLuint size )
 	{
-		//std::cout << "Shader render " << mesh->getName() << std::endl;
-//		GLuint name = mesh->getName();
-		//glBindVertexArray( name );
-		//std::cout << "Shader render between" << mesh->size() << std::endl;
-
 		glDrawElements( GL_TRIANGLES, size, GL_UNSIGNED_INT, 0 );
-		//std::cout << "Shader render after" << mesh->getName() << std::endl;
 	}
 
 	void Shader::setUniform( GLuint location, float value )
@@ -60,6 +55,11 @@ namespace uGE {
 	void Shader::setUniform( GLuint location, glm::vec3 vector )
 	{
 		glUniform3fv( location, 1, glm::value_ptr( vector ) );
+	}
+
+    void Shader::setUniform( GLuint location, glm::vec4 color )
+	{
+	    glUniform4fv( location, 1, glm::value_ptr( color ) );
 	}
 
 	void Shader::setTexture( GLuint location, Texture * texture )

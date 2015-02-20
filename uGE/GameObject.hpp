@@ -24,11 +24,9 @@ namespace uGE {
 			glm::mat4 _animTransform;
 
 			std::vector< GameObject * > children;
+			std::vector<Collider * > _colliders;
 
-			Body 	 * _body;
-			//
-			std::vector<Collider * > _colliders; // for future use by students
-			//
+			Body * _body;
 			Controller * _controller;
 
 		public:
@@ -48,7 +46,7 @@ namespace uGE {
 			void update();
 
 			void setPosition( glm::vec3 position );
-			std::vector<Collider *> getCollider();
+			std::vector<Collider *> getColliders();
 			glm::vec3 getPosition();
 
 	};

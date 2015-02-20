@@ -5,7 +5,7 @@
 
 namespace uGE{
 
-    class GameObject;//IT WILL EXIST
+    class GameObject;
     class SphereCollider;
 
     class CollisionDetection

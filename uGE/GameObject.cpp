@@ -8,20 +8,18 @@
 namespace uGE {
 
 	GameObject::GameObject( std::string name )
-	: transform( _transform ), _name( name ), _body( 0 ), _colliders( 0 ), _controller( 0 )
+	: transform( _transform ), _name( name ), _colliders( 0 ), _body( 0 ), _controller( 0 )
 	{
 	}
 
 	GameObject::~GameObject()
 	{
 		delete _body;
-        //
+		delete _controller;
 
 		for(unsigned int i = 0; i < _colliders.size() ; i++ ){
             delete _colliders[i];
         }
-        //
-		delete _controller;
 	}
 
 	void GameObject::addChild( GameObject * child ) //Use this to build your scattered pieces into your GameObject (eyes, feet, etc.)
@@ -43,7 +41,6 @@ namespace uGE {
 
 	void GameObject::render( Shader * shader, glm::mat4 & parentTransform )
 	{
-		//std::cout << "Rendering " << _name << std::endl;
 		glm::mat4 transform = parentTransform * _transform;
 		if ( _body ) _body->render( shader, transform );
 
@@ -66,9 +63,9 @@ namespace uGE {
 		_colliders.push_back( collider );
 	}
 
-	std::vector<Collider *> GameObject::getCollider(){
-
-	return _colliders;
+	std::vector<Collider *> GameObject::getColliders()
+	{
+        return _colliders;
 	}
 
 	void GameObject::setController( Controller * controller )
@@ -103,13 +100,12 @@ namespace uGE {
 			GameObject * child = (GameObject *) *i;
 			child->update();
 		}
-	}//end of update();
+	} //end of update();
 
-	glm::vec3 GameObject::getPosition(){
-
-        glm::vec4 position = glm::vec4( _transform[3] );//rotation,rotation,rotation, position...
-        return glm::vec3( position );//vec3 because we only need the position and not the transformation. (x,y,z (w = HM01));
-	//;
+	glm::vec3 GameObject::getPosition()
+	{
+        glm::vec4 position = glm::vec4( _transform[3] );
+        return glm::vec3( position );
 	}
 
 
