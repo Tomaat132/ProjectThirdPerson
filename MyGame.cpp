@@ -2,13 +2,13 @@
 
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
-#include "uGE/Animation.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
 #include "uGE/GameObject.hpp"
 #include "uGE/Light.hpp"
 #include "uGE/Mesh.hpp"
+#include "uGE/Animation.hpp"
 #include "uGE/Texture.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
@@ -70,9 +70,9 @@ bool MyGame::load()
 			uGE::Body * playerBody = new uGE::Body( player );
                     //working area.
                     player->setCollider(new uGE::SphereCollider(player,1.45f));
-                    playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
                     //
 				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
+                playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
 				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
 			player->setBody( playerBody );
 			player->setController( new uGE::WasdController( player ) );

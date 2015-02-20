@@ -76,7 +76,7 @@ namespace uGE{
                     //std::cout<< colliderA->getRadius() << " Collider A after everything"<< std::endl;
                     //std::cout<< colliderB->getRadius() << "Collider B for scale" << std::endl;
 
-                    glm::vec3 DifferencE = colliderB->getPosition() - colliderA->getPosition() ;
+                    //glm::vec3 DifferencE = colliderB->getPosition() - colliderA->getPosition() ;
 
                     //std::cout<< DifferencE << " the difference of A&B "<< std::endl;
                    // std::cout<< glm::length(DifferencE)<<"the lenght of the difference" << std::endl;
