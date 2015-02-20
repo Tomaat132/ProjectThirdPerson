@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="uGE\AssetManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="uGE\Body.hpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="397" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="uGE\CollisionDetection.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1089" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="uGE\Body.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1093" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="uGE\Utils\glm.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="233" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="uGE\Animation.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3314" topLine="86" />
-		</Cursor>
-	</File>
-	<File name="MyGame.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2838" topLine="53" />
+			<Cursor1 position="561" topLine="3" />
 		</Cursor>
 	</File>
 	<File name="uGE\Controllers\WasdController.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -36,9 +11,24 @@
 			<Cursor1 position="1074" topLine="7" />
 		</Cursor>
 	</File>
+	<File name="uGE\Animation.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="627" topLine="18" />
+		</Cursor>
+	</File>
 	<File name="uGE\Game.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="573" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="uGE\AssetManager.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="397" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="uGE\Body.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1093" topLine="24" />
 		</Cursor>
 	</File>
 	<File name="uGE\GameObject.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -51,6 +41,16 @@
 			<Cursor1 position="942" topLine="18" />
 		</Cursor>
 	</File>
+	<File name="uGE\Animation.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3314" topLine="86" />
+		</Cursor>
+	</File>
+	<File name="MyGame.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2838" topLine="53" />
+		</Cursor>
+	</File>
 	<File name="uGE\Mesh.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="198" topLine="132" />
@@ -61,19 +61,19 @@
 			<Cursor1 position="2502" topLine="75" />
 		</Cursor>
 	</File>
-	<File name="uGE\Body.hpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="561" topLine="3" />
-		</Cursor>
-	</File>
 	<File name="uGE\Texture.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="225" topLine="14" />
 		</Cursor>
 	</File>
-	<File name="uGE\Animation.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="uGE\CollisionDetection.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="627" topLine="18" />
+			<Cursor1 position="1089" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="uGE\Utils\glm.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="233" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
