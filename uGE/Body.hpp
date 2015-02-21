@@ -27,6 +27,7 @@ namespace uGE {
 			void render( Shader * shader, glm::mat4 & transform );
 			void setMesh( Mesh * mesh );
 			void setAnimation( Animation * animation );
+			Animation * getAnimation();
 			void setTexture( Texture * texture );
 			void setShader( Shader * shader);
             void setOutlineColor( glm::vec4 color );
