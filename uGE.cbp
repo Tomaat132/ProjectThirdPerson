@@ -59,6 +59,8 @@
 		<Unit filename="MyGame.hpp" />
 		<Unit filename="Shaders/basic.fs" />
 		<Unit filename="Shaders/basic.vs" />
+		<Unit filename="Shaders/diffuse.fs" />
+		<Unit filename="Shaders/diffuse.vs" />
 		<Unit filename="main.cpp" />
 		<Unit filename="uGE/Animation.cpp" />
 		<Unit filename="uGE/Animation.hpp" />

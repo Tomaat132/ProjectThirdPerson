@@ -29,8 +29,12 @@ namespace uGE {
 
 	GameObject * GameObject::getChildWithName(std::string childName)
 	{
-	    //return the child however that works...
-	    return 0;
+	    for( GameObject* child : children ) {
+            if( child->getName() == childName ) {
+                return child;
+            }
+	    }
+	    return NULL;
 	}
 
 	std::string GameObject::getName()
@@ -100,14 +104,12 @@ namespace uGE {
 			GameObject * child = (GameObject *) *i;
 			child->update();
 		}
-	} //end of update();
+	}
 
 	glm::vec3 GameObject::getPosition()
 	{
         glm::vec4 position = glm::vec4( _transform[3] );
         return glm::vec3( position );
 	}
-
-
 
 }

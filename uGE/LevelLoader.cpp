@@ -11,26 +11,25 @@
 #include "SceneManager.hpp"
 
 using namespace tinyxml2;
-using namespace std;
 
-namespace uGE {
+namespace uGE
+{
     LevelLoader::LevelLoader() {
     }
 
     LevelLoader::~LevelLoader() {
     }
 
-
     void LevelLoader::parseXML(const char* iFilename)
     {
         XMLDocument doc;
         std::cout << "Loading level " << iFilename << ", result: " << doc.LoadFile(iFilename) << std::endl;
 
-        XMLElement * object = doc.RootElement()->FirstChildElement("library_visual_scenes")->FirstChildElement()->FirstChildElement("node");
+        XMLElement * object = doc.RootElement()->FirstChildElement( "library_visual_scenes" )->FirstChildElement()->FirstChildElement( "node" );
         XMLElement * objMatrix;
 
         while( object ) {
-            objMatrix = object->FirstChildElement("matrix");
+            objMatrix = object->FirstChildElement( "matrix" );
             const char * matrixString = objMatrix->GetText();
 
             //Decompose the matrix into the 16 separate values
@@ -50,8 +49,8 @@ namespace uGE {
             //Push the values in an empty matrix to add to the object later
             glm::mat4 matrix;
             for (unsigned int i = 0; i < words.size(); i++) {
-                float convert = std::atof( words[i].c_str() );
-                matrix[i%4][i/4] = convert;
+                float value = std::atof( words[i].c_str() );
+                matrix[i%4][i/4] = value;
             }
 
             //Set and format the object name
@@ -74,12 +73,12 @@ namespace uGE {
             }
 
             //Next object
-            object = object->NextSiblingElement("node");
+            object = object->NextSiblingElement( "node" );
         }
     }
 
     void LevelLoader::loadLevel(std::string iFilename)
     {
-        parseXML( ("Assets/Level/" + iFilename + ".dae").c_str() );
+        parseXML( ( "Assets/Level/" + iFilename + ".dae" ).c_str() );
     }
 }
