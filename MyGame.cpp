@@ -38,25 +38,14 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
-    uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level_0_3" );
-
-		uGE::GameObject * floor = new uGE::GameObject( "Floor" );
-			uGE::Body * floorBody = new uGE::Body( floor );
-				floorBody->setMesh( uGE::AssetManager::loadMesh( "Assets/plane.obj" ) );
-				floorBody->setTexture( uGE::AssetManager::loadTexture( "Assets/land.jpg") );
-			floor->setBody( floorBody );
-			glm::mat4 & transform = floor->transform;
-			transform = glm::scale( transform, glm::vec3( 2.0f, 1.0f, 2.0f ) );
-
-		uGE::GameObject * player = new uGE::GameObject( "Player" );
-			uGE::Body * playerBody = new uGE::Body( player );
-				playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/teapot.obj" ) );
-                playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
-				playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
-			player->setBody( playerBody );
-			player->setCollider(new uGE::SphereCollider(player,1.45f));
-			player->setController( new uGE::WasdController( player ) );
+    uGE::GameObject * player = new uGE::GameObject( "Player" );
+        uGE::Body * playerBody = new uGE::Body( player );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
+            playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+        player->setBody( playerBody );
+        player->setCollider(new uGE::SphereCollider(player,1.45f));
+        player->setController( new uGE::PlayerController( player ) );
 
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
@@ -72,9 +61,11 @@ bool MyGame::load()
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
-	//uGE::SceneManager::add( floor );
 	uGE::SceneManager::add( player );
 	uGE::SceneManager::add( enemy );
+
+	uGE::LevelLoader loader = uGE::LevelLoader();
+    loader.loadLevel( "level_0_3" );
 
 	return true;
 }
