@@ -37,12 +37,12 @@ void main() {
     else if(diffused > 0.2)   toonish = 0.3;
     else toonish = 0.2;
     if(dot(wNormal, normalize(cameraDirection)) < 0.2) {
-        toonish = 0.0f;
+        diffused = 0.0f;
      //   if(outlineColor != 0)
         fragment = outlineColor * vec4(1.0, 1.0, 1.0, alpha);        // color for the outline
        // else fragment = vec4(0.0, 0.0, 0.0, 1.0);
     }
-    else fragment = toonish * texture( colorMap, texCoord ) * vec4(1.0, 1.0, 1.0, alpha);
+    else fragment = diffused * texture( colorMap, texCoord ) * vec4(1.0, 1.0, 1.0, alpha);
 
 	//fragment = diffused * vec4(1.0, 1.0, 1.0, 0.75);
 

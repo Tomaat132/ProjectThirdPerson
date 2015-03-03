@@ -13,6 +13,7 @@ namespace uGE {
 	GameObject::GameObject( std::string name )
 	: transform( _transform ), _name( name ), _colliders( 0 ), _body( 0 ), _controller( 0 )
 	{
+	    //_direction = glm::vec3(1f, 0f, 0f);
 	}
 
 	GameObject::~GameObject()
@@ -64,7 +65,6 @@ namespace uGE {
 			child->render( shader, transform );
 		}
 	}
-
 	void GameObject::setBody( Body * body )
 	{
 		_body = body;
@@ -103,6 +103,15 @@ namespace uGE {
 	void GameObject::setPosition( glm::vec3 position )
 	{
 		_transform[3] = glm::vec4( position, 1.0f );
+	}
+
+    void GameObject::setDirection( glm::vec3 direction )
+	{
+		_direction = direction;
+	}
+    glm::vec3 GameObject::getDirection()
+	{
+		return _direction;
 	}
 
 	void GameObject::update()

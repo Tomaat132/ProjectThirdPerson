@@ -71,6 +71,7 @@ namespace uGE
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+               // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
 
                 uGE::SceneManager::add( obj );
