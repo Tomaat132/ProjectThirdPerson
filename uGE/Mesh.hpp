@@ -37,6 +37,12 @@ namespace uGE {
 
 			static Mesh * load( std::string );
 
+			void setBoundingBox(glm::vec3 minimal, glm::vec3 maxi);
+
+			glm::vec3 getHighestBounds();
+			glm::vec3 getLowestBounds();
+
+
 
 
 		private:
@@ -48,7 +54,13 @@ namespace uGE {
 					return memcmp((void*)this, (void*)&other, sizeof(Face))>0;
 				}
 			};
-
+            //
+            glm::vec3 highestVector;
+            glm::vec3 lowestVector;
+            //
+            //glm::vec3 highestVector;
+            //glm::vec3 lowestVector;
+            //
 	};
 }
 #endif // MESH_H
