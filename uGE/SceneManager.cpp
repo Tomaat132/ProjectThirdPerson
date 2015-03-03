@@ -5,6 +5,7 @@
 #include "Utils/FPS.hpp"
 
 #include "Camera.hpp"
+#include "Time.hpp"
 #include "GameObject.hpp"
 #include "Body.hpp"
 #include "Light.hpp"
@@ -18,6 +19,7 @@ namespace uGE {
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
 	std::vector< GameObject * > SceneManager::_objects;
+	std::vector< GameObject * > SceneManager::_deleteQueue;
 
 	CollisionDetection * SceneManager::_collision;
 
@@ -49,6 +51,10 @@ namespace uGE {
 	void SceneManager::add( Shader * shader )
 	{
 		_shader = shader;
+	}
+    void SceneManager::del( GameObject * object )
+	{
+		_deleteQueue.push_back( object );
 	}
 
 	bool SceneManager::control( sf::Window * window )
@@ -91,7 +97,7 @@ namespace uGE {
 
 	void SceneManager::update()
 	{
-	    //FPS::update();
+        Time::update();
         _collision->update(_objects);
 		_camera->update();
 		_light->update();
@@ -99,6 +105,19 @@ namespace uGE {
 			GameObject * object = (GameObject*) *i;
 			object->update();
 		}
+
+		for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
+			GameObject * object = (GameObject*) *j;
+			auto position = std::find(_objects.begin(), _objects.end(), object);
+			delete object;
+			if( position != _objects.end() ) {
+                _objects.erase( position );
+			}
+
+			//delete object;
+		}
+
+		_deleteQueue.clear();
 	}
 
 }

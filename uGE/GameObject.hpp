@@ -22,6 +22,7 @@ namespace uGE {
 			std::string _name;
 			glm::mat4 _transform;
 			glm::mat4 _animTransform;
+            glm::vec3 _direction;
 
 			std::vector< GameObject * > children;
 			std::vector<Collider * > _colliders;
@@ -39,6 +40,8 @@ namespace uGE {
 			GameObject * getChildWithName(std::string childName);
 			void setBody( Body * body );
 			Body * getBody();
+			void setDirection( glm::vec3 direction );
+			glm::vec3 getDirection();
 			void setCollider( Collider * collider );
 			void setController( Controller * controller );
 			void setAnimTransform( glm::mat4 & animTransform );

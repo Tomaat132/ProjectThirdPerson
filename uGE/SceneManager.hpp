@@ -17,11 +17,14 @@ namespace uGE {
 	//empty space to add classes above
 	class SceneManager
 	{
-		private:
-			static Camera * _camera;
+        public:
+            static Camera * _camera;
 			static Light * _light;
 			static Shader * _shader;
+		private:
+
 			static std::vector< GameObject * > _objects;
+			static std::vector< GameObject * > _deleteQueue;
 			//
 			static CollisionDetection * _collision;
 
@@ -31,6 +34,7 @@ namespace uGE {
 
 			static void add( Camera * camera );
 			static void add( GameObject * object );
+			static void del( GameObject * delObject );
 			static void add( Light * light );
 			static void add( Shader * shader );
 

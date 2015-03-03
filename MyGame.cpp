@@ -40,7 +40,7 @@ bool MyGame::load()
 
     uGE::GameObject * player = new uGE::GameObject( "Player" );
         uGE::Body * playerBody = new uGE::Body( player );
-            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
@@ -50,11 +50,11 @@ bool MyGame::load()
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
         uGE::Body * enemyBody = new uGE::Body( enemy );
-            enemyBody->setMesh( uGE::Mesh::load( "Assets/Models/suzanna.obj") );
+            enemyBody->setMesh( uGE::Mesh::load( "Assets/Models/teapot.obj") );
             enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         enemy->setBody( enemyBody );
-        enemy->setCollider(new uGE::SphereCollider(enemy,1.45f));
-        enemy->setController( new uGE::RotateController( enemy ) );
+        enemy->setCollider(new uGE::SphereCollider(enemy, 1.45f));
+        enemy->setController( new uGE::ParticleController( enemy, camera ) );
 
     camera->setController( new uGE::FollowController( camera, player ) );
     //camera->setController( new uGE::PlayerController( camera ) );
