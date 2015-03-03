@@ -95,6 +95,7 @@ namespace uGE {
         _collision->update(_objects);
 		_camera->update();
 		_light->update();
+
 		for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
 			GameObject * object = (GameObject*) *i;
 			object->update();

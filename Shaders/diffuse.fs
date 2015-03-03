@@ -23,7 +23,7 @@ void main() {
 	vec4 wVertex = model * vec4( aVertex, 1.0f ); // transform vertex to world
 	vec4 wNormal = model * vec4( aNormal, 0.0f ); // rotate normal to world, note the 0.0 for w. Only works with symetric scaling
 
-    float diffused =  dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
+    float diffused =  0.3 + 0.7 * dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
     specular =  dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
 
     vec4 cameraDirection = wCamera - wVertex;

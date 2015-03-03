@@ -117,13 +117,12 @@ namespace uGE {
 	void GameObject::update()
 	{
 		if ( _controller ) _controller->update();
+
 		if ( this->getName() == "Player" )
         {
             if(this->getBody()->getAnimation())
-            {
-                //std::cout << "Player+Body+Animation" << std::endl;
-                this->getBody()->getAnimation()->update();
-                //std::cout << this->getBody()->getAnimation() << std::endl;
+            {  // This code needs some serious fixing, causes crashes somehow
+                //this->getBody()->getAnimation()->update();
             }
         }
 

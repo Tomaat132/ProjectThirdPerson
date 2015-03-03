@@ -68,7 +68,7 @@ bool MyGame::load()
 	uGE::SceneManager::add( enemy );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level test 3" );
+    loader.loadLevel( "LEVEL v4" );
 
 	return true;
 }

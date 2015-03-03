@@ -26,12 +26,9 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-<<<<<<< HEAD
 	    float speed = 25.f * Time::step();
-=======
-        if( _shootTime > 0 ) _shootTime -= Time::step();
-	    float speed = 0.4f;
->>>>>>> c30cafdb31349eb45d8ceb210d0411dbe8f6ca96
+        if( _shootTime > 0 ) { _shootTime -= Time::step(); }
+
 		glm::mat4 & transform = _parent->transform;
 	//	glm::vec3 direction = _parent->getDirection();    //IS THIS STILL DIRECTION OF PARENT??? OR A COPY OF IT?
 		glm::vec3 translate;
@@ -53,7 +50,9 @@ namespace uGE {
                 if(!(keyW && keyS)) hTranslate *= sin(45);
 		}
 		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
-        if(hTranslate != glm::vec3(0, 0, 0) || vTranslate != glm::vec3(0, 0, 0) ) _parent->setDirection(glm::normalize(hTranslate + vTranslate));   //SET DIRECTION
+        if(hTranslate != glm::vec3(0, 0, 0) || vTranslate != glm::vec3(0, 0, 0) ) {
+                _parent->setDirection(glm::normalize(hTranslate + vTranslate));   //SET DIRECTION
+        }
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
         {
             createParticle();
