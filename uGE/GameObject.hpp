@@ -13,6 +13,7 @@ namespace uGE {
 	class Body;
 	class Collider;
 	class Controller;
+	class Material;
 	class GameObject
 	{
 		public:
@@ -39,6 +40,7 @@ namespace uGE {
 			GameObject * getChildWithName(std::string childName);
 			void setBody( Body * body );
 			Body * getBody();
+			Material * getMaterial();
 			void setCollider( Collider * collider );
 			void setController( Controller * controller );
 			void setAnimTransform( glm::mat4 & animTransform );

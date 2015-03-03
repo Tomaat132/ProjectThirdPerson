@@ -10,6 +10,7 @@
 #include "uGE/Mesh.hpp"
 #include "uGE/Animation.hpp"
 #include "uGE/Texture.hpp"
+#include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
@@ -46,6 +47,8 @@ bool MyGame::load()
         player->setBody( playerBody );
         player->setCollider(new uGE::SphereCollider(player,1.45f));
         player->setController( new uGE::PlayerController( player ) );
+        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::SUB );
+        player->getMaterial()->setAlpha( 0.75f );
 
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
@@ -65,7 +68,7 @@ bool MyGame::load()
 	uGE::SceneManager::add( enemy );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level_0_3" );
+    loader.loadLevel( "level test 3" );
 
 	return true;
 }

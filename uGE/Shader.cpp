@@ -12,18 +12,19 @@ namespace uGE {
 	Shader::Shader( GLuint program )
 	:	_program( program )
 	{
-		vertex 			= glGetAttribLocation( _program, "vertex" );
+		vertex 			    = glGetAttribLocation( _program, "vertex" );
 		normal 			= glGetAttribLocation( _program, "normal" );
 		uv 					= glGetAttribLocation( _program, "uv" );
-		projection	= glGetUniformLocation( _program, "projection" );
-		view				= glGetUniformLocation( _program, "view" );
+		projection	    = glGetUniformLocation( _program, "projection" );
+		view				    = glGetUniformLocation( _program, "view" );
 		model				= glGetUniformLocation( _program, "model" );
-		colorMap		= glGetUniformLocation( _program, "colorMap" );
-		lightCount	= glGetUniformLocation( _program, "lightCount" );
-		light				= glGetUniformLocation( _program, "light" );
-		camera				= glGetUniformLocation( _program, "camera" );
-		outlineColor			= glGetUniformLocation( _program, "outlineColor" );
-		time				= glGetUniformLocation( _program, "time" );
+		colorMap		    = glGetUniformLocation( _program, "colorMap" );
+		lightCount	    = glGetUniformLocation( _program, "lightCount" );
+		light				    = glGetUniformLocation( _program, "light" );
+		camera			= glGetUniformLocation( _program, "camera" );
+		outlineColor		= glGetUniformLocation( _program, "outlineColor" );
+		time				    = glGetUniformLocation( _program, "time" );
+		alpha               = glGetUniformLocation( _program, "alpha" );
 	}
 
 	Shader::~Shader()

@@ -1,5 +1,6 @@
 #include <SFML/Window.hpp>
 #include "PlayerController.hpp"
+#include "Time.hpp"
 #include "GameObject.hpp"
 namespace uGE {
 
@@ -15,7 +16,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 0.4f;
+	    float speed = 25.f * Time::step();
 		glm::mat4 & transform = _parent->transform;
 		glm::vec3 translate;
 		float rotate = 0.0f;

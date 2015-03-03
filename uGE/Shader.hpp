@@ -38,6 +38,7 @@ namespace uGE {
 				GLuint camera;
 				GLuint outlineColor;
 				GLuint time;
+				GLuint alpha;
 
 			void use();
 

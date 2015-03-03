@@ -1,6 +1,8 @@
 #ifndef LEVELLOADER_H
 #define LEVELLOADER_H
 
+#include "utils/tinyxml2.h"
+
 namespace uGE {
 
     class LevelLoader
@@ -17,6 +19,7 @@ namespace uGE {
         private:
 
             void parseXML(const char * iFilename);
+            void parseGroup( tinyxml2::XMLElement * group );
 
     };
 }

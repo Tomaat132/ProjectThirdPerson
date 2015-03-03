@@ -6,13 +6,15 @@ namespace uGE {
 	Game::Game()
 	:	_window ( new sf::Window( sf::VideoMode( 800, 600), "Saxion uGE Game" ) )
 	{
-		_window->setVerticalSyncEnabled( true );
+		//_window->setVerticalSyncEnabled( true );
 		std::cout << "Init Glew " << glewInit() << " GL : " << glGetString( GL_VERSION ) << std::endl;
 		std::cout << "Max textures size " << GL_MAX_TEXTURE_SIZE << std::endl;
 		std::cout << "GLSL version " << glGetString( GL_SHADING_LANGUAGE_VERSION ) << std::endl;
 
 		glEnable( GL_DEPTH_TEST );
-		glClearColor( 0.1f, 0.1f, 0.3f, 1.0f );
+		glEnable( GL_CULL_FACE );
+		glEnable( GL_BLEND );
+		glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
 	}
 
 	Game::~Game()

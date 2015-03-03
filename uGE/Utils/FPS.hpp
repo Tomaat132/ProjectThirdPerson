@@ -19,7 +19,6 @@ namespace uGE {
             static float time;
             static unsigned int count;
             static unsigned int fps;
-            static sf::Clock clock;
     };
 }
 

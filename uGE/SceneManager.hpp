@@ -18,9 +18,6 @@ namespace uGE {
 	class SceneManager
 	{
 		private:
-			static Camera * _camera;
-			static Light * _light;
-			static Shader * _shader;
 			static std::vector< GameObject * > _objects;
 			//
 			static CollisionDetection * _collision;
@@ -28,6 +25,10 @@ namespace uGE {
 		public:
 			SceneManager();
 			virtual ~SceneManager();
+
+			static Camera * _camera;
+			static Light * _light;
+			static Shader * _shader;
 
 			static void add( Camera * camera );
 			static void add( GameObject * object );

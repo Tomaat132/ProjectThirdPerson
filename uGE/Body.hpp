@@ -7,6 +7,7 @@
 
 namespace uGE {
 
+    class Material;
 	class Mesh;
 	class Animation;
 
@@ -18,6 +19,7 @@ namespace uGE {
 			Animation * _animation;
 			Texture * _texture;
 			Shader * _shader;
+			Material * _material;
 			glm::vec4 _outlineColor;
 
 		public:
@@ -30,8 +32,10 @@ namespace uGE {
 			Animation * getAnimation();
 			void setTexture( Texture * texture );
 			void setShader( Shader * shader);
+			void setMaterial( Material * material );
             void setOutlineColor( glm::vec4 color );
 			Shader * getShader();
+			Material * getMaterial();
 	};
 }
 #endif // BODY_H
