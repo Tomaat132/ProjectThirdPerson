@@ -1,10 +1,15 @@
 #include "Mesh.hpp"
 
+#include <vector>
+#include "Utils/glm.hpp"
+#include <iostream>
+
 #include <fstream>
 #include <map>
 
 
 namespace uGE {
+
 
 	Mesh::Mesh()
 	{
@@ -53,6 +58,10 @@ namespace uGE {
 			std::map< Face, unsigned int> faces; // used to convert to indexed arrays
 
 			std::string line; // to store each line in
+
+                    glm::vec3 lowest;
+					glm::vec3 highest;
+
 			while( getline( file, line ) ) { // as long as there are lines to be read
 				char cmd[10]; // c-type string to store cmd
 				cmd[0] = 0;
@@ -60,6 +69,20 @@ namespace uGE {
 				if ( strcmp ( cmd, "v" ) == 0 ) { // line with vertex
 					glm::vec3 vertex;
 					sscanf( line.c_str(), "%10s %f %f %f ", cmd, &vertex.x, &vertex.y, &vertex.z );
+
+					// working area for storing highest and lowest vertices of an object in a vector
+					if( vertex.x < lowest.x ) { lowest.x = vertex.x; }
+					if( vertex.y < lowest.y ) { lowest.y = vertex.y; }
+					if( vertex.z < lowest.z ) { lowest.z = vertex.z; }
+                    //std::cout<< lowestVector.z << " print" << std::endl;
+
+                    if( vertex.x > highest.x ) { highest.x = vertex.x; }
+                    if( vertex.y > highest.y ) { highest.y = vertex.y; }
+                    if( vertex.z > highest.z ) { highest.z = vertex.z; }
+                    //std::cout<< highestVector.x<< " +print" << std::endl;
+
+                    //end of working area
+
 					rawVertices.push_back( vertex );
 				} else if ( strcmp ( cmd, "vn" ) == 0 ) { // line with normal
 					glm::vec3 normal;
@@ -102,6 +125,10 @@ namespace uGE {
 			}
 			file.close();
 			mesh->createBuffers();
+			//
+            //add lowest and highest vectors here
+            mesh->setBoundingBox(lowest , highest);
+			//
 			std::cout << "Done loading " << filename << " having " << mesh->_vertices.size() << " vertices for " << mesh->_indices.size() << " indices" << std::endl;
 			return mesh;
 		} else { // file could not be opened;
@@ -157,6 +184,20 @@ namespace uGE {
 		return _name;
 	}
 
+   void Mesh::setBoundingBox(glm::vec3 minimal , glm::vec3 maxi){
 
+        lowestVector = minimal;
+        highestVector = maxi;
+   }
+
+   glm::vec3 Mesh::getHighestBounds(){
+
+   return highestVector;
+   }
+
+   glm::vec3 Mesh::getLowestBounds(){
+
+   return lowestVector;
+   }
 
 }

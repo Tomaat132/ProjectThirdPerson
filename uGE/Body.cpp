@@ -36,6 +36,12 @@ namespace uGE {
 	{
 		_mesh = mesh;
 	}
+
+	Mesh * Body::getMesh(){
+
+	return _mesh;
+	}
+
 	void Body::setOutlineColor( glm::vec4 color )
 	{
 		_outlineColor = color;
