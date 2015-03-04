@@ -2,6 +2,7 @@
 #include "Mesh.hpp"
 #include "Animation.hpp"
 #include "Texture.hpp"
+#include "Time.hpp"
 #include "Material.hpp"
 
 
@@ -23,6 +24,7 @@ namespace uGE {
 	    //if(!_shader) return;
 		if ( shader && _mesh ) {
             _material->applyBlendMode();
+            shader->setUniform( shader->time, Time::now() );
             shader->setUniform( shader->alpha, _material->getAlpha() );
             shader->setUniform( shader->outlineColor, _outlineColor );
 			shader->setUniform( shader->model, transform );

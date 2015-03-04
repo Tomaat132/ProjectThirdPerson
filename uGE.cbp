@@ -12,11 +12,8 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Winit-self" />
 					<Add option="-Wunreachable-code" />
-					<Add option="-Wzero-as-null-pointer-constant" />
 					<Add option="-std=c++11" />
-					<Add option="-Wextra" />
 					<Add option="-g" />
 					<Add directory="uGE" />
 					<Add directory="uGE/Utils" />
@@ -65,6 +62,7 @@
 		<Unit filename="Shaders/basic.vs" />
 		<Unit filename="Shaders/diffuse.fs" />
 		<Unit filename="Shaders/diffuse.vs" />
+		<Unit filename="Shaders/water.fs" />
 		<Unit filename="main.cpp" />
 		<Unit filename="uGE/Animation.cpp" />
 		<Unit filename="uGE/Animation.hpp" />

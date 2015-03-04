@@ -62,10 +62,26 @@ bool MyGame::load()
     camera->setController( new uGE::FollowController( camera, player ) );
     //camera->setController( new uGE::PlayerController( camera ) );
 
+    uGE::GameObject * water = new uGE::GameObject( "Water" );
+        water->setPosition( glm::vec3( 0, 1.5, 0 ) );
+        uGE::Body * waterBody = new uGE::Body( water );
+            waterBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/cube.obj" ) );
+            waterBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/water.png" ) );
+            waterBody->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
+        water->setBody( waterBody );
+            glm::mat4 &transform = water->transform;
+            transform = glm::scale( transform, glm::vec3( 80.f, 1.f, 80.f ) );
+        water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
+        water->getMaterial()->setAlpha( 2.5f );
+
+
+
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::add( player );
 	uGE::SceneManager::add( enemy );
+
+	uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "LEVEL v4" );

@@ -12,6 +12,10 @@ namespace uGE {
 
     void FPS::update()
     {
+        if( startTime == 0.0f ) {
+            startTime = Time::now();
+        }
+
         FPS::time = Time::now();
         FPS::count++;
         if ( FPS::time - FPS::startTime >= 1.0f ) {
