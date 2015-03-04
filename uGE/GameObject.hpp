@@ -41,6 +41,7 @@ namespace uGE {
 			void setBody( Body * body );
 			Body * getBody();
 			void setDirection( glm::vec3 direction );
+			void setRotation( glm::vec3 rotation );
 			glm::vec3 getDirection();
 			void setCollider( Collider * collider );
 			void setController( Controller * controller );
