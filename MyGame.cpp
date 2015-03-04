@@ -41,9 +41,9 @@ bool MyGame::load()
 
     uGE::GameObject * player = new uGE::GameObject( "Player" );
         uGE::Body * playerBody = new uGE::Body( player );
-            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-            playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
-            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
+            playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/stone_2.jpg") );
         player->setBody( playerBody );
         player->setCollider(new uGE::SphereCollider(player,1.45f));
         player->setController( new uGE::PlayerController( player ) );

@@ -1,6 +1,7 @@
 #version 330
 
 uniform sampler2D colorMap;
+uniform sampler2D normalMap;
 
 in vec2 texCoord;
 

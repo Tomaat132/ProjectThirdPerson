@@ -27,7 +27,7 @@ namespace uGE {
 			GLuint getId();
 
 		protected:
-			GLuint createVAO( std::vector< unsigned int > indices, std::vector< glm::vec3 > vertices, std::vector< glm::vec3 > normals, std::vector< glm::vec2 > uvs );
+			//GLuint createVAO( std::vector< unsigned int > indices, std::vector< glm::vec3 > vertices, std::vector< glm::vec3 > normals, std::vector< glm::vec2 > uvs );
 
 
 

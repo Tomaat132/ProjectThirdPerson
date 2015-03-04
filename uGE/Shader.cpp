@@ -19,6 +19,7 @@ namespace uGE {
 		view				    = glGetUniformLocation( _program, "view" );
 		model				= glGetUniformLocation( _program, "model" );
 		colorMap		    = glGetUniformLocation( _program, "colorMap" );
+		normalMap           = glGetUniformLocation( _program, "normalMap" );
 		lightCount	    = glGetUniformLocation( _program, "lightCount" );
 		light				    = glGetUniformLocation( _program, "light" );
 		camera			= glGetUniformLocation( _program, "camera" );
@@ -66,12 +67,25 @@ namespace uGE {
 	void Shader::setTexture( GLuint location, Texture * texture )
 	{
 		GLuint name = 0;
-		if ( texture ) {
+		if ( texture )
+        {
 			name = texture->getName();
 		}
 		glActiveTexture( GL_TEXTURE0 + location - colorMap ); // units numbered as uniformlocations with colormap offset
 			glBindTexture( GL_TEXTURE_2D, name );
 				glUniform1i( location, 0 );
+	}
+
+	void Shader::setNormTex( GLuint location, Texture * texture )
+	{
+	    GLuint name = 0;
+	    if ( texture )
+        {
+            name = texture->getName();
+        }
+        glActiveTexture( GL_TEXTURE0 + location - normalMap ); // units numbered as uniformlocations with normalmap offset
+            glBindTexture( GL_TEXTURE_2D, name );
+                glUniform1i( location, 0 );
 	}
 
 	void Shader::setAttrib( GLuint indices )
