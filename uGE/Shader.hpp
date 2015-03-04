@@ -33,6 +33,7 @@ namespace uGE {
 				GLuint view;
 				GLuint model;
 				GLuint colorMap;
+				GLuint normalMap;
 				GLuint lightCount;
 				GLuint light;
 				GLuint camera;
@@ -46,6 +47,7 @@ namespace uGE {
 			void setAttrib( GLuint buffer );
 			void setAttrib( GLuint location, GLuint elements, GLuint buffer );
 			void setTexture( GLuint location, Texture * texture );
+			void setNormTex( GLuint location, Texture * texture );
 			void setUniform( GLuint location, float value );
 			void setUniform( GLuint location, glm::mat4 matrix );
 			void setUniform( GLuint location, glm::vec3 vector );

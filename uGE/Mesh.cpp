@@ -8,12 +8,13 @@ namespace uGE {
 
 	Mesh::Mesh()
 	{
+	    //ctor
 	}
 
 	Mesh::~Mesh()
 	{
 	//	glDeleteVertexArrays( 1, & _name );
-		glDeleteBuffers( 4, _vbos );
+		glDeleteBuffers( 6, _vbos );
 	}
 
 	GLuint Mesh::getIndexBuffer()
@@ -31,6 +32,14 @@ namespace uGE {
 	GLuint Mesh::getUvBuffer()
 	{
 		return _vbos[3];
+	}
+	GLuint Mesh::getTangentBuffer()
+	{
+	    return _vbos[4];
+	}
+	GLuint Mesh::getBitangentBuffer()
+	{
+	    return _vbos[5];
 	}
 
 	unsigned int Mesh::size()
@@ -78,7 +87,7 @@ namespace uGE {
 					if ( count == 10 ) { // there should be 10 args to be read
 						for ( int i = 0; i < 3; ++i ) { // make verticesArray out of indexed array
 							Face face = { vertexIndex[i], normalIndex[i], uvIndex[i] };
-							std::map< Face, unsigned int>::iterator found = faces.find( face ); // allready oresent ?
+							std::map< Face, unsigned int>::iterator found = faces.find( face ); // already present ?
 							if ( found == faces.end() ) { // face is new
 								unsigned int index = faces.size();
 								//std::cout << "new i " <<  index << " > " << face.v << "," << face.n << "," << face.t << std::endl;
@@ -88,7 +97,7 @@ namespace uGE {
 								mesh->_normals.push_back( rawNormals[ normalIndex[i]-1 ] );
 								mesh->_uvs.push_back( rawUvs[ uvIndex[i]-1 ] );
 							} else { // face already present
-								unsigned int index = found->second; // index allready available for the face
+								unsigned int index = found->second; // index already available for the face
 								//std::cout << "old i " <<  index << " > " << face.v << "," << face.n << "," << face.t << std::endl;
 								mesh->_indices.push_back( index );
 							}
@@ -109,6 +118,43 @@ namespace uGE {
 			delete mesh;
 		}
 		return 0;
+	}
+
+	//To calculate the Tangents and Bitangents
+	void Mesh::calculateTangents()
+	{
+	    signed int _v = _vertices.size();
+        for(int i = 0; i < _v; i += 3)
+        {
+            glm::vec3 &v0 = _vertices[i + 0];
+            glm::vec3 &v1 = _vertices[i + 1];
+            glm::vec3 &v2 = _vertices[i + 2];
+
+            glm::vec2 &uv0 = _uvs[i + 0];
+            glm::vec2 &uv1 = _uvs[i + 1];
+            glm::vec2 &uv2 = _uvs[i + 2];
+
+            //deltaPos1 = deltaUV1.x * T + deltaUV1.y * B;
+            //deltaPos2 = deltaUV2.x * T + deltaUV1.y * B;
+            glm::vec3 deltaPos1 = v1 - v0;
+            glm::vec3 deltaPos2 = v2 - v0;
+
+            glm::vec2 deltaUV1 = uv1 - uv0;
+            glm::vec2 deltaUV2 = uv2 - uv0;
+
+            //Trying to convert the formula above to make T and B free and get their values.
+            float diviCross = 1.0f / ((deltaUV1.x * deltaUV2.y) - (deltaUV1.y * deltaUV2.x));
+            _tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * diviCross;
+            _bitangent = (deltaPos2 * deltaUV1.x - deltaPos1 * deltaUV2.x) * diviCross;
+
+            _tangents.push_back( _tangent );
+            _tangents.push_back( _tangent );
+            _tangents.push_back( _tangent );
+
+            _bitangents.push_back( _bitangent );
+            _bitangents.push_back( _bitangent );
+            _bitangents.push_back( _bitangent );
+        }
 	}
 
 //	GLuint Mesh::createVAO()
@@ -140,7 +186,7 @@ namespace uGE {
 
 	GLuint Mesh::createBuffers()
 	{
-		glGenBuffers( 4, _vbos );
+		glGenBuffers( 6, _vbos );
 
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _vbos[0] ); // working on indices buffer
 				glBufferData( GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof( unsigned int ), _indices.data(), GL_STATIC_DRAW );
@@ -153,6 +199,12 @@ namespace uGE {
 
 			glBindBuffer( GL_ARRAY_BUFFER, _vbos[3] ); // working on uvs buffer
 				glBufferData( GL_ARRAY_BUFFER, _uvs.size() * 2 * sizeof( float ), _uvs.data(), GL_STATIC_DRAW );
+
+            glBindBuffer( GL_ARRAY_BUFFER, _vbos[4] ); // working on tangents buffer
+                glBufferData( GL_ARRAY_BUFFER, _tangents.size() * 3 * sizeof( float ), _tangents.data(), GL_STATIC_DRAW );
+
+            glBindBuffer( GL_ARRAY_BUFFER, _vbos[5] ); // working on bitangents buffer
+                glBufferData( GL_ARRAY_BUFFER, _bitangents.size() * 3 * sizeof( float ), _bitangents.data(), GL_STATIC_DRAW );
 
 		return _name;
 	}

@@ -92,6 +92,7 @@ namespace uGE {
             {
                 //std::cout << "Player+Body+Animation" << std::endl;
                 this->getBody()->getAnimation()->update();
+                //std::cout << "Animation is playing" << std::endl;
                 //std::cout << this->getBody()->getAnimation() << std::endl;
             }
         }
