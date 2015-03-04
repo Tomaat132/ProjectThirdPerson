@@ -1,5 +1,6 @@
 #include <SFML/Window.hpp>
 #include "PlayerController.hpp"
+#include "Time.hpp"
 #include "BulletController.hpp"
 #include "GameObject.hpp"
 #include "Body.hpp"
@@ -25,8 +26,9 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-        if( _shootTime > 0 ) _shootTime -= Time::step();
-	    float speed = 0.4f;
+	    float speed = 25.f * Time::step();
+        if( _shootTime > 0 ) { _shootTime -= Time::step(); }
+
 		glm::mat4 & transform = _parent->transform;
 	//	glm::vec3 direction = _parent->getDirection();    //IS THIS STILL DIRECTION OF PARENT??? OR A COPY OF IT?
 		glm::vec3 translate;
@@ -44,7 +46,9 @@ namespace uGE {
 		if ( keyD ) rotate[0] = -1.f;//hTranslate.x -= speed;
 
 		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
+
         _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
+
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
         {
             createParticle();

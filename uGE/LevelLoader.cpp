@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#include "Colliders/SphereCollider.hpp"
+
 #include "utils/glm.hpp"
 #include "utils/tinyxml2.h"
 #include "AssetManager.hpp"
@@ -11,29 +13,36 @@
 #include "SceneManager.hpp"
 
 using namespace tinyxml2;
-using namespace std;
 
-namespace uGE {
+namespace uGE
+{
     LevelLoader::LevelLoader() {
     }
 
     LevelLoader::~LevelLoader() {
     }
 
-
-    void LevelLoader::parseXML(const char* iFilename)
+    void LevelLoader::parseGroup( XMLElement * group )
     {
-        XMLDocument doc;
-        std::cout << "Loading level " << iFilename << ", result: " << doc.LoadFile(iFilename) << std::endl;
-
-        XMLElement * object = doc.RootElement()->FirstChildElement("library_visual_scenes")->FirstChildElement()->FirstChildElement("node");
-        XMLElement * objMatrix;
+        XMLElement * object = group->FirstChildElement( "node" );
 
         while( object ) {
-            objMatrix = object->FirstChildElement("matrix");
-            const char * matrixString = objMatrix->GetText();
+            //Set and format the object name
+            std::string objName = std::string( object->Attribute( "name" ) );
+            while( isdigit( objName.at( objName.size() - 1 ) ) ) {
+                objName.pop_back();
+            }
+
+            if( objName == "group" ) {
+                parseGroup( object );
+                object = object->NextSiblingElement( "node" );
+                continue;
+            }
 
             //Decompose the matrix into the 16 separate values
+            XMLElement * objMatrix = object->FirstChildElement( "matrix" );
+            const char * matrixString = objMatrix->GetText();
+
             std::string  word;
             std::vector< std::string > words;
             for ( unsigned int i = 0; i < std::strlen(matrixString); ++i ) {
@@ -50,14 +59,8 @@ namespace uGE {
             //Push the values in an empty matrix to add to the object later
             glm::mat4 matrix;
             for (unsigned int i = 0; i < words.size(); i++) {
-                float convert = std::atof( words[i].c_str() );
-                matrix[i%4][i/4] = convert;
-            }
-
-            //Set and format the object name
-            std::string objName = std::string( object->Attribute( "name" ) );
-            while( isdigit( objName.at( objName.size() - 1 ) ) ) {
-                objName.pop_back();
+                float value = std::atof( words[i].c_str() );
+                matrix[i%4][i/4] = value;
             }
 
             //Compose the GameObject
@@ -75,12 +78,21 @@ namespace uGE {
             }
 
             //Next object
-            object = object->NextSiblingElement("node");
+            object = object->NextSiblingElement( "node" );
         }
+    }
+
+    void LevelLoader::parseXML(const char* iFilename)
+    {
+        XMLDocument doc;
+        std::cout << "Loading level " << iFilename << ", result: " << doc.LoadFile(iFilename) << std::endl;
+
+        XMLElement * object = doc.RootElement()->FirstChildElement( "library_visual_scenes" )->FirstChildElement();
+        parseGroup( object );
     }
 
     void LevelLoader::loadLevel(std::string iFilename)
     {
-        parseXML( ("Assets/Level/" + iFilename + ".dae").c_str() );
+        parseXML( ( "Assets/Level/" + iFilename + ".dae" ).c_str() );
     }
 }

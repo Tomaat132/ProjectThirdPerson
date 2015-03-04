@@ -7,6 +7,7 @@ uniform	mat4 view;
 uniform	mat4 model;
 uniform vec3 camera;
 uniform vec4 outlineColor;
+uniform float alpha;
 
 in vec2 texCoord;
 
@@ -22,7 +23,7 @@ void main() {
 	vec4 wVertex = model * vec4( aVertex, 1.0f ); // transform vertex to world
 	vec4 wNormal = model * vec4( aNormal, 0.0f ); // rotate normal to world, note the 0.0 for w. Only works with symetric scaling
 
-    float diffused =  dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
+    float diffused =  0.3 + 0.7 * dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
     specular =  dot( wNormal, normalize( wLight - wVertex ) ); // diffuse light to vertex
 
     vec4 cameraDirection = wCamera - wVertex;
@@ -38,11 +39,11 @@ void main() {
     if(dot(wNormal, normalize(cameraDirection)) < 0.2) {
         diffused = 0.0f;
      //   if(outlineColor != 0)
-        fragment = outlineColor;        // color for the outline
+        fragment = outlineColor * vec4(1.0, 1.0, 1.0, alpha);        // color for the outline
        // else fragment = vec4(0.0, 0.0, 0.0, 1.0);
     }
-    else fragment = diffused * texture( colorMap, texCoord );
+    else fragment = diffused * texture( colorMap, texCoord ) * vec4(1.0, 1.0, 1.0, alpha);
 
-	//fragment = toonish * vec4(1.0, 0.0, 0.0, 1.0);
+	//fragment = diffused * vec4(1.0, 1.0, 1.0, 0.75);
 
 }

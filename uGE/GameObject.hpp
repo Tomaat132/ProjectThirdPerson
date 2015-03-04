@@ -13,6 +13,7 @@ namespace uGE {
 	class Body;
 	class Collider;
 	class Controller;
+	class Material;
 	class GameObject
 	{
 		public:
@@ -43,15 +44,20 @@ namespace uGE {
 			void setDirection( glm::vec3 direction );
 			void setRotation( glm::vec3 rotation );
 			glm::vec3 getDirection();
+			Body * getBody();
+			Material * getMaterial();
 			void setCollider( Collider * collider );
+			std::vector<Collider *> getColliders();
 			void setController( Controller * controller );
 			void setAnimTransform( glm::mat4 & animTransform );
+
 			void render( Shader * shader, glm::mat4 & parentTransform );
 			void update();
 
 			void setPosition( glm::vec3 position );
-			std::vector<Collider *> getColliders();
 			glm::vec3 getPosition();
+			void setDirection( glm::vec3 direction );
+			glm::vec3 getDirection();
 
 	};
 }

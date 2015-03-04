@@ -10,6 +10,7 @@
 #include "uGE/Mesh.hpp"
 #include "uGE/Animation.hpp"
 #include "uGE/Texture.hpp"
+#include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
@@ -40,12 +41,14 @@ bool MyGame::load()
 
     uGE::GameObject * player = new uGE::GameObject( "Player" );
         uGE::Body * playerBody = new uGE::Body( player );
-            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-            playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/eyes.mov") );
-            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
+            playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/stone_2.jpg") );
         player->setBody( playerBody );
         player->setCollider(new uGE::SphereCollider(player,1.45f));
         player->setController( new uGE::PlayerController( player ) );
+        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::SUB );
+        player->getMaterial()->setAlpha( 0.75f );
 
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
@@ -59,13 +62,29 @@ bool MyGame::load()
     camera->setController( new uGE::FollowController( camera, player ) );
     //camera->setController( new uGE::PlayerController( camera ) );
 
+    uGE::GameObject * water = new uGE::GameObject( "Water" );
+        water->setPosition( glm::vec3( 0, 1.5, 0 ) );
+        uGE::Body * waterBody = new uGE::Body( water );
+            waterBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/cube.obj" ) );
+            waterBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/water.png" ) );
+            waterBody->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
+        water->setBody( waterBody );
+            glm::mat4 &transform = water->transform;
+            transform = glm::scale( transform, glm::vec3( 80.f, 1.f, 80.f ) );
+        water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
+        water->getMaterial()->setAlpha( 2.5f );
+
+
+
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::add( player );
 	uGE::SceneManager::add( enemy );
 
+	uGE::SceneManager::add( water );
+
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level_0_3" );
+    loader.loadLevel( "LEVEL v4" );
 
 	return true;
 }

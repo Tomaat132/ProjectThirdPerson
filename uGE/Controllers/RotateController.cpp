@@ -1,5 +1,6 @@
 #include "RotateController.hpp"
 #include "Utils/glm.hpp"
+#include "Time.hpp"
 
 #include "GameObject.hpp"
 namespace uGE {
@@ -18,7 +19,6 @@ namespace uGE {
 	void RotateController::update()
 	{
 		glm::mat4 & transform = _parent->transform;
-		transform = glm::rotate( transform, 0.01f, glm::vec3( 0,1,0 ) );
-
+		transform = glm::rotate( transform, 1.f * Time::step(), glm::vec3( 0,1,0 ) );
 	}
 }

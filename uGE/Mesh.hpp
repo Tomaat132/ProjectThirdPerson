@@ -17,12 +17,17 @@ namespace uGE {
 		private:
 
 			GLuint _name;
-			GLuint _vbos[4];
+			GLuint _vbos[6];
+
+			glm::vec3 _tangent;
+			glm::vec3 _bitangent;
 
 			std::vector< unsigned int > _indices; // index to the v/n/t/u/
 			std::vector< glm::vec3 > _vertices; // all the vertices
 			std::vector< glm::vec3 > _normals; // normal to the vertex
 			std::vector< glm::vec2 > _uvs; // uv to the vertex
+			std::vector< glm::vec3 > _tangents; // tangents
+			std::vector< glm::vec3 > _bitangents; // bitangents
 
 		public:
 			Mesh();
@@ -32,12 +37,16 @@ namespace uGE {
 			GLuint getVertexBuffer();
 			GLuint getNormalBuffer();
 			GLuint getUvBuffer();
+			GLuint getTangentBuffer();
+			GLuint getBitangentBuffer();
 			unsigned int size();
 
-
 			static Mesh * load( std::string );
-
-
+			void setBoundingBox(glm::vec3 minimal, glm::vec3 maxi);
+			glm::vec3 getHighestBounds();
+			glm::vec3 getLowestBounds();
+			
+            void calculateTangents();
 
 		private:
 			GLuint createBuffers();
@@ -49,6 +58,8 @@ namespace uGE {
 				}
 			};
 
+            glm::vec3 highestVector;
+            glm::vec3 lowestVector;
 	};
 }
 #endif // MESH_H

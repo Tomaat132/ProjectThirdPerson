@@ -5,7 +5,6 @@
 
 namespace uGE {
 
-    sf::Clock FPS::clock;
     float FPS::startTime = 0.0f;
     float FPS::time = 0.0f;
     unsigned int FPS::count = 0;
@@ -13,7 +12,11 @@ namespace uGE {
 
     void FPS::update()
     {
-        FPS::time = FPS::clock.getElapsedTime().asSeconds();
+        if( startTime == 0.0f ) {
+            startTime = Time::now();
+        }
+
+        FPS::time = Time::now();
         FPS::count++;
         if ( FPS::time - FPS::startTime >= 1.0f ) {
             std::cout << "FPS " << FPS::count << std::endl;

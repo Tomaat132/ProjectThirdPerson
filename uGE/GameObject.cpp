@@ -1,8 +1,11 @@
 #include "GameObject.hpp"
-#include "Controller.hpp"
+
+#include "Animation.hpp"
 #include "Body.hpp"
 #include "Collider.hpp"
-#include "Animation.hpp"
+#include "Controller.hpp"
+#include "Material.hpp"
+#include "Renderer.hpp"
 
 
 namespace uGE {
@@ -30,8 +33,12 @@ namespace uGE {
 
 	GameObject * GameObject::getChildWithName(std::string childName)
 	{
-	    //return the child however that works...
-	    return 0;
+	    for( GameObject* child : children ) {
+            if( child->getName() == childName ) {
+                return child;
+            }
+	    }
+	    return NULL;
 	}
 
 	std::string GameObject::getName()
@@ -43,7 +50,15 @@ namespace uGE {
 	void GameObject::render( Shader * shader, glm::mat4 & parentTransform )
 	{
 		glm::mat4 transform = parentTransform * _transform;
-		if ( _body ) _body->render( shader, transform );
+		//if ( _body ) _body->render( shader, transform );
+
+		if( _body ) {
+            if( _body->getMaterial()->getBlendMode() == Material::BlendMode::NORMAL ) {
+                Renderer::firstPassRender[ _body ] = transform;
+            } else {
+                Renderer::secondPassRender[ _body ] = transform;
+            }
+		}
 
 		for ( auto i = children.begin(); i != children.end(); ++i ) {
 			GameObject * child = (GameObject *) *i;
@@ -58,6 +73,13 @@ namespace uGE {
 	{
 		return _body;
 	}
+
+	Material * GameObject::getMaterial()
+	{
+	    if( !_body ) { return NULL; }
+	    return _body->getMaterial();
+	}
+
 	void GameObject::setCollider( Collider * collider )
 	{
 		_colliders.push_back( collider );
@@ -101,13 +123,12 @@ namespace uGE {
 	void GameObject::update()
 	{
 		if ( _controller ) _controller->update();
+
 		if ( this->getName() == "Player" )
         {
             if(this->getBody()->getAnimation())
-            {
-                //std::cout << "Player+Body+Animation" << std::endl;
-                this->getBody()->getAnimation()->update();
-                //std::cout << this->getBody()->getAnimation() << std::endl;
+            {  // This code needs some serious fixing, causes crashes somehow
+                //this->getBody()->getAnimation()->update();
             }
         }
 
@@ -115,14 +136,12 @@ namespace uGE {
 			GameObject * child = (GameObject *) *i;
 			child->update();
 		}
-	} //end of update();
+	}
 
 	glm::vec3 GameObject::getPosition()
 	{
         glm::vec4 position = glm::vec4( _transform[3] );
         return glm::vec3( position );
 	}
-
-
 
 }

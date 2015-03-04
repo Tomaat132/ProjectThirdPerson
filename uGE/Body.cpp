@@ -2,6 +2,8 @@
 #include "Mesh.hpp"
 #include "Animation.hpp"
 #include "Texture.hpp"
+#include "Time.hpp"
+#include "Material.hpp"
 
 
 namespace uGE {
@@ -9,7 +11,7 @@ namespace uGE {
 	Body::Body( GameObject * parent )
 	:	_parent( parent ), _mesh( 0 ), _animation( NULL ), _texture( 0 ), _shader (0)
 	{
-        //ctor
+        _material = new Material();
 	}
 
 	Body::~Body()
@@ -21,6 +23,9 @@ namespace uGE {
 	{
 	    //if(!_shader) return;
 		if ( shader && _mesh ) {
+            _material->applyBlendMode();
+            shader->setUniform( shader->time, Time::now() );
+            shader->setUniform( shader->alpha, _material->getAlpha() );
             shader->setUniform( shader->outlineColor, _outlineColor );
 			shader->setUniform( shader->model, transform );
 			shader->setTexture( shader->colorMap, _texture );
@@ -36,6 +41,12 @@ namespace uGE {
 	{
 		_mesh = mesh;
 	}
+
+	Mesh * Body::getMesh(){
+
+	return _mesh;
+	}
+
 	void Body::setOutlineColor( glm::vec4 color )
 	{
 		_outlineColor = color;
@@ -63,10 +74,20 @@ namespace uGE {
 	void Body::setShader( Shader * shader)
 	{
 		_shader = shader;
-
 	}
+
+	void Body::setMaterial( Material * material )
+	{
+	    _material = material;
+	}
+
 	Shader* Body::getShader()
 	{
 		return _shader;
+	}
+
+	Material * Body::getMaterial()
+	{
+	    return _material;
 	}
 }

@@ -1,9 +1,9 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib Ground_V.mtl
+mtllib ground level v4.mtl
 g default
-v -150.000000 -0.000000 150.000000
-v 150.000000 -0.000000 150.000000
+v -150.000000 0.000000 150.000000
+v 150.000000 0.000000 150.000000
 v -150.000000 0.000000 -150.000000
 v 150.000000 0.000000 -150.000000
 vt 0.047179 0.047179

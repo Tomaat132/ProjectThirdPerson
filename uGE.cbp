@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wunreachable-code" />
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="uGE" />
@@ -30,6 +31,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Wall" />
 					<Add directory="uGE" />
 					<Add directory="uGE/Utils" />
 					<Add directory="uGE/" />
@@ -38,9 +40,6 @@
 					<Add directory="uGE/Colliders" />
 					<Add directory="uGE/Controllers" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
@@ -61,6 +60,7 @@
 		<Unit filename="Shaders/basic.vs" />
 		<Unit filename="Shaders/diffuse.fs" />
 		<Unit filename="Shaders/diffuse.vs" />
+		<Unit filename="Shaders/water.fs" />
 		<Unit filename="main.cpp" />
 		<Unit filename="uGE/Animation.cpp" />
 		<Unit filename="uGE/Animation.hpp" />
@@ -72,6 +72,8 @@
 		<Unit filename="uGE/Camera.hpp" />
 		<Unit filename="uGE/Collider.cpp" />
 		<Unit filename="uGE/Collider.hpp" />
+		<Unit filename="uGE/Colliders/AABB collision.hpp" />
+		<Unit filename="uGE/Colliders/AABBcollision.cpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.cpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.hpp" />
 		<Unit filename="uGE/CollisionDetection.cpp" />
@@ -98,14 +100,16 @@
 		<Unit filename="uGE/LevelLoader.hpp" />
 		<Unit filename="uGE/Light.cpp" />
 		<Unit filename="uGE/Light.hpp" />
+		<Unit filename="uGE/Material.cpp" />
+		<Unit filename="uGE/Material.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
 		<Unit filename="uGE/Mesh.hpp" />
+		<Unit filename="uGE/Renderer.cpp" />
+		<Unit filename="uGE/Renderer.hpp" />
 		<Unit filename="uGE/SceneManager.cpp" />
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
-		<Unit filename="uGE/TestXMLdae.cpp" />
-		<Unit filename="uGE/TestXMLdae.hpp" />
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />

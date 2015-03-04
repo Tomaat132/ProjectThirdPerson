@@ -15,10 +15,12 @@ namespace uGE {
 			virtual ~Collider();
 
 			glm::vec3 getPosition();
+			int getColliderType();
 
 		protected:
             GameObject * parent;
 
+            int cType = 0;
 	};
 }
 #endif // COLLIDER_H
