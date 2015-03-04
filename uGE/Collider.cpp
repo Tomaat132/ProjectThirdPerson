@@ -18,4 +18,11 @@ namespace uGE {
 	{
         return parent->getPosition();
 	}
+
+
+	int Collider::getColliderType(){
+
+    return cType;
+	}
+
 }
