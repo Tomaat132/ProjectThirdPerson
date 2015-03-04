@@ -31,6 +31,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Wall" />
 					<Add directory="uGE" />
 					<Add directory="uGE/Utils" />
 					<Add directory="uGE/" />
@@ -39,9 +40,6 @@
 					<Add directory="uGE/Colliders" />
 					<Add directory="uGE/Controllers" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>

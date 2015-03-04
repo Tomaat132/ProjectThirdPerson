@@ -5,8 +5,9 @@ namespace uGE{
     SphereCollider::SphereCollider(GameObject * aParent , float aRadius)
     :Collider(aParent)
     {
-
+        cType = 1;
         radius = aRadius;
+
 
     }
 
