@@ -26,7 +26,6 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 25.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
 
 		glm::mat4 & transform = _parent->transform;
@@ -47,9 +46,14 @@ namespace uGE {
 
 		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
 
-        _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
+        if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
 
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
+        {
+            shoot();
+            _shootTime = 0.3f;
+        }
+        if(sf::Keyboard::isKeyPressed( sf::Keyboard::G ) && _shootTime <= 0.f)
         {
             createParticle();
             _shootTime = 0.3f;
@@ -59,8 +63,8 @@ namespace uGE {
        //transform[2][0] = sin(rotate);
         //transform[2][2] = -sin(rotate+90);
 		// note, does not check collision, just moves on xz plane !
-		if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 1.f) );
-		if(rotate != glm::vec3(0,0,0)) _parent->setRotation(rotate);
+		if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 180.f)*Time::step() );
+		if(rotate != glm::vec3(0,0,0)) _parent->setRotation(glm::normalize(rotate));
 		//transform = glm::rotate( transform, rotate, glm::vec3( 0,1,0 ) );
 	}
     void PlayerController::createParticle()
@@ -69,6 +73,7 @@ namespace uGE {
         uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
 
             particleEmitter->setController( new uGE::ParticleEmitterController( particleEmitter, _parent) );
+            particleEmitter->setPosition( _parent->getPosition());
            uGE::SceneManager::add( particleEmitter );
 	}
 	void PlayerController::shoot()

@@ -5,17 +5,18 @@
 #include "GameObject.hpp"
 #include "SceneManager.hpp"
 #include "AssetManager.hpp"
+#include "Material.hpp"
 #include "Camera.hpp"
 
 
 #include "Time.hpp"
 #include <iostream>
 namespace uGE {
-	ParticleEmitterController::ParticleEmitterController( uGE::GameObject * parent, GameObject * followee )
+	ParticleEmitterController::ParticleEmitterController( GameObject * parent, GameObject * followee )
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillEmit = 0.0f;
-	    _emitTime = 0.03f;
+	    _emitTime = 0.4f;
 	}
 
 	ParticleEmitterController::~ParticleEmitterController()
@@ -38,7 +39,7 @@ namespace uGE {
         if(_timeTillEmit <= 0)
         {
             _particles.clear();
-            for(auto i = 0; i < 6; i++)
+            for(auto i = 0; i < 4; i++)
                 emit();
             _timeTillEmit = _emitTime;
         }
@@ -49,14 +50,14 @@ namespace uGE {
         uGE::GameObject * particle = new uGE::GameObject( "Particle");
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
-                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );
+                particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
             particle->setBody( particleBody );
 
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
             particle->setPosition( _parent->getPosition() );
            uGE::SceneManager::add( particle );
            _particles.push_back( particle );
-           std::cout<<  _particles.size() << std::endl;
     }
 	void ParticleEmitterController::setVelocity(glm::vec3 aVelocity)
 	{

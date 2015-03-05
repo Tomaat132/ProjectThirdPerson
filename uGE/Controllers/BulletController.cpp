@@ -8,7 +8,7 @@ namespace uGE {
 	:	Controller( parent ), _shooter( shooter )
 	{
 	    _destroyTime = 0.5f;
-	    _speed = 1.f;
+	    _speed = 100.f;
 	    _direction = _shooter->getDirection(); // Uses his own direction - the actual gameobject should have direction
        // std::cout<< _parent->getName() << std::endl;
 
