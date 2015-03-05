@@ -25,4 +25,9 @@ namespace uGE {
     return cType;
 	}
 
+	GameObject* Collider::getParent()
+	{
+	    return parent;
+	}
+
 }

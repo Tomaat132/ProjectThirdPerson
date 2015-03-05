@@ -5,6 +5,7 @@
 
 namespace uGE {
 
+    struct CollisionResult;
 	class PlayerController : public Controller
 	{
         private:
@@ -17,6 +18,7 @@ namespace uGE {
 			void shoot();
             void createParticle();
 
+            void onCollision( CollisionResult * result );
 	};
 }
 #endif // PLAYERCONTROLLER_H

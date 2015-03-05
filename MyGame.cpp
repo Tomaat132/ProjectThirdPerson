@@ -43,12 +43,12 @@ bool MyGame::load()
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
-            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/stone_2.jpg") );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
         player->setCollider(new uGE::SphereCollider(player,1.45f));
         player->setController( new uGE::PlayerController( player ) );
-        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::SUB );
-        player->getMaterial()->setAlpha( 0.75f );
+        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+        //player->getMaterial()->setAlpha( 0.95f );
 
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );

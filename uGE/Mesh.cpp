@@ -243,13 +243,12 @@ namespace uGE {
    }
 
    glm::vec3 Mesh::getHighestBounds(){
-
-   return highestVector;
+        return highestVector;
    }
 
    glm::vec3 Mesh::getLowestBounds(){
 
-   return lowestVector;
+        return lowestVector;
    }
 
 }

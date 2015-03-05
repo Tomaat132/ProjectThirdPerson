@@ -9,6 +9,7 @@
 #include "SphereCollider.hpp"
 #include "Camera.hpp"
 #include "ParticleController.hpp"
+#include "CollisionDetection.hpp"
 #include "Time.hpp"
 namespace uGE {
 
@@ -87,5 +88,10 @@ namespace uGE {
             bullet->setController( new uGE::BulletController( bullet, _parent ) );
             bullet->setPosition( _parent->getPosition() );
            uGE::SceneManager::add( bullet );
+	}
+
+	void PlayerController::onCollision( CollisionResult * result )
+	{
+        std::cout << result->objectB->getName() << std::endl;
 	}
 }

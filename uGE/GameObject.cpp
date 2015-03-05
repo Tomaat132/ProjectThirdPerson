@@ -95,6 +95,11 @@ namespace uGE {
 		_controller = controller;
 	}
 
+	Controller* GameObject::getController()
+	{
+	    return _controller;
+	}
+
 	void GameObject::setAnimTransform( glm::mat4 & animTransform )
 	{
 	    _animTransform = animTransform;
