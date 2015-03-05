@@ -12,6 +12,7 @@ namespace uGE {
 		std::cout << "GLSL version " << glGetString( GL_SHADING_LANGUAGE_VERSION ) << std::endl;
 
 		glEnable( GL_DEPTH_TEST );
+
 		glEnable( GL_CULL_FACE );
 		glEnable( GL_BLEND );
 		glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );

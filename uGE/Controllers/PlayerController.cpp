@@ -1,16 +1,17 @@
 #include <SFML/Window.hpp>
-#include "PlayerController.hpp"
-#include "Time.hpp"
 #include "BulletController.hpp"
+#include "ParticleController.hpp"
+#include "ParticleEmitterController.hpp"
+#include "PlayerController.hpp"
+#include "SphereCollider.hpp"
 #include "GameObject.hpp"
 #include "Body.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
-#include "SphereCollider.hpp"
 #include "Camera.hpp"
-#include "ParticleController.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
+
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::GameObject * parent )
@@ -33,7 +34,7 @@ namespace uGE {
 		glm::mat4 & transform = _parent->transform;
 	//	glm::vec3 direction = _parent->getDirection();    //IS THIS STILL DIRECTION OF PARENT??? OR A COPY OF IT?
 		glm::vec3 translate;
-		float rotate = 0.0f;
+		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 		glm::vec3 hTranslate(0, 0, 0);
         glm::vec3 vTranslate(0, 0, 0);
 
@@ -41,48 +42,44 @@ namespace uGE {
         bool keyS = sf::Keyboard::isKeyPressed( sf::Keyboard::S );
         bool keyA = sf::Keyboard::isKeyPressed( sf::Keyboard::A );
         bool keyD = sf::Keyboard::isKeyPressed( sf::Keyboard::D );
-		if ( keyW ) vTranslate.z += speed;
-		if ( keyS ) vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
-		if ( keyA ) hTranslate.x += speed;
-		if ( keyD ) hTranslate.x -= speed;
-		if ( ((keyW || keyS) && keyA) || ((keyW || keyS) && keyD))
-		{
-                if(!(keyD && keyA)) vTranslate *= cos(45);
-                if(!(keyW && keyS)) hTranslate *= sin(45);
-		}
+		if ( keyW ) rotate[2] = 1.0f;
+		if ( keyS ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
+		if ( keyA ) rotate[0] = 1.f;//hTranslate.x += speed;
+		if ( keyD ) rotate[0] = -1.f;//hTranslate.x -= speed;
+
 		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
-        if(hTranslate != glm::vec3(0, 0, 0) || vTranslate != glm::vec3(0, 0, 0) ) {
-                _parent->setDirection(glm::normalize(hTranslate + vTranslate));   //SET DIRECTION
-        }
+
+        _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
+
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
         {
             createParticle();
             _shootTime = 0.3f;
         }
+        //transform[0][0] = cos(rotate);
+        //transform[0][2] = -cos(rotate+90);
+       //transform[2][0] = sin(rotate);
+        //transform[2][2] = -sin(rotate+90);
 		// note, does not check collision, just moves on xz plane !
-		transform = glm::translate( transform, (hTranslate + vTranslate) );
-		transform = glm::rotate( transform, rotate, glm::vec3( 0,1,0 ) );
+		if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 1.f) );
+		if(rotate != glm::vec3(0,0,0)) _parent->setRotation(rotate);
+		//transform = glm::rotate( transform, rotate, glm::vec3( 0,1,0 ) );
 	}
     void PlayerController::createParticle()
 	{
 
-        uGE::GameObject * particle = new uGE::GameObject( "Particle");
-            uGE::Body * particleBody = new uGE::Body( particle );
-                particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/cube.obj" ) );
-                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
-            particle->setBody( particleBody );
+        uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
 
-            particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
-            particle->setPosition( _parent->getPosition() );
-           uGE::SceneManager::add( particle );
+            particleEmitter->setController( new uGE::ParticleEmitterController( particleEmitter, _parent) );
+           uGE::SceneManager::add( particleEmitter );
 	}
 	void PlayerController::shoot()
 	{
 
         uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
             uGE::Body * bulletBody = new uGE::Body( bullet );
-                bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particle.obj" ) );
-                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+                bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
+                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jps") );
             bullet->setBody( bulletBody );
             bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
             bullet->setController( new uGE::BulletController( bullet, _parent ) );

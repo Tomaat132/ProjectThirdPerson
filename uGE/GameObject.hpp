@@ -41,6 +41,10 @@ namespace uGE {
 			GameObject * getChildWithName(std::string childName);
 			void setBody( Body * body );
 			Body * getBody();
+			void setDirection( glm::vec3 direction );
+			void setRotation( glm::vec3 rotation );
+			glm::vec3 getDirection();
+			Body * getBody();
 			Material * getMaterial();
 			void setCollider( Collider * collider );
 			std::vector<Collider *> getColliders();
