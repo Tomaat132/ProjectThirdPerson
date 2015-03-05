@@ -216,22 +216,22 @@ namespace uGE {
 		glGenBuffers( 6, _vbos );
 
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _vbos[0] ); // working on indices buffer
-				glBufferData( GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof( unsigned int ), _indices.data(), GL_STATIC_DRAW );
+				glBufferData( GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof( unsigned int ), _indices.data(), GL_STATIC_DRAW ); // data being drawn into memory
 
 			glBindBuffer( GL_ARRAY_BUFFER, _vbos[1] ); // working on vertices buffer
-				glBufferData( GL_ARRAY_BUFFER, _vertices.size() * 3 * sizeof( float ), _vertices.data(), GL_STATIC_DRAW );
+				glBufferData( GL_ARRAY_BUFFER, _vertices.size() * 3 * sizeof( float ), _vertices.data(), GL_STATIC_DRAW ); // data being drawn into memory
 
 			glBindBuffer( GL_ARRAY_BUFFER, _vbos[2] ); // working on normals buffer
-				glBufferData( GL_ARRAY_BUFFER, _normals.size() * 3 * sizeof( float ), _normals.data(), GL_STATIC_DRAW );
+				glBufferData( GL_ARRAY_BUFFER, _normals.size() * 3 * sizeof( float ), _normals.data(), GL_STATIC_DRAW ); // data being drawn into memory
 
 			glBindBuffer( GL_ARRAY_BUFFER, _vbos[3] ); // working on uvs buffer
-				glBufferData( GL_ARRAY_BUFFER, _uvs.size() * 2 * sizeof( float ), _uvs.data(), GL_STATIC_DRAW );
+				glBufferData( GL_ARRAY_BUFFER, _uvs.size() * 2 * sizeof( float ), _uvs.data(), GL_STATIC_DRAW ); // data being drawn into memory
 
             glBindBuffer( GL_ARRAY_BUFFER, _vbos[4] ); // working on tangents buffer
-                glBufferData( GL_ARRAY_BUFFER, _tangents.size() * 3 * sizeof( float ), _tangents.data(), GL_STATIC_DRAW );
+                glBufferData( GL_ARRAY_BUFFER, _tangents.size() * 3 * sizeof( float ), _tangents.data(), GL_STATIC_DRAW ); // data being drawn into memory
 
             glBindBuffer( GL_ARRAY_BUFFER, _vbos[5] ); // working on bitangents buffer
-                glBufferData( GL_ARRAY_BUFFER, _bitangents.size() * 3 * sizeof( float ), _bitangents.data(), GL_STATIC_DRAW );
+                glBufferData( GL_ARRAY_BUFFER, _bitangents.size() * 3 * sizeof( float ), _bitangents.data(), GL_STATIC_DRAW ); //data being drawn into memory
 
 		return _name;
 	}

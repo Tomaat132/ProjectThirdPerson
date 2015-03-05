@@ -28,7 +28,7 @@ namespace uGE {
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::Z ) ) translate += glm::vec3( 0,0.1,0 );
 		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::X ) ) translate -= glm::vec3( 0,0.1,0 );
 		/*if ( sf::Keyboard::isKeyPressed( sf::Keyboard::P ) ) */
-        //    _parent->getBody()->getAnimation()->PlayAnimation(_parent, false);
+            //_parent->getBody()->getAnimation()->PlayAnimation(_parent, false);
 
 		// note, does not check collision, just moves on xz plane !
 		transform = glm::translate( transform, translate );

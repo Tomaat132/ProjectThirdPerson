@@ -54,9 +54,9 @@ namespace uGE {
 
 		if( _body ) {
             if( _body->getMaterial()->getBlendMode() == Material::BlendMode::NORMAL ) {
-                Renderer::firstPassRender[ _body ] = transform;
+                Renderer::firstPassRender[ _body ] = transform * _animTransform;
             } else {
-                Renderer::secondPassRender[ _body ] = transform;
+                Renderer::secondPassRender[ _body ] = transform * _animTransform;
             }
 		}
 
@@ -102,6 +102,7 @@ namespace uGE {
 
 	void GameObject::setAnimTransform( glm::mat4 & animTransform )
 	{
+	    //std::cout << animTransform << std::endl;
 	    _animTransform = animTransform;
 	}
     void GameObject::setRotation( glm::vec3 aRotation )
@@ -130,8 +131,8 @@ namespace uGE {
 
 		if ( this->getName() == "Player" )
         {
-            if(this->getBody()->getAnimation())
-            {  // This code needs some serious fixing, causes crashes somehow
+            if ( this->getBody()->getAnimation() )
+            {
                 //this->getBody()->getAnimation()->update();
             }
         }

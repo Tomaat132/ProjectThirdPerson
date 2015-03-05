@@ -15,8 +15,8 @@ namespace uGE {
 	class Animation
 	{
         private:
-            bool isPlaying;
-            int frame;
+            bool _isPlaying;
+            unsigned int frame;
             bool _repeat;
             GameObject * _parent;
             Mesh * _mesh;
@@ -38,7 +38,9 @@ namespace uGE {
 
             void setMesh( Mesh * mesh );
 			static Animation * LoadAnimation(std::string filename);
-			void PlayAnimation(GameObject * parent, bool repeat);
+			void PlayAnimation(GameObject * parent, std::string repeat);
+			void StopAnimation();
+			void setIsPlaying(std::string isPlaying);
             void update();
 
 		private:

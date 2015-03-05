@@ -6,6 +6,7 @@
 #include "SphereCollider.hpp"
 #include "GameObject.hpp"
 #include "Body.hpp"
+#include "Animation.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
 #include "Camera.hpp"
@@ -23,7 +24,7 @@ namespace uGE {
 
 	PlayerController::~PlayerController()
 	{
-
+        //dtor
 	}
 
 	void PlayerController::update()
@@ -52,8 +53,13 @@ namespace uGE {
         }
 
 		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
-
         if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
+        if(hTranslate != glm::vec3(0, 0, 0) || vTranslate != glm::vec3(0, 0, 0) ) {
+                _parent->setDirection(glm::normalize(hTranslate + vTranslate));   //SET DIRECTION
+                _parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
+        } else {
+            _parent->getBody()->getAnimation()->StopAnimation();
+        }
 
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
         {
