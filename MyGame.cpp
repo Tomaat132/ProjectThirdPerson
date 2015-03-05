@@ -69,9 +69,6 @@ bool MyGame::load()
             waterBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/water.png" ) );
             waterBody->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
         water->setBody( waterBody );
-            glm::mat4 &transform = water->transform;
-            //transform = glm::rotate( transform, 180.f, glm::vec3(1,0,0) );
-//transform = glm::scale( transform, glm::vec3( 80.f, 1.f, 80.f ) );
         water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
         water->getMaterial()->setAlpha( 2.0f );
 

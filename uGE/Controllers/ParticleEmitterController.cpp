@@ -17,6 +17,8 @@ namespace uGE {
 	{
 	    _timeTillEmit = 0.0f;
 	    _emitTime = 0.4f;
+
+	    std::cout << SceneManager::_camera->getName() << std::endl;
 	}
 
 	ParticleEmitterController::~ParticleEmitterController()
@@ -51,7 +53,7 @@ namespace uGE {
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
                 particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );
-                particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+                particleBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             particle->setBody( particleBody );
 
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
