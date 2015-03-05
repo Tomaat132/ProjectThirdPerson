@@ -56,7 +56,6 @@ namespace uGE {
             particle->setPosition( _parent->getPosition() );
            uGE::SceneManager::add( particle );
            _particles.push_back( particle );
-           std::cout<<  _particles.size() << std::endl;
     }
 	void ParticleEmitterController::setVelocity(glm::vec3 aVelocity)
 	{

@@ -28,7 +28,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 25.f * Time::step();
+	    float speed = 40.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
 
 		glm::mat4 & transform = _parent->transform;
@@ -46,6 +46,10 @@ namespace uGE {
 		if ( keyS ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
 		if ( keyA ) rotate[0] = 1.f;//hTranslate.x += speed;
 		if ( keyD ) rotate[0] = -1.f;//hTranslate.x -= speed;
+
+        if( glm::length(rotate) > 0 ) {
+            rotate = glm::normalize(rotate);
+        }
 
 		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
 

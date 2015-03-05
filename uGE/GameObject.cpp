@@ -105,12 +105,12 @@ namespace uGE {
 	    _animTransform = animTransform;
 	}
     void GameObject::setRotation( glm::vec3 aRotation )
-{
-    std::cout << glm::length( aRotation ) << std::endl;
-    glm::vec3 xAxis = glm::cross( glm::vec3( 0.f, 1.f, 0.f ), aRotation );
-    transform[2] = glm::vec4( aRotation, 0.f );
-    transform[0] = glm::vec4( glm::normalize( xAxis ), 0.f );
-}
+    {
+        std::cout << glm::length( aRotation ) << std::endl;
+        glm::vec3 xAxis = glm::cross( glm::vec3( 0.f, 1.f, 0.f ), aRotation );
+        transform[2] = glm::vec4( aRotation, 0.f );
+        transform[0] = glm::vec4( glm::normalize( xAxis ), 0.f );
+    }
 	void GameObject::setPosition( glm::vec3 position )
 	{
 		_transform[3] = glm::vec4( position, 1.0f );
