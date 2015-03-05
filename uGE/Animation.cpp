@@ -69,13 +69,23 @@ namespace uGE {
         return 0;
 	}
 
-	void Animation::PlayAnimation(GameObject * parent, bool repeat) //Plays the animation on custom designated fps with repeat option
+	void Animation::PlayAnimation(GameObject * parent, std::string repeat) //Plays the animation on custom designated fps with repeat option
 	{
 	    //Variables: speed of playing, loopable, activation
 	    _parent = parent;
-	    _repeat = repeat;
-	    frame = 0;
-	    isPlaying = true;
+	    if(repeat == "false")
+        {
+            _repeat = false;
+            _isPlaying = true;
+        }
+	    else if(repeat == "true")
+        {
+            _repeat = true;
+            _isPlaying = true;
+        }
+
+	    if(frame >= _animTrans.size()) frame = 0;
+	    //this->setIsPlaying("true");/*
 	    //std::cout << _parent->getName() << std::endl;
 	    //std::cout << "FPS = " << playFPS << "." << std::endl;
 	    //std::cout << _animTrans.size() << ", " << _animRot.size() << std::endl;
@@ -96,27 +106,55 @@ namespace uGE {
         //}
         //std::cout << "bool repeat = " << repeat << "." << std::endl;
         //std::cout << "int i afterwards: " << i << "." << std::endl;
-        //std::cout << "int j afterwards: " << j << "." << std::endl;
+        //std::cout << "int j afterwards: " << j << "." << std::endl;*/
+	}
+
+	void Animation::StopAnimation() //Stops animation and resets frame to 0;
+	{
+	    //_isPlaying = false;
+	    frame = 0;
+	}
+
+	void Animation::setIsPlaying(std::string isPlaying)
+	{
+        if(isPlaying == "false") _isPlaying = false;
+        else if(isPlaying == "true") _isPlaying = true;
 	}
 
 	void Animation::update() //Update function
 	{
-        if(!isPlaying)
+        std::cout << "_repeat: " << _repeat << "." << std::endl;
+        std::cout << "_isPlaying: " << _isPlaying << "." << std::endl;
+        _animTransform = glm::mat4( 1.0 );
+        unsigned int i = _animTrans.size();
+        if(!_isPlaying)
         {
+            /* <- A try to set transformation to default again...
+            //Assigning rotations x,y,z from that specific frame to rotation part of animTransform matrix
+            _animTransform = glm::rotate( _animTransform, _animRot[frame][0], glm::vec3( _animTransform[0] ) ); //_animRot.x assigned to _animTransform.x
+            _animTransform = glm::rotate( _animTransform, _animRot[frame][1], glm::vec3( _animTransform[1] ) ); //_animRot.y assigned to _animTransform.y
+            _animTransform = glm::rotate( _animTransform, _animRot[frame][2], glm::vec3( _animTransform[2] ) ); //_animRot.z assigned to _animTransform.z
+            //Assigning translations to animTransform matrix
+            _animTransform = glm::translate( _animTransform, _animTrans[frame] );
+            _parent->setAnimTransform( _animTransform );*/
             return;
+        } else {
+            //Assigning rotations x,y,z from that specific frame to rotation part of animTransform matrix
+            _animTransform = glm::rotate( _animTransform, _animRot[frame][0], glm::vec3( _animTransform[0] ) ); //_animRot.x assigned to _animTransform.x
+            _animTransform = glm::rotate( _animTransform, _animRot[frame][1], glm::vec3( _animTransform[1] ) ); //_animRot.y assigned to _animTransform.y
+            _animTransform = glm::rotate( _animTransform, _animRot[frame][2], glm::vec3( _animTransform[2] ) ); //_animRot.z assigned to _animTransform.z
+            //Assigning translations to animTransform matrix
+            _animTransform = glm::translate( _animTransform, _animTrans[frame] );
+            _parent->setAnimTransform( _animTransform ); // Setting animTransform onto GameObject.transform
+            frame++;
         }
-        signed int i = _animTrans.size();
-        _animTransform = glm::rotate(_parent->transform, _animRot[frame][0], glm::vec3(_parent->transform[0]));
-        _animTransform = glm::rotate(_parent->transform, _animRot[frame][1], glm::vec3(_parent->transform[1]));
-        _animTransform = glm::rotate(_parent->transform, _animRot[frame][2], glm::vec3(_parent->transform[2]));
-        _animTransform = glm::translate(_parent->transform, _animTrans[frame]);
-        frame++;
-
-        if(frame >= i && _repeat == true)
+        if(frame >= i && _repeat != false)
         {
             frame = 0;
-        } else {
-            isPlaying = false;
+        }
+        else if(_repeat != true)
+        {
+            _isPlaying = false;
         }
 	}
 

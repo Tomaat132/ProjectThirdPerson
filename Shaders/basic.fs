@@ -1,5 +1,7 @@
 #version 330
 
+//Basic Fragment Shader "template". Please do not touch!
+
 uniform sampler2D colorMap;
 uniform sampler2D normalMap;
 
