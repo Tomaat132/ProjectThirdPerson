@@ -22,14 +22,14 @@ namespace uGE {
 	{
         _destroyTime -= Time::step();
 
-		glm::mat4 & transform = _parent->transform;
+        Camera * camera = SceneManager::_camera;
+        glm::mat4 & transform = _parent->transform;     //We need to optimize this mess at some point
+        transform[1] = camera->transform[2];
+        transform[2] = camera->transform[0];
+        transform[0] = camera->transform[1];
+		transform = glm::rotate( transform, -90.f, glm::vec3(1,0,0) );
 
-        //std::cout<< transform << std::endl;
-		transform = glm::inverse( glm::lookAt( glm::vec3( transform[3] ), glm::vec3( _followee->transform[3] ), glm::vec3( 0,1,0 ) ) );
-		transform = glm::rotate( transform, -135.f, glm::vec3(1,0,0) );
-
-		if( _destroyTime <= 0.0f ) uGE::SceneManager::del(_parent);
-
+		if( _destroyTime <= 0.0f ) SceneManager::del(_parent);
 	}
 }
 
