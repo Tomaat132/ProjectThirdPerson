@@ -22,7 +22,7 @@ namespace uGE {
 	Shader * SceneManager::_shader;
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
-
+    std::vector< glm::vec3 > SceneManager::_spawnLocations;
 	CollisionDetection * SceneManager::_collision;
 
 	SceneManager::SceneManager()
@@ -43,6 +43,8 @@ namespace uGE {
 	void SceneManager::add( GameObject * object )
 	{
 		_objects.push_back( object );
+        std::cout << _objects.size() << std::endl;
+
 	}
 
 	void SceneManager::add( Light * light )
@@ -53,6 +55,14 @@ namespace uGE {
 	void SceneManager::add( Shader * shader )
 	{
 		_shader = shader;
+	}
+	void SceneManager::addSpawnLoc( glm::vec3 spawnLoc )
+	{
+		_spawnLocations.push_back(spawnLoc);
+	}
+	std::vector< glm::vec3 >& SceneManager::getSpawnLoc()
+	{
+		return _spawnLocations;
 	}
     void SceneManager::del( GameObject * object )
 	{
@@ -87,7 +97,7 @@ namespace uGE {
         Renderer::StartRender();
 		window->display();
 	}
-
+ int k=0;
 	void SceneManager::update()
 	{
 	    Time::update();
@@ -96,8 +106,8 @@ namespace uGE {
 		_camera->update();
 		_light->update();
 
-		for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
-			GameObject * object = (GameObject*) *i;
+		for ( auto i = 0; i < _objects.size(); i++ ) {
+			GameObject * object = _objects[i];
 			object->update();
 		}
 
@@ -113,6 +123,12 @@ namespace uGE {
 		}
 
 		_deleteQueue.clear();
+
+		//k++;
+         //   uGE::GameObject * zombie = new uGE::GameObject( "Zombie");
+
+         //  uGE::SceneManager::add( zombie );
+        //std::cout << k << " zombies created"<<std::endl;
 	}
 
 }

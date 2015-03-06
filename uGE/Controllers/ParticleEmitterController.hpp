@@ -14,6 +14,8 @@ namespace uGE {
 			float _timeTillEmit;
 			float _emitTime;
 			glm::vec3 _velocity;
+			float _percentSucked;
+
 
 			std::vector < GameObject* > _particles;
         private:
@@ -24,6 +26,7 @@ namespace uGE {
 
 			void update();
 			void setVelocity(glm::vec3 aVelocity);
+			void getSucked();
 	};
 }
 #endif // ParticleEmitterController

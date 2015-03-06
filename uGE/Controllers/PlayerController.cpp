@@ -63,7 +63,7 @@ namespace uGE {
        //transform[2][0] = sin(rotate);
         //transform[2][2] = -sin(rotate+90);
 		// note, does not check collision, just moves on xz plane !
-		if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 180.f)*Time::step() );
+		if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 80.f)*Time::step() );
 		if(rotate != glm::vec3(0,0,0)) _parent->setRotation(glm::normalize(rotate));
 		//transform = glm::rotate( transform, rotate, glm::vec3( 0,1,0 ) );
 	}
@@ -71,7 +71,6 @@ namespace uGE {
 	{
 
         uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
-
             particleEmitter->setController( new uGE::ParticleEmitterController( particleEmitter, _parent) );
             particleEmitter->setPosition( _parent->getPosition());
            uGE::SceneManager::add( particleEmitter );

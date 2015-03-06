@@ -21,6 +21,8 @@
 #include "uGE/Controllers/RotateController.hpp"
 #include "uGE/Controllers/PlayerController.hpp"
 #include "uGE/Controllers/ParticleController.hpp"
+#include "uGE/Controllers/ZombieSpawnController.hpp"
+#include "uGE/Controllers/SpiritSpawnController.hpp"
 
 
 MyGame::MyGame()
@@ -49,7 +51,10 @@ bool MyGame::load()
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::SUB );
         player->getMaterial()->setAlpha( 0.75f );
-
+    uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
+        zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
+    uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
+        spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
         uGE::Body * enemyBody = new uGE::Body( enemy );
@@ -81,6 +86,8 @@ bool MyGame::load()
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::add( player );
 	uGE::SceneManager::add( enemy );
+	uGE::SceneManager::add( zombieSpawn );
+	uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::add( water );
 

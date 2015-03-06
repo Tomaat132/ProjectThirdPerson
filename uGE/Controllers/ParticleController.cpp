@@ -9,7 +9,7 @@ namespace uGE {
 	ParticleController::ParticleController( uGE::GameObject * parent, GameObject * followee )
 	:	Controller( parent ), _followee( followee )
 	{
-        _destroyTime = 0.04f;
+        _destroyTime = 0.1f;
         _rotation = float(rand()*0.1f);
 	}
 
@@ -26,9 +26,9 @@ namespace uGE {
 
         //std::cout<< transform << std::endl;
 		transform = glm::inverse( glm::lookAt( glm::vec3( transform[3] ), glm::vec3( _followee->transform[3] ), glm::vec3( 0,1,0 ) ) );
-		transform = glm::rotate( transform, -180.f, glm::vec3(1,0,0) );
+		transform = glm::rotate( transform, -135.f, glm::vec3(1,0,0) );
 
-        transform = glm::rotate( transform, _rotation, glm::vec3( 0,0,1 ) );
+        //transform = glm::rotate( transform, _rotation, glm::vec3( 0,0,1 ) );
 
 		if( _destroyTime <= 0.0f ) uGE::SceneManager::del(_parent);
 
