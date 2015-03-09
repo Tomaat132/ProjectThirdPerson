@@ -21,7 +21,7 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 3.10f;
+	    _spawnTime = 5.10f;
         srand(time(NULL));
 
 	}

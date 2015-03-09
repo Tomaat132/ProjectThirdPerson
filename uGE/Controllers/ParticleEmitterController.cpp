@@ -18,7 +18,6 @@ namespace uGE {
 	    _timeTillEmit = 0.0f;
 	    _emitTime = 0.1f;
 	    _velocity = glm::vec3(0.f, 4.f, 0.f);
-	    _percentSucked = 0;
         srand(time(NULL));
 	}
 
@@ -28,8 +27,9 @@ namespace uGE {
 	}
 	void ParticleEmitterController::update()
 	{
+	    _parent->setPosition( _followee->getPosition());
 	    _timeTillEmit -= Time::step();
-		glm::mat4 & transform = _parent->transform;
+		//glm::mat4 & transform = _parent->transform;
         //transform = _parent->transform;
         /*std::cout<< transform << std::endl;
 		transform = glm::inverse( glm::lookAt( glm::vec3( transform[3] ), glm::vec3( _followee->transform[3] ), glm::vec3( 0,1,0 ) ) );
@@ -43,20 +43,17 @@ namespace uGE {
             _particles.clear();
             for(auto i = 0; i < 5; i++)
             {
-                setVelocity(glm::vec3((2.0f * float(rand())/ float(RAND_MAX) -1.0f), (2.0f * float(rand())/ float(RAND_MAX) +3.0f), (2.0f * float(rand())/ float(RAND_MAX) -1.0f)));
-                if(_percentSucked >= 0) setVelocity(_velocity + (_followee->getPosition()-_parent->getPosition())*_percentSucked/100.f ); //interpolated vec3 between player and ghost
+                //distortion around a position
+                setDistortion(glm::vec3((2.0f * float(rand())/ float(RAND_MAX) -1.0f), (2.0f * float(rand())/ float(RAND_MAX) +3.0f), (2.0f * float(rand())/ float(RAND_MAX) -1.0f)));
+
                 emit();
             }
             _timeTillEmit = _emitTime;
         }
-        getSucked();
+        //getSucked();
 	}
 
-	void ParticleEmitterController::getSucked()
-	{
-	    _percentSucked += Time::step()*20.f;
-	    if(_percentSucked >= 90) _percentSucked = 0;//DIE
-	}
+
     void ParticleEmitterController::emit()
     {
         uGE::GameObject * particle = new uGE::GameObject( "Particle");
@@ -67,13 +64,17 @@ namespace uGE {
             particle->setBody( particleBody );
 
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
-            particle->setPosition( _parent->getPosition() +_velocity );
+            particle->setPosition( _parent->getPosition() +_velocity +_distortion);
            uGE::SceneManager::add( particle );
            _particles.push_back( particle );
     }
 	void ParticleEmitterController::setVelocity(glm::vec3 aVelocity)
 	{
 	    _velocity = aVelocity;
+	}
+	void ParticleEmitterController::setDistortion(glm::vec3 aDistortion)
+	{
+	    _distortion = aDistortion;
 	}
 }
 

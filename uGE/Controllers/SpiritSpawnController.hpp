@@ -13,6 +13,8 @@ namespace uGE {
 			float _timeTillSpawn;
 			float _spawnTime;
 
+            std::vector < GameObject* > _spirits;
+
         private:
             void spawn();
 		public:

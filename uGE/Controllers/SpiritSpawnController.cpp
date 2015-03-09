@@ -21,7 +21,7 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 1.20f;
+	    _spawnTime = 5.20f;
         srand(time(NULL));
 
 	}
@@ -52,7 +52,6 @@ namespace uGE {
             spirit->setController( new uGE::ParticleEmitterController( spirit, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
-            std::cout<< r <<std::endl;
            spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
            uGE::SceneManager::add( spirit );
     }
