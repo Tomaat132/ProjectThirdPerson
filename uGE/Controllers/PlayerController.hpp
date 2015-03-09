@@ -3,6 +3,8 @@
 #include "utils/glm.hpp"
 #include "Controller.hpp"
 
+#include "Player.hpp"
+
 namespace uGE {
 
     struct CollisionResult;

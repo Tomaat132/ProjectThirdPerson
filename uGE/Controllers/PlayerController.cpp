@@ -13,6 +13,8 @@
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
 
+#include "Player.hpp"
+
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::GameObject * parent )
@@ -26,7 +28,7 @@ namespace uGE {
 	{
         //dtor
 	}
-
+	
 	void PlayerController::update()
 	{
 	    float speed = 40.f * Time::step();
