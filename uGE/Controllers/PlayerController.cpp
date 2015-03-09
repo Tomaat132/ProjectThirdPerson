@@ -33,7 +33,6 @@ namespace uGE {
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
 
 		glm::mat4 & transform = _parent->transform;
-	//	glm::vec3 direction = _parent->getDirection();    //IS THIS STILL DIRECTION OF PARENT??? OR A COPY OF IT?
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
