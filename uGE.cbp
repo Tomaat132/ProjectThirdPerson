@@ -93,6 +93,8 @@
 		<Unit filename="uGE/Controllers/PlayerController.hpp" />
 		<Unit filename="uGE/Controllers/RotateController.cpp" />
 		<Unit filename="uGE/Controllers/RotateController.hpp" />
+		<Unit filename="uGE/Controllers/SpiritController.cpp" />
+		<Unit filename="uGE/Controllers/SpiritController.hpp" />
 		<Unit filename="uGE/Controllers/SpiritSpawnController.cpp" />
 		<Unit filename="uGE/Controllers/SpiritSpawnController.hpp" />
 		<Unit filename="uGE/Controllers/WasdController.cpp" />
