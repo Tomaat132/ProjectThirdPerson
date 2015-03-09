@@ -14,12 +14,15 @@
 #include "CollisionDetection.hpp"
 #include "Renderer.hpp"
 
+#include "Player.hpp"
+
 namespace uGE {
 
 
 	Camera * SceneManager::_camera;
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
+	Player * SceneManager::_player;
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
 
@@ -79,6 +82,8 @@ namespace uGE {
         Renderer::secondPassRender.clear();
 
         glm::mat4 parent;
+        _player->render( _shader, parent );
+
         for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
             GameObject * object = (GameObject*) *i;
             object->render( _shader, parent );
@@ -95,6 +100,7 @@ namespace uGE {
         _collision->update(_objects);
 		_camera->update();
 		_light->update();
+		_player->update();
 
 		for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
 			GameObject * object = (GameObject*) *i;

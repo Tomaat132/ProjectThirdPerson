@@ -74,6 +74,7 @@
 		<Unit filename="uGE/Collider.hpp" />
 		<Unit filename="uGE/Colliders/AABB collision.hpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.cpp" />
+		<Unit filename="uGE/Colliders/AABBcollision.hpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.cpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.hpp" />
 		<Unit filename="uGE/CollisionDetection.cpp" />
@@ -86,12 +87,16 @@
 		<Unit filename="uGE/Controllers/FollowController.hpp" />
 		<Unit filename="uGE/Controllers/ParticleController.cpp" />
 		<Unit filename="uGE/Controllers/ParticleController.hpp" />
+		<Unit filename="uGE/Controllers/ParticleEmitterController.cpp" />
+		<Unit filename="uGE/Controllers/ParticleEmitterController.hpp" />
 		<Unit filename="uGE/Controllers/PlayerController.cpp" />
 		<Unit filename="uGE/Controllers/PlayerController.hpp" />
 		<Unit filename="uGE/Controllers/RotateController.cpp" />
 		<Unit filename="uGE/Controllers/RotateController.hpp" />
 		<Unit filename="uGE/Controllers/WasdController.cpp" />
 		<Unit filename="uGE/Controllers/WasdController.hpp" />
+		<Unit filename="uGE/Controllers/ZombieController.cpp" />
+		<Unit filename="uGE/Controllers/ZombieController.hpp" />
 		<Unit filename="uGE/Game.cpp" />
 		<Unit filename="uGE/Game.hpp" />
 		<Unit filename="uGE/GameObject.cpp" />

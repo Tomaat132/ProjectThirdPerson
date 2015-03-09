@@ -12,6 +12,8 @@
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
 
+#include "Player.hpp"
+
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::GameObject * parent )
@@ -25,7 +27,9 @@ namespace uGE {
 	{
 
 	}
-
+    //---------------------------
+    Player * _player;
+    //---------------------------
 	void PlayerController::update()
 	{
 	    float speed = 40.f * Time::step();
@@ -42,10 +46,10 @@ namespace uGE {
         bool keyS = sf::Keyboard::isKeyPressed( sf::Keyboard::S );
         bool keyA = sf::Keyboard::isKeyPressed( sf::Keyboard::A );
         bool keyD = sf::Keyboard::isKeyPressed( sf::Keyboard::D );
-		if ( keyW ) rotate[2] = 1.0f;
-		if ( keyS ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
-		if ( keyA ) rotate[0] = 1.f;//hTranslate.x += speed;
-		if ( keyD ) rotate[0] = -1.f;//hTranslate.x -= speed;
+		if ( keyW ) {rotate[2] = 1.0f; _player->changeHealth(+1) ;std::cout<< _player->getHealth() <<std::endl; }
+		if ( keyS ) {rotate[2] = -1.0f;} //vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
+		if ( keyA ) {rotate[0] = 1.f;}//hTranslate.x += speed;
+		if ( keyD ) {rotate[0] = -1.f;}//hTranslate.x -= speed;
 
         if( glm::length(rotate) > 0 ) {
             rotate = glm::normalize(rotate);

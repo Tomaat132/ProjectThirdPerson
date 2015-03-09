@@ -21,6 +21,7 @@
 #include "uGE/Controllers/RotateController.hpp"
 #include "uGE/Controllers/PlayerController.hpp"
 #include "uGE/Controllers/ParticleController.hpp"
+#include "uGE/Controllers/ZombieController.hpp"
 
 
 MyGame::MyGame()
@@ -39,7 +40,7 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
-    uGE::GameObject * player = new uGE::GameObject( "Player" );
+    uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
@@ -79,9 +80,22 @@ bool MyGame::load()
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
-	uGE::SceneManager::add( player );
+	//uGE::SceneManager::add( player );
+	uGE::SceneManager::_player = player;
 	uGE::SceneManager::add( enemy );
 	uGE::SceneManager::add( water );
+
+
+    //working area
+        uGE::GameObject * zombie = new uGE::GameObject( "Zombie" );
+        uGE::Body * zombieBody = new uGE::Body( zombie );
+            zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/test/stump.obj" ) );
+            zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+        zombie->setBody( zombieBody );
+        zombie->setController( new uGE::ZombieController( zombie ) );
+        uGE::SceneManager::add( zombie );
+    //end of working area
+
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "LEVEL v4" );
