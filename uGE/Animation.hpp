@@ -15,9 +15,11 @@ namespace uGE {
 	class Animation
 	{
         private:
-            bool _isPlaying;
-            unsigned int frame;
-            bool _repeat;
+            bool _isPlaying = false;
+            unsigned int frame = 0;
+            float time = 0.f;
+            bool _repeat = false;
+
             GameObject * _parent;
             Mesh * _mesh;
             GLuint _name;
@@ -42,6 +44,7 @@ namespace uGE {
 			void StopAnimation();
 			void setIsPlaying(std::string isPlaying);
             void update();
+            void updateFrame();
 
 		private:
 		    GLuint createBuffers();

@@ -133,7 +133,7 @@ namespace uGE {
         {
             if ( this->getBody()->getAnimation() )
             {
-                //this->getBody()->getAnimation()->update();
+                this->getBody()->getAnimation()->update();
             }
         }
 

@@ -78,10 +78,10 @@ bool MyGame::load()
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::add( player );
 	uGE::SceneManager::add( enemy );
-	uGE::SceneManager::add( water );
+	//uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL v4" );
+    loader.loadLevel( "level test 6" );
 
 	return true;
 }

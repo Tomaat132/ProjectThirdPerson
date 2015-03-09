@@ -29,7 +29,7 @@ void main() {
 
     vec4 cameraDirection = wCamera - wVertex;
 
-    vec2 coordOffset = vec2( 0.01 * sin( 3 * time ), 0.04 * time );
+    vec2 coordOffset = vec2( 0.005 * sin( 2 * time ) + 0.04 * time, 0.005 * sin( 2 * time) + 0.04 * time );
 
     fragment = diffused * texture( colorMap, texCoord + coordOffset ) * vec4(1.0, 1.0, 1.0, alpha);
 }

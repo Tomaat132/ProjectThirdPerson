@@ -36,49 +36,33 @@ namespace uGE {
 	//	glm::vec3 direction = _parent->getDirection();    //IS THIS STILL DIRECTION OF PARENT??? OR A COPY OF IT?
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 hTranslate(0, 0, 0);
-        glm::vec3 vTranslate(0, 0, 0);
 
-        bool keyW = sf::Keyboard::isKeyPressed( sf::Keyboard::W );
-        bool keyS = sf::Keyboard::isKeyPressed( sf::Keyboard::S );
-        bool keyA = sf::Keyboard::isKeyPressed( sf::Keyboard::A );
-        bool keyD = sf::Keyboard::isKeyPressed( sf::Keyboard::D );
-		if ( keyW ) rotate[2] = 1.0f;
-		if ( keyS ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
-		if ( keyA ) rotate[0] = 1.f;//hTranslate.x += speed;
-		if ( keyD ) rotate[0] = -1.f;//hTranslate.x -= speed;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) rotate[2] = -1.0f;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
-        if( glm::length(rotate) > 0 ) {
-            rotate = glm::normalize(rotate);
+        if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
+            //Do Melee
         }
-
-		//if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
-        if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
-        if(hTranslate != glm::vec3(0, 0, 0) || vTranslate != glm::vec3(0, 0, 0) ) {
-                _parent->setDirection(glm::normalize(hTranslate + vTranslate));   //SET DIRECTION
-                _parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
-        } else {
-            _parent->getBody()->getAnimation()->StopAnimation();
-        }
-
-        if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
+        if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
         {
             shoot();
             _shootTime = 0.3f;
         }
-        if(sf::Keyboard::isKeyPressed( sf::Keyboard::G ) && _shootTime <= 0.f)
-        {
-            createParticle();
-            _shootTime = 0.3f;
+        if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
+            //Do Absorbing
         }
-        //transform[0][0] = cos(rotate);
-        //transform[0][2] = -cos(rotate+90);
-       //transform[2][0] = sin(rotate);
-        //transform[2][2] = -sin(rotate+90);
-		// note, does not check collision, just moves on xz plane !
-		if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
-		if(rotate != glm::vec3(0,0,0)) _parent->setRotation(glm::normalize(rotate));
-		//transform = glm::rotate( transform, rotate, glm::vec3( 0,1,0 ) );
+
+		if( glm::length(rotate) > 0 ) {
+            rotate = glm::normalize(rotate);
+            transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
+            _parent->setDirection( rotate );
+            _parent->setRotation( rotate );
+            _parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
+		} else {
+		    _parent->getBody()->getAnimation()->StopAnimation();
+		}
 	}
     void PlayerController::createParticle()
 	{
