@@ -9,12 +9,15 @@
 #include "ParticleController.hpp"
 #include "SpiritController.hpp"
 #include "SpiritSpawnController.hpp"
+#include "ZombieSpawnController.hpp"
 #include "PlayerController.hpp"
 #include "SphereCollider.hpp"
 #include "GameObject.hpp"
+#include "Zombie.hpp"
 #include "Spirit.hpp"
 #include "Body.hpp"
 #include "Animation.hpp"
+#include "Material.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
 #include "Camera.hpp"
@@ -50,8 +53,8 @@ namespace uGE {
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
         {
             for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
-                Spirit* spirit = SpiritSpawnController::spirits[j];
-                spirit->isTargeted( false );
+                Spirit* aSpirit = SpiritSpawnController::spirits[j];
+                aSpirit->isTargeted( false );
             }
             _isSucking = false;
         }
@@ -85,6 +88,11 @@ namespace uGE {
                 shoot();
                 _shootTime = 0.3f;
             }
+            if(sf::Keyboard::isKeyPressed( sf::Keyboard::T ) && _shootTime <= 0.f)
+            {
+                attack();
+                _shootTime = 0.3f;
+            }
             if(sf::Keyboard::isKeyPressed( sf::Keyboard::G ) && _shootTime <= 0.f)
             {
                 for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
@@ -93,6 +101,7 @@ namespace uGE {
                     {
                         if(glm::dot(glm::normalize(spirit->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
                         {
+                            std::cout<< glm::dot(glm::normalize(spirit->getPosition()- _parent->getPosition()), _parent->getDirection()) << std::endl;
                             spirit->isTargeted( true );
                             break;
                         }
@@ -121,6 +130,35 @@ namespace uGE {
             particleEmitter->setPosition( _parent->getPosition());
            uGE::SceneManager::add( particleEmitter );
 
+	}
+	void PlayerController::attack()
+	{
+	    for( unsigned int i = 0; i < ZombieSpawnController::zombies.size(); i++){
+            Zombie* zombie = ZombieSpawnController::zombies[i];
+            if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 10.f)
+            {
+                if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
+                {
+
+                    //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
+                    SceneManager::del(zombie);
+                    break;
+                }
+
+            }
+        }
+        //particle
+        uGE::GameObject * particle = new uGE::GameObject( "Particle" );
+             uGE::Body * particleBody = new uGE::Body( particle );
+                particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
+                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star02.png") );
+                particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+
+            particle->setBody( particleBody );
+
+            particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
+            particle->setPosition( _parent->getPosition() +_parent->getDirection()*4.f);
+           uGE::SceneManager::add( particle );
 	}
 	void PlayerController::shoot()
 	{

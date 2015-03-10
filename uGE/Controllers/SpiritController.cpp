@@ -72,8 +72,8 @@ namespace uGE {
     }
 	void SpiritController::getSucked()
 	{
-	    if(_targeted ) _percentSucked += Time::step()*30.f;
-	    else if(_percentSucked > 0) _percentSucked -= 2*Time::step()*30.f;
+	    if(_targeted ) _percentSucked += Time::step()*35.f;
+	    else if(_percentSucked > 0) _percentSucked -= 2*Time::step()*35.f;
 	    if(_percentSucked >= 98) die();//DIE
 	}
 

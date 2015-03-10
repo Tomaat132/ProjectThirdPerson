@@ -17,6 +17,7 @@ namespace uGE {
 
 			void update();
 			void shoot();
+			void attack();
             void createParticle();
 
             void onCollision( CollisionResult * result );

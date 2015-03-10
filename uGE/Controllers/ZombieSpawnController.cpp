@@ -1,13 +1,14 @@
 #include "ZombieSpawnController.hpp"
 #include "ParticleController.hpp"
-#include "RotateController.hpp"
+#include "ZombieController.hpp"
 
 #include "GameObject.hpp"
-#include "Body.hpp"
+#include "Zombie.hpp"
 
 #include "SceneManager.hpp"
 #include "AssetManager.hpp"
 
+#include "Body.hpp"
 #include "Material.hpp"
 #include "Camera.hpp"
 
@@ -17,6 +18,9 @@
 #include <stdlib.h>
 
 namespace uGE {
+
+    std::vector< Zombie *> ZombieSpawnController::zombies;
+
 	ZombieSpawnController::ZombieSpawnController( GameObject * parent, GameObject * followee )
 	:	Controller( parent ), _followee( followee )
 	{
@@ -47,18 +51,18 @@ namespace uGE {
 	}
     void ZombieSpawnController::spawn()
     {
-        uGE::GameObject * zombie = new uGE::GameObject( "Zombie");
+        uGE::Zombie* zombie = new uGE::Zombie( "Zombie");
              uGE::Body * zombieBody = new uGE::Body( zombie );
                 zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
                 zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
                 zombieBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
             zombie->setBody( zombieBody );
-
-            zombie->setController( new uGE::RotateController( zombie) );
+            zombie->setController( new uGE::ZombieController( zombie, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
             std::cout<< r <<std::endl;
            zombie->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
+           zombies.push_back( zombie );
            uGE::SceneManager::add( zombie );
     }
 }

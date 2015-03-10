@@ -4,6 +4,7 @@
 #include "utils/glm.hpp"
 #include "Controller.hpp"
 #include "GameObject.hpp"
+#include "Zombie.hpp"
 namespace uGE {
 
 	class ZombieSpawnController : public Controller
@@ -12,7 +13,8 @@ namespace uGE {
 			GameObject * _followee;
 			float _timeTillSpawn;
 			float _spawnTime;
-
+        public:
+            static std::vector< Zombie* > zombies;
         private:
             void spawn();
 		public:
