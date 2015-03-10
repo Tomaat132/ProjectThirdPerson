@@ -54,9 +54,9 @@ namespace uGE {
 
 		if( _body ) {
             if( _body->getMaterial()->getBlendMode() == Material::BlendMode::NORMAL ) {
-                Renderer::firstPassRender[ _body ] = transform;
+                Renderer::firstPassRender[ _body ] = transform * _animTransform;
             } else {
-                Renderer::secondPassRender[ _body ] = transform;
+                Renderer::secondPassRender[ _body ] = transform * _animTransform;
             }
 		}
 
@@ -95,16 +95,22 @@ namespace uGE {
 		_controller = controller;
 	}
 
+	Controller* GameObject::getController()
+	{
+	    return _controller;
+	}
+
 	void GameObject::setAnimTransform( glm::mat4 & animTransform )
 	{
+	    //std::cout << animTransform << std::endl;
 	    _animTransform = animTransform;
 	}
     void GameObject::setRotation( glm::vec3 aRotation )
-{
-    glm::vec3 xAxis = glm::cross( glm::vec3( 0.f, 1.f, 0.f ), aRotation );
-    transform[2] = glm::vec4( aRotation, 0.f );
-    transform[0] = glm::vec4( glm::normalize( xAxis ), 0.f );
-}
+    {
+        glm::vec3 xAxis = glm::cross( glm::vec3( 0.f, 1.f, 0.f ), aRotation );
+        transform[2] = glm::vec4( aRotation, 0.f );
+        transform[0] = glm::vec4( glm::normalize( xAxis ), 0.f );
+    }
 	void GameObject::setPosition( glm::vec3 position )
 	{
 		_transform[3] = glm::vec4( position, 1.0f );
@@ -125,8 +131,8 @@ namespace uGE {
 
 		if ( this->getName() == "Player" )
         {
-            if(this->getBody()->getAnimation())
-            {  // This code needs some serious fixing, causes crashes somehow
+            if ( this->getBody()->getAnimation() )
+            {
                 //this->getBody()->getAnimation()->update();
             }
         }

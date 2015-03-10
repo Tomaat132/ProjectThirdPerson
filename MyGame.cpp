@@ -45,16 +45,17 @@ bool MyGame::load()
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
-            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/stone_2.jpg") );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
         player->setCollider(new uGE::SphereCollider(player,1.45f));
         player->setController( new uGE::PlayerController( player ) );
-        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::SUB );
+        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
         player->getMaterial()->setAlpha( 0.75f );
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
     uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
         spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
+
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
         uGE::Body * enemyBody = new uGE::Body( enemy );
@@ -74,11 +75,8 @@ bool MyGame::load()
             waterBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/water.png" ) );
             waterBody->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
         water->setBody( waterBody );
-            glm::mat4 &transform = water->transform;
-            //transform = glm::rotate( transform, 180.f, glm::vec3(1,0,0) );
-//transform = glm::scale( transform, glm::vec3( 80.f, 1.f, 80.f ) );
         water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
-        water->getMaterial()->setAlpha( 2.5f );
+        water->getMaterial()->setAlpha( 2.0f );
 
 
 

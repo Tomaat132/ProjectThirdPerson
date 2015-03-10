@@ -20,13 +20,11 @@ namespace uGE{
     }
 
     glm::vec3 AABBcollision::getMinBounds(){
-
-    return parent->getBody()->getMesh()->getLowestBounds();
+        return parent->getBody()->getMesh()->getLowestBounds();
     }
 
     glm::vec3 AABBcollision::getMaxBounds(){
-
-    return parent->getBody()->getMesh()->getHighestBounds();
+        return parent->getBody()->getMesh()->getHighestBounds();
     }
     //working area
 

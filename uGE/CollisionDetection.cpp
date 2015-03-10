@@ -3,6 +3,7 @@
 #include "Colliders/AABBcollision.hpp"
 
 #include "GameObject.hpp"
+#include "Controller.hpp"
 #include "utils/glm.hpp"
 
 #include <iostream>
@@ -22,25 +23,10 @@ namespace uGE{
 
       void CollisionDetection::update( std::vector<GameObject *> _objects )
       {
-            doSphereCollision( _objects );
-
-            //// THIS HERE IS FOR FUTURE UPDATING ON ALL COLLISION
-            //// SO SPHERE ON AABB ,,, AABB ON AABB
-            //// SPHERE ON SPHERE IS ALREADY DONE
+            checkCollisions( _objects );
       }
 
-      void CollisionDetection::checkSphereCollision( SphereCollider * sphere1, SphereCollider * sphere2 )
-      {
-            float sumOfRadius = sphere1->getRadius() + sphere2->getRadius();
-            glm::vec3 difference = sphere2->getPosition() -  sphere1->getPosition();
-
-            float dist = glm::length(difference);
-            if(dist <= sumOfRadius){
-                //std::cout<< "printing collision"<< std::endl;
-            }
-    }
-
-    void CollisionDetection::doSphereCollision(std::vector<GameObject *> _objects)
+    void CollisionDetection::checkCollisions(std::vector<GameObject *> _objects)
     {
         std::vector<Collider *> colliderArray;
         for( GameObject* object : _objects ) {
@@ -86,9 +72,25 @@ namespace uGE{
         }
     }
 
+    void CollisionDetection::checkSphereCollision( SphereCollider * sphere1, SphereCollider * sphere2 )
+    {
+            float sumOfRadius = sphere1->getRadius() + sphere2->getRadius();
+            glm::vec3 difference = sphere2->getPosition() -  sphere1->getPosition();
+
+            float dist = glm::length(difference);
+            if(dist <= sumOfRadius){
+                CollisionResult * res = new CollisionResult();
+                res->objectA = sphere1->getParent();
+                res->objectB = sphere2->getParent();
+                res->overlap = glm::normalize( difference ) * ( sumOfRadius - dist ); //glm::vec3 with distance and size of overlap
+
+                res->objectA->getController()->onCollision( res ); //Run onCollision in the controller of the first GameObject
+                res->objectB->getController()->onCollision( res );
+            }
+    }
+
     void CollisionDetection::checkAABBcollision(AABBcollision * box1, AABBcollision * box2){
     //run the check to see if obj 1 and 2 collide, if they do, then start function doAABBcollision
-
     //box 1 left and right boundary lines.
     float maxRightSide1 = box1->getPosition().x + box1->getMaxBounds().x;
     float maxLeftSide1 = box1->getPosition().x + box1->getMinBounds().x;
@@ -106,7 +108,13 @@ namespace uGE{
             if(maxLeftSide1 > maxRightSide2){ //check left
                 if (maxUpSide1 < maxDownSide2){ //check top
                     if (maxDownSide1 > maxUpSide2){ //check bottom
-                        //do magic here
+                        CollisionResult * res = new CollisionResult();
+                        res->objectA = box1->getParent();
+                        res->objectB = box2->getParent();
+                        res->overlap = glm::vec3(0,0,0);
+
+                        res->objectA->getController()->onCollision( res );
+                        res->objectB->getController()->onCollision( res );
                     }
                 }
             }
@@ -115,34 +123,43 @@ namespace uGE{
 
     void CollisionDetection::checkSphereAABB(SphereCollider * sphere , AABBcollision * box){
 
-    float maxRightSide = box->getPosition().x + box->getMaxBounds().x;
-    float maxLeftSide = box->getPosition().x + box->getMinBounds().x;
-    float maxUpSide = box->getPosition().z + box->getMaxBounds().z;
-    float maxDownSide = box->getPosition().z + box->getMinBounds().z;
+        float maxRightSide = box->getPosition().x + box->getMaxBounds().x;
+        float maxLeftSide = box->getPosition().x + box->getMinBounds().x;
+        float maxUpSide = box->getPosition().z + box->getMaxBounds().z;
+        float maxDownSide = box->getPosition().z + box->getMinBounds().z;
 
 
-    glm::vec3 closestPoint = sphere->getPosition();
-    //---------- closestPoint lockdown-------------
+        glm::vec3 closestPoint = sphere->getPosition();
+
         if(closestPoint.x > maxRightSide){//right side check
-        closestPoint.x = maxRightSide;
+            closestPoint.x = maxRightSide;
         }
         if(closestPoint.x < maxLeftSide){//left side check
-        closestPoint.x = maxLeftSide;
+            closestPoint.x = maxLeftSide;
         }
         if(closestPoint.z > maxUpSide){//up side check
-        closestPoint.z = maxUpSide;
+            closestPoint.z = maxUpSide;
         }
         if(closestPoint.z < maxDownSide){//up side check
-        closestPoint.z = maxDownSide;
+            closestPoint.z = maxDownSide;
         }
-    //--------- closestPoint defined boundaries end--
+
         //--calculating diff between closespoint and sphere Radius--
         float radius = sphere->getRadius();
-
         glm::vec3 difference = closestPoint - sphere->getPosition();
 
-        if(glm::length(difference) <= sphere->getRadius()){
-            //doStuff();
+        if(glm::length(difference) <= radius){
+            CollisionResult * res = new CollisionResult();
+            res->objectA = sphere->getParent();
+            res->objectB = box->getParent();
+            res->overlap = glm::normalize( difference ) * ( radius - glm::length( difference ) );
+
+            if( res->objectA->getController() ) {
+                res->objectA->getController()->onCollision( res );
+            }
+            if( res->objectB->getController() ) {
+                res->objectB->getController()->onCollision( res );
+            }
         }
         //--end of calculation--
     }//end of checkSphereAABB func();

@@ -1,8 +1,9 @@
 #include "SpiritSpawnController.hpp"
-#include "ParticleEmitterController.hpp"
+#include "SpiritController.hpp"
 #include "RotateController.hpp"
 
 #include "GameObject.hpp"
+#include "Spirit.hpp"
 #include "Body.hpp"
 
 #include "SceneManager.hpp"
@@ -17,6 +18,9 @@
 #include <stdlib.h>
 
 namespace uGE {
+
+    std::vector< Spirit *> SpiritSpawnController::spirits;
+
 	SpiritSpawnController::SpiritSpawnController( GameObject * parent, GameObject * followee )
 	:	Controller( parent ), _followee( followee )
 	{
@@ -47,12 +51,13 @@ namespace uGE {
 	}
     void SpiritSpawnController::spawn()
     {
-        uGE::GameObject * spirit = new uGE::GameObject( "Spirit");
+        uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
 
-            spirit->setController( new uGE::ParticleEmitterController( spirit, _followee) );
+            spirit->setController( new uGE::SpiritController( spirit, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
            spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
+           spirits.push_back( spirit );
            uGE::SceneManager::add( spirit );
     }
 }

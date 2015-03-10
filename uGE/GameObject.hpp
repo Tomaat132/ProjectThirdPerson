@@ -46,6 +46,7 @@ namespace uGE {
 			void setCollider( Collider * collider );
 			std::vector<Collider *> getColliders();
 			void setController( Controller * controller );
+			Controller* getController();
 			void setAnimTransform( glm::mat4 & animTransform );
 
 			void render( Shader * shader, glm::mat4 & parentTransform );

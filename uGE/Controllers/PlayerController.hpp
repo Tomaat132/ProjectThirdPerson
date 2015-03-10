@@ -5,10 +5,12 @@
 
 namespace uGE {
 
+    struct CollisionResult;
 	class PlayerController : public Controller
 	{
         private:
             float _shootTime;
+            bool _isSucking;
 		public:
 			PlayerController( uGE::GameObject * parent );
 			virtual ~PlayerController();
@@ -17,6 +19,7 @@ namespace uGE {
 			void shoot();
             void createParticle();
 
+            void onCollision( CollisionResult * result );
 	};
 }
 #endif // PLAYERCONTROLLER_H

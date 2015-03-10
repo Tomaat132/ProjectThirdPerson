@@ -4,6 +4,7 @@
 #include "utils/glm.hpp"
 #include "Controller.hpp"
 #include "GameObject.hpp"
+#include "Spirit.hpp"
 namespace uGE {
 
 	class SpiritSpawnController : public Controller
@@ -13,7 +14,8 @@ namespace uGE {
 			float _timeTillSpawn;
 			float _spawnTime;
 
-            std::vector < GameObject* > _spirits;
+        public:
+             static std::vector < Spirit* > spirits;
 
         private:
             void spawn();

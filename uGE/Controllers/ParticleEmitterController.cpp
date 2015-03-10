@@ -16,9 +16,10 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillEmit = 0.0f;
-	    _emitTime = 0.1f;
 	    _velocity = glm::vec3(0.f, 4.f, 0.f);
         srand(time(NULL));
+	    _emitTime = 0.1f;
+
 	}
 
 	ParticleEmitterController::~ParticleEmitterController()
@@ -27,7 +28,7 @@ namespace uGE {
 	}
 	void ParticleEmitterController::update()
 	{
-	    _parent->setPosition( _followee->getPosition());
+	    //_parent->setPosition( _followee->getPosition());
 	    _timeTillEmit -= Time::step();
 		//glm::mat4 & transform = _parent->transform;
         //transform = _parent->transform;
@@ -61,6 +62,7 @@ namespace uGE {
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
                 particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star02.png") );
                 particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+
             particle->setBody( particleBody );
 
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
@@ -72,9 +74,9 @@ namespace uGE {
 	{
 	    _velocity = aVelocity;
 	}
+
 	void ParticleEmitterController::setDistortion(glm::vec3 aDistortion)
 	{
 	    _distortion = aDistortion;
 	}
 }
-

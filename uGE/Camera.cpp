@@ -21,4 +21,9 @@ namespace uGE {
 		shader->setUniform( shader->view, glm::inverse( _transform ) );
 		shader->setUniform( shader->camera, glm::vec3( _transform[3] )) ;
 	}
+
+	glm::mat4 Camera::getView()
+	{
+	    return _view;
+	}
 }

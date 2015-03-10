@@ -1,5 +1,6 @@
 #version 330
 
+//Basic Vertex Shader "template". Please do not touch!
 
 in vec3 vertex;
 in vec3 normal;

@@ -10,7 +10,6 @@
 #include "Body.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
-#include "Time.hpp"
 #include "CollisionDetection.hpp"
 #include "Renderer.hpp"
 
@@ -43,7 +42,6 @@ namespace uGE {
 	void SceneManager::add( GameObject * object )
 	{
 		_objects.push_back( object );
-        std::cout << _objects.size() << std::endl;
 
 	}
 

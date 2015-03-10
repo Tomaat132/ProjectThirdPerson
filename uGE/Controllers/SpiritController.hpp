@@ -9,9 +9,15 @@ namespace uGE {
 	class SpiritController : public Controller
 	{
         private:
-            GameObject * _particleEmitter;
 			GameObject * _followee;
+			float _timeTillEmit;
+			float _emitTime;
+			glm::vec3 _velocity;
+			glm::vec3 _distortion;
             float _percentSucked;
+            bool _targeted;
+
+			std::vector < GameObject* > _particles;
 
 		public:
 			SpiritController( uGE::GameObject * parent, uGE::GameObject * followee);
@@ -19,6 +25,10 @@ namespace uGE {
 
 			void update();
 			void getSucked();
+			void emit();
+			void isTargeted(bool value);
+            void die();
+
 	};
 }
 #endif // WASDCONTROLLER_HPP

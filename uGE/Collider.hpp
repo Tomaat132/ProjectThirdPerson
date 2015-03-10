@@ -16,6 +16,7 @@ namespace uGE {
 
 			glm::vec3 getPosition();
 			int getColliderType();
+			GameObject* getParent();
 
 		protected:
             GameObject * parent;

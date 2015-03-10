@@ -15,6 +15,7 @@ namespace uGE {
 			virtual ~Camera();
 
 			void render( Shader * shader );
+			glm::mat4 getView();
 	};
 }
 #endif // CAMERA_H

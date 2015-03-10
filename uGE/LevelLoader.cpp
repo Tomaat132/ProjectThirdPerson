@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Colliders/SphereCollider.hpp"
+#include "Colliders/AABBcollision.hpp"
 
 #include "utils/glm.hpp"
 #include "utils/tinyxml2.h"
@@ -73,6 +74,9 @@ namespace uGE
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
                // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
+                if( body->getMesh() ) {
+                    obj->setCollider( new AABBcollision( obj ) );
+                }
 
                 uGE::SceneManager::add( obj );
                 if( objName == "tree_group" ){
