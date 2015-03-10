@@ -13,12 +13,15 @@
 #include "CollisionDetection.hpp"
 #include "Renderer.hpp"
 
+#include "Player.hpp"
+
 namespace uGE {
 
 
 	Camera * SceneManager::_camera;
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
+	Player * SceneManager::_player;
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
@@ -87,6 +90,8 @@ namespace uGE {
         Renderer::secondPassRender.clear();
 
         glm::mat4 parent;
+        _player->render( _shader, parent );
+
         for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
             GameObject * object = (GameObject*) *i;
             object->render( _shader, parent );
@@ -103,30 +108,28 @@ namespace uGE {
         _collision->update(_objects);
 		_camera->update();
 		_light->update();
+		_player->update();
 
 		for ( auto i = 0; i < _objects.size(); i++ ) {
 			GameObject * object = _objects[i];
 			object->update();
+			//std::cout << object->getName() << std::endl;
 		}
 
-		for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
-			GameObject * object = (GameObject*) *j;
+		//for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
+		for ( auto j = 0; j != _deleteQueue.size(); ++j ) {
+			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
-			delete object;
-			if( position != _objects.end() ) {
+			//std::cout << "HELP HERE" << std::endl;
+            delete object;
+			if( position < _objects.end() ) {
                 _objects.erase( position );
 			}
 
-			//delete object;
+			//
 		}
 
 		_deleteQueue.clear();
-
-		//k++;
-         //   uGE::GameObject * zombie = new uGE::GameObject( "Zombie");
-
-         //  uGE::SceneManager::add( zombie );
-        //std::cout << k << " zombies created"<<std::endl;
 	}
 
 }

@@ -9,6 +9,7 @@ namespace uGE{
     class GameObject;
     class SphereCollider;
     class AABBcollision;
+    class BoxCollider;
 
     struct CollisionResult {
         GameObject * objectA;
@@ -21,15 +22,16 @@ namespace uGE{
         public:
             CollisionDetection();
             virtual ~CollisionDetection();
-            //add stuff under here
 
-            void checkSphereCollision(SphereCollider * sphere1 , SphereCollider * sphere2);
             void update(std::vector<GameObject *> _objects);
             void checkCollisions(std::vector<GameObject *> _objects);
-            //new stuff area
+
+            void checkSphereCollision(SphereCollider * sphere1 , SphereCollider * sphere2);
             void checkAABBcollision(AABBcollision * box1, AABBcollision * box2);
             void checkSphereAABB(SphereCollider * sphere , AABBcollision * box);
-            //
+            void checkBoxCollision( BoxCollider * box1, BoxCollider * box2 );
+            bool checkLineCollision( glm::vec2 line1a, glm::vec2 line1b, glm::vec2 line2a, glm::vec2 line2b );
+
         protected:
         private:
     };//end of CollisionDetetction class

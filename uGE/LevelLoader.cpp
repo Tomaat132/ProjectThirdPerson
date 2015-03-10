@@ -11,7 +11,9 @@
 #include "Body.hpp"
 #include "GameObject.hpp"
 #include "LevelLoader.hpp"
+#include "Material.hpp"
 #include "SceneManager.hpp"
+#include "Shader.hpp"
 
 using namespace tinyxml2;
 
@@ -65,6 +67,21 @@ namespace uGE
             }
 
             //Compose the GameObject
+            if( objName == "water" ) {
+                GameObject * obj = new GameObject( objName );
+                obj->transform = matrix;
+
+                Body * body = new Body( obj );
+                body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
+                body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                body->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
+                //body->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+                //body->getMaterial()->setAlpha( 1.75f );
+                obj->setBody( body );
+
+                uGE::SceneManager::add( obj );
+            }
+
             if( objName.compare( "group" ) != 0 ) {
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
@@ -77,6 +94,7 @@ namespace uGE
                 if( body->getMesh() ) {
                     obj->setCollider( new AABBcollision( obj ) );
                 }
+                uGE::SceneManager::addSpawnLoc(obj->getPosition());
 
                 uGE::SceneManager::add( obj );
                 if( objName == "tree_group" ){

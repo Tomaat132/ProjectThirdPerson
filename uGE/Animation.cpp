@@ -3,7 +3,7 @@
 #include <glm/gtx/transform.hpp>
 
 #include "Utils/glm.hpp"
-
+#include "Time.hpp"
 
 namespace uGE {
 
@@ -121,33 +121,33 @@ namespace uGE {
         else if(isPlaying == "true") _isPlaying = true;
 	}
 
-	void Animation::update() //Update function
+    void Animation::update()
+    {
+        time += Time::step();
+        while( time > .05f ) {
+            time -= .05f;
+            updateFrame();
+        }
+    }
+
+	void Animation::updateFrame() //Update function
 	{
-        std::cout << "_repeat: " << _repeat << "." << std::endl;
-        std::cout << "_isPlaying: " << _isPlaying << "." << std::endl;
+	    if( !_parent || !_isPlaying ) {
+            return;
+	    }
+
         _animTransform = glm::mat4( 1.0 );
         unsigned int i = _animTrans.size();
-        if(!_isPlaying)
-        {
-            /* <- A try to set transformation to default again...
-            //Assigning rotations x,y,z from that specific frame to rotation part of animTransform matrix
-            _animTransform = glm::rotate( _animTransform, _animRot[frame][0], glm::vec3( _animTransform[0] ) ); //_animRot.x assigned to _animTransform.x
-            _animTransform = glm::rotate( _animTransform, _animRot[frame][1], glm::vec3( _animTransform[1] ) ); //_animRot.y assigned to _animTransform.y
-            _animTransform = glm::rotate( _animTransform, _animRot[frame][2], glm::vec3( _animTransform[2] ) ); //_animRot.z assigned to _animTransform.z
-            //Assigning translations to animTransform matrix
-            _animTransform = glm::translate( _animTransform, _animTrans[frame] );
-            _parent->setAnimTransform( _animTransform );*/
-            return;
-        } else {
-            //Assigning rotations x,y,z from that specific frame to rotation part of animTransform matrix
-            _animTransform = glm::rotate( _animTransform, _animRot[frame][0], glm::vec3( _animTransform[0] ) ); //_animRot.x assigned to _animTransform.x
-            _animTransform = glm::rotate( _animTransform, _animRot[frame][1], glm::vec3( _animTransform[1] ) ); //_animRot.y assigned to _animTransform.y
-            _animTransform = glm::rotate( _animTransform, _animRot[frame][2], glm::vec3( _animTransform[2] ) ); //_animRot.z assigned to _animTransform.z
-            //Assigning translations to animTransform matrix
-            _animTransform = glm::translate( _animTransform, _animTrans[frame] );
-            _parent->setAnimTransform( _animTransform ); // Setting animTransform onto GameObject.transform
-            frame++;
-        }
+
+        //Assigning rotations x,y,z from that specific frame to rotation part of animTransform matrix
+        _animTransform = glm::rotate( _animTransform, _animRot[frame][0], glm::vec3( _animTransform[0] ) ); //_animRot.x assigned to _animTransform.x
+        _animTransform = glm::rotate( _animTransform, _animRot[frame][1], glm::vec3( _animTransform[1] ) ); //_animRot.y assigned to _animTransform.y
+        _animTransform = glm::rotate( _animTransform, _animRot[frame][2], glm::vec3( _animTransform[2] ) ); //_animRot.z assigned to _animTransform.z
+        //Assigning translations to animTransform matrix
+        _animTransform = glm::translate( _animTransform, _animTrans[frame] );
+        _parent->setAnimTransform( _animTransform ); // Setting animTransform onto GameObject.transform
+        frame++;
+
         if(frame >= i && _repeat != false)
         {
             frame = 0;

@@ -23,13 +23,17 @@
 #include "Camera.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
+#include "Player.hpp"
+#include "Viking.hpp"
 
+//Still missing controls: Melee, Absorbing.
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::GameObject * parent )
 	:	Controller( parent )
 	{
 	    _shootTime = 0.0f;
+		_vikingTime = 0.0f;
 	    _parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
 	    _isSucking = false;
 	}
@@ -43,92 +47,86 @@ namespace uGE {
 	{
 	    float speed = 40.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
+        if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
 		glm::mat4 & transform = _parent->transform;
-	//	glm::vec3 direction = _parent->getDirection();    //IS THIS STILL DIRECTION OF PARENT??? OR A COPY OF IT?
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-		glm::vec3 hTranslate(0, 0, 0);
-        glm::vec3 vTranslate(0, 0, 0);
+
+
+        if(!_isSucking)
+        {
+            if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) rotate[2] = -1.0f;
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
+
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f ) {
+				//Do Meleestump
+				attack();
+                _shootTime = 0.3f;
+
+			}
+
+			//Shooting controls
+			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
+			{
+				shoot();
+				_shootTime = 0.3f;
+			}
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
+				//Do Absorbing
+				vacuum();
+			}
+
+			//Bury Controls
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && _vikingTime <= 0.f ) {
+				std::cout << Viking::zombieCount << std::endl;
+				if( Viking::zombieCount <= 0 )
+				{
+					Viking::startWinSeq();
+					Viking::zombieCount += 101;
+				}
+				else if( Viking::zombieCount < 100)
+				{
+					Viking::zombieCount--;
+					_vikingTime = 0.3f;
+				}
+			}
+
+			if( glm::length(rotate) > 0 ) {
+				rotate = glm::normalize(rotate);
+				transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
+				_parent->setDirection( rotate );
+				_parent->setRotation( rotate );
+				_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
+			} else {
+				_parent->getBody()->getAnimation()->StopAnimation();
+			}
+        }
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
         {
             for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
                 Spirit* aSpirit = SpiritSpawnController::spirits[j];
                 aSpirit->isTargeted( false );
+
+                //GIVES ERROR AFTER SPIRIT IS DELETED AND PRESSED SPACE
             }
             _isSucking = false;
         }
-
-        if(!_isSucking)
-        {
-            bool keyW = sf::Keyboard::isKeyPressed( sf::Keyboard::W );
-            bool keyS = sf::Keyboard::isKeyPressed( sf::Keyboard::S );
-            bool keyA = sf::Keyboard::isKeyPressed( sf::Keyboard::A );
-            bool keyD = sf::Keyboard::isKeyPressed( sf::Keyboard::D );
-            if ( keyW ) rotate[2] = 1.0f;
-            if ( keyS ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
-            if ( keyA ) rotate[0] = 1.f;//hTranslate.x += speed;
-            if ( keyD ) rotate[0] = -1.f;//hTranslate.x -= speed;
-
-            if( glm::length(rotate) > 0 ) {
-                rotate = glm::normalize(rotate);
-            }
-
-            //if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) hTranslate.x -= speed;
-            if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));   //SET DIRECTION
-            if(hTranslate != glm::vec3(0, 0, 0) || vTranslate != glm::vec3(0, 0, 0) ) {
-                    _parent->setDirection(glm::normalize(hTranslate + vTranslate));   //SET DIRECTION
-                    _parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
-            } else {
-                _parent->getBody()->getAnimation()->StopAnimation();
-            }
-
-            if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
-            {
-                shoot();
-                _shootTime = 0.3f;
-            }
-            if(sf::Keyboard::isKeyPressed( sf::Keyboard::T ) && _shootTime <= 0.f)
-            {
-                attack();
-                _shootTime = 0.3f;
-            }
-            if(sf::Keyboard::isKeyPressed( sf::Keyboard::G ) && _shootTime <= 0.f)
-            {
-                for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
-                    Spirit* spirit = SpiritSpawnController::spirits[i];
-                    if(glm::distance(spirit->getPosition(), _parent->getPosition()) < 10.f)
-                    {
-                        if(glm::dot(glm::normalize(spirit->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
-                        {
-                            std::cout<< glm::dot(glm::normalize(spirit->getPosition()- _parent->getPosition()), _parent->getDirection()) << std::endl;
-                            spirit->isTargeted( true );
-                            break;
-                        }
-
-                    }
-                }
-                //suck();
-                _isSucking = true;
-            }
-            //transform[0][0] = cos(rotate);
-            //transform[0][2] = -cos(rotate+90);
-           //transform[2][0] = sin(rotate);
-            //transform[2][2] = -sin(rotate+90);
-            // note, does not check collision, just moves on xz plane !
-
-            if( keyW || keyS || keyA || keyD) transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
-            if(rotate != glm::vec3(0,0,0)) _parent->setRotation(glm::normalize(rotate));
-        }
-		//transform = glm::rotate( transform, rotate, glm::vec3( 0,1,0 ) );
 	}
-    void PlayerController::createParticle()
+	void PlayerController::vacuum()
 	{
-
-        uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
-            particleEmitter->setController( new uGE::SpiritController( particleEmitter, _parent) );
-            particleEmitter->setPosition( _parent->getPosition());
-           uGE::SceneManager::add( particleEmitter );
+        for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
+            Spirit* spirit = SpiritSpawnController::spirits[i];
+            glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
+            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 10.f){
+                if(glm::dot( _parent->getDirection(), distanceVec) > 0.7f){
+                    spirit->isTargeted( true );
+                }
+            }
+        }
+        _isSucking = true;
 
 	}
 	void PlayerController::attack()
@@ -139,7 +137,6 @@ namespace uGE {
             {
                 if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
                 {
-
                     //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
                     SceneManager::del(zombie);
                     break;
@@ -166,7 +163,7 @@ namespace uGE {
         uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
             uGE::Body * bulletBody = new uGE::Body( bullet );
                 bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jps") );
+                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
             bullet->setBody( bulletBody );
             bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
             bullet->setController( new uGE::BulletController( bullet, _parent ) );

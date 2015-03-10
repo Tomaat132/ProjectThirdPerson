@@ -11,6 +11,7 @@ namespace uGE {
 	class GameObject;
 	class Light;
 	class Shader;
+	class Player;
 
 	class CollisionDetection;
 
@@ -31,6 +32,8 @@ namespace uGE {
 			static Camera * _camera;
 			static Light * _light;
 			static Shader * _shader;
+			static Player * _player;
+
             static std::vector< glm::vec3 > _spawnLocations;
 			static void add( Camera * camera );
 			static void add( GameObject * object );

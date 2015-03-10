@@ -60,10 +60,10 @@ namespace uGE {
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
-            std::cout<< r <<std::endl;
            zombie->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
            zombies.push_back( zombie );
            uGE::SceneManager::add( zombie );
+           std::cout << "ZOMBIE" << std::endl;
     }
 }
 

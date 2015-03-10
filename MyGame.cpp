@@ -12,8 +12,11 @@
 #include "uGE/Texture.hpp"
 #include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
+#include "uGE/Viking.hpp"
+#include "uGE/WinSequence.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
+#include "uGE/Colliders/BoxCollider.hpp"
 #include "Collider.hpp"
 //
 #include "uGE/Controllers/FollowController.hpp"
@@ -41,18 +44,20 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
-    uGE::GameObject * player = new uGE::GameObject( "Player" );
+    uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
-        player->setCollider(new uGE::SphereCollider(player,1.45f));
+        //player->setCollider(new uGE::SphereCollider(player,1.45f));
+        player->setCollider( new uGE::BoxCollider(player) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
-        player->getMaterial()->setAlpha( 0.75f );
+
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
+
     uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
         spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
 
@@ -77,20 +82,30 @@ bool MyGame::load()
         water->setBody( waterBody );
         water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
         water->getMaterial()->setAlpha( 2.0f );
-
-
+//delete this>>
+    uGE::Zombie* zombie = new uGE::Zombie( "Zombie");
+             uGE::Body * zombieBody = new uGE::Body( zombie );
+                zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
+                zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
+                zombieBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
+            zombie->setBody( zombieBody );
+            zombie->setController( new uGE::ZombieController( zombie, player) );
+          // zombie->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
+           uGE::SceneManager::add( zombie );
+// <<
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
-	uGE::SceneManager::add( player );
+	uGE::SceneManager::_player = player;
 	uGE::SceneManager::add( enemy );
-	uGE::SceneManager::add( zombieSpawn );
-	uGE::SceneManager::add( spiritSpawn );
+	uGE::SceneManager::add( zombie );
+	//uGE::SceneManager::add( zombieSpawn );
+	//uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL v4" );
+    loader.loadLevel( "level test 6" );
 
 	return true;
 }

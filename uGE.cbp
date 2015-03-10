@@ -58,6 +58,8 @@
 		<Unit filename="MyGame.hpp" />
 		<Unit filename="Shaders/basic.fs" />
 		<Unit filename="Shaders/basic.vs" />
+		<Unit filename="Shaders/bumpMapping.fs" />
+		<Unit filename="Shaders/bumpMapping.vs" />
 		<Unit filename="Shaders/diffuse.fs" />
 		<Unit filename="Shaders/diffuse.vs" />
 		<Unit filename="Shaders/water.fs" />
@@ -72,9 +74,10 @@
 		<Unit filename="uGE/Camera.hpp" />
 		<Unit filename="uGE/Collider.cpp" />
 		<Unit filename="uGE/Collider.hpp" />
-		<Unit filename="uGE/Colliders/AABB collision.hpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.cpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.hpp" />
+		<Unit filename="uGE/Colliders/BoxCollider.cpp" />
+		<Unit filename="uGE/Colliders/BoxCollider.hpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.cpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.hpp" />
 		<Unit filename="uGE/CollisionDetection.cpp" />
@@ -115,14 +118,21 @@
 		<Unit filename="uGE/Material.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
 		<Unit filename="uGE/Mesh.hpp" />
+		<Unit filename="uGE/Player.cpp" />
+		<Unit filename="uGE/Player.hpp" />
 		<Unit filename="uGE/Renderer.cpp" />
 		<Unit filename="uGE/Renderer.hpp" />
 		<Unit filename="uGE/SceneManager.cpp" />
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
+<<<<<<< HEAD
 		<Unit filename="uGE/Spirit.cpp" />
 		<Unit filename="uGE/Spirit.hpp" />
+=======
+		<Unit filename="uGE/SoundManager.cpp" />
+		<Unit filename="uGE/SoundManager.hpp" />
+>>>>>>> 8dbf1db6e5cec35efe047c0422f84f2816622bfa
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />
@@ -136,8 +146,15 @@
 		<Unit filename="uGE/Utils/tinyxml2.h" />
 		<Unit filename="uGE/Vao.cpp" />
 		<Unit filename="uGE/Vao.hpp" />
+<<<<<<< HEAD
 		<Unit filename="uGE/Zombie.cpp" />
 		<Unit filename="uGE/Zombie.hpp" />
+=======
+		<Unit filename="uGE/Viking.cpp" />
+		<Unit filename="uGE/Viking.hpp" />
+		<Unit filename="uGE/WinSequence.cpp" />
+		<Unit filename="uGE/WinSequence.hpp" />
+>>>>>>> 8dbf1db6e5cec35efe047c0422f84f2816622bfa
 		<Extensions>
 			<code_completion />
 			<envvars />
