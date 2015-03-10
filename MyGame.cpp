@@ -13,6 +13,7 @@
 #include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
 #include "uGE/Viking.hpp"
+#include "uGE/WinSequence.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "uGE/Colliders/BoxCollider.hpp"
@@ -54,9 +55,10 @@ bool MyGame::load()
         player->setCollider( new uGE::BoxCollider(player) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
-        player->getMaterial()->setAlpha( 0.75f );
+		
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
+		
     uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
         spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
 
@@ -82,35 +84,22 @@ bool MyGame::load()
         water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
         water->getMaterial()->setAlpha( 2.0f );
 
-
-
-	uGE::SceneManager::add( camera );
-	uGE::SceneManager::add( light );
-<<<<<<< HEAD
-	//uGE::SceneManager::add( player );
-	uGE::SceneManager::_player = player;
-	uGE::SceneManager::add( enemy );
-	//uGE::SceneManager::add( water );
-
-
-    //working area
-        uGE::GameObject * zombie = new uGE::GameObject( "Zombie" );
+	uGE::GameObject * zombie = new uGE::GameObject( "Zombie" );
         uGE::Body * zombieBody = new uGE::Body( zombie );
             zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/test/stump.obj" ) );
             zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         zombie->setBody( zombieBody );
         zombie->setController( new uGE::ZombieController( zombie ) );
-        uGE::SceneManager::add( zombie );
-    //end of working area
-
-=======
-	uGE::SceneManager::add( player );
+        
+	uGE::SceneManager::add( camera );
+	uGE::SceneManager::add( light );
+	uGE::SceneManager::_player = player;
+	uGE::SceneManager::add( zombie );
 	uGE::SceneManager::add( enemy );
 	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::add( water );
->>>>>>> ab468c1926262e99899c61f9c321bab290d7917f
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "level test 6" );

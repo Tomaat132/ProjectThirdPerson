@@ -33,6 +33,7 @@ namespace uGE {
 	:	Controller( parent )
 	{
 	    _shootTime = 0.0f;
+		_vikingTime = 0.0f;
 	    _parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
 	    _isSucking = false;
 	}
@@ -41,11 +42,12 @@ namespace uGE {
 	{
         //dtor
 	}
-	
+
 	void PlayerController::update()
 	{
 	    float speed = 40.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
+        if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
 		glm::mat4 & transform = _parent->transform;
 		glm::vec3 translate;
@@ -58,7 +60,6 @@ namespace uGE {
                 aSpirit->isTargeted( false );
             }
             _isSucking = false;
-        }
 
         if(!_isSucking)
         {
@@ -79,6 +80,21 @@ namespace uGE {
 			}
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 				//Do Absorbing
+			}
+			
+			//Bury Controls
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && _vikingTime <= 0.f ) {
+				std::cout << Viking::zombieCount << std::endl;
+				if( Viking::zombieCount <= 0 )
+				{
+					Viking::startWinSeq();
+					Viking::zombieCount += 101;
+				}
+				else if( Viking::zombieCount < 100)
+				{
+					Viking::zombieCount--;
+					_vikingTime = 0.3f;
+				}
 			}
 
 			if( glm::length(rotate) > 0 ) {
