@@ -21,10 +21,10 @@ namespace uGE{
         //dtor
     }
 
-      void CollisionDetection::update( std::vector<GameObject *> _objects )
-      {
-            checkCollisions( _objects );
-      }
+    void CollisionDetection::update( std::vector<GameObject *> _objects )
+    {
+        checkCollisions( _objects );
+    }
 
     void CollisionDetection::checkCollisions(std::vector<GameObject *> _objects)
     {

@@ -12,7 +12,9 @@
 #include "Camera.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
+#include "Viking.hpp"
 
+//Still missing controls: Melee, Absorbing.
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::GameObject * parent )
@@ -39,6 +41,7 @@ namespace uGE {
 		glm::vec3 hTranslate(0, 0, 0);
         glm::vec3 vTranslate(0, 0, 0);
 
+        //Movement controls
         bool keyW = sf::Keyboard::isKeyPressed( sf::Keyboard::W );
         bool keyS = sf::Keyboard::isKeyPressed( sf::Keyboard::S );
         bool keyA = sf::Keyboard::isKeyPressed( sf::Keyboard::A );
@@ -61,7 +64,8 @@ namespace uGE {
             _parent->getBody()->getAnimation()->StopAnimation();
         }
 
-        if(sf::Keyboard::isKeyPressed( sf::Keyboard::F ) && _shootTime <= 0.f)
+        //Shooting controls
+        if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
         {
             shoot();
             _shootTime = 0.3f;
@@ -94,7 +98,7 @@ namespace uGE {
         uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
             uGE::Body * bulletBody = new uGE::Body( bullet );
                 bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jps") );
+                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
             bullet->setBody( bulletBody );
             bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
             bullet->setController( new uGE::BulletController( bullet, _parent ) );

@@ -126,6 +126,8 @@
 		<Unit filename="uGE/Utils/tinyxml2.h" />
 		<Unit filename="uGE/Vao.cpp" />
 		<Unit filename="uGE/Vao.hpp" />
+		<Unit filename="uGE/Viking.cpp" />
+		<Unit filename="uGE/Viking.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
