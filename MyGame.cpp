@@ -14,6 +14,7 @@
 #include "uGE/LevelLoader.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
+#include "uGE/Colliders/BoxCollider.hpp"
 #include "Collider.hpp"
 //
 #include "uGE/Controllers/FollowController.hpp"
@@ -46,7 +47,8 @@ bool MyGame::load()
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
-        player->setCollider(new uGE::SphereCollider(player,1.45f));
+        //player->setCollider(new uGE::SphereCollider(player,1.45f));
+        player->setCollider( new uGE::BoxCollider(player) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
         //player->getMaterial()->setAlpha( 0.95f );

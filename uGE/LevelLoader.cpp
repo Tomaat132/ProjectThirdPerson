@@ -74,9 +74,9 @@ namespace uGE
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                body->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
                 //body->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
                 //body->getMaterial()->setAlpha( 1.75f );
-                body->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
                 obj->setBody( body );
 
                 uGE::SceneManager::add( obj );

@@ -75,6 +75,8 @@
 		<Unit filename="uGE/Colliders/AABB collision.hpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.cpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.hpp" />
+		<Unit filename="uGE/Colliders/BoxCollider.cpp" />
+		<Unit filename="uGE/Colliders/BoxCollider.hpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.cpp" />
 		<Unit filename="uGE/Colliders/SphereCollider.hpp" />
 		<Unit filename="uGE/CollisionDetection.cpp" />
@@ -109,12 +111,16 @@
 		<Unit filename="uGE/Material.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
 		<Unit filename="uGE/Mesh.hpp" />
+		<Unit filename="uGE/Player.cpp" />
+		<Unit filename="uGE/Player.hpp" />
 		<Unit filename="uGE/Renderer.cpp" />
 		<Unit filename="uGE/Renderer.hpp" />
 		<Unit filename="uGE/SceneManager.cpp" />
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
+		<Unit filename="uGE/SoundManager.cpp" />
+		<Unit filename="uGE/SoundManager.hpp" />
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />
