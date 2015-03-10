@@ -1,11 +1,15 @@
 #include "Viking.hpp"
+#include "Game.hpp"
+#include "WinSequence.hpp"
+#include <iostream>
 
 namespace uGE {
 
+    int Viking::zombieCount = 20;
+
     Viking::Viking()
-    : alive(20)
     {
-        //ctor
+
     }
 
     Viking::~Viking()
@@ -13,8 +17,10 @@ namespace uGE {
         //dtor
     }
 
-    void vikingBuried()
+    void Viking::startWinSeq()
     {
-        alive--;
+        std::cout << "You beat the game!" << std::endl;
+        WinSequence * winSeq = new WinSequence();
     }
+
 }

@@ -1,6 +1,8 @@
 #ifndef VIKING_H
 #define VIKING_H
 
+#include <SFML/Window.hpp>
+
 namespace uGE {
 
     class Viking
@@ -9,10 +11,11 @@ namespace uGE {
             Viking();
             virtual ~Viking();
 
-            void vikingBuried();
+            static int zombieCount;
+            static void startWinSeq();
         protected:
+			sf::Window * _window;
         private:
-            static int alive;
     };
 }
 #endif // VIKING_H

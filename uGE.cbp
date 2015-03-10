@@ -58,6 +58,8 @@
 		<Unit filename="MyGame.hpp" />
 		<Unit filename="Shaders/basic.fs" />
 		<Unit filename="Shaders/basic.vs" />
+		<Unit filename="Shaders/bumpMapping.fs" />
+		<Unit filename="Shaders/bumpMapping.vs" />
 		<Unit filename="Shaders/diffuse.fs" />
 		<Unit filename="Shaders/diffuse.vs" />
 		<Unit filename="Shaders/water.fs" />
@@ -72,7 +74,6 @@
 		<Unit filename="uGE/Camera.hpp" />
 		<Unit filename="uGE/Collider.cpp" />
 		<Unit filename="uGE/Collider.hpp" />
-		<Unit filename="uGE/Colliders/AABB collision.hpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.cpp" />
 		<Unit filename="uGE/Colliders/AABBcollision.hpp" />
 		<Unit filename="uGE/Colliders/BoxCollider.cpp" />
@@ -136,6 +137,8 @@
 		<Unit filename="uGE/Vao.hpp" />
 		<Unit filename="uGE/Viking.cpp" />
 		<Unit filename="uGE/Viking.hpp" />
+		<Unit filename="uGE/WinSequence.cpp" />
+		<Unit filename="uGE/WinSequence.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
