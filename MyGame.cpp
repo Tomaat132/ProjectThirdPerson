@@ -13,6 +13,7 @@
 #include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
 #include "uGE/Viking.hpp"
+#include "uGE/WinSequence.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "uGE/Colliders/BoxCollider.hpp"
