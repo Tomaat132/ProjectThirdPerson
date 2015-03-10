@@ -20,5 +20,7 @@ namespace uGE {
 	{
 		glm::mat4 & transform = _parent->transform;
 		transform = glm::rotate( transform, 1.f * Time::step(), glm::vec3( 0,1,0 ) );
+
+		//checkCollision with bullet
 	}
 }

@@ -10,7 +10,9 @@ namespace uGE {
 	ParticleController::ParticleController( uGE::GameObject * parent, GameObject * followee )
 	:	Controller( parent ), _followee( followee )
 	{
-        _destroyTime = 0.4f;
+
+        _destroyTime = 0.15f;
+
 	}
 
 	ParticleController::~ParticleController()

@@ -24,6 +24,8 @@
 #include "uGE/Controllers/PlayerController.hpp"
 #include "uGE/Controllers/ParticleController.hpp"
 #include "uGE/Controllers/ZombieController.hpp"
+#include "uGE/Controllers/ZombieSpawnController.hpp"
+#include "uGE/Controllers/SpiritSpawnController.hpp"
 
 
 MyGame::MyGame()
@@ -52,7 +54,11 @@ bool MyGame::load()
         player->setCollider( new uGE::BoxCollider(player) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
-        //player->getMaterial()->setAlpha( 0.95f );
+        player->getMaterial()->setAlpha( 0.75f );
+    uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
+        zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
+    uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
+        spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
 
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
@@ -80,6 +86,7 @@ bool MyGame::load()
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
+<<<<<<< HEAD
 	//uGE::SceneManager::add( player );
 	uGE::SceneManager::_player = player;
 	uGE::SceneManager::add( enemy );
@@ -96,6 +103,14 @@ bool MyGame::load()
         uGE::SceneManager::add( zombie );
     //end of working area
 
+=======
+	uGE::SceneManager::add( player );
+	uGE::SceneManager::add( enemy );
+	uGE::SceneManager::add( zombieSpawn );
+	uGE::SceneManager::add( spiritSpawn );
+
+	uGE::SceneManager::add( water );
+>>>>>>> ab468c1926262e99899c61f9c321bab290d7917f
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "level test 6" );

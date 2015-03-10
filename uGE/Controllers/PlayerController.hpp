@@ -12,12 +12,14 @@ namespace uGE {
 	{
         private:
             float _shootTime;
+            bool _isSucking;
 		public:
 			PlayerController( uGE::GameObject * parent );
 			virtual ~PlayerController();
 
 			void update();
 			void shoot();
+			void attack();
             void createParticle();
 
             void onCollision( CollisionResult * result );

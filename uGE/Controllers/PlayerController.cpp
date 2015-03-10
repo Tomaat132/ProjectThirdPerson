@@ -1,12 +1,23 @@
 #include <SFML/Window.hpp>
+
+#include <GL/glew.h>
+
+#include "Utils/glm.hpp"
+#include "Utils/FPS.hpp"
+
 #include "BulletController.hpp"
 #include "ParticleController.hpp"
-#include "ParticleEmitterController.hpp"
+#include "SpiritController.hpp"
+#include "SpiritSpawnController.hpp"
+#include "ZombieSpawnController.hpp"
 #include "PlayerController.hpp"
 #include "SphereCollider.hpp"
 #include "GameObject.hpp"
+#include "Zombie.hpp"
+#include "Spirit.hpp"
 #include "Body.hpp"
 #include "Animation.hpp"
+#include "Material.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
 #include "Camera.hpp"
@@ -23,6 +34,7 @@ namespace uGE {
 	{
 	    _shootTime = 0.0f;
 	    _parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
+	    _isSucking = false;
 	}
 
 	PlayerController::~PlayerController()
@@ -39,42 +51,84 @@ namespace uGE {
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) rotate[2] = -1.0f;
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
-
-        if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
-            //Do Melee
-        }
-
-        //Shooting controls
-        if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
+        if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
         {
-            shoot();
-            _shootTime = 0.3f;
-        }
-        if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
-            //Do Absorbing
+            for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
+                Spirit* aSpirit = SpiritSpawnController::spirits[j];
+                aSpirit->isTargeted( false );
+            }
+            _isSucking = false;
         }
 
-		if( glm::length(rotate) > 0 ) {
-            rotate = glm::normalize(rotate);
-            transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
-            _parent->setDirection( rotate );
-            _parent->setRotation( rotate );
-            _parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
-		} else {
-		    _parent->getBody()->getAnimation()->StopAnimation();
-		}
+        if(!_isSucking)
+        {
+            if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) rotate[2] = -1.0f;
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
+
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
+				//Do Melee
+			}
+
+			//Shooting controls
+			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
+			{
+				shoot();
+				_shootTime = 0.3f;
+			}
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
+				//Do Absorbing
+			}
+
+			if( glm::length(rotate) > 0 ) {
+				rotate = glm::normalize(rotate);
+				transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
+				_parent->setDirection( rotate );
+				_parent->setRotation( rotate );
+				_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
+			} else {
+				_parent->getBody()->getAnimation()->StopAnimation();
+			}
+        }
 	}
     void PlayerController::createParticle()
 	{
 
         uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
-        particleEmitter->setController( new uGE::ParticleEmitterController( particleEmitter, _parent) );
+        particleEmitter->setController( new uGE::SpiritController( particleEmitter, _parent) );
         particleEmitter->setPosition( _parent->getPosition());
         uGE::SceneManager::add( particleEmitter );
+
+	}
+	void PlayerController::attack()
+	{
+	    for( unsigned int i = 0; i < ZombieSpawnController::zombies.size(); i++){
+            Zombie* zombie = ZombieSpawnController::zombies[i];
+            if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 10.f)
+            {
+                if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
+                {
+
+                    //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
+                    SceneManager::del(zombie);
+                    break;
+                }
+
+            }
+        }
+        //particle
+        uGE::GameObject * particle = new uGE::GameObject( "Particle" );
+             uGE::Body * particleBody = new uGE::Body( particle );
+                particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
+                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star02.png") );
+                particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+
+            particle->setBody( particleBody );
+
+            particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
+            particle->setPosition( _parent->getPosition() +_parent->getDirection()*4.f);
+           uGE::SceneManager::add( particle );
 	}
 	void PlayerController::shoot()
 	{

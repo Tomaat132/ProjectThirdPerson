@@ -85,7 +85,7 @@ namespace uGE
             if( objName.compare( "group" ) != 0 ) {
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
-
+                //std::cout<< objName << std::endl;
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
@@ -96,6 +96,23 @@ namespace uGE
                 }
 
                 uGE::SceneManager::add( obj );
+                if( objName == "tree_group" ){
+                    // name of spawn should be here
+                    //Zombie spawn controller then randomly get a location from spot [0] to [9]
+                   /* uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 0.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 0.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 0.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 3.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 3.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 3.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 6.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 6.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 6.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 9.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 9.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 9.f ));*/
+                    uGE::SceneManager::addSpawnLoc(obj->getPosition());
+                }
             }
 
             //Next object

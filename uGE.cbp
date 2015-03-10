@@ -95,10 +95,16 @@
 		<Unit filename="uGE/Controllers/PlayerController.hpp" />
 		<Unit filename="uGE/Controllers/RotateController.cpp" />
 		<Unit filename="uGE/Controllers/RotateController.hpp" />
+		<Unit filename="uGE/Controllers/SpiritController.cpp" />
+		<Unit filename="uGE/Controllers/SpiritController.hpp" />
+		<Unit filename="uGE/Controllers/SpiritSpawnController.cpp" />
+		<Unit filename="uGE/Controllers/SpiritSpawnController.hpp" />
 		<Unit filename="uGE/Controllers/WasdController.cpp" />
 		<Unit filename="uGE/Controllers/WasdController.hpp" />
 		<Unit filename="uGE/Controllers/ZombieController.cpp" />
 		<Unit filename="uGE/Controllers/ZombieController.hpp" />
+		<Unit filename="uGE/Controllers/ZombieSpawnController.cpp" />
+		<Unit filename="uGE/Controllers/ZombieSpawnController.hpp" />
 		<Unit filename="uGE/Game.cpp" />
 		<Unit filename="uGE/Game.hpp" />
 		<Unit filename="uGE/GameObject.cpp" />
