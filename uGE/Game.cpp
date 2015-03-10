@@ -4,7 +4,7 @@
 namespace uGE {
 
 	Game::Game()
-	:	_window ( new sf::Window( sf::VideoMode( 1024, 768 ), "Saxion uGE Game" /*, sf::Style::Fullscreen*/ ) )
+	: _window ( new sf::Window( sf::VideoMode( 1600, 900 ), "Redemption" /*, sf::Style::Fullscreen*/ ) )
 	{
 		_window->setVerticalSyncEnabled( true );
 		std::cout << "Init Glew " << glewInit() << " GL : " << glGetString( GL_VERSION ) << std::endl;

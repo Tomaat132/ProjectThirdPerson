@@ -12,6 +12,7 @@
 #include "uGE/Texture.hpp"
 #include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
+#include "uGE/Viking.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "uGE/Colliders/BoxCollider.hpp"

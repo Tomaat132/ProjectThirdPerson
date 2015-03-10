@@ -12,9 +12,10 @@
 #include "Camera.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
-
 #include "Player.hpp"
+#include "Viking.hpp"
 
+//Still missing controls: Melee, Absorbing.
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::GameObject * parent )
@@ -46,6 +47,8 @@ namespace uGE {
         if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
             //Do Melee
         }
+
+        //Shooting controls
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
         {
             shoot();
@@ -79,7 +82,7 @@ namespace uGE {
         uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
             uGE::Body * bulletBody = new uGE::Body( bullet );
                 bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jps") );
+                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
             bullet->setBody( bulletBody );
             bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
             bullet->setController( new uGE::BulletController( bullet, _parent ) );
