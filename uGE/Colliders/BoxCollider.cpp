@@ -7,7 +7,7 @@ namespace uGE
     BoxCollider::BoxCollider( GameObject * aParent )
     : AABBcollision( aParent )
     {
-        cType = 3;
+        cType = Type::BOX;
     }
 
     BoxCollider::~BoxCollider()

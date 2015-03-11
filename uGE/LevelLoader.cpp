@@ -4,6 +4,7 @@
 
 #include "Colliders/SphereCollider.hpp"
 #include "Colliders/AABBcollision.hpp"
+#include "Colliders/BoxCollider.hpp"
 
 #include "utils/glm.hpp"
 #include "utils/tinyxml2.h"
@@ -92,7 +93,7 @@ namespace uGE
                // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
                 if( body->getMesh() ) {
-                    obj->setCollider( new AABBcollision( obj ) );
+                    obj->setCollider( new BoxCollider( obj ) );
                 }
 
                 uGE::SceneManager::add( obj );

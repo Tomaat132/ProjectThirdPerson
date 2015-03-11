@@ -51,14 +51,14 @@ bool MyGame::load()
             playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
-        //player->setCollider(new uGE::SphereCollider(player,1.45f));
-        player->setCollider( new uGE::BoxCollider(player) );
+        //player->setCollider( new uGE::BoxCollider(player) );
+        player->setCollider( new uGE::SphereCollider( player, 1.25f ) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
-		
+
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
-		
+
     uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
         spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
 
@@ -89,8 +89,10 @@ bool MyGame::load()
             zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/test/stump.obj" ) );
             zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         zombie->setBody( zombieBody );
+        zombie->setPosition( glm::vec3( 10.f, 0.f, 0.f ) );
         zombie->setController( new uGE::ZombieController( zombie ) );
-        
+        zombie->setCollider( new uGE::BoxCollider( zombie ) );
+
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;

@@ -110,7 +110,7 @@ namespace uGE {
 		_light->update();
 		_player->update();
 
-		for ( auto i = 0; i < _objects.size(); i++ ) {
+		for ( unsigned int i = 0; i < _objects.size(); i++ ) {
 			GameObject * object = _objects[i];
 			object->update();
 		}

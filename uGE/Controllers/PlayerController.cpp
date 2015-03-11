@@ -21,6 +21,7 @@
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
 #include "Camera.hpp"
+#include "Collider.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
 #include "Player.hpp"
@@ -60,6 +61,7 @@ namespace uGE {
                 aSpirit->isTargeted( false );
             }
             _isSucking = false;
+        }
 
         if(!_isSucking)
         {
@@ -81,7 +83,7 @@ namespace uGE {
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 				//Do Absorbing
 			}
-			
+
 			//Bury Controls
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && _vikingTime <= 0.f ) {
 				std::cout << Viking::zombieCount << std::endl;
@@ -108,15 +110,15 @@ namespace uGE {
 			}
         }
 	}
+
     void PlayerController::createParticle()
 	{
-
         uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
         particleEmitter->setController( new uGE::SpiritController( particleEmitter, _parent) );
         particleEmitter->setPosition( _parent->getPosition());
         uGE::SceneManager::add( particleEmitter );
-
 	}
+
 	void PlayerController::attack()
 	{
 	    for( unsigned int i = 0; i < ZombieSpawnController::zombies.size(); i++){
@@ -146,6 +148,7 @@ namespace uGE {
             particle->setPosition( _parent->getPosition() +_parent->getDirection()*4.f);
            uGE::SceneManager::add( particle );
 	}
+
 	void PlayerController::shoot()
 	{
 
@@ -162,6 +165,8 @@ namespace uGE {
 
 	void PlayerController::onCollision( CollisionResult * result )
 	{
-        //std::cout << result->objectB->getName() << std::endl;
+        if( result->colliderTypeB == Collider::BOX ) {
+            _parent->setPosition( _parent->getPosition() - result->overlap );
+        }
 	}
 }

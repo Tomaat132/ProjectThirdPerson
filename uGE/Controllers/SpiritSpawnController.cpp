@@ -51,14 +51,14 @@ namespace uGE {
 	}
     void SpiritSpawnController::spawn()
     {
-        uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
+        /*uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
 
             spirit->setController( new uGE::SpiritController( spirit, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
            spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
            spirits.push_back( spirit );
-           uGE::SceneManager::add( spirit );
+           uGE::SceneManager::add( spirit );*/
     }
 }
 
