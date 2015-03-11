@@ -12,7 +12,7 @@ namespace uGE{
             SoundManager();
             virtual ~SoundManager();
 
-            static std::vector<sf::Sound *> sounds;
+            static std::vector<sf::Sound*> sounds;
             static std::vector<sf::SoundBuffer *> buffers;
 
             void getBGM(std::string iFilename);

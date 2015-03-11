@@ -35,7 +35,7 @@ namespace uGE{
 
     void Player::update(){
         GameObject::update();
-        if (health <= 0){std::cout<<"HOLY SHIT IT'S 0"<<std::endl;}
+        if (health <= 0){std::cout<<"Health got below 0"<<std::endl;}
     }
 
 

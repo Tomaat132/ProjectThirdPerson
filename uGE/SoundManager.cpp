@@ -28,7 +28,7 @@ namespace uGE
         bgm = new sf::Music;
         if (!bgm->openFromFile("Assets/Music/" + iFilename + ".wav"))
         {
-            std::cout<< "error loading: "<< iFilename<< std::endl;
+            std::cout<< "#$#$# error loading: "<< iFilename<< std::endl;
         }
         bgm->play();
     }//end of getBGM function
@@ -40,15 +40,13 @@ namespace uGE
 
     if (!buffer->loadFromFile("Assets/Music/Fx/" + iFilename + ".wav"))
         {
-            std::cout<< "error loading: "<< iFilename<< " sound effect " << std::endl;
+            std::cout<< "#$#$# error loading: "<< iFilename<< " sound effect " << std::endl;
         }
-
     }//end of getSFX function;
 
     void SoundManager::playSFX(std::string iFilename){
         //getSFX(iFilename);
-
-        sfx = new sf::Sound();
+        sfx = new sf::Sound;
         sounds.push_back(sfx);
 
         for(unsigned int i = 0; i < buffers.size() ;i++ ){
@@ -56,9 +54,9 @@ namespace uGE
 
         }
         std::cout<<buffers.size()<<" sounds size" <<std::endl;
-        findFreeSound();
+        //findFreeSound();
         sfx->play();
-    }
+        }
 
    unsigned int SoundManager::findFreeSound(){
         for (unsigned int i = 0 ; i < sounds.size() ;i++){

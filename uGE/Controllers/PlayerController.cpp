@@ -83,8 +83,9 @@ namespace uGE {
 			//Shooting controls
 			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
             {
+
             SoundManager * sfx;
-            sfx->playSFX("Rifle");
+            sfx->playSFX("Launch");
 
             shoot();
             _shootTime = 0.3f;
@@ -118,7 +119,7 @@ namespace uGE {
 				_parent->getBody()->getAnimation()->StopAnimation();
 			}
         }
-
+	}
     void PlayerController::createParticle()
 	{
         uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
@@ -171,10 +172,11 @@ namespace uGE {
            uGE::SceneManager::add( bullet );
 	}
 
-	void PlayerController::onCollision( CollisionResult * result )
-	{
+    void PlayerController::onCollision( CollisionResult * result )
+    {
         if( result->colliderTypeB == Collider::BOX ) {
             _parent->setPosition( _parent->getPosition() - result->overlap );
         }
-	}
+    }
 }
+

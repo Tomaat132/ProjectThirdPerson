@@ -92,7 +92,7 @@ bool MyGame::load()
             zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         zombie->setBody( zombieBody );
         zombie->setPosition( glm::vec3( 10.f, 0.f, 0.f ) );
-        zombie->setController( new uGE::ZombieController( zombie ) );
+        zombie->setController( new uGE::ZombieController( zombie , player ) );
         zombie->setCollider( new uGE::BoxCollider( zombie ) );
 
 	uGE::SceneManager::add( camera );
