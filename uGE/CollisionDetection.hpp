@@ -14,6 +14,7 @@ namespace uGE{
     struct CollisionResult {
         GameObject * objectA;
         GameObject * objectB;
+        int colliderTypeA, colliderTypeB;
         glm::vec3 overlap;
     };
 
@@ -30,10 +31,11 @@ namespace uGE{
             void checkAABBcollision(AABBcollision * box1, AABBcollision * box2);
             void checkSphereAABB(SphereCollider * sphere , AABBcollision * box);
             void checkBoxCollision( BoxCollider * box1, BoxCollider * box2 );
-            bool checkLineCollision( glm::vec2 line1a, glm::vec2 line1b, glm::vec2 line2a, glm::vec2 line2b );
+            void checkSphereBoxCollision( SphereCollider * sphere, BoxCollider * box );
 
         protected:
         private:
+            bool checkLineCollision( glm::vec2 line1a, glm::vec2 line1b, glm::vec2 line2a, glm::vec2 line2b );
     };//end of CollisionDetetction class
 }
 

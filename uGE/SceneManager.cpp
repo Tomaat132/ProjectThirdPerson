@@ -11,6 +11,7 @@
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "CollisionDetection.hpp"
+#include "SpiritSpawnController.hpp"
 #include "Renderer.hpp"
 
 #include "Player.hpp"
@@ -110,7 +111,7 @@ namespace uGE {
 		_light->update();
 		_player->update();
 
-		for ( auto i = 0; i < _objects.size(); i++ ) {
+		for ( unsigned int i = 0; i < _objects.size(); i++ ) {
 			GameObject * object = _objects[i];
 			object->update();
 			//std::cout << object->getName() << std::endl;
@@ -120,11 +121,15 @@ namespace uGE {
 		for ( auto j = 0; j != _deleteQueue.size(); ++j ) {
 			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
+			auto positionSpirit = std::find(SpiritSpawnController::spirits.begin(), SpiritSpawnController::spirits.end(), object);
 			//std::cout << "HELP HERE" << std::endl;
-            delete object;
+			if( positionSpirit < SpiritSpawnController::spirits.end() ) {
+                SpiritSpawnController::spirits.erase( positionSpirit );
+			}
 			if( position < _objects.end() ) {
                 _objects.erase( position );
 			}
+            delete object;
 
 			//
 		}

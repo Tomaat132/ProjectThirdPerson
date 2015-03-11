@@ -6,11 +6,17 @@
 namespace uGE {
 
     class GameObject;
-
 	class Collider
 	{
 
 		public:
+		    enum Type {
+                NONE = 0,
+                SPHERE,
+                AABB,
+                BOX,
+            };
+
 			Collider(GameObject * aParent);
 			virtual ~Collider();
 

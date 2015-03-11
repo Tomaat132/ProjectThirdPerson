@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "MyGame.hpp"
+#include "uGE/CollisionDetection.hpp"
 
 int main()
 {

@@ -21,6 +21,7 @@
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
 #include "Camera.hpp"
+#include "Collider.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
 #include "Player.hpp"
@@ -52,7 +53,6 @@ namespace uGE {
 		glm::mat4 & transform = _parent->transform;
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-
 
         if(!_isSucking)
         {
@@ -108,7 +108,7 @@ namespace uGE {
         {
             for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
                 Spirit* aSpirit = SpiritSpawnController::spirits[j];
-                aSpirit->isTargeted( false );
+               // aSpirit->isTargeted( false );
 
                 //GIVES ERROR AFTER SPIRIT IS DELETED AND PRESSED SPACE
             }
@@ -127,8 +127,8 @@ namespace uGE {
             }
         }
         _isSucking = true;
-
 	}
+
 	void PlayerController::attack()
 	{
 	    for( unsigned int i = 0; i < ZombieSpawnController::zombies.size(); i++){
@@ -157,6 +157,7 @@ namespace uGE {
             particle->setPosition( _parent->getPosition() +_parent->getDirection()*4.f);
            uGE::SceneManager::add( particle );
 	}
+
 	void PlayerController::shoot()
 	{
 
@@ -173,6 +174,8 @@ namespace uGE {
 
 	void PlayerController::onCollision( CollisionResult * result )
 	{
-        //std::cout << result->objectB->getName() << std::endl;
+        if( result->colliderTypeB == Collider::BOX ) {
+            _parent->setPosition( _parent->getPosition() - result->overlap );
+        }
 	}
 }
