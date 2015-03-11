@@ -56,11 +56,6 @@ namespace uGE{
                     SphereCollider * colliderB = dynamic_cast <SphereCollider *>(colliderArray[j]);
                     checkSphereCollision(colliderA ,colliderB);
                 }
-                else if( typeX == Collider::BOX && typeY == Collider::BOX ) {
-                    BoxCollider * colliderA = dynamic_cast<BoxCollider*> ( colliderArray[i] );
-                    BoxCollider * colliderB = dynamic_cast<BoxCollider*> ( colliderArray[j] );
-                    checkBoxCollision( colliderA, colliderB );
-                }
                 else if( typeX == Collider::SPHERE && typeY == Collider::BOX ) {
                     SphereCollider* colliderA = dynamic_cast<SphereCollider*> ( colliderArray[i] );
                     BoxCollider* colliderB = dynamic_cast<BoxCollider*> ( colliderArray[j] );
