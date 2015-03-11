@@ -101,8 +101,8 @@ namespace uGE {
 
         uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
             uGE::Body * bulletBody = new uGE::Body( bullet );
-                bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+                bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" ) );  //change model
+                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/slime.jpg") );     //change texture
             bullet->setBody( bulletBody );
             bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
             bullet->setController( new uGE::BulletController( bullet, _parent ) );

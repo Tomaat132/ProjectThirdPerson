@@ -5,7 +5,7 @@
 namespace uGE {
 
     WinSequence::WinSequence()
-	: _window ( new sf::Window( sf::VideoMode( 400, 200 ), "Game Over" /*, sf::Style::Fullscreen*/ ) )
+	: _window ( new sf::Window( sf::VideoMode( 400, 200 ), "Game Over: You won!" /*, sf::Style::Fullscreen*/ ) )
 	{
 		_window->setVerticalSyncEnabled( true );
 		std::cout << "Init Glew " << glewInit() << " GL : " << glGetString( GL_VERSION ) << std::endl;

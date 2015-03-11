@@ -18,6 +18,7 @@ namespace uGE {
 			virtual ~BulletController();
 
 			void update();
+			bool isGreaterThan(glm::vec3 input1, glm::vec3 input2);
 	};
 }
 #endif // BULLETCONTROLLER_H
