@@ -7,13 +7,14 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/uGE" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/uGE2" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wunreachable-code" />
 					<Add option="-std=c++11" />
+					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add directory="uGE" />
 					<Add directory="uGE/Utils" />
@@ -50,6 +51,7 @@
 		<Linker>
 			<Add library="opengl32" />
 			<Add library="glew32" />
+			<Add library="sfml-audio" />
 			<Add library="sfml-graphics" />
 			<Add library="sfml-window" />
 			<Add library="sfml-system" />
@@ -109,12 +111,16 @@
 		<Unit filename="uGE/Material.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
 		<Unit filename="uGE/Mesh.hpp" />
+		<Unit filename="uGE/Player.cpp" />
+		<Unit filename="uGE/Player.hpp" />
 		<Unit filename="uGE/Renderer.cpp" />
 		<Unit filename="uGE/Renderer.hpp" />
 		<Unit filename="uGE/SceneManager.cpp" />
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
+		<Unit filename="uGE/SoundManager.cpp" />
+		<Unit filename="uGE/SoundManager.hpp" />
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />

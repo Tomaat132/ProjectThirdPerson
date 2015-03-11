@@ -13,6 +13,8 @@
 #include "uGE/Material.hpp"
 #include "uGE/LevelLoader.hpp"
 //
+#include "SoundManager.hpp"
+//
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "Collider.hpp"
 //
@@ -94,8 +96,12 @@ bool MyGame::load()
     //end of working area
 
 
+
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "level test 6" );
+
+    uGE::SoundManager * sound = new uGE::SoundManager;
+    sound->getBGM("Azure");
 
 	return true;
 }

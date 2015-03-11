@@ -13,7 +13,8 @@
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
 
-#include "Player.hpp"
+#include "SoundManager.hpp"
+
 
 namespace uGE {
 
@@ -28,7 +29,8 @@ namespace uGE {
 	{
         //dtor
 	}
-	
+
+
 	void PlayerController::update()
 	{
 	    float speed = 40.f * Time::step();
@@ -38,16 +40,19 @@ namespace uGE {
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) rotate[2] = -1.0f;
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
-		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) {rotate[2] = 1.0f;}
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) {rotate[2] = -1.0f;}
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) {rotate[0] = 1.f;}
+		if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) {rotate[0] = -1.f;}
 
         if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
             //Do Melee
         }
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
         {
+            SoundManager * sfx;
+            sfx->playSFX("Rifle");
+
             shoot();
             _shootTime = 0.3f;
         }

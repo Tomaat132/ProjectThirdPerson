@@ -3,8 +3,7 @@
 
 namespace uGE{
 
-    int health = 100;
-    int maxHealth = 150;
+
 
     Player::Player()
     :GameObject( "Player" )

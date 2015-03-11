@@ -19,6 +19,9 @@ namespace uGE{
 
         protected:
         private:
+
+            int health = 100;
+            int maxHealth = 150;
     };
 }
 #endif // PLAYER_H
