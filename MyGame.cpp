@@ -26,7 +26,6 @@
 #include "uGE/Controllers/RotateController.hpp"
 #include "uGE/Controllers/PlayerController.hpp"
 #include "uGE/Controllers/ParticleController.hpp"
-#include "uGE/Controllers/ZombieController.hpp"
 #include "uGE/Controllers/ZombieSpawnController.hpp"
 #include "uGE/Controllers/SpiritSpawnController.hpp"
 
@@ -95,19 +94,29 @@ bool MyGame::load()
         zombie->setController( new uGE::ZombieController( zombie , player ) );
         zombie->setCollider( new uGE::BoxCollider( zombie ) );
 
+    uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
+            uGE::Body * spiritBody = new uGE::Body( spirit );
+                spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );
+                spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
+                spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+            spirit->setBody( spiritBody );
+
+            spirit->setController( new uGE::SpiritController( spirit, player) );
+       // zombie->setCollider( new uGE::BoxCollider( zombie ) );
+
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;
-	uGE::SceneManager::add( zombie );
 	uGE::SceneManager::add( enemy );
-	uGE::SceneManager::add( zombieSpawn );
+	uGE::SceneManager::add( zombie );
+	//uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 
-	uGE::SceneManager::add( water );
+	//uGE::SceneManager::add( water );
 
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level test 6" );
+    loader.loadLevel( "LEVEL week4 wednesday third try" );
 
     uGE::SoundManager * sound = new uGE::SoundManager;
     sound->getBGM("Azure");

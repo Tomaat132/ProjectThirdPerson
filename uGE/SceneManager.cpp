@@ -11,6 +11,7 @@
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "CollisionDetection.hpp"
+#include "SpiritSpawnController.hpp"
 #include "Renderer.hpp"
 
 #include "Player.hpp"
@@ -114,26 +115,27 @@ namespace uGE {
 		for ( unsigned int i = 0; i < _objects.size(); i++ ) {
 			GameObject * object = _objects[i];
 			object->update();
+			//std::cout << object->getName() << std::endl;
 		}
 
-		for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
-			GameObject * object = (GameObject*) *j;
+		//for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
+		for ( auto j = 0; j != _deleteQueue.size(); ++j ) {
+			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
-			delete object;
-			if( position != _objects.end() ) {
+			auto positionSpirit = std::find(SpiritSpawnController::spirits.begin(), SpiritSpawnController::spirits.end(), object);
+			//std::cout << "HELP HERE" << std::endl;
+			if( positionSpirit < SpiritSpawnController::spirits.end() ) {
+                SpiritSpawnController::spirits.erase( positionSpirit );
+			}
+			if( position < _objects.end() ) {
                 _objects.erase( position );
 			}
+            delete object;
 
-			//delete object;
+			//
 		}
 
 		_deleteQueue.clear();
-
-		//k++;
-         //   uGE::GameObject * zombie = new uGE::GameObject( "Zombie");
-
-         //  uGE::SceneManager::add( zombie );
-        //std::cout << k << " zombies created"<<std::endl;
 	}
 
 }

@@ -13,8 +13,13 @@
 
 namespace uGE{
 
+<<<<<<< HEAD
     ZombieController::ZombieController( uGE::GameObject  parent, uGE::GameObject  followee)
  : Controller( parent ), _followee( followee )
+=======
+    ZombieController::ZombieController( uGE::GameObject * parent, uGE::GameObject * followee)
+	:	Controller( parent ), _followee( followee )
+>>>>>>> upstream/master
     {
         //ctor
         //_parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
@@ -55,19 +60,34 @@ namespace uGE{
     {
         glm::mat4 & transform = _parent->transform;
         glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
+<<<<<<< HEAD
 
   if ( aDir == 7 || aDir == 0 || aDir == 1) rotate[2] = 1.0f;
   if ( aDir == 3 || aDir == 4 || aDir == 5) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
   if ( aDir == 1 || aDir == 2 || aDir == 3) rotate[0] = 1.f;//hTranslate.x += speed;
   if ( aDir == 5 || aDir == 6 || aDir == 7) rotate[0] = -1.f;
+=======
+
+		if ( aDir == 7 || aDir == 0 || aDir == 1) rotate[2] = 1.0f;
+		if ( aDir == 3 || aDir == 4 || aDir == 5) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
+		if ( aDir == 1 || aDir == 2 || aDir == 3) rotate[0] = 1.f;//hTranslate.x += speed;
+		if ( aDir == 5 || aDir == 6 || aDir == 7) rotate[0] = -1.f;
+>>>>>>> upstream/master
         if( glm::length(rotate) > 0 ) {
             rotate = glm::normalize(rotate);
         }
 
         if(rotate != glm::vec3(0,0,0)){ _parent->setDirection(glm::normalize(rotate));}
 
+<<<<<<< HEAD
         if( aDir > -1) {transform = glm::translate( transform, glm::vec3(0, 0, 1.f)  _speed  Time::step());}
   if(rotate != glm::vec3(0,0,0)) {_parent->setRotation(glm::normalize(rotate));}
     }
 
+=======
+        if( aDir > -1) {transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * _speed * Time::step());}
+		if(rotate != glm::vec3(0,0,0)) {_parent->setRotation(glm::normalize(rotate));}
+    }
+
+>>>>>>> upstream/master
 }
