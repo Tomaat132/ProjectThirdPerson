@@ -100,12 +100,12 @@ bool MyGame::load()
 	uGE::SceneManager::add( enemy );
 	uGE::SceneManager::add( zombie );
 	//uGE::SceneManager::add( zombieSpawn );
-	//uGE::SceneManager::add( spiritSpawn );
+	uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level test 6" );
+    loader.loadLevel( "full level" );
 
 	return true;
 }

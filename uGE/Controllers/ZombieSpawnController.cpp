@@ -55,7 +55,7 @@ namespace uGE {
              uGE::Body * zombieBody = new uGE::Body( zombie );
                 zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
                 zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
-                zombieBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+                zombieBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
