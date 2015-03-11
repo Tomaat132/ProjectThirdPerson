@@ -4,6 +4,7 @@
 
 #include "Colliders/SphereCollider.hpp"
 #include "Colliders/AABBcollision.hpp"
+#include "Colliders/BoxCollider.hpp"
 
 #include "utils/glm.hpp"
 #include "utils/tinyxml2.h"
@@ -74,9 +75,9 @@ namespace uGE
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                body->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
                 //body->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
                 //body->getMaterial()->setAlpha( 1.75f );
-                body->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
                 obj->setBody( body );
 
                 uGE::SceneManager::add( obj );
@@ -85,17 +86,34 @@ namespace uGE
             if( objName.compare( "group" ) != 0 ) {
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
-
+                //std::cout<< objName << std::endl;
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
                // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
                 if( body->getMesh() ) {
-                    obj->setCollider( new AABBcollision( obj ) );
+                    obj->setCollider( new BoxCollider( obj ) );
                 }
 
                 uGE::SceneManager::add( obj );
+                if( objName == "tree_group" ){
+                    // name of spawn should be here
+                    //Zombie spawn controller then randomly get a location from spot [0] to [9]
+                   /* uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 0.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 0.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 0.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 3.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 3.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 3.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 6.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 6.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 6.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 9.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 9.f ));
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 9.f ));*/
+                    uGE::SceneManager::addSpawnLoc(obj->getPosition());
+                }
             }
 
             //Next object

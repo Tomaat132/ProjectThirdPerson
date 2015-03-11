@@ -46,10 +46,10 @@ namespace uGE{
         glm::mat4 & transform = _parent->transform;
         glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        bool keyI = sf::Keyboard::isKeyPressed( sf::Keyboard::I );
-        bool keyK = sf::Keyboard::isKeyPressed( sf::Keyboard::K );
-        bool keyJ = sf::Keyboard::isKeyPressed( sf::Keyboard::J );
-        bool keyL = sf::Keyboard::isKeyPressed( sf::Keyboard::L );
+        bool keyI = sf::Keyboard::isKeyPressed( sf::Keyboard::Up );
+        bool keyK = sf::Keyboard::isKeyPressed( sf::Keyboard::Down );
+        bool keyJ = sf::Keyboard::isKeyPressed( sf::Keyboard::Left );
+        bool keyL = sf::Keyboard::isKeyPressed( sf::Keyboard::Right );
 		if ( keyI ) rotate[2] = 1.0f;
 		if ( keyK ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
 		if ( keyJ ) rotate[0] = 1.f;//hTranslate.x += speed;

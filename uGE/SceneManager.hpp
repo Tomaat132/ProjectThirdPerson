@@ -22,6 +22,7 @@ namespace uGE {
 			static std::vector< GameObject * > _objects;
 			static std::vector< GameObject * > _deleteQueue;
 
+
 			static CollisionDetection * _collision;
 
 		public:
@@ -33,11 +34,14 @@ namespace uGE {
 			static Shader * _shader;
 			static Player * _player;
 
+            static std::vector< glm::vec3 > _spawnLocations;
 			static void add( Camera * camera );
 			static void add( GameObject * object );
 			static void del( GameObject * delObject );
 			static void add( Light * light );
 			static void add( Shader * shader );
+			static void addSpawnLoc( glm::vec3 aSpawnLoc );
+			static std::vector< glm::vec3 >& getSpawnLoc();
 
 			static bool control( sf::Window * window );
 
