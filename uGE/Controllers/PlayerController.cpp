@@ -54,15 +54,6 @@ namespace uGE {
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
-        if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
-        {
-            for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
-                Spirit* aSpirit = SpiritSpawnController::spirits[j];
-                aSpirit->isTargeted( false );
-            }
-            _isSucking = false;
-        }
-
         if(!_isSucking)
         {
             if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
@@ -70,8 +61,11 @@ namespace uGE {
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
-				//Do Melee
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f ) {
+				//Do Meleestump
+				attack();
+                _shootTime = 0.3f;
+
 			}
 
 			//Shooting controls
@@ -82,6 +76,7 @@ namespace uGE {
 			}
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 				//Do Absorbing
+				vacuum();
 			}
 
 			//Bury Controls
@@ -109,14 +104,29 @@ namespace uGE {
 				_parent->getBody()->getAnimation()->StopAnimation();
 			}
         }
-	}
+        if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
+        {
+            for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
+                Spirit* aSpirit = SpiritSpawnController::spirits[j];
+               // aSpirit->isTargeted( false );
 
-    void PlayerController::createParticle()
+                //GIVES ERROR AFTER SPIRIT IS DELETED AND PRESSED SPACE
+            }
+            _isSucking = false;
+        }
+	}
+	void PlayerController::vacuum()
 	{
-        uGE::GameObject * particleEmitter = new uGE::GameObject( "ParticleEmitter");
-        particleEmitter->setController( new uGE::SpiritController( particleEmitter, _parent) );
-        particleEmitter->setPosition( _parent->getPosition());
-        uGE::SceneManager::add( particleEmitter );
+        for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
+            Spirit* spirit = SpiritSpawnController::spirits[i];
+            glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
+            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 10.f){
+                if(glm::dot( _parent->getDirection(), distanceVec) > 0.7f){
+                    spirit->isTargeted( true );
+                }
+            }
+        }
+        _isSucking = true;
 	}
 
 	void PlayerController::attack()
@@ -127,7 +137,6 @@ namespace uGE {
             {
                 if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
                 {
-
                     //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
                     SceneManager::del(zombie);
                     break;

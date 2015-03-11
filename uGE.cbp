@@ -126,10 +126,18 @@
 		<Unit filename="uGE/SceneManager.hpp" />
 		<Unit filename="uGE/Shader.cpp" />
 		<Unit filename="uGE/Shader.hpp" />
-		<Unit filename="uGE/SoundManager.cpp" />
-		<Unit filename="uGE/SoundManager.hpp" />
+<<<<<<< HEAD
 		<Unit filename="uGE/Spirit.cpp" />
 		<Unit filename="uGE/Spirit.hpp" />
+=======
+		<Unit filename="uGE/SoundManager.cpp" />
+		<Unit filename="uGE/SoundManager.hpp" />
+<<<<<<< HEAD
+>>>>>>> 8dbf1db6e5cec35efe047c0422f84f2816622bfa
+=======
+		<Unit filename="uGE/Spirit.cpp" />
+		<Unit filename="uGE/Spirit.hpp" />
+>>>>>>> 82862dfba78ebce9f36cff6139fbf8bd058d360a
 		<Unit filename="uGE/Texture.cpp" />
 		<Unit filename="uGE/Texture.hpp" />
 		<Unit filename="uGE/Time.cpp" />
@@ -143,12 +151,20 @@
 		<Unit filename="uGE/Utils/tinyxml2.h" />
 		<Unit filename="uGE/Vao.cpp" />
 		<Unit filename="uGE/Vao.hpp" />
+<<<<<<< HEAD
+		<Unit filename="uGE/Zombie.cpp" />
+		<Unit filename="uGE/Zombie.hpp" />
+=======
 		<Unit filename="uGE/Viking.cpp" />
 		<Unit filename="uGE/Viking.hpp" />
 		<Unit filename="uGE/WinSequence.cpp" />
 		<Unit filename="uGE/WinSequence.hpp" />
+<<<<<<< HEAD
+>>>>>>> 8dbf1db6e5cec35efe047c0422f84f2816622bfa
+=======
 		<Unit filename="uGE/Zombie.cpp" />
 		<Unit filename="uGE/Zombie.hpp" />
+>>>>>>> 82862dfba78ebce9f36cff6139fbf8bd058d360a
 		<Extensions>
 			<code_completion />
 			<envvars />

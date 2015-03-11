@@ -51,14 +51,19 @@ namespace uGE {
 	}
     void SpiritSpawnController::spawn()
     {
-        /*uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
+        uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
+            uGE::Body * spiritBody = new uGE::Body( spirit );
+                spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );
+                spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
+                spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+            spirit->setBody( spiritBody );
 
             spirit->setController( new uGE::SpiritController( spirit, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
-           spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
+           spirit->setPosition(glm::vec3(0.f, 0.f, 0.f));//uGE::SceneManager::getSpawnLoc()[r]);
            spirits.push_back( spirit );
-           uGE::SceneManager::add( spirit );*/
+           uGE::SceneManager::add( spirit );
     }
 }
 

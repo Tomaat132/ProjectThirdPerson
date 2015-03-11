@@ -37,10 +37,10 @@ namespace uGE {
         if(_timeTillEmit <= 0)
         {
             _particles.clear();
-            for(auto i = 0; i < 5; i++)
+            for(auto i = 0; i < 4; i++)
             {
                 //distortion around a position
-                _distortion = (glm::vec3((2.0f * float(rand())/ float(RAND_MAX) -1.0f), (2.0f * float(rand())/ float(RAND_MAX) +3.0f), (2.0f * float(rand())/ float(RAND_MAX) -1.0f)));
+                _distortion = (glm::vec3((3.0f * float(rand())/ float(RAND_MAX) -1.5f), (3.0f * float(rand())/ float(RAND_MAX) +2.5f), (3.0f * float(rand())/ float(RAND_MAX) -1.5f)));
                 if(_percentSucked >= 0) _velocity = (_followee->getPosition()-_parent->getPosition())*_percentSucked/100.f ;
                 emit();
             }
