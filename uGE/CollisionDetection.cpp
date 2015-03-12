@@ -202,7 +202,7 @@ namespace uGE{
 
     void CollisionDetection::checkSphereBoxCollision( SphereCollider* sphere, BoxCollider* box )
     {
-        if( glm::length( sphere->getPosition() - box->getPosition() ) > 15.f ) {
+        if( glm::length2( sphere->getPosition() - box->getPosition() ) > 250.f ) {
             return;
         }
 
