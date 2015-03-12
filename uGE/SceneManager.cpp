@@ -12,6 +12,7 @@
 #include "Shader.hpp"
 #include "CollisionDetection.hpp"
 #include "SpiritSpawnController.hpp"
+#include "ZombieSpawnController.hpp"
 #include "Renderer.hpp"
 
 #include "Player.hpp"
@@ -26,6 +27,7 @@ namespace uGE {
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
+    std::vector< glm::vec3 > SceneManager::_zombieSpawnLocations;
 	CollisionDetection * SceneManager::_collision;
 
 	SceneManager::SceneManager()
@@ -61,6 +63,10 @@ namespace uGE {
 	void SceneManager::addSpawnLoc( glm::vec3 spawnLoc )
 	{
 		_spawnLocations.push_back(spawnLoc);
+	}
+	void SceneManager::addZombieSpawnLoc( glm::vec3 spawnLoc )
+	{
+		_zombieSpawnLocations.push_back(spawnLoc);
 	}
 	std::vector< glm::vec3 >& SceneManager::getSpawnLoc()
 	{
@@ -122,9 +128,13 @@ namespace uGE {
 			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
 			auto positionSpirit = std::find(SpiritSpawnController::spirits.begin(), SpiritSpawnController::spirits.end(), object);
-			//std::cout << "HELP HERE" << std::endl;
+			auto positionZombie = std::find(ZombieSpawnController::zombies.begin(), ZombieSpawnController::zombies.end(), object);
+
 			if( positionSpirit < SpiritSpawnController::spirits.end() ) {
                 SpiritSpawnController::spirits.erase( positionSpirit );
+			}
+			if( positionZombie < ZombieSpawnController::zombies.end() ) {
+                ZombieSpawnController::zombies.erase( positionZombie );
 			}
 			if( position < _objects.end() ) {
                 _objects.erase( position );

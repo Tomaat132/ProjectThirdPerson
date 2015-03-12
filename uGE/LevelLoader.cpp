@@ -93,27 +93,18 @@ namespace uGE
                // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
                 if( body->getMesh() ) {
-                    obj->setCollider( new BoxCollider( obj ) );
+                    if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
                 }
-                uGE::SceneManager::addSpawnLoc(obj->getPosition());
+                //uGE::SceneManager::addSpawnLoc(obj->getPosition());
                 //if(objName != "Water_box")
                 uGE::SceneManager::add( obj );
                 if( objName == "position_of_wisp" ){
-                    // name of spawn should be here
-                    //Zombie spawn controller then randomly get a location from spot [0] to [9]
-                   /* uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 0.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 0.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 0.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 3.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 3.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 3.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 6.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 6.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 6.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 9.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 9.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 9.f ));*/
+
                     uGE::SceneManager::addSpawnLoc(obj->getPosition());
+                }
+                if( objName == "pozition_of_zombie" ){
+
+                    uGE::SceneManager::addZombieSpawnLoc(obj->getPosition());
                 }
             }
 

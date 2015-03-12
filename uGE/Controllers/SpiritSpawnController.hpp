@@ -4,13 +4,14 @@
 #include "utils/glm.hpp"
 #include "Controller.hpp"
 #include "GameObject.hpp"
+#include "Player.hpp"
 #include "Spirit.hpp"
 namespace uGE {
 
 	class SpiritSpawnController : public Controller
 	{
 		private:
-			GameObject * _followee;
+			Player * _followee;
 			float _timeTillSpawn;
 			float _spawnTime;
 
@@ -20,7 +21,7 @@ namespace uGE {
         private:
             void spawn();
 		public:
-			SpiritSpawnController( GameObject * parent, GameObject * followee );
+			SpiritSpawnController( GameObject * parent, Player * followee );
 			virtual ~SpiritSpawnController();
 
 			void update();
