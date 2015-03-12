@@ -62,10 +62,6 @@ namespace uGE {
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
            zombie->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
            zombies.push_back( zombie );
-<<<<<<< HEAD
-           uGE::SceneManager::add( zombie );
-           std::cout << "ZOMBIE" << std::endl;
-=======
            uGE::SceneManager::add( zombie );*/
     }
 }

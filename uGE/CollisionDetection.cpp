@@ -202,8 +202,11 @@ namespace uGE{
 
     void CollisionDetection::checkSphereBoxCollision( SphereCollider* sphere, BoxCollider* box )
     {
+        if( glm::length( sphere->getPosition() - box->getPosition() ) > 15.f ) {
+            return;
+        }
+
         std::vector<glm::vec2> points = box->getPoints();
-        //glm::vec2 closestPoint = glm::vec2( 0, 0 );
         glm::vec2 closestDiff = glm::vec2( 0, 0 );
         glm::vec2 sphereVec = glm::vec2( sphere->getPosition().x, sphere->getPosition().z );
 

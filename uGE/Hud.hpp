@@ -18,6 +18,11 @@ namespace uGE
             sf::Image hudImage;
             sf::Texture hudTexture;
             sf::Sprite hudSprite;
+
+            sf::Font font;
+            sf::Text zombieText;
+            sf::Text healthText;
+            sf::Text spiritText;
     };
 
 }

@@ -85,6 +85,20 @@ namespace uGE
                 continue;
             }
 
+            if( objName == "groundff" ) {
+                GameObject * obj = new GameObject( objName );
+                obj->transform = matrix;
+
+                Body * body = new Body( obj );
+                body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
+                body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                obj->setBody( body );
+
+                uGE::SceneManager::add( obj );
+                object = object->NextSiblingElement( "node" );
+                continue;
+            }
+
             if( objName == "position_of_wisp" ){
                 GameObject* obj = new GameObject( "" );
                 obj->transform = matrix;
@@ -103,13 +117,10 @@ namespace uGE
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
-               // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
                 if( body->getMesh() ) {
                     obj->setCollider( new BoxCollider( obj ) );
                 }
-                uGE::SceneManager::addSpawnLoc(obj->getPosition());
-                //if(objName != "Water_box")
                 uGE::SceneManager::add( obj );
             }
 
