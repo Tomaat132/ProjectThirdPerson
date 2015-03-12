@@ -89,8 +89,8 @@ namespace uGE
                 //std::cout<< objName << std::endl;
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
-                body->setTexture( AssetManager::loadTexture( "Assets/Textures/bricks.jpg"));// + objName + ".png" ) );
-               // if(objName == "Ground_V") body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
+                body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                if(objName == "groundff") body->setTexture( AssetManager::loadTexture( "Assets/Textures/bricks.jpg" ) ); //body->setShader(uGE::Shader::load( "Shaders/basic.vs", "Shaders/basic.fs"));
                 obj->setBody( body );
                 if( body->getMesh() ) {
                     if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
