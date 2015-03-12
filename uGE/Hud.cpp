@@ -26,7 +26,6 @@ namespace uGE
         healthText.setColor( sf::Color::White );
         healthText.setPosition( 550, 20 );
 
-        spiritText.setString( "--" );
         spiritText.setCharacterSize( 48 );
         spiritText.setColor( sf::Color::White );
         spiritText.setPosition( 920, 20 );
@@ -56,6 +55,10 @@ namespace uGE
         char cHealth[64];
         sprintf( cHealth, "%d", SceneManager::_player->getHealth() );
         healthText.setString( cHealth );
+
+        char cSpirits[64];
+        sprintf( cSpirits, "%d", SceneManager::_player->getShootable() );
+        spiritText.setString( cSpirits );
 
         window->draw( zombieText );
         window->draw( healthText );

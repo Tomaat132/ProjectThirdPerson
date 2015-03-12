@@ -85,7 +85,7 @@ namespace uGE
                 continue;
             }
 
-            if( objName == "groundff" ) {
+            if( objName == "groundff" || objName == "bridge_msize" || objName == "bridge_vsize" || objName == "Skull_m" ) {
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
 

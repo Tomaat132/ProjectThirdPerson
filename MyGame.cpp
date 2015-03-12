@@ -68,7 +68,7 @@ bool MyGame::load()
             enemyBody->setMesh( uGE::Mesh::load( "Assets/Models/suzanna.obj") );
             enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         enemy->setBody( enemyBody );
-        enemy->setCollider(new uGE::SphereCollider(enemy, 1.45f));
+        enemy->setCollider(new uGE::SphereCollider(enemy, 1.25f));
         enemy->setController( new uGE::ParticleController( enemy, camera ) );
 
     camera->setController( new uGE::FollowController( camera, player ) );

@@ -47,7 +47,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 40.f * Time::step();
+	    float speed = 30.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
         if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
