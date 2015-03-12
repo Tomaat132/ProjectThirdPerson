@@ -70,6 +70,12 @@ namespace uGE {
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
+            //Absorbing Controls
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::I ) ) {
+				//Do Absorbing
+			}
+
+            //Melee Controls
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) ) {
 				//Do Melee
 			}
@@ -79,9 +85,6 @@ namespace uGE {
 			{
 				shoot();
 				_shootTime = 0.3f;
-			}
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
-				//Do Absorbing
 			}
 
 			//Bury Controls

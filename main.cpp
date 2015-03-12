@@ -1,13 +1,14 @@
 #include <iostream>
 
-#include "MyGame.hpp"
+#include "MyMenu.hpp"
+//#include "MyGame.hpp"
 #include "uGE/CollisionDetection.hpp"
 
 int main()
 {
-	MyGame * game = new MyGame();
-	game->load();
-	game->run();
+	MyMenu * menu = new MyMenu();
+	menu->load();
+	menu->run();
 
 	return 0;
 }

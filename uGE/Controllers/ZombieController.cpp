@@ -37,8 +37,8 @@ namespace uGE{
     //update variables here such as health location etc/
     void healthCheck();
 
-    int direction = rand() %10+1;//INITIALISE RANDOM DIRECTION between 10 and 0
-    // this shows that a random number is constantly generated //std::cout<<direction<<std::endl;
+    //int direction = rand() %10+1;//INITIALISE RANDOM DIRECTION between 10 and 0
+    //this shows that a random number is constantly generated //std::cout<<direction<<std::endl;
 
 
     float speed = 40.f * Time::step();
@@ -52,7 +52,7 @@ namespace uGE{
         bool keyL = sf::Keyboard::isKeyPressed( sf::Keyboard::Right );
 		if ( keyI ) rotate[2] = 1.0f;
 		if ( keyK ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
-		if ( keyJ ) rotate[0] = 1.f;//hTranslate.x += speed;
+		if ( keyJ ) rotate[0] = 1.f;  //hTranslate.x += speed;
 		if ( keyL ) rotate[0] = -1.f;
 
         if( glm::length(rotate) > 0 ) {
