@@ -4,6 +4,7 @@
 #include "AssetManager.hpp"
 #include "ParticleController.hpp"
 #include "GameObject.hpp"
+#include "Player.hpp"
 #include "Body.hpp"
 #include "Animation.hpp"
 #include "Material.hpp"
@@ -12,7 +13,7 @@
 
 namespace uGE {
 
-	SpiritController::SpiritController( uGE::GameObject * parent, uGE::GameObject * followee)
+	SpiritController::SpiritController( uGE::GameObject * parent, uGE::Player * followee)
 	:	Controller( parent ), _followee( followee )
 	{
 
@@ -72,9 +73,13 @@ namespace uGE {
     }
 	void SpiritController::getSucked()
 	{
-	    if(_targeted ) _percentSucked += Time::step()*35.f;
-	    else if(_percentSucked > 0) _percentSucked -= 2*Time::step()*35.f;
-	    if(_percentSucked >= 98) die();//DIE
+	    if(_targeted ) _percentSucked += Time::step()*45.f;
+	    else if(_percentSucked > 0) _percentSucked -= 2*Time::step()*45.f;
+	    if(_percentSucked >= 98)
+        {
+            _followee->changeShootable(1);
+            die();//DIE
+        }
 	}
 
 	void SpiritController::die()

@@ -38,12 +38,14 @@ namespace uGE {
 			static Hud * _hud;
 
             static std::vector< glm::vec3 > _spawnLocations;
+            static std::vector< glm::vec3 > _zombieSpawnLocations;
 			static void add( Camera * camera );
 			static void add( GameObject * object );
 			static void del( GameObject * delObject );
 			static void add( Light * light );
 			static void add( Shader * shader );
 			static void addSpawnLoc( glm::vec3 aSpawnLoc );
+			static void addZombieSpawnLoc( glm::vec3 aSpawnLoc );
 			static std::vector< glm::vec3 >& getSpawnLoc();
 
 			static bool control( sf::Window * window );

@@ -5,6 +5,8 @@
 #include "GameObject.hpp"
 #include "Zombie.hpp"
 
+#include "SphereCollider.hpp"
+
 #include "SceneManager.hpp"
 #include "AssetManager.hpp"
 
@@ -25,7 +27,7 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 5.10f;
+	    _spawnTime = 10.10f;
         srand(time(NULL));
 
 	}
@@ -41,7 +43,7 @@ namespace uGE {
 
 
 		//spawn zombie
-        if(_timeTillSpawn <= 0)
+        if(_timeTillSpawn <= 0 && zombies.size() < 2)
         {
             for(auto i = 0; i < 1; i++)
                 spawn();
@@ -51,18 +53,19 @@ namespace uGE {
 	}
     void ZombieSpawnController::spawn()
     {
-        /*uGE::Zombie* zombie = new uGE::Zombie( "Zombie");
+        uGE::Zombie* zombie = new uGE::Zombie( "Zombie");
              uGE::Body * zombieBody = new uGE::Body( zombie );
                 zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
                 zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
                 zombieBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
-           auto temp = uGE::SceneManager::getSpawnLoc().size();
+            zombie->setCollider( new uGE::SphereCollider(zombie, 1.75f));
+           auto temp = uGE::SceneManager::_zombieSpawnLocations.size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
-           zombie->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
+           zombie->setPosition(uGE::SceneManager::_zombieSpawnLocations[r]);
            zombies.push_back( zombie );
-           uGE::SceneManager::add( zombie );*/
+           uGE::SceneManager::add( zombie );
     }
 }
 

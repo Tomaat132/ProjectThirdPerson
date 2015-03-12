@@ -16,8 +16,9 @@ namespace uGE {
 	class Material;
 	class Zombie : public GameObject
 	{
+        private:
+            bool _viking;
         public:
-            bool targeted;
 		protected:
 
 			//SpiritController * _controller;
@@ -27,6 +28,8 @@ namespace uGE {
 			virtual ~Zombie();
 
             void update();
+            void setViking(bool value);
+            bool getViking();
 
 	};
 }

@@ -110,6 +110,18 @@ namespace uGE
                 continue;
             }
 
+            if( objName == "pozition_of_zombie" )
+            {
+                GameObject* obj = new GameObject( "" );
+                obj->transform = matrix;
+
+                uGE::SceneManager::addZombieSpawnLoc(obj->getPosition());
+                delete obj;
+
+                object = object->NextSiblingElement( "node" );
+                continue;
+            }
+
             if( objName.compare( "group" ) != 0 ) {
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
@@ -119,7 +131,7 @@ namespace uGE
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
                 obj->setBody( body );
                 if( body->getMesh() ) {
-                    obj->setCollider( new BoxCollider( obj ) );
+                    if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
                 }
                 uGE::SceneManager::add( obj );
             }

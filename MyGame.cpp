@@ -83,7 +83,7 @@ bool MyGame::load()
         water->setBody( waterBody );
         water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
         water->getMaterial()->setAlpha( 2.0f );
-
+/*
 	uGE::GameObject * zombie = new uGE::GameObject( "Zombie" );
         uGE::Body * zombieBody = new uGE::Body( zombie );
             zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/test/stump.obj" ) );
@@ -92,22 +92,11 @@ bool MyGame::load()
         zombie->setPosition( glm::vec3( 10.f, 0.f, 0.f ) );
         zombie->setController( new uGE::ZombieController( zombie, player ) );
         zombie->setCollider( new uGE::BoxCollider( zombie ) );
-
-    uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
-            uGE::Body * spiritBody = new uGE::Body( spirit );
-                spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );
-                spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
-                spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
-            spirit->setBody( spiritBody );
-
-            spirit->setController( new uGE::SpiritController( spirit, player) );
-       // zombie->setCollider( new uGE::BoxCollider( zombie ) );
-
+*/
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;
 	uGE::SceneManager::add( enemy );
-	uGE::SceneManager::add( zombie );
 	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 

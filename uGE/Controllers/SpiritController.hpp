@@ -3,13 +3,14 @@
 #include "utils/glm.hpp"
 #include "Controller.hpp"
 #include "GameObject.hpp"
+#include "Player.hpp"
 
 namespace uGE {
 
 	class SpiritController : public Controller
 	{
         private:
-			GameObject * _followee;
+			uGE::Player * _followee;
 			float _timeTillEmit;
 			float _emitTime;
 			glm::vec3 _velocity;
@@ -20,7 +21,7 @@ namespace uGE {
 			std::vector < GameObject* > _particles;
 
 		public:
-			SpiritController( uGE::GameObject * parent, uGE::GameObject * followee);
+			SpiritController( uGE::GameObject * parent, uGE::Player * followee);
 			virtual ~SpiritController();
 
 			void update();

@@ -14,7 +14,7 @@ namespace uGE {
 	Zombie::Zombie( std::string name )
 	: GameObject( name )
 	{
-	    targeted = false;
+        _viking = false;
 	    //_direction = glm::vec3(1f, 0f, 0f);
 	}
 
@@ -26,5 +26,14 @@ namespace uGE {
 	void Zombie::update()
 	{
 		GameObject::update();
+	}
+
+	void Zombie::setViking(bool value)
+	{
+	    _viking = value;
+	}
+	bool Zombie::getViking()
+	{
+	    return _viking;
 	}
 }
