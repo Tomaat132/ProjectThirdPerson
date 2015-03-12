@@ -48,6 +48,10 @@ namespace uGE{
                     continue;
                 }
 
+                //if( glm::length( colliderArray[i]->getPosition() - colliderArray[j]->getPosition() ) > 5 ) {
+                //    continue;
+                //}
+
                 int typeX = colliderArray[i]->getColliderType();
                 int typeY = colliderArray[j]->getColliderType();
 

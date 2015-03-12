@@ -110,6 +110,8 @@
 		<Unit filename="uGE/Game.hpp" />
 		<Unit filename="uGE/GameObject.cpp" />
 		<Unit filename="uGE/GameObject.hpp" />
+		<Unit filename="uGE/Hud.cpp" />
+		<Unit filename="uGE/Hud.hpp" />
 		<Unit filename="uGE/LevelLoader.cpp" />
 		<Unit filename="uGE/LevelLoader.hpp" />
 		<Unit filename="uGE/Light.cpp" />

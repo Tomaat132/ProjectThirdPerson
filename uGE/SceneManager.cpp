@@ -7,10 +7,12 @@
 #include "Camera.hpp"
 #include "Time.hpp"
 #include "GameObject.hpp"
+#include "Hud.hpp"
 #include "Body.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "CollisionDetection.hpp"
+#include "SpiritSpawnController.hpp"
 #include "Renderer.hpp"
 
 #include "Player.hpp"
@@ -22,6 +24,7 @@ namespace uGE {
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
 	Player * SceneManager::_player;
+	Hud * SceneManager::_hud;
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
@@ -81,7 +84,7 @@ namespace uGE {
 		return true; // continue running
 	}
 
-	void SceneManager::render( sf::Window * window )
+	void SceneManager::render( sf::RenderWindow * window )
 	{
         glEnable( GL_DEPTH_TEST ); // must be enables after after use program
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -97,7 +100,9 @@ namespace uGE {
             object->render( _shader, parent );
         }
 
-        Renderer::StartRender();
+        Renderer::StartRender( window );
+        //window->clear( sf::Color::White );
+        _hud->draw( window );
 		window->display();
 	}
  int k=0;
@@ -113,26 +118,27 @@ namespace uGE {
 		for ( unsigned int i = 0; i < _objects.size(); i++ ) {
 			GameObject * object = _objects[i];
 			object->update();
+			//std::cout << object->getName() << std::endl;
 		}
 
-		for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
-			GameObject * object = (GameObject*) *j;
+		//for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
+		for ( auto j = 0; j != _deleteQueue.size(); ++j ) {
+			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
-			delete object;
-			if( position != _objects.end() ) {
+			auto positionSpirit = std::find(SpiritSpawnController::spirits.begin(), SpiritSpawnController::spirits.end(), object);
+			//std::cout << "HELP HERE" << std::endl;
+			if( positionSpirit < SpiritSpawnController::spirits.end() ) {
+                SpiritSpawnController::spirits.erase( positionSpirit );
+			}
+			if( position < _objects.end() ) {
                 _objects.erase( position );
 			}
+            delete object;
 
-			//delete object;
+			//
 		}
 
 		_deleteQueue.clear();
-
-		//k++;
-         //   uGE::GameObject * zombie = new uGE::GameObject( "Zombie");
-
-         //  uGE::SceneManager::add( zombie );
-        //std::cout << k << " zombies created"<<std::endl;
 	}
 
 }

@@ -9,17 +9,31 @@
 #include "SceneManager.hpp"
 
 #include "utils/glm.hpp"
+#include "string.h"
 
 namespace uGE{
 
     class ZombieController : public Controller
     {
+        private:
+        //private variables
+        uGE::GameObject * _followee;
+
+        enum State {IDLE};
+        State _state;
+
+        float _idleTimer;
+        float _speed;
+        int _eightDir;
+
         public:
-            ZombieController(uGE::GameObject * parent);
+        //public constructor and functions
+            ZombieController(uGE::GameObject * parent, uGE::GameObject * followee);
             virtual ~ZombieController();
             //add stuff underneath here
 
             void update();
+            void move( int aDir);
             void healthCheck();
 
         protected:

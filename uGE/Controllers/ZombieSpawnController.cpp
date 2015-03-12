@@ -55,14 +55,17 @@ namespace uGE {
              uGE::Body * zombieBody = new uGE::Body( zombie );
                 zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
                 zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
-                zombieBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+                zombieBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
-            std::cout<< r <<std::endl;
            zombie->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
            zombies.push_back( zombie );
+<<<<<<< HEAD
+           uGE::SceneManager::add( zombie );
+           std::cout << "ZOMBIE" << std::endl;
+=======
            uGE::SceneManager::add( zombie );*/
     }
 }

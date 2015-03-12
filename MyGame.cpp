@@ -8,6 +8,7 @@
 #include "uGE/Controller.hpp"
 #include "uGE/GameObject.hpp"
 #include "uGE/LevelLoader.hpp"
+#include "uGE/Hud.hpp"
 #include "uGE/Light.hpp"
 #include "uGE/Material.hpp"
 #include "uGE/Mesh.hpp"
@@ -24,7 +25,6 @@
 #include "uGE/Controllers/RotateController.hpp"
 #include "uGE/Controllers/PlayerController.hpp"
 #include "uGE/Controllers/ParticleController.hpp"
-#include "uGE/Controllers/ZombieController.hpp"
 #include "uGE/Controllers/ZombieSpawnController.hpp"
 #include "uGE/Controllers/SpiritSpawnController.hpp"
 
@@ -52,7 +52,7 @@ bool MyGame::load()
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
         //player->setCollider( new uGE::BoxCollider(player) );
-        player->setCollider( new uGE::SphereCollider( player, 1.25f ) );
+        player->setCollider( new uGE::SphereCollider( player, 1.75f ) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
 
@@ -90,21 +90,33 @@ bool MyGame::load()
             zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         zombie->setBody( zombieBody );
         zombie->setPosition( glm::vec3( 10.f, 0.f, 0.f ) );
-        zombie->setController( new uGE::ZombieController( zombie ) );
+        zombie->setController( new uGE::ZombieController( zombie, player ) );
         zombie->setCollider( new uGE::BoxCollider( zombie ) );
+
+    uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
+            uGE::Body * spiritBody = new uGE::Body( spirit );
+                spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );
+                spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
+                spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+            spirit->setBody( spiritBody );
+
+            spirit->setController( new uGE::SpiritController( spirit, player) );
+       // zombie->setCollider( new uGE::BoxCollider( zombie ) );
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;
-	uGE::SceneManager::add( zombie );
 	uGE::SceneManager::add( enemy );
+	uGE::SceneManager::add( zombie );
 	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 
-	uGE::SceneManager::add( water );
+	uGE::SceneManager::_hud = new uGE::Hud();
+
+	//uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "level test 6" );
+    loader.loadLevel( "LEVEL week4 wednesday third try" );
 
 	return true;
 }

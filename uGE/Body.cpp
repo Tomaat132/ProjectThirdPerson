@@ -34,6 +34,11 @@ namespace uGE {
 			shader->setAttrib( shader->normal, 3, _mesh->getNormalBuffer() );
 			shader->setAttrib( shader->uv, 	   2, _mesh->getUvBuffer() );
 			shader->render( _mesh->size() );
+			glBindBuffer( GL_ARRAY_BUFFER, 0 );
+			glDisableVertexAttribArray( shader->vertex );
+			glDisableVertexAttribArray( shader->normal );
+			glDisableVertexAttribArray( shader->uv );
+			glBindTexture( GL_TEXTURE_2D, 0 );
 		}
 	}
 
