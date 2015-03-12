@@ -21,8 +21,9 @@ namespace uGE
     }
 
 
-    void Renderer::StartRender()
+    void Renderer::StartRender( sf::RenderWindow * window )
     {
+        // First render pass, for opaque objects
         for( rIterator i = firstPassRender.begin(); i != firstPassRender.end(); ++i ) {
             Body * body = i->first;
 
@@ -36,6 +37,7 @@ namespace uGE
             body->render( shader, i->second );
         }
 
+        // Second render pass, for transparent objects
         for( rIterator i = secondPassRender.begin(); i != secondPassRender.end(); ++i ) {
             Body * body = i->first;
 

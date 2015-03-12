@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "Time.hpp"
 #include "GameObject.hpp"
+#include "Hud.hpp"
 #include "Body.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
@@ -23,6 +24,7 @@ namespace uGE {
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
 	Player * SceneManager::_player;
+	Hud * SceneManager::_hud;
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
@@ -82,7 +84,7 @@ namespace uGE {
 		return true; // continue running
 	}
 
-	void SceneManager::render( sf::Window * window )
+	void SceneManager::render( sf::RenderWindow * window )
 	{
         glEnable( GL_DEPTH_TEST ); // must be enables after after use program
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -98,7 +100,9 @@ namespace uGE {
             object->render( _shader, parent );
         }
 
-        Renderer::StartRender();
+        Renderer::StartRender( window );
+        //window->clear( sf::Color::White );
+        _hud->draw( window );
 		window->display();
 	}
  int k=0;

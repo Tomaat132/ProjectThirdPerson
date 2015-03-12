@@ -6,6 +6,7 @@
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
 #include "uGE/GameObject.hpp"
+#include "uGE/Hud.hpp"
 #include "uGE/Light.hpp"
 #include "uGE/Mesh.hpp"
 #include "uGE/Animation.hpp"
@@ -51,7 +52,7 @@ bool MyGame::load()
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
         //player->setCollider( new uGE::BoxCollider(player) );
-        player->setCollider( new uGE::SphereCollider( player, 1.25f ) );
+        player->setCollider( new uGE::SphereCollider( player, 1.75f ) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
 
@@ -107,8 +108,10 @@ bool MyGame::load()
 	uGE::SceneManager::_player = player;
 	uGE::SceneManager::add( enemy );
 	uGE::SceneManager::add( zombie );
-	//uGE::SceneManager::add( zombieSpawn );
+	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
+
+	uGE::SceneManager::_hud = new uGE::Hud();
 
 	//uGE::SceneManager::add( water );
 

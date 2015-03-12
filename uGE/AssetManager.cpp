@@ -47,6 +47,9 @@ namespace uGE {
 			return found->second;
 		} else {
 			Texture * texture = Texture::load( filename );
+			if( texture == NULL && filename != "Assets/Textures/bricks.jpg" ) {
+                texture = loadTexture( "Assets/Textures/bricks.jpg" );
+			}
 			textures[ filename ] = texture;
 			return texture;
 		}

@@ -36,7 +36,6 @@ namespace uGE {
 	void Shader::use()
 	{
 		glUseProgram( _program );
-
 	}
 
 	void Shader::render( GLuint size )
