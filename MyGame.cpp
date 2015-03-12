@@ -61,7 +61,7 @@ bool MyGame::load()
 
     uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
         spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
-
+/*
     uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
         enemy->setPosition( glm::vec3( -2, 0, 0 ) );
         uGE::Body * enemyBody = new uGE::Body( enemy );
@@ -70,7 +70,7 @@ bool MyGame::load()
         enemy->setBody( enemyBody );
         enemy->setCollider(new uGE::SphereCollider(enemy, 1.25f));
         enemy->setController( new uGE::ParticleController( enemy, camera ) );
-
+*/
     camera->setController( new uGE::FollowController( camera, player ) );
     //camera->setController( new uGE::PlayerController( camera ) );
 
@@ -96,7 +96,6 @@ bool MyGame::load()
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;
-	uGE::SceneManager::add( enemy );
 	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 
@@ -105,7 +104,7 @@ bool MyGame::load()
 	//uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL week4 wednesday third try" );
+    loader.loadLevel( "LEVEL week4 thursday" );
 
 	return true;
 }

@@ -127,11 +127,20 @@ namespace uGE
                 obj->transform = matrix;
                 //std::cout<< objName << std::endl;
                 Body * body = new Body( obj );
-                body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
-                body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
-                obj->setBody( body );
+                if( objName != "position_of_wisp" && objName != "pozition_of_zombie" ){
+                    if(objName != "Water_box"){
+                        body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
+                        body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                    }
+                    obj->setBody( body );
+                }
                 if( body->getMesh() ) {
                     if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
+
+                }
+                if( objName == "pasted__Cone_tree"){
+                    body->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+                    body->getMaterial()->setAlpha( 1.75f );
                 }
                 uGE::SceneManager::add( obj );
             }

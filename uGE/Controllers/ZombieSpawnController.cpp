@@ -55,8 +55,8 @@ namespace uGE {
     {
         uGE::Zombie* zombie = new uGE::Zombie( "Zombie");
              uGE::Body * zombieBody = new uGE::Body( zombie );
-                zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-                zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
+                zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/zombie1.obj" ) );
+                zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/zombie1.png") );
                 zombieBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
