@@ -17,7 +17,8 @@ namespace uGE {
 	class Zombie : public GameObject
 	{
         public:
-            bool targeted;
+            //bool targeted;
+
 		protected:
 
 			//SpiritController * _controller;

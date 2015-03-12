@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "GameObject.hpp"
-
+#include "Utils/glm.hpp"
 
 namespace uGE{
 
@@ -17,8 +17,19 @@ namespace uGE{
             void changeHealth(int _health);
             void update();
 
+            void addCrumbs();
+            void dropCrumbs();
+
+            std::vector<glm::vec3> getCrumbs();
+
+            std::vector<glm::vec3> crumbs;
+
         protected:
         private:
+
+            float _timeCrumb = 0;
+
+
 
             int health = 100;
             int maxHealth = 150;

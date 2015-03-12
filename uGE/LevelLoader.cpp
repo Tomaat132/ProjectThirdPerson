@@ -101,7 +101,7 @@ namespace uGE
                 if( objName == "position_of_wisp" ){
                     // name of spawn should be here
                     //Zombie spawn controller then randomly get a location from spot [0] to [9]
-                   /* uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 0.f ));
+                /*  uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 0.f ));
                     uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 0.f ));
                     uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 0.f ));
                     uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 3.f ));
@@ -112,7 +112,8 @@ namespace uGE
                     uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 6.f ));
                     uGE::SceneManager::addSpawnLoc(glm::vec3( 0.f, 0.f, 9.f ));
                     uGE::SceneManager::addSpawnLoc(glm::vec3( 3.f, 0.f, 9.f ));
-                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 9.f ));*/
+                    uGE::SceneManager::addSpawnLoc(glm::vec3( 6.f, 0.f, 9.f ));
+                */
                     uGE::SceneManager::addSpawnLoc(obj->getPosition());
                 }
             }

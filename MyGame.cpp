@@ -57,6 +57,7 @@ bool MyGame::load()
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
 
+
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
 
@@ -92,7 +93,7 @@ bool MyGame::load()
         zombie->setBody( zombieBody );
         zombie->setPosition( glm::vec3( 10.f, 0.f, 0.f ) );
         zombie->setController( new uGE::ZombieController( zombie , player ) );
-        zombie->setCollider( new uGE::BoxCollider( zombie ) );
+        zombie->setCollider( new uGE::SphereCollider( zombie, 20 ) );
 
     uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
             uGE::Body * spiritBody = new uGE::Body( spirit );

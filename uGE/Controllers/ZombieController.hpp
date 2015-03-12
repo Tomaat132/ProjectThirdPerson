@@ -19,7 +19,7 @@ namespace uGE{
         //private variables
         uGE::GameObject * _followee;
 
-        enum State {IDLE};
+        enum State {IDLE, CHASE};
         State _state;
 
         float _idleTimer;
@@ -35,6 +35,10 @@ namespace uGE{
             void update();
             void move( int aDir);
             void healthCheck();
+            void checkPlayerRange();
+            void chaseCrumb(glm::vec3 crumb);
+
+            void onCollision( CollisionResult * result );
 
         protected:
         //able to see as in public but unusable

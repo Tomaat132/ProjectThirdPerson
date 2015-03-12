@@ -58,8 +58,6 @@ namespace uGE {
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
-<<<<<<< HEAD
-
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
         {
             for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
@@ -69,8 +67,6 @@ namespace uGE {
             _isSucking = false;
         }
 
-=======
->>>>>>> upstream/master
         if(!_isSucking)
         {
             if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
@@ -136,13 +132,9 @@ namespace uGE {
             }
             _isSucking = false;
         }
-<<<<<<< HEAD
 	}
-    void PlayerController::createParticle()
-=======
-	}
+
 	void PlayerController::vacuum()
->>>>>>> upstream/master
 	{
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];

@@ -14,7 +14,7 @@ namespace uGE {
 	Zombie::Zombie( std::string name )
 	: GameObject( name )
 	{
-	    targeted = false;
+	    //targeted = false;
 	    //_direction = glm::vec3(1f, 0f, 0f);
 	}
 
