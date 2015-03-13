@@ -9,7 +9,7 @@ namespace uGE {
     {
         public:
 
-            SphereCollider(GameObject * aParent, float aRadius);
+            SphereCollider(GameObject * aParent, float aRadius, std::string aName = "Sphere");
             virtual ~SphereCollider();
 
             float getRadius();

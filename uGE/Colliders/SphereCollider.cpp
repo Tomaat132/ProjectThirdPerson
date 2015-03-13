@@ -2,8 +2,8 @@
 
 
 namespace uGE{
-    SphereCollider::SphereCollider(GameObject * aParent , float aRadius)
-    :Collider(aParent)
+    SphereCollider::SphereCollider(GameObject * aParent , float aRadius, std::string aName)
+    :Collider(aParent, aName)
     {
         cType = Type::SPHERE;
         radius = aRadius;

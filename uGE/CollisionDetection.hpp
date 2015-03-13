@@ -14,6 +14,8 @@ namespace uGE{
     struct CollisionResult {
         GameObject * objectA;
         GameObject * objectB;
+        std::string colliderA;
+        std::string colliderB;
         int colliderTypeA, colliderTypeB;
         glm::vec3 overlap;
     };
