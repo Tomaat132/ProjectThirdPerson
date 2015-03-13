@@ -11,7 +11,7 @@ namespace uGE
     class BoxCollider : public AABBcollision
     {
         public:
-            BoxCollider( GameObject * aParent );
+            BoxCollider( GameObject * aParent, std::string aName = "Box" );
             virtual ~BoxCollider();
 
             std::vector<glm::vec2> getPoints();

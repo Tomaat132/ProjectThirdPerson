@@ -3,8 +3,8 @@
 
 namespace uGE {
 
-	Collider::Collider( GameObject * aParent )
-	:parent( aParent )
+	Collider::Collider( GameObject * aParent, std::string aName )
+	:parent( aParent ), name( aName )
 	{
 		//ctor
 	}
@@ -30,4 +30,8 @@ namespace uGE {
 	    return parent;
 	}
 
+    std::string Collider::getName()
+    {
+        return name;
+    }
 }

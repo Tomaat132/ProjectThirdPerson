@@ -5,8 +5,8 @@
 
 namespace uGE{
 
-    AABBcollision::AABBcollision(GameObject * aParent)
-    :Collider(aParent)
+    AABBcollision::AABBcollision(GameObject * aParent, std::string aName)
+    :Collider(aParent, aName)
     {
         cType = Type::AABB;
         //sizeX = aSizeX;

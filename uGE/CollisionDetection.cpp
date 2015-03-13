@@ -79,14 +79,16 @@ namespace uGE{
             float sumOfRadius = sphere1->getRadius() + sphere2->getRadius();
             glm::vec3 difference = sphere2->getPosition() -  sphere1->getPosition();
 
-            float dist = glm::length(difference);
-            if(dist <= sumOfRadius){
+            float dist2 = glm::length2(difference);
+            if( dist2 <= glm::pow2(sumOfRadius) ) {
                 CollisionResult * res = new CollisionResult();
                 res->objectA = sphere1->getParent();
                 res->objectB = sphere2->getParent();
+                res->colliderA = sphere1->getName();
+                res->colliderB = sphere2->getName();
                 res->colliderTypeA = sphere1->getColliderType();
                 res->colliderTypeB = sphere2->getColliderType();
-                res->overlap = glm::normalize( difference ) * ( sumOfRadius - dist ); //glm::vec3 with distance and size of overlap
+                res->overlap = glm::normalize( difference ) * ( sumOfRadius - glm::length( difference ) ); //glm::vec3 with distance and size of overlap
 
                 res->objectA->getController()->onCollision( res ); //Run onCollision in the controller of the first GameObject
                 res->objectB->getController()->onCollision( res );
@@ -110,6 +112,8 @@ namespace uGE{
                         CollisionResult * res = new CollisionResult();
                         res->objectA = box1->getParent();
                         res->objectB = box2->getParent();
+                        res->colliderA = box1->getName();
+                        res->colliderB = box2->getName();
                         res->colliderTypeA = box1->getColliderType();
                         res->colliderTypeB = box2->getColliderType();
                         res->overlap = glm::vec3(0,0,0);
@@ -129,10 +133,9 @@ namespace uGE{
         float maxUpSide = box->getPosition().z + box->getMaxBounds().z;
         float maxDownSide = box->getPosition().z + box->getMinBounds().z;
 
-
         glm::vec3 closestPoint = sphere->getPosition();
 
-        if(closestPoint.x > maxRightSide){//right side check
+        if(closestPoint.x > maxRightSide) {//right side check
             closestPoint.x = maxRightSide;
         }
         if(closestPoint.x < maxLeftSide){//left side check
@@ -149,7 +152,7 @@ namespace uGE{
         float radius = sphere->getRadius();
         glm::vec3 difference = closestPoint - sphere->getPosition();
 
-        if(glm::length(difference) <= radius){
+        if( glm::length2(difference) <= glm::pow2(radius) ) {
             CollisionResult * res = new CollisionResult();
             res->objectA = sphere->getParent();
             res->objectB = box->getParent();
@@ -184,6 +187,8 @@ namespace uGE{
                     CollisionResult* res = new CollisionResult();
                     res->objectA = box1->getParent();
                     res->objectB = box2->getParent();
+                    res->colliderA = box1->getName();
+                    res->colliderB = box2->getName();
                     res->colliderTypeA = box1->getColliderType();
                     res->colliderTypeB = box2->getColliderType();
                     res->overlap = box2->getPosition() - box1->getPosition();
@@ -224,16 +229,18 @@ namespace uGE{
 
             glm::vec2 pointOnLine = pointA + ( line * dotLength );
             glm::vec2 diff = pointOnLine - sphereVec;
-            if( glm::length( closestDiff ) == 0 || glm::length( diff ) <= glm::length( closestDiff ) ) {
+            if( glm::length2( closestDiff ) == 0 || glm::length2( diff ) <= glm::length2( closestDiff ) ) {
                 closestDiff = diff;
             }
         }
 
-        if( glm::length( closestDiff ) != 0 ) {
-            if( glm::length( closestDiff ) <= sphere->getRadius() ) {
+        if( glm::length2( closestDiff ) != 0 ) {
+            if( glm::length2( closestDiff ) <= glm::pow2( sphere->getRadius() ) ) {
                 CollisionResult* res = new CollisionResult();
                 res->objectA = sphere->getParent();
                 res->objectB = box->getParent();
+                res->colliderA = sphere->getName();
+                res->colliderB = box->getName();
                 res->colliderTypeA = sphere->getColliderType();
                 res->colliderTypeB = box->getColliderType();
                 res->overlap = glm::normalize( glm::vec3(closestDiff.x, 0, closestDiff.y) ) * ( sphere->getRadius() - glm::length( closestDiff ) );

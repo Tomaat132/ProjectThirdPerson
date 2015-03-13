@@ -7,7 +7,7 @@ namespace uGE{
     class AABBcollision : public Collider
     {
         public:
-            AABBcollision(GameObject * aParent);
+            AABBcollision(GameObject * aParent, std::string aName = "AABB");
             virtual ~AABBcollision();
 
             glm::vec3 getMinBounds();

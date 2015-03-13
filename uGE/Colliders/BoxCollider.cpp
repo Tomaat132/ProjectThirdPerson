@@ -4,8 +4,8 @@
 namespace uGE
 {
 
-    BoxCollider::BoxCollider( GameObject * aParent )
-    : AABBcollision( aParent )
+    BoxCollider::BoxCollider( GameObject * aParent, std::string aName )
+    : AABBcollision( aParent, aName )
     {
         cType = Type::BOX;
     }
