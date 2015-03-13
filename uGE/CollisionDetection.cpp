@@ -91,7 +91,7 @@ namespace uGE{
                 res->overlap = glm::normalize( difference ) * ( sumOfRadius - glm::length( difference ) ); //glm::vec3 with distance and size of overlap
 
                 res->objectA->getController()->onCollision( res ); //Run onCollision in the controller of the first GameObject
-                res->objectB->getController()->onCollision( res );
+                res->objectB->getController()->onCollision( inverseResult(res) );
             }
     }
 
@@ -197,7 +197,7 @@ namespace uGE{
                         res->objectA->getController()->onCollision( res );
                     }
                     if( res->objectB->getController() ) {
-                        res->objectB->getController()->onCollision( res );
+                        res->objectB->getController()->onCollision( inverseResult(res) );
                     }
                     return;
                 }
@@ -249,7 +249,7 @@ namespace uGE{
                     res->objectA->getController()->onCollision( res );
                 }
                 if( res->objectB->getController() ) {
-                    res->objectB->getController()->onCollision( res );
+                    res->objectB->getController()->onCollision( inverseResult(res) );
                 }
             }
         }
@@ -264,6 +264,18 @@ namespace uGE{
         float t = ( line2.x * ( line1a.y - line2a.y ) - line2.y * ( line1a.x - line2a.x ) ) / ( -line2.x * line1.y + line1.x * line2.y );
 
         return ( s >= 0 && s <= 1 && t >= 0 && t <= 1 );
+    }
+
+    CollisionResult * CollisionDetection::inverseResult( CollisionResult * result )
+    {
+        CollisionResult * newResult = new CollisionResult();
+        newResult->objectA = result->objectB;
+        newResult->objectB = result->objectA;
+        newResult->colliderA = result->colliderB;
+        newResult->colliderB = result->colliderA;
+        newResult->colliderTypeA = result->colliderTypeB;
+        newResult->colliderTypeB = result->colliderTypeA;
+        return newResult;
     }
 
 }//end of namespace
