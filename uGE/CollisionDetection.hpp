@@ -14,8 +14,7 @@ namespace uGE{
     struct CollisionResult {
         GameObject * objectA;
         GameObject * objectB;
-        std::string colliderA;
-        std::string colliderB;
+        std::string colliderA, colliderB;
         int colliderTypeA, colliderTypeB;
         glm::vec3 overlap;
     };
@@ -38,6 +37,8 @@ namespace uGE{
         protected:
         private:
             bool checkLineCollision( glm::vec2 line1a, glm::vec2 line1b, glm::vec2 line2a, glm::vec2 line2b );
+
+            CollisionResult * inverseResult( CollisionResult * result );
     };//end of CollisionDetetction class
 }
 
