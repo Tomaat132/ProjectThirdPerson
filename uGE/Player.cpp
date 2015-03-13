@@ -67,7 +67,7 @@ namespace uGE
     }
 
     std::vector<glm::vec3> Player::getCrumbs(){
-    return crumbs;
+        return crumbs;
     }
 
 

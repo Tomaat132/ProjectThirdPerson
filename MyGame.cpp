@@ -47,6 +47,9 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
+    uGE::LevelLoader loader = uGE::LevelLoader();
+    loader.loadLevel( "LEVEL week4 wednesday third try" );
+
     uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
@@ -95,15 +98,7 @@ bool MyGame::load()
 	uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::_hud = new uGE::Hud();
-
-	//uGE::SceneManager::add( water );
-
-
-	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL week4 wednesday third try" );
-
     uGE::SoundManager::init();
-
 
 	return true;
 }
