@@ -17,7 +17,7 @@ namespace uGE
             static std::map<Body*, glm::mat4> firstPassRender;
             static std::map<Body*, glm::mat4> secondPassRender;
 
-            static void StartRender( sf::RenderWindow * window );
+            static void StartRender( sf::RenderWindow * window, std::string source );
         protected:
         private:
     };

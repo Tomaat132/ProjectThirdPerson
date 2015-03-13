@@ -1,9 +1,12 @@
 #include "Player.hpp"
+#include "Body.hpp"
+#include "AssetManager.hpp"
 #include "Colliders/BoxCollider.hpp"
 #include "Utils/glm.hpp"
 #include "Time.hpp"
 
 #include <iostream>
+#include <map>
 
 namespace uGE
 {
@@ -11,7 +14,13 @@ namespace uGE
     Player::Player()
     :GameObject( "Player" ), _score( 0 ), _shootable( 5 )
     {
-        //ctor
+        idle.push_back( AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Animations/Character_animation.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Animations/fthyhhf.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Animations/hero_anim.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Animations/player.obj" ) );
+        currentAnim = idle;
+        std::cout << "All loaded and stored. Player Constructor closed." << std::endl;
     }
 
     Player::~Player()
@@ -43,12 +52,18 @@ namespace uGE
 
     void Player::update(){
         GameObject::update();
-        if (health <= 0){std::cout<<"Health got below 0"<<std::endl;}
-        addCrumbs();
+        if (health <= 0){ std::cout<<"HOLY SHIT IT'S 0"<<std::endl; }
+		addCrumbs();
 
+        time += Time::step();
+		while( time > .1f ) {
+            time -= .1f;
+            updateFrame();
+        }
     }
+
     void Player::addCrumbs(){
-    _timeCrumb +=Time::step();
+		_timeCrumb +=Time::step();
         if(_timeCrumb > 1){//time to update the dropping of crumbs for zombie to follow
         dropCrumbs();//actual dropping of the crumbs
         _timeCrumb = 0;//reset, duh
@@ -56,20 +71,36 @@ namespace uGE
     }
 
     void Player::dropCrumbs(){//makes player drop a trail
-    glm::vec3 crumb;
-    crumb = getPosition();
-    crumbs.push_back(crumb);
-        for(unsigned int i = 0; i < crumbs.size(); i++){
-            if(crumbs.size() > 4){
-            crumbs.erase(crumbs.begin());
-            }
-        }
+		glm::vec3 crumb;
+		crumb = getPosition();
+		crumbs.push_back(crumb);
+			for(unsigned int i = 0; i < crumbs.size(); i++){
+				if(crumbs.size() > 4){
+				crumbs.erase(crumbs.begin());
+				}
+			}
+		}
+
+		std::vector<glm::vec3> Player::getCrumbs(){
+		return crumbs;
+	}
+
+
+    void Player::updateFrame()
+    {
+        ++frame;
+        if(frame >= currentAnim.size()) frame = 0;
+        std::cout << currentAnim[frame] << " -> " << frame << std::endl;
+        _body->setMesh(idle[frame]);
     }
 
-    std::vector<glm::vec3> Player::getCrumbs(){
-    return crumbs;
+    //Player::currentlyPlaying for switching between animations
+    void Player::playNow( std::string action )
+    {
+        frame = 0;
+        if( action == "IDLE" ) currentAnim = idle;
+        if( action == "WALK" ) currentAnim = walk;
     }
-
 
 
     //add stuff below
