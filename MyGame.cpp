@@ -120,7 +120,7 @@ bool MyGame::load()
     loader.loadLevel( "LEVEL week4 wednesday third try" );
 
     uGE::SoundManager * sound = new uGE::SoundManager;
-    sound->getBGM("Azure");
+    sound->getBGM("Forest");
 
 	return true;
 }
