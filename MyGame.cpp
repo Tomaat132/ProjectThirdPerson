@@ -86,16 +86,7 @@ bool MyGame::load()
         water->setBody( waterBody );
         water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
         water->getMaterial()->setAlpha( 2.0f );
-/*
-	uGE::GameObject * zombie = new uGE::GameObject( "Zombie" );
-        uGE::Body * zombieBody = new uGE::Body( zombie );
-            zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/test/stump.obj" ) );
-            zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
-        zombie->setBody( zombieBody );
-        zombie->setPosition( glm::vec3( 10.f, 0.f, 0.f ) );
-        zombie->setController( new uGE::ZombieController( zombie, player ) );
-        zombie->setCollider( new uGE::BoxCollider( zombie ) );
-*/
+
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;
@@ -110,6 +101,8 @@ bool MyGame::load()
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "LEVEL week4 wednesday third try" );
+
+    uGE::SoundManager::init();
 
 
 	return true;

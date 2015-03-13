@@ -86,12 +86,8 @@ namespace uGE {
 			//Shooting controls
 			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
             {
-
-            SoundManager * sfx;
-            sfx->playSFX("Launch");
-
-            shoot();
-            _shootTime = 0.3f;
+                shoot();
+                _shootTime = 0.3f;
             }
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 				//Do Absorbing
@@ -185,6 +181,7 @@ namespace uGE {
 	void PlayerController::shoot()
 	{
         if(_parent->getShootable() > 0 ) {
+            SoundManager::playSFX( "Launch" );
             uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
                 uGE::Body * bulletBody = new uGE::Body( bullet );
                     bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" ) );  //change model
@@ -195,10 +192,6 @@ namespace uGE {
                 bullet->setPosition( _parent->getPosition() );
                uGE::SceneManager::add( bullet );
                _parent->changeShootable(-1);
-        }
-        else{
-            std::cout << "-- no ammo -- " <<std::endl;
-
         }
 	}
 

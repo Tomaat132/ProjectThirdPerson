@@ -2,6 +2,7 @@
 #define SOUNDMANAGER_H
 
 #include <iostream>
+#include <map>
 #include <SFML/Audio.hpp>
 
 
@@ -12,24 +13,20 @@ namespace uGE{
             SoundManager();
             virtual ~SoundManager();
 
-            static std::vector<sf::Sound*> sounds;
-            static std::vector<sf::SoundBuffer *> buffers;
+            static void init();
 
-            void getBGM(std::string iFilename);
-            void getSFX(std::string iFilename);
-
-            void playSFX(std::string iFilename);
-            unsigned int findFreeSound();
+            static void getBGM(std::string iFilename);
+            static void getSFX(std::string iFilename);
+            static void playSFX(std::string iFilename);
 
         protected:
         private:
+            static bool active;
+            static sf::Music *bgm;
+            static std::vector<sf::Sound*> sounds;
+            static std::map<std::string,sf::SoundBuffer*> soundMap;
 
-            sf::Music *bgm;
-            sf::SoundBuffer *buffer;
-            sf::Sound *sfx;
-
-
-
+            static unsigned int findFreeSound();
     };
 }
 #endif // SOUNDMANAGER_H
