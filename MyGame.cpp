@@ -111,7 +111,11 @@ bool MyGame::load()
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "LEVEL week4 wednesday third try" );
 
-    uGE::SoundManager * sound = new uGE::SoundManager;
+    uGE::SoundManager::init();
+    uGE::SoundManager::playSFX( "rifle" );
+    uGE::SoundManager::playSFX( "rifle" );
+    uGE::SoundManager::playSFX( "rifle" );
+    uGE::SoundManager::playSFX( "rifle" );
     //sound->getBGM("Azure");
 
 	return true;

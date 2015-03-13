@@ -6,25 +6,34 @@
 
 namespace uGE
 {
-    std::vector<sf::Sound*> SoundManager::sounds;
-    std::vector<sf::SoundBuffer *> SoundManager::buffers;
 
-    SoundManager::SoundManager()
+    bool SoundManager::active = false;
+    sf::Music * SoundManager::bgm;
+    std::vector<sf::Sound*> SoundManager::sounds;
+    std::map<std::string,sf::SoundBuffer*> SoundManager::soundMap;
+
+    void SoundManager::init()
     {
-        //ctor
+        sounds.clear();
+        soundMap.clear();
+
         getSFX("rifle");
         getSFX("Launch");
 
-    }
+        for( unsigned int i = 0; i < 64; ++i ) {
+            sounds.push_back( new sf::Sound );
+        }
 
-    SoundManager::~SoundManager()
-    {
-        //dtor
+        active = true;
     }
-    //add stuf below here
 
     void SoundManager::getBGM(std::string iFilename)
     {
+        if( !active ) {
+            std::cout << "Sound Manager is not yet initialized. Could not play sounds." << std::endl;
+            return;
+        }
+
         bgm = new sf::Music;
         if (!bgm->openFromFile("Assets/Music/" + iFilename + ".wav"))
         {
@@ -33,45 +42,50 @@ namespace uGE
         bgm->play();
     }//end of getBGM function
 
-    void SoundManager::getSFX(std::string iFilename){
-    buffer = new sf::SoundBuffer;
-    buffers.push_back(buffer);
-        //std::cout<<buffers.size()<< " buffer size" <<std::endl;
-
-    if (!buffer->loadFromFile("Assets/Music/Fx/" + iFilename + ".wav"))
+    void SoundManager::getSFX(std::string iFilename)
+    {
+        sf::SoundBuffer * buffer = new sf::SoundBuffer;
+        if (!buffer->loadFromFile("Assets/Music/Fx/" + iFilename + ".wav"))
         {
             std::cout<< "#$#$# error loading: "<< iFilename<< " sound effect " << std::endl;
+            return;
         }
+        soundMap[ iFilename ] = buffer;
     }//end of getSFX function;
 
-    void SoundManager::playSFX(std::string iFilename){
-        //getSFX(iFilename);
-        sfx = new sf::Sound;
-        sounds.push_back(sfx);
-
-        for(unsigned int i = 0; i < buffers.size() ;i++ ){
-            sfx->setBuffer(*buffers[i]);
-
-        }
-        std::cout<<buffers.size()<<" sounds size" <<std::endl;
-        //findFreeSound();
-        sfx->play();
+    void SoundManager::playSFX(std::string iFilename)
+    {
+        if( !active ) {
+            std::cout << "Sound Manager is not yet initialized. Could not play sounds." << std::endl;
+            return;
         }
 
-   unsigned int SoundManager::findFreeSound(){
-        for (unsigned int i = 0 ; i < sounds.size() ;i++){
-            sf::Sound *aSound = sounds[i];
-            std::cout<< aSound->getStatus() << std::endl;
+        auto found = soundMap.find( iFilename );
+        if( found == soundMap.end() ) {
+            std::cout << "SFX not found: " << iFilename << std::endl;
+            std::cout << "# of loaded sounds: " << soundMap.size() << std::endl;
+            return;
+        }
 
-           if(aSound->getStatus() == sf::SoundSource::Stopped){
+        unsigned int soundPos = findFreeSound();
+        if( soundPos == sounds.size() ) {
+            std::cout << "No free sounds! Could not play sound: " << iFilename << std::endl;
+            return;
+        }
 
+        sf::Sound * sound = sounds[ soundPos ];
+        sound->setBuffer( *soundMap[ iFilename ] );
+        sound->play();
+    }
+
+   unsigned int SoundManager::findFreeSound()
+   {
+        for( unsigned int i = 0; i < sounds.size(); i++ ){
+           if( sounds[i]->getStatus() == sf::SoundSource::Stopped ){
                return i;
-           }//end of if soundsource is empty
+           }
+        }
+        return sounds.size();
+    }
 
-        }//end of forloop
-
-    return 0;
-    }//end of findFreeSound();
-
-
-}//end of uGE namespace
+}
