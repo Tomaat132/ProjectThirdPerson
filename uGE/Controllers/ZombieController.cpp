@@ -89,20 +89,20 @@ namespace uGE{
                 //std::cout<<tempVec.size()<<std::endl; //this holds 1
                 SphereCollider* sphere = dynamic_cast<SphereCollider *>(tempVec[i]);
                 //glm::vec3 closestPoint = sphere->getPosition();
-                    for(unsigned int j = 0; j < cCrumbs.size(); j++){
-                    glm::vec3 diff = cCrumbs[j] - sphere->getPosition();
+                    glm::vec3 diff = SceneManager::_player->getPosition() - sphere->getPosition();
                     float dist = glm::length(diff);
 
                         if(sphere->getRadius() > dist){
                         //_state = State::CHASE;
-                        chaseCrumb(cCrumbs[j]);
-                            if(cCrumbs[j] == sphere->getPosition()){
-                            chaseCrumb(cCrumbs[j]);
-                            }
+
+                        chaseCrumb(SceneManager::_player->getPosition());
+                            //if(cCrumbs[j] == sphere->getPosition()){
+                            //chaseCrumb(cCrumbs[j]);
+                            //}
                         return;
                         }
                     //glm::vec3 difference = closestPoint - sphere->getPosition();
-                    }
+
                 //SphereCollider * colliderA = dynamic_cast <SphereCollider *>(colliderArray[i]);
 
                 }
@@ -112,9 +112,7 @@ namespace uGE{
     void ZombieController::chaseCrumb(glm::vec3 crumb){
         glm::mat4 & transform = _parent->transform;
         glm::vec3 diff = crumb - _parent->getPosition();
-        if (glm::length(diff) < _speed * Time::step()){
-            //change target
-        }
+
             diff = glm::normalize(diff);
             _parent->setRotation(diff);
             transform = glm::translate(transform , glm::vec3(0 , 0 , 1.0f)* _speed * Time::step());
