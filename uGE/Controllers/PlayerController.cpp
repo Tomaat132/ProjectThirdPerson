@@ -24,10 +24,14 @@
 #include "Collider.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
+
+#include "SoundManager.hpp"
+
 #include "Player.hpp"
 #include "Viking.hpp"
 
 //Still missing controls: Melee, Absorbing.
+
 namespace uGE {
 
 	PlayerController::PlayerController( uGE::Player * parent )
@@ -55,6 +59,15 @@ namespace uGE {
 		glm::vec3 translate;
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
+        if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
+        {
+            for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
+                Spirit* aSpirit = SpiritSpawnController::spirits[j];
+                aSpirit->isTargeted( false );
+            }
+            _isSucking = false;
+        }
+
         if(!_isSucking)
         {
             if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
@@ -69,12 +82,17 @@ namespace uGE {
 
 			}
 
+
 			//Shooting controls
 			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
-			{
-				shoot();
-				_shootTime = 0.3f;
-			}
+            {
+
+            SoundManager * sfx;
+            sfx->playSFX("Launch");
+
+            shoot();
+            _shootTime = 0.3f;
+            }
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 				//Do Absorbing
 				vacuum();
@@ -114,6 +132,7 @@ namespace uGE {
             _isSucking = false;
         }
 	}
+
 	void PlayerController::vacuum()
 	{
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
@@ -183,10 +202,11 @@ namespace uGE {
         }
 	}
 
-	void PlayerController::onCollision( CollisionResult * result )
-	{
+    void PlayerController::onCollision( CollisionResult * result )
+    {
         if( result->colliderTypeB == Collider::BOX ) {
             _parent->setPosition( _parent->getPosition() - result->overlap );
         }
-	}
+    }
 }
+

@@ -18,10 +18,8 @@ namespace uGE {
 	{
         private:
             bool _viking;
-        public:
-		protected:
 
-			//SpiritController * _controller;
+		protected:
 
 		public:
 			Zombie( std::string name );

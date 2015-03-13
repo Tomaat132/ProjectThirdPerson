@@ -16,6 +16,8 @@
 #include "uGE/Viking.hpp"
 #include "uGE/WinSequence.hpp"
 //
+#include "SoundManager.hpp"
+//
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "uGE/Colliders/BoxCollider.hpp"
 #include "Collider.hpp"
@@ -55,6 +57,7 @@ bool MyGame::load()
         player->setCollider( new uGE::SphereCollider( player, 1.75f ) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+
 
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
@@ -104,8 +107,12 @@ bool MyGame::load()
 
 	//uGE::SceneManager::add( water );
 
+
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "LEVEL week4 wednesday third try" );
+
+    uGE::SoundManager * sound = new uGE::SoundManager;
+    sound->getBGM("Azure");
 
 	return true;
 }

@@ -61,6 +61,7 @@ namespace uGE {
 	void SceneManager::add( Shader * shader )
 	{
 		_shader = shader;
+
 	}
 	void SceneManager::addSpawnLoc( glm::vec3 spawnLoc )
 	{

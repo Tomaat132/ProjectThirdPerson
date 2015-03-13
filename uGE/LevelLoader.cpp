@@ -133,6 +133,7 @@ namespace uGE
                 if( body->getMesh() ) {
                     if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
                 }
+				
                 uGE::SceneManager::add( obj );
             }
 

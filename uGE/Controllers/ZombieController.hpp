@@ -19,33 +19,36 @@ namespace uGE{
     class ZombieController : public Controller
     {
         private:
-        //private variables
-        Zombie* _parent;
-        GameObject* _followee;
-        enum State {IDLE, TRANSFORM};
-        State _state;
-        //timers
-        float _idleTimer;
-        float _transformTimer;
-        float _transformIntervalTimer;
-        float _speed;
-        int _eightDir;
+			GameObject * _followee;
+            Zombie * _zombieParent;
+
+			enum State {IDLE, CHASE, TRANSFORM};
+			State _state;
+
+			//timers
+			float _idleTimer;
+			float _transformTimer;
+			float _transformIntervalTimer;
+			float _speed;
+			int _eightDir;
 
         public:
         //public constructor and functions
-            ZombieController(uGE::Zombie * parent, uGE::GameObject * followee);
+            ZombieController( GameObject * parent, GameObject * followee );
             virtual ~ZombieController();
             //add stuff underneath here
 
             void update();
             void move( int aDir);
             void healthCheck();
-            void onCollision( CollisionResult* result);
+
+            void checkPlayerRange();
+            void chaseCrumb(glm::vec3 crumb);
+
+            void onCollision( CollisionResult * result );
+
         protected:
         //able to see as in public but unusable
-
-        private:
-        //don't let other mess with yo stuff
 
 
     };
