@@ -16,18 +16,18 @@ namespace uGE {
 	class Material;
 	class Zombie : public GameObject
 	{
-        public:
-            //bool targeted;
+        private:
+            bool _viking;
 
 		protected:
-
-			//SpiritController * _controller;
 
 		public:
 			Zombie( std::string name );
 			virtual ~Zombie();
 
             void update();
+            void setViking(bool value);
+            bool getViking();
 
 	};
 }

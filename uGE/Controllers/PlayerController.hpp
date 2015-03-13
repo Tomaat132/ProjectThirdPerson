@@ -9,17 +9,18 @@
 namespace uGE {
 
     struct CollisionResult;
+    class Player;
 	class PlayerController : public Controller
 	{
         private:
+            uGE::Player* _parent;
             float _shootTime;
             bool _isSucking;
             float _vikingTime;
-
             Viking * _viking;
 
 		public:
-			PlayerController( uGE::GameObject * parent );
+			PlayerController( uGE::Player * parent );
 			virtual ~PlayerController();
 
 			void update();

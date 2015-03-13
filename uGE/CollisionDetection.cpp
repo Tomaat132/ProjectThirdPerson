@@ -48,6 +48,10 @@ namespace uGE{
                     continue;
                 }
 
+                //if( glm::length( colliderArray[i]->getPosition() - colliderArray[j]->getPosition() ) > 5 ) {
+                //    continue;
+                //}
+
                 int typeX = colliderArray[i]->getColliderType();
                 int typeY = colliderArray[j]->getColliderType();
 
@@ -198,8 +202,11 @@ namespace uGE{
 
     void CollisionDetection::checkSphereBoxCollision( SphereCollider* sphere, BoxCollider* box )
     {
+        if( glm::length2( sphere->getPosition() - box->getPosition() ) > 250.f ) {
+            return;
+        }
+
         std::vector<glm::vec2> points = box->getPoints();
-        //glm::vec2 closestPoint = glm::vec2( 0, 0 );
         glm::vec2 closestDiff = glm::vec2( 0, 0 );
         glm::vec2 sphereVec = glm::vec2( sphere->getPosition().x, sphere->getPosition().z );
 

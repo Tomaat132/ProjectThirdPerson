@@ -4,6 +4,7 @@
 
 #include "GameObject.hpp"
 #include "Spirit.hpp"
+#include "Spirit.hpp"
 #include "Body.hpp"
 
 #include "SceneManager.hpp"
@@ -21,11 +22,11 @@ namespace uGE {
 
     std::vector< Spirit *> SpiritSpawnController::spirits;
 
-	SpiritSpawnController::SpiritSpawnController( GameObject * parent, GameObject * followee )
+	SpiritSpawnController::SpiritSpawnController( GameObject * parent, Player * followee )
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 5.20f;
+	    _spawnTime = 3.20f;
         srand(time(NULL));
 
 	}
@@ -53,15 +54,15 @@ namespace uGE {
     {
         uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
             uGE::Body * spiritBody = new uGE::Body( spirit );
-                spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );
+                spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj"));
                 spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
                 spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
             spirit->setBody( spiritBody );
 
             spirit->setController( new uGE::SpiritController( spirit, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
-            unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
-           spirit->setPosition(glm::vec3(0.f, 0.f, 0.f));//uGE::SceneManager::getSpawnLoc()[r]);
+            unsigned int r = rand() % temp;
+           spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
            spirits.push_back( spirit );
            uGE::SceneManager::add( spirit );
     }

@@ -4,6 +4,8 @@
 #include "Controller.hpp"
 
 #include "GameObject.hpp"
+
+#include "Zombie.hpp"
 #include "Body.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
@@ -13,28 +15,33 @@
 
 namespace uGE{
 
+    class Zombie;
     class ZombieController : public Controller
     {
         private:
-        //private variables
-        uGE::GameObject * _followee;
+			GameObject * _followee;
+            Zombie * _zombieParent;
 
-        enum State {IDLE, CHASE};
-        State _state;
+			enum State {IDLE, CHASE, TRANSFORM};
+			State _state;
 
-        float _idleTimer;
-        float _speed;
-        int _eightDir;
+			//timers
+			float _idleTimer;
+			float _transformTimer;
+			float _transformIntervalTimer;
+			float _speed;
+			int _eightDir;
 
         public:
         //public constructor and functions
-            ZombieController(uGE::GameObject * parent, uGE::GameObject * followee);
+            ZombieController( GameObject * parent, GameObject * followee );
             virtual ~ZombieController();
             //add stuff underneath here
 
             void update();
             void move( int aDir);
             void healthCheck();
+
             void checkPlayerRange();
             void chaseCrumb(glm::vec3 crumb);
 
@@ -42,9 +49,6 @@ namespace uGE{
 
         protected:
         //able to see as in public but unusable
-
-        private:
-        //don't let other mess with yo stuff
 
 
     };

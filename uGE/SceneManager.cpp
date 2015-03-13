@@ -7,11 +7,13 @@
 #include "Camera.hpp"
 #include "Time.hpp"
 #include "GameObject.hpp"
+#include "Hud.hpp"
 #include "Body.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "CollisionDetection.hpp"
 #include "SpiritSpawnController.hpp"
+#include "ZombieSpawnController.hpp"
 #include "Renderer.hpp"
 
 #include "Player.hpp"
@@ -23,9 +25,11 @@ namespace uGE {
 	Light * SceneManager::_light;
 	Shader * SceneManager::_shader;
 	Player * SceneManager::_player;
+	Hud * SceneManager::_hud;
 	std::vector< GameObject * > SceneManager::_objects;
 	std::vector< GameObject * > SceneManager::_deleteQueue;
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
+    std::vector< glm::vec3 > SceneManager::_zombieSpawnLocations;
 	CollisionDetection * SceneManager::_collision;
 
 	SceneManager::SceneManager()
@@ -63,6 +67,10 @@ namespace uGE {
 	{
 		_spawnLocations.push_back(spawnLoc);
 	}
+	void SceneManager::addZombieSpawnLoc( glm::vec3 spawnLoc )
+	{
+		_zombieSpawnLocations.push_back(spawnLoc);
+	}
 	std::vector< glm::vec3 >& SceneManager::getSpawnLoc()
 	{
 		return _spawnLocations;
@@ -83,7 +91,7 @@ namespace uGE {
 		return true; // continue running
 	}
 
-	void SceneManager::render( sf::Window * window )
+	void SceneManager::render( sf::RenderWindow * window )
 	{
         glEnable( GL_DEPTH_TEST ); // must be enables after after use program
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -99,7 +107,9 @@ namespace uGE {
             object->render( _shader, parent );
         }
 
-        Renderer::StartRender();
+        Renderer::StartRender( window );
+        //window->clear( sf::Color::White );
+        _hud->draw( window );
 		window->display();
 	}
  int k=0;
@@ -123,9 +133,13 @@ namespace uGE {
 			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
 			auto positionSpirit = std::find(SpiritSpawnController::spirits.begin(), SpiritSpawnController::spirits.end(), object);
-			//std::cout << "HELP HERE" << std::endl;
+			auto positionZombie = std::find(ZombieSpawnController::zombies.begin(), ZombieSpawnController::zombies.end(), object);
+
 			if( positionSpirit < SpiritSpawnController::spirits.end() ) {
                 SpiritSpawnController::spirits.erase( positionSpirit );
+			}
+			if( positionZombie < ZombieSpawnController::zombies.end() ) {
+                ZombieSpawnController::zombies.erase( positionZombie );
 			}
 			if( position < _objects.end() ) {
                 _objects.erase( position );

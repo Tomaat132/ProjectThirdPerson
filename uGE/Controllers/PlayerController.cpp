@@ -34,9 +34,10 @@
 
 namespace uGE {
 
-	PlayerController::PlayerController( uGE::GameObject * parent )
+	PlayerController::PlayerController( uGE::Player * parent )
 	:	Controller( parent )
 	{
+	    _parent =  parent ;
 	    _shootTime = 0.0f;
 		_vikingTime = 0.0f;
 	    _parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
@@ -50,7 +51,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 40.f * Time::step();
+	    float speed = 30.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
         if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
@@ -126,9 +127,7 @@ namespace uGE {
         {
             for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
                 Spirit* aSpirit = SpiritSpawnController::spirits[j];
-               // aSpirit->isTargeted( false );
-
-                //GIVES ERROR AFTER SPIRIT IS DELETED AND PRESSED SPACE
+                aSpirit->isTargeted( false );
             }
             _isSucking = false;
         }
@@ -142,6 +141,7 @@ namespace uGE {
             if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 10.f){
                 if(glm::dot( _parent->getDirection(), distanceVec) > 0.7f){
                     spirit->isTargeted( true );
+                    break;
                 }
             }
         }
@@ -157,8 +157,13 @@ namespace uGE {
                 if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
                 {
                     //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
-                    SceneManager::del(zombie);
-                    break;
+                    if(zombie->getViking())
+                    {
+                        SceneManager::del(zombie);
+                        _parent->addScore( 1 );
+                        std::cout << "SCORE :::::: =D :: "<<  _parent->getScore() << std::endl;
+                        break;
+                    }
                 }
 
             }
@@ -167,7 +172,7 @@ namespace uGE {
         uGE::GameObject * particle = new uGE::GameObject( "Particle" );
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
-                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star02.png") );
+                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star.png") );
                 particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
 
             particle->setBody( particleBody );
@@ -179,16 +184,22 @@ namespace uGE {
 
 	void PlayerController::shoot()
 	{
+        if(_parent->getShootable() > 0 ) {
+            uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
+                uGE::Body * bulletBody = new uGE::Body( bullet );
+                    bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" ) );  //change model
+                    bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/slime.jpg") );     //change texture
+                bullet->setBody( bulletBody );
+                bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
+                bullet->setController( new uGE::BulletController( bullet, _parent ) );
+                bullet->setPosition( _parent->getPosition() );
+               uGE::SceneManager::add( bullet );
+               _parent->changeShootable(-1);
+        }
+        else{
+            std::cout << "-- no ammo -- " <<std::endl;
 
-        uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
-            uGE::Body * bulletBody = new uGE::Body( bullet );
-                bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" ) );  //change model
-                bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/slime.jpg") );     //change texture
-            bullet->setBody( bulletBody );
-            bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
-            bullet->setController( new uGE::BulletController( bullet, _parent ) );
-            bullet->setPosition( _parent->getPosition() );
-           uGE::SceneManager::add( bullet );
+        }
 	}
 
     void PlayerController::onCollision( CollisionResult * result )

@@ -3,6 +3,9 @@
 #include <stdlib.h>
 
 #include "GameObject.hpp"
+#include "Collider.hpp"
+#include "Zombie.hpp"
+#include "CollisionDetection.hpp"
 #include "Body.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
@@ -18,18 +21,13 @@
 
 namespace uGE{
 
-
     ZombieController::ZombieController( uGE::GameObject * parent, uGE::GameObject * followee)
-	:	Controller( parent ), _followee( followee )
-
+	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformIntervalTimer( 0 ), _transformTimer( 0 ), _eightDir( 0 ), _speed( 5.f )
     {
-        //ctor
-        //_parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
         _state = IDLE;
-        _idleTimer = 0.f;
-        _eightDir = 0;
-        _speed = 5.f;
         srand(time(NULL));
+
+        _zombieParent = dynamic_cast<Zombie*> ( parent );
     }
 
     ZombieController::~ZombieController()
@@ -55,6 +53,22 @@ namespace uGE{
             checkPlayerRange();//it checks every second compared to the update of every 2 seconds in player;
 
             _idleTimer -= Time::step();
+            break;
+        case TRANSFORM:
+            if(_transformTimer <= 0.f){
+                //can use nice animation here
+                _zombieParent->getBody()->setMesh( uGE::AssetManager::loadMesh("Assets/Models/teapot.obj"));
+                _zombieParent->setViking(true);
+                _state = IDLE;
+            }
+            if(_transformIntervalTimer <= 0.f){
+                _eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
+                _transformIntervalTimer = 0.05f;
+            }
+            move(_eightDir);
+
+            _transformTimer -= Time::step();
+            _transformIntervalTimer -= Time::step();
             break;
 
         case CHASE:
@@ -129,8 +143,17 @@ namespace uGE{
 		if(rotate != glm::vec3(0,0,0)) {_parent->setRotation(glm::normalize(rotate));}
     }
 
-    void ZombieController::onCollision( CollisionResult * result ){
-
+    void ZombieController::onCollision( CollisionResult* result)
+    {
+        if( result->colliderTypeB == Collider::SPHERE ) {
+            if(result->objectB->getName() == "Bullet") {
+                if(_state != TRANSFORM){   //ZOMBIE BEHAVIOUR:
+					_state = TRANSFORM;
+					_transformTimer = 3.f;
+				}
+				SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+            }
+        }
     }
 
 }
