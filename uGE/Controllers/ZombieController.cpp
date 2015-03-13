@@ -144,12 +144,16 @@ namespace uGE{
     void ZombieController::onCollision( CollisionResult* result)
     {
         if( result->colliderTypeB == Collider::SPHERE ) {
-            if(result->objectB->getName() == "Bullet") {
-                if(_state != TRANSFORM){   //ZOMBIE BEHAVIOUR:
-					_state = TRANSFORM;
-					_transformTimer = 3.f;
-				}
-				SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+
+            if(result->colliderB == "zombieHitbox"){
+
+                if(result->objectB->getName() == "Bullet") {
+                    if(_state != TRANSFORM){   //ZOMBIE BEHAVIOUR:
+                        _state = TRANSFORM;
+                        _transformTimer = 3.f;
+                    }
+                   SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+                }
             }
         }
     }
