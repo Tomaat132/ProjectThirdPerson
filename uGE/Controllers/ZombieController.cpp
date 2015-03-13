@@ -145,7 +145,7 @@ namespace uGE{
     {
         if( result->colliderTypeB == Collider::SPHERE ) {
 
-            if(result->colliderB == "zombieHitbox"){
+            if(result->colliderA == "zombieHitbox"){
 
                 if(result->objectB->getName() == "Bullet") {
                     if(_state != TRANSFORM){   //ZOMBIE BEHAVIOUR:
