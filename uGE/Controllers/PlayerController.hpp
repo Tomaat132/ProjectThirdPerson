@@ -16,6 +16,7 @@ namespace uGE {
             bool _isSucking;
             float _vikingTime;
 
+            Player * player;
             Viking * _viking;
 
 		public:

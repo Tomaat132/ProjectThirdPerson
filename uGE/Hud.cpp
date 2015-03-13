@@ -1,5 +1,5 @@
 #include <GL/glew.h>
-
+#include <iostream>
 #include "Hud.hpp"
 
 namespace uGE

@@ -100,7 +100,7 @@ namespace uGE {
             object->render( _shader, parent );
         }
 
-        Renderer::StartRender( window );
+        Renderer::StartRender( window, "Game" );
         //window->clear( sf::Color::White );
         _hud->draw( window );
 		window->display();
@@ -122,7 +122,7 @@ namespace uGE {
 		}
 
 		//for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
-		for ( auto j = 0; j != _deleteQueue.size(); ++j ) {
+		for ( unsigned int j = 0; j != _deleteQueue.size(); ++j ) {
 			GameObject * object = _deleteQueue[j];
 			auto position = std::find(_objects.begin(), _objects.end(), object);
 			auto positionSpirit = std::find(SpiritSpawnController::spirits.begin(), SpiritSpawnController::spirits.end(), object);

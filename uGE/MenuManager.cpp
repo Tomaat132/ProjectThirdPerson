@@ -8,6 +8,7 @@
 #include "Time.hpp"
 #include "GameObject.hpp"
 #include "Body.hpp"
+#include "Hud.hpp"
 #include "Light.hpp"
 #include "Shader.hpp"
 #include "CollisionDetection.hpp"
@@ -19,6 +20,7 @@ namespace uGE {
 	Camera * MenuManager::_camera;
 	Light * MenuManager::_light;
 	Shader * MenuManager::_shader;
+    Hud * MenuManager::_hud;
 	std::vector< GameObject * > MenuManager::_objects;
 	std::vector< GameObject * > MenuManager::_deleteQueue;
     std::vector< glm::vec3 > MenuManager::_spawnLocations;
@@ -31,7 +33,6 @@ namespace uGE {
 
 	MenuManager::~MenuManager()
 	{
-		//dtor
 	}
 
 	void MenuManager::add( Camera * camera )
@@ -78,7 +79,7 @@ namespace uGE {
 		return true; // continue running
 	}
 
-	void MenuManager::render( sf::Window * window )
+	void MenuManager::render( sf::RenderWindow * window )
 	{
         glEnable( GL_DEPTH_TEST ); // must be enables after after use program
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -93,10 +94,14 @@ namespace uGE {
             object->render( _shader, parent );
         }
 
-        Renderer::StartRender();
+        Renderer::StartRender( window, "Menu");
+        //window->clear( sf::Color::White );
+        _hud->draw( window );
 		window->display();
 	}
- int u=0;
+
+    int u=0;
+
 	void MenuManager::update()
 	{
 	    Time::update();
@@ -120,13 +125,10 @@ namespace uGE {
 			//delete object;
 		}
 
-		_deleteQueue.clear();
-
 		//u++;
          //   uGE::GameObject * zombie = new uGE::GameObject( "Zombie");
 
          //  uGE::MenuManager::add( zombie );
         //std::cout << u << " zombies created"<<std::endl;
 	}
-
 }

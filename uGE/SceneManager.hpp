@@ -33,9 +33,9 @@ namespace uGE {
 
 			static Camera * _camera;
 			static Light * _light;
+			static Hud * _hud;
 			static Shader * _shader;
 			static Player * _player;
-			static Hud * _hud;
 
             static std::vector< glm::vec3 > _spawnLocations;
 			static void add( Camera * camera );

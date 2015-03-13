@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "Body.hpp"
 #include "GameObject.hpp"
@@ -13,7 +14,7 @@ namespace uGE {
 	class Menu
 	{
 		protected:
-			sf::Window * _window;
+			sf::RenderWindow * _window;
 		public:
 			Menu();
 			virtual ~Menu();

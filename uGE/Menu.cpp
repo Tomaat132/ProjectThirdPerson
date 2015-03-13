@@ -1,10 +1,10 @@
 #include "Menu.hpp"
-#include "MainMenu/MenuManager.hpp"
+#include "MenuManager.hpp"
 
 namespace uGE {
 
 	Menu::Menu()
-	: _window ( new sf::Window( sf::VideoMode( 1024, 768 ), "Redemption: Main Menu" /*, sf::Style::Fullscreen*/ ) )
+	: _window ( new sf::RenderWindow( sf::VideoMode( 1024, 768 ), "Redemption: Main Menu" /*, sf::Style::Fullscreen*/ ) )
 	{
 		_window->setVerticalSyncEnabled( true );
 		std::cout << "Init Glew " << glewInit() << " GL : " << glGetString( GL_VERSION ) << std::endl;

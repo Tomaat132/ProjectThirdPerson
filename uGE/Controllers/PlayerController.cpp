@@ -37,6 +37,7 @@ namespace uGE {
 		_vikingTime = 0.0f;
 	    _parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
 	    _isSucking = false;
+	    player = dynamic_cast<Player*>( _parent );
 	}
 
 	PlayerController::~PlayerController()
@@ -100,16 +101,18 @@ namespace uGE {
 				transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
 				_parent->setDirection( rotate );
 				_parent->setRotation( rotate );
-				_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
+				player->playNow("WALK");
+				//_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
 			} else {
-				_parent->getBody()->getAnimation()->StopAnimation();
+			    player->playNow("IDLE");
+				//_parent->getBody()->getAnimation()->StopAnimation();
 			}
         }
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))
         {
             for( unsigned int j = 0; j < SpiritSpawnController::spirits.size(); j++){
-                Spirit* aSpirit = SpiritSpawnController::spirits[j];
-               // aSpirit->isTargeted( false );
+                //Spirit* aSpirit = SpiritSpawnController::spirits[j];
+                //aSpirit->isTargeted( false );
 
                 //GIVES ERROR AFTER SPIRIT IS DELETED AND PRESSED SPACE
             }

@@ -56,12 +56,15 @@
 		</Linker>
 		<Unit filename="MyGame.cpp" />
 		<Unit filename="MyGame.hpp" />
+		<Unit filename="MyMenu.cpp" />
+		<Unit filename="MyMenu.hpp" />
 		<Unit filename="Shaders/basic.fs" />
 		<Unit filename="Shaders/basic.vs" />
 		<Unit filename="Shaders/bumpMapping.fs" />
 		<Unit filename="Shaders/bumpMapping.vs" />
 		<Unit filename="Shaders/diffuse.fs" />
 		<Unit filename="Shaders/diffuse.vs" />
+		<Unit filename="Shaders/phong.fs" />
 		<Unit filename="Shaders/water.fs" />
 		<Unit filename="main.cpp" />
 		<Unit filename="uGE/Animation.cpp" />
@@ -88,6 +91,8 @@
 		<Unit filename="uGE/Controllers/BulletController.hpp" />
 		<Unit filename="uGE/Controllers/FollowController.cpp" />
 		<Unit filename="uGE/Controllers/FollowController.hpp" />
+		<Unit filename="uGE/Controllers/MenuController.cpp" />
+		<Unit filename="uGE/Controllers/MenuController.hpp" />
 		<Unit filename="uGE/Controllers/ParticleController.cpp" />
 		<Unit filename="uGE/Controllers/ParticleController.hpp" />
 		<Unit filename="uGE/Controllers/ParticleEmitterController.cpp" />
@@ -118,6 +123,10 @@
 		<Unit filename="uGE/Light.hpp" />
 		<Unit filename="uGE/Material.cpp" />
 		<Unit filename="uGE/Material.hpp" />
+		<Unit filename="uGE/Menu.cpp" />
+		<Unit filename="uGE/Menu.hpp" />
+		<Unit filename="uGE/MenuManager.cpp" />
+		<Unit filename="uGE/MenuManager.hpp" />
 		<Unit filename="uGE/Mesh.cpp" />
 		<Unit filename="uGE/Mesh.hpp" />
 		<Unit filename="uGE/Player.cpp" />

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include "Utils/glm.hpp"
 
 namespace uGE {
@@ -10,6 +11,7 @@ namespace uGE {
 	class Camera;
 	class GameObject;
 	class Light;
+    class Hud;
 	class Shader;
 
 	class CollisionDetection;
@@ -29,6 +31,7 @@ namespace uGE {
 			virtual ~MenuManager();
 
 			static Camera * _camera;
+			static Hud * _hud;
 			static Light * _light;
 			static Shader * _shader;
 
@@ -43,7 +46,7 @@ namespace uGE {
 
 			static bool control( sf::Window * window );
 
-			static void render( sf::Window * window );
+			static void render( sf::RenderWindow * window );
 			static void update();
 
 	};

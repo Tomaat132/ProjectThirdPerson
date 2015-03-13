@@ -1,5 +1,6 @@
 #include "MenuController.hpp"
-
+#include <iostream>
+#include "../MyGame.hpp"
 
 namespace uGE {
 
@@ -16,6 +17,13 @@ namespace uGE {
 
     void MenuController::update()
     {
-        //update
+        if ( sf::Keyboard::isKeyPressed( sf::Keyboard::P ) )
+        {
+            //DESTROY MENU
+//            delete MyMenu;
+            MyGame * game = new MyGame();
+            game->load();
+            game->run();
+        }
     }
 }

@@ -1,7 +1,7 @@
 #ifndef MYMENU_H
 #define MYMENU_H
 
-#include "uGE\MainMenu\Menu.hpp"
+#include "uGE\Menu.hpp"
 
 class MyMenu : public uGE::Menu
 {
