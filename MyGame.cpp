@@ -112,7 +112,6 @@ bool MyGame::load()
 	uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::_hud = new uGE::Hud();
-
 	//uGE::SceneManager::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
