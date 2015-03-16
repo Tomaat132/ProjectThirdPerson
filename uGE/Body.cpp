@@ -9,7 +9,7 @@
 namespace uGE {
 
 	Body::Body( GameObject * parent )
-	:	_parent( parent ), _mesh( 0 ), _animation( NULL ), _texture( 0 ), _shader (0)
+	:	_parent( parent ), _mesh( 0 ), _animation( 0 ), _texture( 0 ), _shader (0)
 	{
         _material = new Material();
 	}
@@ -17,6 +17,11 @@ namespace uGE {
 	Body::~Body()
 	{
 		//dtor
+	}
+
+	std::string Body::getParentName()
+	{
+	    return _parent->getName();
 	}
 
 	void Body::render( Shader * shader, glm::mat4 & transform )
@@ -44,7 +49,7 @@ namespace uGE {
 
 	void Body::setMesh( Mesh * mesh )
 	{
-		_mesh = mesh;
+        _mesh = mesh;
 	}
 
 	Mesh * Body::getMesh(){

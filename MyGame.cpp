@@ -2,17 +2,17 @@
 
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
+#include "uGE/Animation.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
 #include "uGE/GameObject.hpp"
+#include "uGE/LevelLoader.hpp"
 #include "uGE/Hud.hpp"
 #include "uGE/Light.hpp"
-#include "uGE/Mesh.hpp"
-#include "uGE/Animation.hpp"
-#include "uGE/Texture.hpp"
 #include "uGE/Material.hpp"
-#include "uGE/LevelLoader.hpp"
+#include "uGE/Mesh.hpp"
+#include "uGE/Texture.hpp"
 #include "uGE/Viking.hpp"
 #include "uGE/WinSequence.hpp"
 //
@@ -47,10 +47,13 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
+    uGE::LevelLoader loader = uGE::LevelLoader();
+    loader.loadLevel( "LEVEL week4 wednesday third try" );
+
     uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
-            playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
+            //playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
         player->setBody( playerBody );
         //player->setCollider( new uGE::BoxCollider(player) );
@@ -95,15 +98,7 @@ bool MyGame::load()
 	uGE::SceneManager::add( spiritSpawn );
 
 	uGE::SceneManager::_hud = new uGE::Hud();
-
-	//uGE::SceneManager::add( water );
-
-
-	uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL week4 wednesday third try" );
-
     uGE::SoundManager::init();
-
 
 	return true;
 }

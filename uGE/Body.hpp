@@ -29,6 +29,7 @@ namespace uGE {
 			void render( Shader * shader, glm::mat4 & transform );
 			void setMesh( Mesh * mesh );
 			Mesh * getMesh();
+			std::string getParentName();
 			void setAnimation( Animation * animation );
 			Animation * getAnimation();
 			void setTexture( Texture * texture );

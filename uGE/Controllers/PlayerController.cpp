@@ -75,11 +75,16 @@ namespace uGE {
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
+            //Absorbing Controls
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::I ) ) {
+				//Do Absorbing
+				vacuum();
+			}
+
+            //Melee Controls
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f ) {
-				//Do Meleestump
 				attack();
                 _shootTime = 0.3f;
-
 			}
 
 
@@ -94,29 +99,16 @@ namespace uGE {
 				vacuum();
 			}
 
-			//Bury Controls
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && _vikingTime <= 0.f ) {
-				std::cout << Viking::zombieCount << std::endl;
-				if( Viking::zombieCount <= 0 )
-				{
-					Viking::startWinSeq();
-					Viking::zombieCount += 101;
-				}
-				else if( Viking::zombieCount < 100)
-				{
-					Viking::zombieCount--;
-					_vikingTime = 0.3f;
-				}
-			}
-
 			if( glm::length(rotate) > 0 ) {
 				rotate = glm::normalize(rotate);
 				transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
 				_parent->setDirection( rotate );
 				_parent->setRotation( rotate );
-				_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
+				_parent->playNow("WALK");
+				//_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
 			} else {
-				_parent->getBody()->getAnimation()->StopAnimation();
+			    _parent->playNow("IDLE");
+				//_parent->getBody()->getAnimation()->StopAnimation();
 			}
         }
         if(sf::Keyboard::isKeyPressed( sf::Keyboard::Space))

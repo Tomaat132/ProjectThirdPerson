@@ -22,7 +22,7 @@
 namespace uGE{
 
     ZombieController::ZombieController( uGE::GameObject * parent, uGE::GameObject * followee)
-	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformIntervalTimer( 0 ), _transformTimer( 0 ), _eightDir( 0 ), _speed( 5.f )
+	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformTimer( 0 ), _transformIntervalTimer( 0 ), _speed( 5.f ), _eightDir( 0 )
     {
         _state = IDLE;
         srand(time(NULL));
@@ -44,39 +44,58 @@ namespace uGE{
     {
         switch(_state)
         {
-        case IDLE:
-            if(_idleTimer <= 0.f){
-               _eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
-               _idleTimer = 1.f; // how many seconds till next direction
-            }
-            move(_eightDir);
-            checkPlayerRange();//it checks every second compared to the update of every 2 seconds in player;
+			case IDLE:
+				if(_idleTimer <= 0.f){
+				   _eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
+				   _idleTimer = 1.f; // how many seconds till next direction
+				}
+				move(_eightDir);
+				checkPlayerRange();//it checks every second compared to the update of every 2 seconds in player;
 
-            _idleTimer -= Time::step();
-            break;
-        case TRANSFORM:
-            if(_transformTimer <= 0.f){
-                //can use nice animation here
-                _zombieParent->getBody()->setMesh( uGE::AssetManager::loadMesh("Assets/Models/teapot.obj"));
-                _zombieParent->setViking(true);
-                _state = IDLE;
-            }
-            if(_transformIntervalTimer <= 0.f){
-                _eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
-                _transformIntervalTimer = 0.05f;
-            }
-            move(_eightDir);
+				_idleTimer -= Time::step();
+				break;
+			case TRANSFORM:
+				if(_transformTimer <= 0.f){
+					//can use nice animation here
+					_zombieParent->getBody()->setMesh( uGE::AssetManager::loadMesh("Assets/Models/teapot.obj"));
+					_zombieParent->setViking(true);
+					_state = IDLE;
+				}
+				if(_transformIntervalTimer <= 0.f){
+					_eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
+					_transformIntervalTimer = 0.05f;
+				}
+				move(_eightDir);
 
-            _transformTimer -= Time::step();
-            _transformIntervalTimer -= Time::step();
-            break;
+				_transformTimer -= Time::step();
+				_transformIntervalTimer -= Time::step();
+				break;
 
-        case CHASE:
-            //do code
+			case CHASE:
+				//do code
 
-            break;
-
+				break;
         }
+        //if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));
+
+		//int direction = rand() %10+1;//INITIALISE RANDOM DIRECTION between 10 and 0
+		//this shows that a random number is constantly generated //std::cout<<direction<<std::endl;
+
+
+		/*float speed = 40.f * Time::step();
+		//std::cout<<"startup"<<std::endl;
+        glm::mat4 & transform = _parent->transform;
+        glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        bool keyI = sf::Keyboard::isKeyPressed( sf::Keyboard::Up );
+        bool keyK = sf::Keyboard::isKeyPressed( sf::Keyboard::Down );
+        bool keyJ = sf::Keyboard::isKeyPressed( sf::Keyboard::Left );
+        bool keyL = sf::Keyboard::isKeyPressed( sf::Keyboard::Right );
+		if ( keyI ) rotate[2] = 1.0f;
+		if ( keyK ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
+		if ( keyJ ) rotate[0] = 1.f;  //hTranslate.x += speed;
+		if ( keyL ) rotate[0] = -1.f;
+		*/
     }
 
     void ZombieController::checkPlayerRange(){
@@ -117,7 +136,6 @@ namespace uGE{
             _parent->setRotation(diff);
             transform = glm::translate(transform , glm::vec3(0 , 0 , 1.0f)* _speed * Time::step());
     }
-
 
     void ZombieController::move( int aDir)
     {
