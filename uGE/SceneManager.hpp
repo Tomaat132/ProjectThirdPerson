@@ -37,6 +37,8 @@ namespace uGE {
 			static Shader * _shader;
 			static Player * _player;
 
+			static bool paused;
+
             static std::vector< glm::vec3 > _spawnLocations;
             static std::vector< glm::vec3 > _zombieSpawnLocations;
 			static void add( Camera * camera );

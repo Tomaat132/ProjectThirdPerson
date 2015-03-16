@@ -4,6 +4,7 @@
 #include "Colliders/BoxCollider.hpp"
 #include "Utils/glm.hpp"
 #include "Time.hpp"
+#include "Logger.h"
 
 #include <iostream>
 #include <map>
@@ -90,9 +91,8 @@ namespace uGE
     void Player::updateFrame()
     {
         ++frame;
-        std::cout << "Frame: " << frame << std::endl;
+        Logger::print( Logger::INFO, "Frame: " + to_s(frame) );
         if(frame >= currentAnim.size()) frame = 0;
-        std::cout << currentAnim[frame] << std::endl;
         this->getBody()->setMesh(currentAnim[frame]);
     }
 

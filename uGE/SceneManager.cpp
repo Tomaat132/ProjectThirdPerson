@@ -31,6 +31,7 @@ namespace uGE {
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
     std::vector< glm::vec3 > SceneManager::_zombieSpawnLocations;
 	CollisionDetection * SceneManager::_collision;
+	bool SceneManager::paused = false;
 
 	SceneManager::SceneManager()
 	{
@@ -87,6 +88,16 @@ namespace uGE {
 			if ( event.type == sf::Event::Closed ) {
 				return false; // stop the game asap
 			}
+
+			if( event.type == sf::Event::KeyPressed ) {
+                if( event.key.code == sf::Keyboard::F4 && event.key.alt ) {
+                    return false;
+                }
+
+                if( event.key.code == sf::Keyboard::P ) {
+                    paused = !paused;
+                }
+			}
 		}
 		return true; // continue running
 	}
@@ -112,21 +123,24 @@ namespace uGE {
         _hud->draw( window );
 		window->display();
 	}
- int k=0;
+
 	void SceneManager::update()
 	{
 	    Time::update();
-	    FPS::update();
-        _collision->update(_objects);
-		_camera->update();
-		_light->update();
-		_player->update();
+        FPS::update();
 
-		for ( unsigned int i = 0; i < _objects.size(); i++ ) {
-			GameObject * object = _objects[i];
-			object->update();
-			//std::cout << object->getName() << std::endl;
-		}
+	    if( !paused ) {
+            _collision->update(_objects);
+            _camera->update();
+            _light->update();
+            _player->update();
+
+            for ( unsigned int i = 0; i < _objects.size(); i++ ) {
+                GameObject * object = _objects[i];
+                object->update();
+                //std::cout << object->getName() << std::endl;
+            }
+	    }
 
 		//for ( auto j = _deleteQueue.begin(); j != _deleteQueue.end(); ++j ) {
 		for ( unsigned int j = 0; j != _deleteQueue.size(); ++j ) {

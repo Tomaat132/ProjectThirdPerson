@@ -102,7 +102,6 @@ namespace uGE {
 
 	void GameObject::setAnimTransform( glm::mat4 & animTransform )
 	{
-	    //std::cout << animTransform << std::endl;
 	    _animTransform = animTransform;
 	}
     void GameObject::setRotation( glm::vec3 aRotation )

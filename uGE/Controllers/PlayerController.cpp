@@ -149,7 +149,6 @@ namespace uGE {
                     {
                         SceneManager::del(zombie);
                         _parent->addScore( 1 );
-                        std::cout << "SCORE :::::: =D :: "<<  _parent->getScore() << std::endl;
                         break;
                     }
                 }

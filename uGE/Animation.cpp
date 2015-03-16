@@ -4,6 +4,7 @@
 
 #include "Utils/glm.hpp"
 #include "Time.hpp"
+#include "Logger.h"
 
 namespace uGE {
 
@@ -60,10 +61,10 @@ namespace uGE {
             }
             animFile.close();
             animation->createBuffers();
-            std::cout << "Done loading " << filename << "." << std::endl;
+            Logger::print( Logger::INFO, "Done loading " + filename + "." );
             return animation;
         } else {
-			std::cout << "Error => Could not load " << filename << "." << std::endl;
+            Logger::print( Logger::ERROR, "Could not load " + filename + "!" );
 			delete animation;
         }
         return 0;
@@ -85,28 +86,6 @@ namespace uGE {
         }
 
 	    if(frame >= _animTrans.size()) frame = 0;
-	    //this->setIsPlaying("true");/*
-	    //std::cout << _parent->getName() << std::endl;
-	    //std::cout << "FPS = " << playFPS << "." << std::endl;
-	    //std::cout << _animTrans.size() << ", " << _animRot.size() << std::endl;
-	    //int i = 0;
-	    //signed int j = _animTrans.size();
-	    //std::cout << "j = " << j << "." << std::endl;
-        //for(i = 0; i < j; ++i)
-        //{
-            //_parent->transform = glm::rotate(_parent->transform, _animRot[i][0], glm::vec3(_parent->transform[0]));
-            //_parent->transform = glm::rotate(_parent->transform, _animRot[i][1], glm::vec3(_parent->transform[1]));
-            //_parent->transform = glm::rotate(_parent->transform, _animRot[i][2], glm::vec3(_parent->transform[2]));
-            //_parent->transform = glm::translate(_parent->transform, _animTrans[i]);
-            //std::cout << "Loop Process: " << i << "." << std::endl;
-            //if(_repeat && i >= j)
-            //{
-                //i = 0;
-            //}
-        //}
-        //std::cout << "bool repeat = " << repeat << "." << std::endl;
-        //std::cout << "int i afterwards: " << i << "." << std::endl;
-        //std::cout << "int j afterwards: " << j << "." << std::endl;*/
 	}
 
 	void Animation::StopAnimation() //Stops animation and resets frame to 0;

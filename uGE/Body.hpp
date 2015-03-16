@@ -22,6 +22,8 @@ namespace uGE {
 			Material * _material;
 			glm::vec4 _outlineColor;
 
+			float time;
+
 		public:
 			Body( GameObject * parent );
 			virtual ~Body();

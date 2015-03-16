@@ -15,6 +15,7 @@
 #include "Material.hpp"
 #include "SceneManager.hpp"
 #include "Shader.hpp"
+#include "Logger.h"
 
 using namespace tinyxml2;
 
@@ -125,7 +126,6 @@ namespace uGE
             if( objName.compare( "group" ) != 0 ) {
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
-                //std::cout<< objName << std::endl;
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
@@ -133,7 +133,7 @@ namespace uGE
                 if( body->getMesh() ) {
                     if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
                 }
-				
+
                 uGE::SceneManager::add( obj );
             }
 
@@ -145,7 +145,7 @@ namespace uGE
     void LevelLoader::parseXML(const char* iFilename)
     {
         XMLDocument doc;
-        std::cout << "Loading level " << iFilename << ", result: " << doc.LoadFile(iFilename) << std::endl;
+        Logger::print( Logger::INFO, "Loading level " + to_s(iFilename) + ", result: " + to_s( doc.LoadFile(iFilename) ) );
 
         XMLElement * object = doc.RootElement()->FirstChildElement( "library_visual_scenes" )->FirstChildElement();
         parseGroup( object );

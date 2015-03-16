@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Logger.h"
 
 namespace uGE {
 
@@ -36,12 +37,12 @@ namespace uGE {
 				//glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0 ); 	// for mipmapping
 				//glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 4 ); 	// for mipmapping
 			if ( name != 0 ) {
-				std::cout << "Done loading texture " << filename << " with name " << name << std::endl;
+				Logger::print( Logger::INFO, "Done loading texture: " + filename + " with name " + to_s(name) );
 				return new Texture( name );
 			}
-			std::cout << "Error uploading texture " << filename << std::endl;
+			Logger::print( Logger::ERROR, "Error initializing texture " + filename );
 		}
-		std::cout << "Error loading texture file " << filename << std::endl;
+		Logger::print( Logger::ERROR, "Error loading texture " + filename );
 		return 0;
 	}
 }
