@@ -22,7 +22,7 @@
 namespace uGE{
 
     ZombieController::ZombieController( uGE::GameObject * parent, uGE::GameObject * followee)
-	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformIntervalTimer( 0 ), _transformTimer( 0 ), _eightDir( 0 ), _speed( 5.f )
+	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformTimer( 0 ), _transformIntervalTimer( 0 ), _speed( 5.f ), _eightDir( 0 )
     {
         _state = IDLE;
         srand(time(NULL));

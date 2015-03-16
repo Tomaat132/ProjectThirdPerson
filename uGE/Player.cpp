@@ -12,7 +12,7 @@ namespace uGE
 {
 
     Player::Player()
-    :GameObject( "Player" ), _score( 0 ), _shootable( 5 )
+    :GameObject( "Player" ), _shootable( 5 ), _score( 0 )
     {
         idle.push_back( AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
         //walk.push_back( AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
@@ -85,11 +85,6 @@ namespace uGE
 	std::vector<glm::vec3> Player::getCrumbs()
 	{
 		return crumbs;
-	}
-
-    std::vector<glm::vec3> Player::getCrumbs()
-	{
-        return crumbs;
 	}
 
     void Player::updateFrame()
