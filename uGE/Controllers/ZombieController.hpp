@@ -31,6 +31,7 @@ namespace uGE{
 			float _transformIntervalTimer;
 			float _speed;
 			int _eightDir;
+            bool disableHitbox = false;
 
         public:
         //public constructor and functions
