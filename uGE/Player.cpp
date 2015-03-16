@@ -15,12 +15,13 @@ namespace uGE
     :GameObject( "Player" ), _score( 0 ), _shootable( 5 )
     {
         idle.push_back( AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
+        //walk.push_back( AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Animations/Character_animation.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Animations/fthyhhf.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Animations/hero_anim.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Animations/player.obj" ) );
+        activeAction = "IDLE";
         currentAnim = idle;
-        std::cout << "All loaded and stored. Player Constructor closed." << std::endl;
     }
 
     Player::~Player()
@@ -89,17 +90,25 @@ namespace uGE
     void Player::updateFrame()
     {
         ++frame;
+        std::cout << "Frame: " << frame << std::endl;
         if(frame >= currentAnim.size()) frame = 0;
-        std::cout << currentAnim[frame] << " -> " << frame << std::endl;
-        _body->setMesh(idle[frame]);
+        std::cout << currentAnim[frame] << std::endl;
+        this->getBody()->setMesh(currentAnim[frame]);
     }
 
     //Player::currentlyPlaying for switching between animations
     void Player::playNow( std::string action )
     {
-        frame = 0;
-        if( action == "IDLE" ) currentAnim = idle;
-        if( action == "WALK" ) currentAnim = walk;
+        if( action == "IDLE" && action != activeAction )
+        {
+            activeAction = "IDLE";
+            currentAnim = idle;
+        }
+        else if( action == "WALK" && action != activeAction )
+        {
+            activeAction = "WALK";
+            currentAnim = walk;
+        }
     }
 
 

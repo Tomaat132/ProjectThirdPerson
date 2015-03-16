@@ -48,6 +48,7 @@ namespace uGE{
         private:
             float time = 0.f;
             unsigned int frame = 0;
+            std::string activeAction;
             Anim idle;
             Anim walk;
             Anim currentAnim;
