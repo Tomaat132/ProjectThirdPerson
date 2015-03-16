@@ -2,6 +2,7 @@
 
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
+#include "uGE/SoundManager.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
@@ -54,7 +55,7 @@ bool MyGame::load()
         //player->setCollider( new uGE::BoxCollider(player) );
         player->setCollider( new uGE::SphereCollider( player, 1.75f ) );
         player->setController( new uGE::PlayerController( player ) );
-        player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+        player->getMaterial()->setBlendMode( uGE::Material::NORMAL );
 
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
@@ -73,7 +74,7 @@ bool MyGame::load()
 */
     camera->setController( new uGE::FollowController( camera, player ) );
     //camera->setController( new uGE::PlayerController( camera ) );
-
+/*
     uGE::GameObject * water = new uGE::GameObject( "Water" );
         water->setPosition( glm::vec3( 0, 1.5, 0 ) );
         uGE::Body * waterBody = new uGE::Body( water );
@@ -101,7 +102,7 @@ bool MyGame::load()
 
 	uGE::SceneManager::_hud = new uGE::Hud();
 
-	//uGE::SceneManager::add( water );
+	//uGE::SceneMana    ger::add( water );
 
 	uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "LEVEL week4 thursday" );

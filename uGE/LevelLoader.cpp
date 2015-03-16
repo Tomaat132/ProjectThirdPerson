@@ -15,7 +15,7 @@
 #include "Material.hpp"
 #include "SceneManager.hpp"
 #include "Shader.hpp"
-
+#include "Player.hpp"
 using namespace tinyxml2;
 
 namespace uGE
@@ -80,7 +80,7 @@ namespace uGE
                 body->getMaterial()->setAlpha( 1.75f );
                 obj->setBody( body );
 
-                uGE::SceneManager::add( obj );
+               // uGE::SceneManager::add( obj );
                 object = object->NextSiblingElement( "node" );
                 continue;
             }

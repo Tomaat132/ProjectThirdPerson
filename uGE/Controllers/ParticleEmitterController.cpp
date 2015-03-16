@@ -57,7 +57,7 @@ namespace uGE {
 
     void ParticleEmitterController::emit()
     {
-        uGE::GameObject * particle = new uGE::GameObject( "Particle");
+       /* uGE::GameObject * particle = new uGE::GameObject( "Particle");
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
                 particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star02.png") );
@@ -68,7 +68,7 @@ namespace uGE {
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera) );
             particle->setPosition( _parent->getPosition() +_velocity +_distortion);
            uGE::SceneManager::add( particle );
-           _particles.push_back( particle );
+           _particles.push_back( particle );*/
     }
 	void ParticleEmitterController::setVelocity(glm::vec3 aVelocity)
 	{

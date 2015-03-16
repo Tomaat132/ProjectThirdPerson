@@ -1,6 +1,6 @@
 #include "BoxCollider.hpp"
 #include "../GameObject.hpp"
-
+#include "../Collider.hpp"
 namespace uGE
 {
 

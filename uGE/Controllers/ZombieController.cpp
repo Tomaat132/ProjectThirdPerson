@@ -102,8 +102,7 @@ namespace uGE{
         if( result->colliderTypeB == Collider::SPHERE ) {
             if(result->objectB->getName() == "Bullet") {
                     std::cout << "COLLISION" <<std::endl;
-
-                    if(_state == IDLE){   //ZOMBIE BEHAVIOUR:
+                    if(_state == IDLE && !_parent->getViking()){   //ZOMBIE BEHAVIOUR:
                                 //Change to viking --
 
                         _state = TRANSFORM;

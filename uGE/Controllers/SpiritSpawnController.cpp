@@ -26,7 +26,7 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 3.20f;
+	    _spawnTime = 1.20f;
         srand(time(NULL));
 
 	}
@@ -52,6 +52,7 @@ namespace uGE {
 	}
     void SpiritSpawnController::spawn()
     {
+        bool cantSpawn = false;
         uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
             uGE::Body * spiritBody = new uGE::Body( spirit );
                 spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj"));
@@ -59,12 +60,22 @@ namespace uGE {
                 spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
             spirit->setBody( spiritBody );
 
-            spirit->setController( new uGE::SpiritController( spirit, _followee) );
            auto temp = uGE::SceneManager::getSpawnLoc().size();
             unsigned int r = rand() % temp;
-           spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]);
-           spirits.push_back( spirit );
-           uGE::SceneManager::add( spirit );
+            for (unsigned int i = 0; i < spirits.size(); i++){
+                if(glm::length(spirits[i]->getPosition()- uGE::SceneManager::getSpawnLoc()[r]) < 12.f)
+                {
+                    cantSpawn = true;
+                }
+               // std::cout<< glm::length(spirits[i]->getPosition()- uGE::SceneManager::getSpawnLoc()[r]) << std::endl;
+            }
+          if(!cantSpawn){
+               spirit->setPosition(uGE::SceneManager::getSpawnLoc()[r]+glm::vec3(0.f, 3.f, 0.f));
+               spirit->setController( new uGE::SpiritController( spirit, _followee) );
+
+               spirits.push_back( spirit );
+               uGE::SceneManager::add( spirit );
+          }
     }
 }
 

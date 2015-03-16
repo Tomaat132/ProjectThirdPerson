@@ -4,6 +4,7 @@ namespace uGE
 {
 
     Material::Material()
+    :    overhang( false ),overhangAlpha( .5f ),blend( BlendMode::NORMAL), color(glm::vec3( 1.f, 1.f, 1.f )), alpha( 1.f )
     {
         //ctor
     }

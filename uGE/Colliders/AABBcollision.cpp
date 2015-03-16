@@ -8,7 +8,7 @@ namespace uGE{
     AABBcollision::AABBcollision(GameObject * aParent)
     :Collider(aParent)
     {
-        cType = Type::AABB;
+        cType = Collider::AABB;
         //sizeX = aSizeX;
         //sizeY = aSizeY;
         //sizeZ = aSizeZ;

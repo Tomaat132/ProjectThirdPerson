@@ -5,6 +5,7 @@
 #include "SceneManager.hpp"
 #include "Player.hpp"
 #include "Viking.hpp"
+#include "ZombieSpawnController.hpp"
 #include "Hud.hpp"
 
 namespace uGE
@@ -38,6 +39,13 @@ namespace uGE
 
     void Hud::draw( sf::RenderWindow * window )
     {
+        /*  --------------------
+
+        SCORE SHOULD ADDED HERE
+        CHECK COMMENTED CODE BELOW
+
+
+            ---------------------*/
         glDisable( GL_CULL_FACE );
         window->pushGLStates();
 
@@ -49,12 +57,18 @@ namespace uGE
         spiritText.setFont( font );
 
         char cZombies[64];
-        sprintf( cZombies, "%d", Viking::zombieCount );
+        sprintf( cZombies, "%d", ZombieSpawnController::zombies.size() );
         zombieText.setString( cZombies );
 
         char cHealth[64];
-        sprintf( cHealth, "%d", SceneManager::_player->getHealth() );
+        sprintf( cHealth, "%d", SceneManager::_player->getTimeLeft() );
         healthText.setString( cHealth );
+
+        /*
+        char cScore[64];
+        sprintf( cScore, "%d", SceneManager::_player->getScore() );
+        scoreText.setString( cScore );
+        */
 
         char cSpirits[64];
         sprintf( cSpirits, "%d", SceneManager::_player->getShootable() );

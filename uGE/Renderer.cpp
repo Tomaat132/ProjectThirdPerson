@@ -36,7 +36,7 @@ namespace uGE
 
             body->render( shader, i->second );
         }
-
+        glDisable( GL_DEPTH_TEST );
         // Second render pass, for transparent objects
         for( rIterator i = secondPassRender.begin(); i != secondPassRender.end(); ++i ) {
             Body * body = i->first;
@@ -50,5 +50,6 @@ namespace uGE
 
             body->render( shader, i->second );
         }
+        glEnable( GL_DEPTH_TEST );
     }
 }
