@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Utils/glm.hpp"
+#include "Logger.h"
 #include <iostream>
 
 #include <fstream>
@@ -126,7 +127,7 @@ namespace uGE {
 							}
 						}
 					} else { // something is wrong
-						std::cout << "Error reading obj, needing v,vn,vt" << std::endl;
+						Logger::print( Logger::ERROR, "Error reading obj file, needs \"v,vn,vt\" format" );
 						delete mesh; // free the mem from created body
 						return 0; // no body read
 					}
@@ -138,10 +139,10 @@ namespace uGE {
             //add lowest and highest vectors here
             mesh->setBoundingBox(lowest , highest);
 			//
-			std::cout << "Done loading " << filename << " having " << mesh->_vertices.size() << " vertices for " << mesh->_indices.size() << " indices" << std::endl;
+			Logger::print( Logger::INFO, "Done loading " + filename + " with " + to_s(mesh->_vertices.size()) + " vertices & " + to_s(mesh->_indices.size()) + " indices" );
 			return mesh;
 		} else { // file could not be opened;
-			std::cout << "Error > Could not load " << filename << std::endl;
+			Logger::print( Logger::ERROR, "Could not load " + filename );
 			delete mesh;
 		}
 		return 0;

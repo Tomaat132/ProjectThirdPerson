@@ -4,12 +4,13 @@
 #include "Texture.hpp"
 #include "Time.hpp"
 #include "Material.hpp"
+#include "SceneManager.hpp"
 
 
 namespace uGE {
 
 	Body::Body( GameObject * parent )
-	:	_parent( parent ), _mesh( 0 ), _animation( 0 ), _texture( 0 ), _shader (0)
+	:	_parent( parent ), _mesh( 0 ), _animation( 0 ), _texture( 0 ), _shader( 0 ), time( 0 )
 	{
         _material = new Material();
 	}
@@ -26,10 +27,13 @@ namespace uGE {
 
 	void Body::render( Shader * shader, glm::mat4 & transform )
 	{
+	    if( !SceneManager::paused ) {
+            time += Time::step();
+	    }
 	    //if(!_shader) return;
 		if ( shader && _mesh ) {
             _material->applyBlendMode();
-            shader->setUniform( shader->time, Time::now() );
+            shader->setUniform( shader->time, time );
             shader->setUniform( shader->alpha, _material->getAlpha() );
             shader->setUniform( shader->outlineColor, _outlineColor );
 			shader->setUniform( shader->model, transform );
@@ -70,10 +74,8 @@ namespace uGE {
 	{
 	    if(_animation == NULL)
         {
-            //std::cout << "_animation = NULL" << std::endl;
-            return 0;;
+            return 0;
         } else {
-            //std::cout << "_animation = TRUE" << std::endl;
             return _animation;
         }
 	}

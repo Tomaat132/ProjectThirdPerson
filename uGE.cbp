@@ -16,6 +16,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 					<Add directory="uGE" />
 					<Add directory="uGE/Utils" />
 					<Add directory="uGE/" />
@@ -44,7 +45,7 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
+			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
@@ -151,6 +152,8 @@
 		<Unit filename="uGE/Transform.hpp" />
 		<Unit filename="uGE/Utils/FPS.cpp" />
 		<Unit filename="uGE/Utils/FPS.hpp" />
+		<Unit filename="uGE/Utils/Logger.cpp" />
+		<Unit filename="uGE/Utils/Logger.h" />
 		<Unit filename="uGE/Utils/glm.hpp" />
 		<Unit filename="uGE/Utils/tinyxml2.cpp" />
 		<Unit filename="uGE/Utils/tinyxml2.h" />

@@ -36,12 +36,12 @@ namespace uGE
         protected:
 
         private:
-            bool overhang = false;
-            float overhangAlpha = .5f;
-            float alpha = 1.f;
+            bool overhang;
+            float overhangAlpha;
+            float alpha;
 
-            glm::vec3 color = glm::vec3( 1.f, 1.f, 1.f );
-            BlendMode blend = BlendMode::NORMAL;
+            glm::vec3 color;
+            BlendMode blend;
     };
 }
 

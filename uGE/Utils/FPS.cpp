@@ -2,6 +2,7 @@
 
 #include "FPS.hpp"
 #include "Time.hpp"
+#include "Logger.h"
 
 namespace uGE {
 
@@ -19,7 +20,10 @@ namespace uGE {
         FPS::time = Time::now();
         FPS::count++;
         if ( FPS::time - FPS::startTime >= 1.0f ) {
-            std::cout << "FPS " << FPS::count << std::endl;
+            char cFPS[8];
+            sprintf( cFPS, "%d", FPS::count );
+            Logger::print( Logger::INFO, "FPS " + std::string( cFPS ) );
+
             FPS::count = 0;
             FPS::startTime = FPS::time;
         }

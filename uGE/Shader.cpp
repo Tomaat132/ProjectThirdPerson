@@ -6,6 +6,7 @@
 
 #include "Mesh.hpp"
 #include "Texture.hpp"
+#include "Logger.h"
 
 namespace uGE {
 
@@ -114,13 +115,13 @@ namespace uGE {
 
 	GLuint Shader::compileShader( GLenum type, std::string name )
 	{
-		std::cout << "Reading shader " << name << std::endl;
+		Logger::print( Logger::INFO, "Reading shader " + name );
 		std::ifstream file( name.c_str() );
 
 		// note, next has changed due to a problem while debugging, it gave a C000 error when extrating the string through a sstream.
 		std::string shaderCode, line;
 		while( getline( file, line ) ) shaderCode += line+"\n";
-		std::cout << "Compiling shader " << std::endl;
+		Logger::print( Logger::INFO, "Compiling shader" );
 		//std::cout << shaderCode << std::endl;
 
 		// Compile Vertex Shader
@@ -134,7 +135,7 @@ namespace uGE {
 		glGetShaderiv( shaderId, GL_COMPILE_STATUS, &result);
 
 		if ( result ) {
-			std::cout << "Shader compiled ok" << std::endl;
+			Logger::print( Logger::INFO, "Shader compiled OK" );
 			return shaderId;
 		} else { // get error message
 			int count;
@@ -142,7 +143,7 @@ namespace uGE {
 			//std::vector<char> errorMessage( count+1 );
 			char errorMessage[ count+1 ];
 			glGetShaderInfoLog( shaderId, count, NULL, errorMessage);
-			std::cout << errorMessage << std::endl;
+			Logger::print( Logger::ERROR, to_s( errorMessage) );
 			return 0; // no shader id
 		}
 	}
@@ -160,7 +161,7 @@ namespace uGE {
 		GLint result = GL_FALSE;
 		glGetProgramiv( program, GL_LINK_STATUS, &result );
 		if ( result ) {
-			std::cout << "program linked ok" << std::endl;
+			Logger::print( Logger::INFO, "Program linked OK" );
 			return program;
 		} else { // error, show message
 			int count;
@@ -168,7 +169,7 @@ namespace uGE {
 			//std::vector<char> ProgramErrorMessage( max(count, int(1)) );
 			char errorMessage[ count+1 ];
 			glGetProgramInfoLog( program, count, NULL, errorMessage );
-			std::cout << errorMessage << std::endl;
+			Logger::print( Logger::ERROR, to_s( errorMessage) );
 			return 0;
 		}
 	}

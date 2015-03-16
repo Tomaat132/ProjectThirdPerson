@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include "Logger.h"
 
 namespace uGE
 {
@@ -30,14 +31,15 @@ namespace uGE
     void SoundManager::getBGM(std::string iFilename)
     {
         if( !active ) {
-            std::cout << "Sound Manager is not yet initialized. Could not play sounds." << std::endl;
+            Logger::print( Logger::WARNING, "Sound Manager is not yet initialized. Could not play sounds." );
             return;
         }
 
         bgm = new sf::Music;
         if (!bgm->openFromFile("Assets/Music/" + iFilename + ".wav"))
         {
-            std::cout<< "#$#$# error loading: "<< iFilename<< std::endl;
+            Logger::print( Logger::ERROR, "Error loading " + iFilename );
+            return;
         }
         bgm->play();
     }//end of getBGM function
@@ -47,7 +49,7 @@ namespace uGE
         sf::SoundBuffer * buffer = new sf::SoundBuffer;
         if (!buffer->loadFromFile("Assets/Music/Fx/" + iFilename + ".wav"))
         {
-            std::cout<< "#$#$# error loading: "<< iFilename<< " sound effect " << std::endl;
+            Logger::print( Logger::ERROR, "Error loading " + iFilename );
             return;
         }
         soundMap[ iFilename ] = buffer;
@@ -56,20 +58,19 @@ namespace uGE
     void SoundManager::playSFX(std::string iFilename)
     {
         if( !active ) {
-            std::cout << "Sound Manager is not yet initialized. Could not play sounds." << std::endl;
+            Logger::print( Logger::WARNING, "Sound Manager is not yet initialized. Could not play sounds." );
             return;
         }
 
         auto found = soundMap.find( iFilename );
         if( found == soundMap.end() ) {
-            std::cout << "SFX not found: " << iFilename << std::endl;
-            std::cout << "# of loaded sounds: " << soundMap.size() << std::endl;
+            Logger::print( Logger::ERROR, "SFX not found: " + iFilename );
             return;
         }
 
         unsigned int soundPos = findFreeSound();
         if( soundPos == sounds.size() ) {
-            std::cout << "No free sounds! Could not play sound: " << iFilename << std::endl;
+            Logger::print( Logger::WARNING, "No free sounds! Could not play " + iFilename );
             return;
         }
 

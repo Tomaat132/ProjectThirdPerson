@@ -11,7 +11,7 @@ typedef std::vector<uGE::Mesh*> Anim;
 namespace uGE{
 
     class Body;
-
+    class PlayerController;
     class Player : public GameObject
     {
         private:
@@ -20,7 +20,9 @@ namespace uGE{
             int maxHealth = 150;
             int _shootable;
             int _score;
-			
+            float _timeLeft;
+            PlayerController* _controller;
+
         public:
             Player();
             virtual ~Player();
@@ -28,6 +30,8 @@ namespace uGE{
             int getHealth();
             void addScore( int value );
             int getScore();
+            int getTimeLeft();
+            void resetTime();
 
             void changeHealth(int _health);
             void changeShootable(int value);

@@ -5,7 +5,9 @@
 #include "SceneManager.hpp"
 #include "Player.hpp"
 #include "Viking.hpp"
+#include "ZombieSpawnController.hpp"
 #include "Hud.hpp"
+#include "Logger.h"
 
 namespace uGE
 {
@@ -48,17 +50,9 @@ namespace uGE
         healthText.setFont( font );
         spiritText.setFont( font );
 
-        char cZombies[64];
-        sprintf( cZombies, "%d", Viking::zombieCount );
-        zombieText.setString( cZombies );
-
-        char cHealth[64];
-        sprintf( cHealth, "%d", SceneManager::_player->getHealth() );
-        healthText.setString( cHealth );
-
-        char cSpirits[64];
-        sprintf( cSpirits, "%d", SceneManager::_player->getShootable() );
-        spiritText.setString( cSpirits );
+        zombieText.setString( to_s( Viking::zombieCount ) );
+        healthText.setString( to_s( SceneManager::_player->getHealth() ) );
+        spiritText.setString( to_s( SceneManager::_player->getShootable() ) );
 
         window->draw( zombieText );
         window->draw( healthText );

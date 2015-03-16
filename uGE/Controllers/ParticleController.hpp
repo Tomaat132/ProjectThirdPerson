@@ -11,9 +11,10 @@ namespace uGE {
 		private:
 			GameObject * _followee;
 			float _destroyTime;
-			float _rotation;
+			glm::vec3 _direction;
+			float _speed;
 		public:
-			ParticleController( GameObject * parent, GameObject * followee );
+			ParticleController( GameObject * parent, GameObject * followee, glm::vec3 dir, float spd );
 			virtual ~ParticleController();
 
 			void update();
