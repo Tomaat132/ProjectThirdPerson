@@ -3,6 +3,7 @@
 #include "uGE/SceneManager.hpp"
 #include "uGE/AssetManager.hpp"
 #include "uGE/Animation.hpp"
+#include "uGE/SoundManager.hpp"
 #include "uGE/Body.hpp"
 #include "uGE/Camera.hpp"
 #include "uGE/Controller.hpp"
@@ -15,8 +16,6 @@
 #include "uGE/Texture.hpp"
 #include "uGE/Viking.hpp"
 #include "uGE/WinSequence.hpp"
-//
-#include "SoundManager.hpp"
 //
 #include "uGE/Colliders/SphereCollider.hpp"
 #include "uGE/Colliders/BoxCollider.hpp"
@@ -48,7 +47,7 @@ bool MyGame::load()
     uGE::Light * light = new uGE::Light( "Sun" );
 
     uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL week4 wednesday third try" );
+    loader.loadLevel( "LEVEL week4 thursday" );
 
     uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
@@ -61,39 +60,18 @@ bool MyGame::load()
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
 
-
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
 
     uGE::GameObject * spiritSpawn = new uGE::GameObject( "SpiritSpawn" );
         spiritSpawn->setController(new uGE::SpiritSpawnController( spiritSpawn, player ));
 
-    uGE::GameObject * enemy = new uGE::GameObject( "Enemy" );
-        enemy->setPosition( glm::vec3( -2, 0, 0 ) );
-        uGE::Body * enemyBody = new uGE::Body( enemy );
-            enemyBody->setMesh( uGE::Mesh::load( "Assets/Models/suzanna.obj") );
-            enemyBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
-        enemy->setBody( enemyBody );
-        enemy->setCollider(new uGE::SphereCollider(enemy, 1.25f));
-        enemy->setController( new uGE::ParticleController( enemy, camera ) );
-
     camera->setController( new uGE::FollowController( camera, player ) );
     //camera->setController( new uGE::PlayerController( camera ) );
-
-    uGE::GameObject * water = new uGE::GameObject( "Water" );
-        water->setPosition( glm::vec3( 0, 1.5, 0 ) );
-        uGE::Body * waterBody = new uGE::Body( water );
-            waterBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/water.obj" ) );
-            waterBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/water.png" ) );
-            waterBody->setShader( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/water.fs" ) );
-        water->setBody( waterBody );
-        water->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
-        water->getMaterial()->setAlpha( 2.0f );
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
 	uGE::SceneManager::_player = player;
-	uGE::SceneManager::add( enemy );
 	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 

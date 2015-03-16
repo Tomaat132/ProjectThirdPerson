@@ -11,9 +11,8 @@
 
 namespace uGE
 {
-
     Player::Player()
-    :GameObject( "Player" ), _shootable( 5 ), _score( 0 )
+    :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 60.f )
     {
         idle.push_back( AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
         //walk.push_back( AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
@@ -39,6 +38,12 @@ namespace uGE
     int Player::getHealth(){
         return health;
     }
+    void Player::resetTime(){
+        _timeLeft = 60.f;
+    }
+    int Player::getTimeLeft(){
+        return (int)_timeLeft;
+    }
     int Player::getShootable(){
         return _shootable;
     }
@@ -51,9 +56,22 @@ namespace uGE
             health = maxHealth;
         }
     }
-
-    void Player::update(){
+    bool reset = true;
+    //PlayerController* Player::getPlayerController()
+    //{
+    //    return _controller;
+   // }
+    void Player::update()
+	{
         GameObject::update();
+
+		_timeLeft -= Time::step();
+		if( reset ) {
+			resetTime();
+			reset = false;
+		}
+		if( _timeLeft <= 0.f ) { /* Do timey stuff */ }
+
         if (health <= 0){ std::cout<<"HOLY SHIT IT'S 0"<<std::endl; }
 		addCrumbs();
 

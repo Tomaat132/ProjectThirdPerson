@@ -28,7 +28,7 @@ namespace uGE {
 			void shoot();
 			void attack();
 			void vacuum();
-
+            void releaseButton();
             void onCollision( CollisionResult * result );
 	};
 }

@@ -15,6 +15,7 @@
 #include "Material.hpp"
 #include "SceneManager.hpp"
 #include "Shader.hpp"
+#include "Player.hpp"
 #include "Logger.h"
 
 using namespace tinyxml2;
@@ -70,7 +71,7 @@ namespace uGE
 
             //Compose the GameObject
             if( objName == "watervv" ) {
-                GameObject * obj = new GameObject( objName );
+                /*GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
 
                 Body * body = new Body( obj );
@@ -81,7 +82,7 @@ namespace uGE
                 body->getMaterial()->setAlpha( 1.75f );
                 obj->setBody( body );
 
-                uGE::SceneManager::add( obj );
+				uGE::SceneManager::add( obj );*/
                 object = object->NextSiblingElement( "node" );
                 continue;
             }
@@ -127,11 +128,22 @@ namespace uGE
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
                 Body * body = new Body( obj );
-                body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
-                body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
-                obj->setBody( body );
+
+                if( objName != "position_of_wisp" && objName != "pozition_of_zombie" ){
+                    if(objName != "Water_box"){
+                        body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
+                        body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                    }
+                    obj->setBody( body );
+                }
                 if( body->getMesh() ) {
-                    if(objName != "bridge_msize" || objName != "bridge_vsize") obj->setCollider( new BoxCollider( obj ) );
+                    if( objName != "bridge_msize" || objName != "bridge_vsize" ) {
+						obj->setCollider( new BoxCollider( obj ) );
+					}
+                }
+                if( objName == "pasted__Cone_tree"){
+                    body->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
+                    body->getMaterial()->setAlpha( 1.75f );
                 }
 
                 uGE::SceneManager::add( obj );

@@ -14,6 +14,7 @@
 #include "CollisionDetection.hpp"
 #include "SpiritSpawnController.hpp"
 #include "ZombieSpawnController.hpp"
+#include "PlayerController.hpp"
 #include "Renderer.hpp"
 
 #include "Player.hpp"
@@ -85,6 +86,11 @@ namespace uGE {
 	{
 		sf::Event event;
 		while( window->pollEvent( event ) ) { // we must empty the event queue
+			//if ( event.type == sf::Event::KeyReleased){
+             //   if(event.key.code == sf::Keyboard::L) {
+           //          PlayerController* pc = (PlayerController*)( _player->getController());
+           //             ->releaseButton();
+		//	}
 			if ( event.type == sf::Event::Closed ) {
 				return false; // stop the game asap
 			}

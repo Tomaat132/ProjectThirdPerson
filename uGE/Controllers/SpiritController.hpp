@@ -13,11 +13,12 @@ namespace uGE {
 			uGE::Player * _followee;
 			float _timeTillEmit;
 			float _emitTime;
+			float _innerLength;
 			glm::vec3 _velocity;
 			glm::vec3 _distortion;
             float _percentSucked;
             bool _targeted;
-
+            glm::vec3 _startPos;
 			std::vector < GameObject* > _particles;
 
 		public:
@@ -26,7 +27,7 @@ namespace uGE {
 
 			void update();
 			void getSucked();
-			void emit();
+			void emit(glm::vec3 aDir, float aSpd);
 			void isTargeted(bool value);
             void die();
 

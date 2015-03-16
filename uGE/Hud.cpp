@@ -5,6 +5,7 @@
 #include "SceneManager.hpp"
 #include "Player.hpp"
 #include "Viking.hpp"
+#include "ZombieSpawnController.hpp"
 #include "Hud.hpp"
 #include "Logger.h"
 
