@@ -104,9 +104,12 @@ namespace uGE{
                                     SoundManager::playSFX("Zombie");
                                     _state = State::CHASE;
                             }
+
                         } else if(_state == State::CHASE){
                             _state = State::IDLE;
+
                         }
+
                             //if(cCrumbs[j] == sphere->getPosition()){
                             //chaseCrumb(cCrumbs[j]);
                             //}
@@ -152,6 +155,8 @@ namespace uGE{
     {
 
         if( result->colliderTypeB == Collider::SPHERE ) {
+
+
             if(result->colliderA == "zombieHitbox"){
                 if(result->objectB->getName() == "Bullet") {
                     if(_state != TRANSFORM && !_zombieParent->getViking()){   //ZOMBIE BEHAVIOUR:
@@ -162,6 +167,9 @@ namespace uGE{
 
                 }
 
+                if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
+                    _parent->setPosition( _parent->getPosition() - result->overlap );
+                }
             }
 
         }
