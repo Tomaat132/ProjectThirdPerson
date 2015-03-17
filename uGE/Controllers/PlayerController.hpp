@@ -16,6 +16,8 @@ namespace uGE {
             uGE::Player* _parent;
             float _shootTime;
             bool _isSucking;
+            bool _isAttacking;
+            bool _isShooting;
             float _vikingTime;
 
             Viking * _viking;

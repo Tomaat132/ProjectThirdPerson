@@ -55,6 +55,8 @@ namespace uGE{
             Anim idle;
             Anim walk;
             Anim melee;
+            Anim shoot;
+            Anim suck;
             Anim death;
             Anim currentAnim;
     };
