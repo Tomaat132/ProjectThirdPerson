@@ -13,12 +13,19 @@ namespace uGE
     Player::Player()
     :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 60.f )
     {
-        idle.push_back( AssetManager::loadMesh( "Assets/Animations/Character_animation.obj" ) );
-        //walk.push_back( AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
-        walk.push_back( AssetManager::loadMesh( "Assets/Animations/Character_animation.obj" ) );
-        walk.push_back( AssetManager::loadMesh( "Assets/Animations/fthyhhf.obj" ) );
-        walk.push_back( AssetManager::loadMesh( "Assets/Animations/hero_anim.obj" ) );
-        walk.push_back( AssetManager::loadMesh( "Assets/Animations/player.obj" ) );
+        idle.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_Idle.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_1.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_2.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_3.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_4.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_5.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_6.obj" ) );
+        walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_7.obj" ) );
+        melee.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_melee/U_A_1.obj" ) );
+        melee.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_melee/U_A_2.obj" ) );
+        melee.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_melee/U_A_3.obj" ) );
+        death.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_death/U_D_1.obj" ) );
+        death.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_death/U_D_2.obj" ) );
         activeAction = "IDLE";
         currentAnim = idle;
     }
@@ -45,6 +52,7 @@ namespace uGE
         if( timeLeft < 0 ) {
             timeLeft = 0;
         }
+        return timeLeft;
     }
     int Player::getShootable(){
         return _shootable;
@@ -77,7 +85,11 @@ namespace uGE
 		}
 		if( _timeLeft <= 0.f ) { /* Do timey stuff */ }
 
-        if (health <= 0){ std::cout<<"HOLY SHIT IT'S 0"<<std::endl; }
+        if (health <= 0)
+        {
+            //std::cout<<"HOLY SHIT IT'S 0"<<std::endl;
+            playNow("DEATH");
+        }
 		addCrumbs();
 
         time += Time::step();

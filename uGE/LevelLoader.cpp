@@ -144,10 +144,10 @@ namespace uGE
                 }
                 if( body->getMesh() ) {
                     if( objName == "Cone_tree" ) {
-                        obj->setCollider( new SphereCollider( obj, 1.9f ) );
+                        obj->setCollider( new SphereCollider( obj, 2.5f ) );
                     }
                     else if( objName == "Tree_dead" ) {
-                        obj->setCollider( new SphereCollider( obj, 1.3f ) );
+                        obj->setCollider( new SphereCollider( obj, 1.75f ) );
                     }
                     else if( objName != "bridge_msize" || objName != "bridge_vsize" ) {
 						obj->setCollider( new BoxCollider( obj ) );
