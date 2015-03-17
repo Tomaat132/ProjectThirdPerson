@@ -59,7 +59,7 @@ bool MyGame::load()
     uGE::SceneManager::_player = player;
 
     uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "week 5 level" );
+    loader.loadLevel( "week 5 level tuesday" );
 
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
