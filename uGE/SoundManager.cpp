@@ -18,8 +18,10 @@ namespace uGE
         sounds.clear();
         soundMap.clear();
 
-        getSFX("rifle");
+        getSFX("Rifle");
         getSFX("Launch");
+        getSFX("Sucking");
+        getSFX("Zombie");
 
         for( unsigned int i = 0; i < 64; ++i ) {
             sounds.push_back( new sf::Sound );

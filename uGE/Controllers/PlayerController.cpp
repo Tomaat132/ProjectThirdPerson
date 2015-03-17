@@ -124,6 +124,7 @@ namespace uGE {
 
 	void PlayerController::vacuum()
 	{
+        SoundManager::playSFX( "Sucking" );
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();

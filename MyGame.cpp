@@ -47,7 +47,7 @@ bool MyGame::load()
     uGE::Light * light = new uGE::Light( "Sun" );
 
     uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "LEVEL week4 thursday" );
+    loader.loadLevel( "week 5 level" );
 
     uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );

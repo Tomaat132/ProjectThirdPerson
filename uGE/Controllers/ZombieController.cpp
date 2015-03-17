@@ -9,6 +9,7 @@
 #include "Body.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
+#include "SoundManager.hpp"
 #include "Time.hpp"
 #include "Player.hpp"
 #include "Zombie.hpp"
@@ -72,8 +73,8 @@ namespace uGE{
 				break;
 
 			case CHASE:
-				//do code
-
+                chaseCrumb(SceneManager::_player->getPosition());
+                checkPlayerRange();
 				break;
         }
         //if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));
@@ -112,19 +113,24 @@ namespace uGE{
                     float dist = glm::length(diff);
 
                         if(sphere->getRadius() > dist){
-                        //_state = State::CHASE;
+                            if(_state == State::IDLE){
+                                    SoundManager::playSFX("Zombie");
+                                    _state = State::CHASE;
+                            }
 
-                        chaseCrumb(SceneManager::_player->getPosition());
+                        } else if(_state == State::CHASE){
+                            _state = State::IDLE;
+
+                        }
+
                             //if(cCrumbs[j] == sphere->getPosition()){
                             //chaseCrumb(cCrumbs[j]);
                             //}
                         return;
-                        }
+                    }
                     //glm::vec3 difference = closestPoint - sphere->getPosition();
 
                 //SphereCollider * colliderA = dynamic_cast <SphereCollider *>(colliderArray[i]);
-
-                }
 
             }
     }
@@ -134,6 +140,7 @@ namespace uGE{
 
             diff = glm::normalize(diff);
             _parent->setRotation(diff);
+
             transform = glm::translate(transform , glm::vec3(0 , 0 , 1.0f)* _speed * Time::step());
     }
 
@@ -162,17 +169,17 @@ namespace uGE{
     void ZombieController::onCollision( CollisionResult* result)
     {
         if( result->colliderTypeB == Collider::SPHERE ) {
-		
+
             if(result->colliderA == "zombieHitbox"){
                 if(result->objectB->getName() == "Bullet") {
-                    if(_state != TRANSFORM){   //ZOMBIE BEHAVIOUR:
+                    if(_state != TRANSFORM && !_zombieParent->getViking()){   //ZOMBIE BEHAVIOUR:
                         _state = TRANSFORM;
                         _transformTimer = 3.f;
                     }
 					SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
                 }
             }
-			
+
         }
     }
 
