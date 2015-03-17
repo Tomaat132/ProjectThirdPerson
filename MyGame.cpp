@@ -48,9 +48,9 @@ bool MyGame::load()
 
     uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
-            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
+            playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_Idle.obj" ) );
             //playerBody->setAnimation( uGE::Animation::LoadAnimation("Assets/Animations/eyes.mov") );
-            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/bricks.jpg") );
+            playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png") );
         player->setBody( playerBody );
         //player->setCollider( new uGE::BoxCollider(player) );
         player->setCollider( new uGE::SphereCollider( player, 1.75f ) );

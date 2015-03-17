@@ -18,8 +18,20 @@ namespace uGE {
 	Zombie::Zombie( std::string name )
 	: GameObject( name )
 	{
-	    //idle.push_back( AssetManager::loadMesh( "Assets/Models/zombie1.obj" ) );
-
+	    idle.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_idle.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_1.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_2.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_3.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_4.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_5.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_6.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_7.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_8.obj" ) );
+	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_9.obj" ) );
+	    attack.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_attack/Z_A_1.obj" ) );
+	    attack.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_attack/Z_A_2.obj" ) );
+        death.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_1.obj" ) );
+        death.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_2.obj" ) );
         activeAction = "IDLE";
         currentAnim = idle;
         _viking = false;

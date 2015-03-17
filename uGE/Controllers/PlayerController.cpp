@@ -61,8 +61,8 @@ namespace uGE {
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
         bool wasSucking = _isSucking;
+        //Absorbing Controls
 		if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
-			//Do Absorbing
 			if ( _isSucking == false ) {// begin event
 				_isSucking = true;
 				_shootTime = 0.5f;
@@ -89,14 +89,10 @@ namespace uGE {
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
-            //Absorbing Controls
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::I ) ) {
-				//Do Absorbing
-				vacuum();
-			}
-
             //Melee Controls
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f ) {
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
+			{
+                _parent->playNow("MELEE");
 				attack();
                 _shootTime = 0.3f;
 			}
