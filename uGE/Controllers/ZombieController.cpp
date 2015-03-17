@@ -181,6 +181,10 @@ namespace uGE{
                     }
 					SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
                 }
+
+                if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
+                    _parent->setPosition( _parent->getPosition() - result->overlap );
+                }
             }
 
         }
