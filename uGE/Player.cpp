@@ -42,13 +42,19 @@ namespace uGE
         _timeLeft = 60.f;
     }
     int Player::getTimeLeft(){
-        return (int)_timeLeft;
+        int timeLeft = (int) _timeLeft;
+        if( timeLeft < 0 ) {
+            timeLeft = 0;
+        }
     }
     int Player::getShootable(){
         return _shootable;
     }
     void Player::changeShootable(int value){
         _shootable += value;
+        if( _shootable > 9 ) {
+            _shootable = 9;
+        }
     }
     void Player::changeHealth(int _health){
         health += _health;

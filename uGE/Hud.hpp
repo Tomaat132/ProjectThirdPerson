@@ -36,6 +36,9 @@ namespace uGE
             sf::Text spiritText;
             sf::Text timeText;
             sf::Text scoreText;
+
+            void drawWithOutline( sf::Text* text, sf::RenderWindow* window, sf::Color color = sf::Color::White );
+            std::string formatTime( int time );
     };
 
 }

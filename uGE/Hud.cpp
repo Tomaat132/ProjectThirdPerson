@@ -20,38 +20,38 @@ namespace uGE
         scoreImg.loadFromFile( "Assets/Textures/Hud/score hud.png" );
 
         healthSprite.setTexture( healthImg );
-        healthSprite.setPosition( 20, 20 );
+        healthSprite.setPosition( 448, 20 );
 
         spiritSprite.setTexture( spiritImg );
-        spiritSprite.setPosition( 444, 20 );
+        spiritSprite.setPosition( 20, 20 );
 
         timeSprite.setTexture( timeImg );
-        timeSprite.setPosition( 20, 500 );
+        timeSprite.setPosition( 20, 620 );
 
         scoreSprite.setTexture( scoreImg );
-        scoreSprite.setPosition( 150, 500 );
+        scoreSprite.setPosition( 876, 640 );
 
         font.loadFromFile( "Assets/VIKING-N.ttf" );
 
         healthText.setCharacterSize( 48 );
         healthText.setColor( sf::Color::White );
         healthText.setFont( font );
-        healthText.setPosition( 50, 50 );
+        healthText.setPosition( 480, 52 );
 
-        spiritText.setCharacterSize( 48 );
+        spiritText.setCharacterSize( 40 );
         spiritText.setColor( sf::Color::White );
         spiritText.setFont( font );
-        spiritText.setPosition( 500, 250 );
+        spiritText.setPosition( 52, 96 );
 
-        timeText.setCharacterSize( 48 );
+        timeText.setCharacterSize( 40 );
         timeText.setColor( sf::Color::White );
         timeText.setFont( font );
-        timeText.setPosition( 50, 500 );
+        timeText.setPosition( 39, 658 );
 
-        scoreText.setCharacterSize( 48 );
+        scoreText.setCharacterSize( 32 );
         scoreText.setColor( sf::Color::White );
         scoreText.setFont( font );
-        scoreText.setPosition( 150, 500 );
+        scoreText.setPosition( 892, 694 );
     }
 
     Hud::~Hud()
@@ -71,16 +71,44 @@ namespace uGE
 
         healthText.setString( to_s( SceneManager::_player->getHealth() ) );
         spiritText.setString( to_s( SceneManager::_player->getShootable() ) );
-        timeText.setString( to_s( SceneManager::_player->getTimeLeft() ) );
+        timeText.setString( formatTime( SceneManager::_player->getTimeLeft() ) );
         scoreText.setString( to_s( SceneManager::_player->getScore() ) );
 
-        window->draw( healthText );
-        window->draw( spiritText );
-        window->draw( timeText );
-        window->draw( scoreText );
+        drawWithOutline( &healthText, window );
+        drawWithOutline( &spiritText, window, sf::Color::Cyan );
+        drawWithOutline( &timeText, window );
+        drawWithOutline( &scoreText, window );
 
         window->popGLStates();
         glEnable( GL_CULL_FACE );
     }
 
+
+    std::string Hud::formatTime( int time )
+    {
+        int minutes = time / 60;
+        int seconds = time % 60;
+
+        char cTime[16];
+        sprintf( cTime, "%1d:%02d", minutes, seconds );
+        return std::string( cTime );
+    }
+
+
+    void Hud::drawWithOutline( sf::Text* text, sf::RenderWindow* window, sf::Color color )
+    {
+        text->setColor( sf::Color::Black );
+        text->move( -1, -1 );
+        window->draw( *text );
+        text->move( 2, 0 );
+        window->draw( *text );
+        text->move( -2, 2 );
+        window->draw( *text );
+        text->move( 2, 0 );
+        window->draw( *text );
+        text->move( -1, -1 );
+
+        text->setColor( color );
+        window->draw( *text );
+    }
 }
