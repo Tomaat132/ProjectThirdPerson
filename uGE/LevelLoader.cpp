@@ -112,6 +112,12 @@ namespace uGE
                 continue;
             }
 
+            if( objName == "position_of_player" ) {
+                SceneManager::_player->setPosition( glm::vec3( matrix[3] ) );
+                object = object->NextSiblingElement( "node" );
+                continue;
+            }
+
             if( objName == "pozition_of_zombie" )
             {
                 GameObject* obj = new GameObject( "" );
@@ -137,14 +143,20 @@ namespace uGE
                     obj->setBody( body );
                 }
                 if( body->getMesh() ) {
-                    if( objName != "bridge_msize" || objName != "bridge_vsize" ) {
+                    if( objName == "Cone_tree" ) {
+                        obj->setCollider( new SphereCollider( obj, 1.75f ) );
+                    }
+                    else if( objName == "Tree_dead" ) {
+                        obj->setCollider( new SphereCollider( obj, 1.3f ) );
+                    }
+                    else if( objName != "bridge_msize" || objName != "bridge_vsize" ) {
 						obj->setCollider( new BoxCollider( obj ) );
 					}
                 }
-                if( objName == "pasted__Cone_tree"){
+                /*if( objName == "Cone_tree"){
                     body->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
                     body->getMaterial()->setAlpha( 1.75f );
-                }
+                }*/
 
                 uGE::SceneManager::add( obj );
             }

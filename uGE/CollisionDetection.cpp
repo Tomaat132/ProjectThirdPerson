@@ -47,10 +47,15 @@ namespace uGE{
                 if( colliderArray[i]->getParent() == colliderArray[j]->getParent() ){
                     continue;
                 }
+                if( colliderArray[i]->getParent()->getName() == "Cone_tree" || colliderArray[i]->getParent()->getName() == "Tree_dead" ) {
+                    if( colliderArray[j]->getParent()->getName() == "Cone_tree" || colliderArray[j]->getParent()->getName() == "Tree_dead" ) {
+                        continue;
+                    }
+                }
 
-                //if( glm::length( colliderArray[i]->getPosition() - colliderArray[j]->getPosition() ) > 5 ) {
-                //    continue;
-                //}
+                if( glm::length2( colliderArray[i]->getPosition() - colliderArray[j]->getPosition() ) > 200.f ) {
+                    continue;
+                }
 
                 int typeX = colliderArray[i]->getColliderType();
                 int typeY = colliderArray[j]->getColliderType();
@@ -90,8 +95,12 @@ namespace uGE{
                 res->colliderTypeB = sphere2->getColliderType();
                 res->overlap = glm::normalize( difference ) * ( sumOfRadius - glm::length( difference ) ); //glm::vec3 with distance and size of overlap
 
-                res->objectA->getController()->onCollision( res ); //Run onCollision in the controller of the first GameObject
-                res->objectB->getController()->onCollision( inverseResult(res) );
+                if( res->objectA->getController() ) {
+                    res->objectA->getController()->onCollision( res ); //Run onCollision in the controller of the first GameObject
+                }
+                if( res->objectB->getController() ) {
+                    res->objectB->getController()->onCollision( inverseResult(res) );
+                }
             }
     }
 
@@ -276,6 +285,7 @@ namespace uGE{
         newResult->colliderB = result->colliderA;
         newResult->colliderTypeA = result->colliderTypeB;
         newResult->colliderTypeB = result->colliderTypeA;
+        newResult->overlap = result->overlap * -1.f;
         return newResult;
     }
 
