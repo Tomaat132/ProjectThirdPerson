@@ -45,6 +45,7 @@ namespace uGE
         if( timeLeft < 0 ) {
             timeLeft = 0;
         }
+        return timeLeft;
     }
     int Player::getShootable(){
         return _shootable;
