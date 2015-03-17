@@ -92,7 +92,7 @@ namespace uGE {
             //Melee Controls
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
 			{
-                _parent->playNow("MELEE");
+                _parent->playNow("WALK");
 				attack();
                 _shootTime = 0.3f;
 			}
@@ -125,8 +125,8 @@ namespace uGE {
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
-            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 15.f){
-                if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.7f){
+            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 12.f){
+                if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.7f ||  glm::distance( spirit->getPosition(), _parent->getPosition()) < 4.f){
                     spirit->isTargeted( true );
                     break;
                 }
@@ -178,8 +178,8 @@ namespace uGE {
             SoundManager::playSFX( "Launch" );
             uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
                 uGE::Body * bulletBody = new uGE::Body( bullet );
-                    bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" ) );  //change model
-                    bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/slime.jpg") );     //change texture
+                    bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );  //change model
+                    bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );     //change texture
                 bullet->setBody( bulletBody );
                 bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
                 bullet->setController( new uGE::BulletController( bullet, _parent ) );

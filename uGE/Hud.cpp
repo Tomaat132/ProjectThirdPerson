@@ -51,7 +51,7 @@ namespace uGE
         scoreText.setCharacterSize( 32 );
         scoreText.setColor( sf::Color::White );
         scoreText.setFont( font );
-        scoreText.setPosition( 892, 694 );
+        scoreText.setPosition( 936, 694 );
     }
 
     Hud::~Hud()
