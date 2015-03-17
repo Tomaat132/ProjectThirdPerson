@@ -5,7 +5,7 @@
 namespace uGE {
 
 	Game::Game()
-	: _window ( new sf::RenderWindow( sf::VideoMode( 1024, 768 ), "Redemption"/*, sf::Style::Fullscreen*/ ) )
+	: _window ( new sf::RenderWindow( sf::VideoMode( 1024, 768 ), "Redemption", sf::Style::Fullscreen ) )
 	{
 		//_window->setVerticalSyncEnabled( true );
 		Logger::print( Logger::INFO, "Init Glew: " + to_s( glewInit() ) + " - GL: " + to_s( glGetString( GL_VERSION ) ) );

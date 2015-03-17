@@ -7,6 +7,7 @@
 #include "ZombieController.hpp"
 #include "Shader.hpp"
 
+typedef std::vector<uGE::Mesh*> Anim;
 
 namespace uGE {
 
@@ -19,6 +20,16 @@ namespace uGE {
         private:
             bool _viking;
 
+            float time = 0.f;
+            unsigned int frame = 0;
+            std::string activeAction;
+            Anim idle;
+            Anim walk;
+            Anim attack;
+            Anim death;
+            Anim currentAnim;
+
+
 		protected:
 
 		public:
@@ -26,6 +37,8 @@ namespace uGE {
 			virtual ~Zombie();
 
             void update();
+            void playNow( std::string action );
+            void updateFrame();
             void setViking(bool value);
             bool getViking();
 

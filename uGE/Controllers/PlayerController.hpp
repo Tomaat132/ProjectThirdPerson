@@ -18,6 +18,14 @@ namespace uGE {
             bool _isSucking;
             float _vikingTime;
 
+            float zombieHitTime = 1;
+            float zombieHitReset = 1;
+
+            float regenerateHpT = 10;
+            float regenerateMax = 3;
+
+            void regenerate();
+
             Viking * _viking;
 
 		public:

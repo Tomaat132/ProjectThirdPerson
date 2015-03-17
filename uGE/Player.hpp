@@ -4,7 +4,6 @@
 #include "GameObject.hpp"
 #include "Utils/glm.hpp"
 
-#include <map>
 
 typedef std::vector<uGE::Mesh*> Anim;
 
@@ -48,13 +47,15 @@ namespace uGE{
 
         protected:
             Body * _body;
-			
+
         private:
             float time = 0.f;
             unsigned int frame = 0;
             std::string activeAction;
             Anim idle;
             Anim walk;
+            Anim melee;
+            Anim death;
             Anim currentAnim;
     };
 }

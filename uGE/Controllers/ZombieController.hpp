@@ -33,6 +33,7 @@ namespace uGE{
 			int _eightDir;
             bool disableHitbox = false;
 
+
         public:
         //public constructor and functions
             ZombieController( GameObject * parent, GameObject * followee );

@@ -9,6 +9,7 @@
 #include "Body.hpp"
 #include "AssetManager.hpp"
 #include "SceneManager.hpp"
+#include "SoundManager.hpp"
 #include "Time.hpp"
 #include "Player.hpp"
 #include "Zombie.hpp"
@@ -45,20 +46,22 @@ namespace uGE{
         switch(_state)
         {
 			case IDLE:
+			    _zombieParent->playNow("IDLE");
 				if(_idleTimer <= 0.f){
 				   _eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
 				   _idleTimer = 1.f; // how many seconds till next direction
 				}
 				move(_eightDir);
-				checkPlayerRange(); //it checks every second compared to the update of every 2 seconds in player;
-                                    //changed to check for player range continuously;
+
+				_zombieParent->playNow("WALK");
+				checkPlayerRange();//it checks every second compared to the update of every 2 seconds in player;
 
 				_idleTimer -= Time::step();
 				break;
 			case TRANSFORM:
 				if(_transformTimer <= 0.f){
 					//can use nice animation here
-					_zombieParent->getBody()->setMesh( uGE::AssetManager::loadMesh("Assets/Models/teapot.obj"));
+					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/bricks.jpg" ) );
 					_zombieParent->setViking(true);
 					_state = IDLE;
 				}
@@ -67,14 +70,15 @@ namespace uGE{
 					_transformIntervalTimer = 0.05f;
 				}
 				move(_eightDir);
+				_zombieParent->playNow("WALK");
 
 				_transformTimer -= Time::step();
 				_transformIntervalTimer -= Time::step();
 				break;
 
 			case CHASE:
-				//do code
-
+                chaseCrumb(SceneManager::_player->getPosition());
+                checkPlayerRange();
 				break;
         }
         //if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));
@@ -96,21 +100,20 @@ namespace uGE{
                     float dist = glm::length(diff);
 
                         if(sphere->getRadius() > dist){
-                        //_state = State::CHASE;
-
-                        chaseCrumb(SceneManager::_player->getPosition());
+                            if(_state == State::IDLE){
+                                    SoundManager::playSFX("Zombie");
+                                    _state = State::CHASE;
+                            }
+                        } else if(_state == State::CHASE){
+                            _state = State::IDLE;
+                        }
                             //if(cCrumbs[j] == sphere->getPosition()){
                             //chaseCrumb(cCrumbs[j]);
                             //}
                         return;
-                        }
-
+                    }
                     //glm::vec3 difference = closestPoint - sphere->getPosition();
-
                 //SphereCollider * colliderA = dynamic_cast <SphereCollider *>(colliderArray[i]);
-
-                }
-
             }
     }
     void ZombieController::chaseCrumb(glm::vec3 crumb){
@@ -119,6 +122,7 @@ namespace uGE{
 
             diff = glm::normalize(diff);
             _parent->setRotation(diff);
+
             transform = glm::translate(transform , glm::vec3(0 , 0 , 1.0f)* _speed * Time::step());
     }
 
@@ -146,10 +150,11 @@ namespace uGE{
 
     void ZombieController::onCollision( CollisionResult* result)
     {
+
         if( result->colliderTypeB == Collider::SPHERE ) {
             if(result->colliderA == "zombieHitbox"){
                 if(result->objectB->getName() == "Bullet") {
-                    if(_state != TRANSFORM){   //ZOMBIE BEHAVIOUR:
+                    if(_state != TRANSFORM && !_zombieParent->getViking()){   //ZOMBIE BEHAVIOUR:
                         _state = TRANSFORM;
                         _transformTimer = 3.f;
                     }

@@ -27,7 +27,7 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 10.10f;
+	    _spawnTime = 1.10f;
         srand(time(NULL));
 
 	}
@@ -55,8 +55,8 @@ namespace uGE {
     {
         uGE::Zombie* zombie = new uGE::Zombie( "Zombie");
              uGE::Body * zombieBody = new uGE::Body( zombie );
-                zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/zombie1.obj" ) );
-                zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/zombie1.png") );
+                zombieBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_1.obj" ) );
+                zombieBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Models/Zombie_walk/zombie 1 texture1.png") );
                 zombieBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );

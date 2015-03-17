@@ -24,6 +24,7 @@
 #include "Collider.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
+#include "Logger.h"
 
 #include "SoundManager.hpp"
 
@@ -60,8 +61,8 @@ namespace uGE {
 		glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 
         bool wasSucking = _isSucking;
+        //Absorbing Controls
 		if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
-			//Do Absorbing
 			if ( _isSucking == false ) {// begin event
 				_isSucking = true;
 				_shootTime = 0.5f;
@@ -88,14 +89,10 @@ namespace uGE {
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
-            //Absorbing Controls
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::I ) ) {
-				//Do Absorbing
-				vacuum();
-			}
-
             //Melee Controls
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f ) {
+			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
+			{
+                _parent->playNow("MELEE");
 				attack();
                 _shootTime = 0.3f;
 			}
@@ -120,10 +117,18 @@ namespace uGE {
 			_parent->playNow("IDLE");
 			//_parent->getBody()->getAnimation()->StopAnimation();
 		}
-	}
+		//checks here if the zombie is able to hit again Should have made this into a function, really...
+		zombieHitTime -=Time::step();
+		if(zombieHitTime <= 0){
+                zombieHitTime = -1;
+		//and makes sure it stay's put at a certain position in time.
+		}
+		regenerate();
+	}//end of update function
 
 	void PlayerController::vacuum()
 	{
+        SoundManager::playSFX( "Sucking" );
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
@@ -153,7 +158,7 @@ namespace uGE {
                     if(zombie->getViking())
                     {
                         SceneManager::del(zombie);
-                        _parent->addScore( 1 );
+                        _parent->addScore( 100 );
                         break;
                     }
                 }
@@ -191,11 +196,37 @@ namespace uGE {
         }
 	}
 
+	void PlayerController::regenerate(){
+	regenerateHpT -=Time::step();
+        if(regenerateHpT<= -1){
+        regenerateHpT = regenerateMax;
+        _parent->changeHealth(+5);
+        }
+
+	}
+
     void PlayerController::onCollision( CollisionResult * result )
     {
         if( result->colliderTypeB == Collider::BOX ) {
             _parent->setPosition( _parent->getPosition() - result->overlap );
         }
+        if( result->colliderTypeB == Collider::SPHERE ) {
+            if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
+                _parent->setPosition( _parent->getPosition() - result->overlap );
+            }
+        }
+        if( result->colliderTypeB == Collider::SPHERE ) {
+            if( result->colliderB == "zombieHitbox"){//check for zombie
+                _parent->setPosition( _parent->getPosition() - result->overlap );//prevent overlapping 2 objects
+
+                if(zombieHitTime <= 0 ){//hits player every second
+                zombieHitTime = zombieHitReset;
+                _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+                }
+
+            }
+        }
+        //add stuff
     }
 }
 
