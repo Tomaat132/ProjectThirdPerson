@@ -144,7 +144,7 @@ namespace uGE
                 }
                 if( body->getMesh() ) {
                     if( objName == "Cone_tree" ) {
-                        obj->setCollider( new SphereCollider( obj, 1.75f ) );
+                        obj->setCollider( new SphereCollider( obj, 1.9f ) );
                     }
                     else if( objName == "Tree_dead" ) {
                         obj->setCollider( new SphereCollider( obj, 1.3f ) );

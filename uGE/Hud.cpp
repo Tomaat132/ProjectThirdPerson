@@ -14,23 +14,44 @@ namespace uGE
 
     Hud::Hud()
     {
-        hudImage.loadFromFile( "Assets/Textures/Hud.png" );
-        hudTexture.loadFromImage( hudImage );
-        hudSprite.setTexture( hudTexture );
+        healthImg.loadFromFile( "Assets/Textures/Hud/life hud.png" );
+        spiritImg.loadFromFile( "Assets/Textures/Hud/spirit hud.png" );
+        timeImg.loadFromFile( "Assets/Textures/Hud/time hud.png" );
+        scoreImg.loadFromFile( "Assets/Textures/Hud/score hud.png" );
+
+        healthSprite.setTexture( healthImg );
+        healthSprite.setPosition( 20, 20 );
+
+        spiritSprite.setTexture( spiritImg );
+        spiritSprite.setPosition( 444, 20 );
+
+        timeSprite.setTexture( timeImg );
+        timeSprite.setPosition( 20, 500 );
+
+        scoreSprite.setTexture( scoreImg );
+        scoreSprite.setPosition( 150, 500 );
 
         font.loadFromFile( "Assets/VIKING-N.ttf" );
 
-        zombieText.setCharacterSize( 48 );
-        zombieText.setColor( sf::Color::White );
-        zombieText.setPosition( 200, 20 );
-
         healthText.setCharacterSize( 48 );
         healthText.setColor( sf::Color::White );
-        healthText.setPosition( 550, 20 );
+        healthText.setFont( font );
+        healthText.setPosition( 50, 50 );
 
         spiritText.setCharacterSize( 48 );
         spiritText.setColor( sf::Color::White );
-        spiritText.setPosition( 920, 20 );
+        spiritText.setFont( font );
+        spiritText.setPosition( 500, 250 );
+
+        timeText.setCharacterSize( 48 );
+        timeText.setColor( sf::Color::White );
+        timeText.setFont( font );
+        timeText.setPosition( 50, 500 );
+
+        scoreText.setCharacterSize( 48 );
+        scoreText.setColor( sf::Color::White );
+        scoreText.setFont( font );
+        scoreText.setPosition( 150, 500 );
     }
 
     Hud::~Hud()
@@ -43,20 +64,20 @@ namespace uGE
         glDisable( GL_CULL_FACE );
         window->pushGLStates();
 
-        hudSprite.setPosition( 0, 0 );
-        window->draw( hudSprite );
+        window->draw( healthSprite );
+        window->draw( spiritSprite );
+        window->draw( timeSprite );
+        window->draw( scoreSprite );
 
-        zombieText.setFont( font );
-        healthText.setFont( font );
-        spiritText.setFont( font );
-
-        zombieText.setString( to_s( Viking::zombieCount ) );
         healthText.setString( to_s( SceneManager::_player->getHealth() ) );
         spiritText.setString( to_s( SceneManager::_player->getShootable() ) );
+        timeText.setString( to_s( SceneManager::_player->getTimeLeft() ) );
+        scoreText.setString( to_s( SceneManager::_player->getScore() ) );
 
-        window->draw( zombieText );
         window->draw( healthText );
         window->draw( spiritText );
+        window->draw( timeText );
+        window->draw( scoreText );
 
         window->popGLStates();
         glEnable( GL_CULL_FACE );
