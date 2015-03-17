@@ -174,7 +174,9 @@ namespace uGE{
                 if(result->objectB->getName() == "Bullet") {
                     if(_state != TRANSFORM && !_zombieParent->getViking()){   //ZOMBIE BEHAVIOUR:
                         _state = TRANSFORM;
-                        _transformTimer = 3.f;
+                        SoundManager::playSFX( "ZombieDie" );
+
+                        _transformTimer = 1.3f;
                     }
 					SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
                 }

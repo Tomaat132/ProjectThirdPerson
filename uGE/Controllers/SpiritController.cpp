@@ -77,7 +77,7 @@ namespace uGE {
         uGE::GameObject * particle = new uGE::GameObject( "Particle" );
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
-                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star02.png") );
+                particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit_particle.png") );
                 particleBody->getMaterial()->setBlendMode( Material::BlendMode::ALPHA );
 
             particle->setBody( particleBody );
