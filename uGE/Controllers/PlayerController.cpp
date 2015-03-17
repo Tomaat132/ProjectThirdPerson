@@ -64,7 +64,8 @@ namespace uGE {
         //Absorbing Controls
 		if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 			if ( _isSucking == false ) {// begin event
-				_isSucking = true;
+				_isSucking = true;      // By setting _isSucking on true, previous frame is separated from current frame.
+				_parent->playNow("SUCK");
 				_shootTime = 0.5f;
 				vacuum();
 			}
@@ -75,7 +76,7 @@ namespace uGE {
 				spirit->isTargeted( false );
 			}
 		}
-		if ( wasSucking && ! _isSucking ) {
+		if ( wasSucking && ! _isSucking ) { //Now that _isSucking is true and wasSucking still false, the spirits are not targeted in current frame.
 			for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
 				Spirit* spirit = SpiritSpawnController::spirits[i];
 				spirit->isTargeted( false );
@@ -92,16 +93,23 @@ namespace uGE {
             //Melee Controls
 			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
 			{
+			    _isAttacking = true;
                 _parent->playNow("MELEE");
 				attack();
                 _shootTime = 0.3f;
+			} else {
+                _isAttacking = false;
 			}
 
 			//Shooting controls
 			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
 			{
+			    _isShooting = true;
+			    _parent->playNow("SHOOT");
 				shoot();
 				_shootTime = 0.3f;
+			} else {
+                _isShooting = false;
 			}
 
         }
@@ -113,7 +121,9 @@ namespace uGE {
 			_parent->setRotation( rotate );
 			_parent->playNow("WALK");
 			//_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
-		} else {
+		}
+		else if(glm::length(rotate) <= 0 && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
+		{
 			_parent->playNow("IDLE");
 			//_parent->getBody()->getAnimation()->StopAnimation();
 		}

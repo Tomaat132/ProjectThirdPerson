@@ -18,7 +18,7 @@ namespace uGE {
 	Zombie::Zombie( std::string name )
 	: GameObject( name )
 	{
-	    idle.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_idle.obj" ) );
+	    idle.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Zombie_idle.obj" ) );
 	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_1.obj" ) );
 	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_2.obj" ) );
 	    walk.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_3.obj" ) );

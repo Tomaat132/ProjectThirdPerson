@@ -14,8 +14,11 @@ namespace uGE {
 	{
         private:
             uGE::Player* _parent;
+			Viking * _viking;
             float _shootTime;
-            bool _isSucking;
+			bool _isSucking;
+            bool _isAttacking;
+            bool _isShooting;
             float _vikingTime;
 
             float zombieHitTime = 1;
@@ -25,8 +28,6 @@ namespace uGE {
             float regenerateMax = 3;
 
             void regenerate();
-
-            Viking * _viking;
 
 		public:
 			PlayerController( uGE::Player * parent );

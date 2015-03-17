@@ -24,6 +24,16 @@ namespace uGE
         melee.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_melee/U_A_1.obj" ) );
         melee.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_melee/U_A_2.obj" ) );
         melee.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_melee/U_A_3.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_1.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_2.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_3.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_4.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_5.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_6.obj" ) );
+        shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_7.obj" ) );
+        suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_1.obj" ) );
+        suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_2.obj" ) );
+        suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_3.obj" ) );
         death.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_death/U_D_1.obj" ) );
         death.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_death/U_D_2.obj" ) );
         activeAction = "IDLE";
@@ -86,8 +96,7 @@ namespace uGE
 		if( _timeLeft <= 0.f ) { /* Do timey stuff */ }
 
         if (health <= 0)
-        {
-            //std::cout<<"Health reached 0"<<std::endl;
+            //Make sure that PlayerController's keyboard controls get disabled!!!
             playNow("DEATH");
         }
 		addCrumbs();
@@ -127,7 +136,7 @@ namespace uGE
     void Player::updateFrame()
     {
         ++frame;
-        //Logger::print( Logger::INFO, "Frame: " + to_s(frame) );
+        Logger::print( Logger::INFO, "Anim: " + activeAction + ", Frame: " + to_s(frame) );
         if(frame >= currentAnim.size()) frame = 0;
         this->getBody()->setMesh(currentAnim[frame]);
     }
@@ -149,6 +158,16 @@ namespace uGE
         {
             activeAction = "MELEE";
             currentAnim = melee;
+        }
+        else if( action == "SHOOT" && action != activeAction )
+        {
+            activeAction = "SHOOT";
+            currentAnim = shoot;
+        }
+        else if( action == "SUCK" && action != activeAction )
+        {
+            activeAction = "SUCK";
+            currentAnim = suck;
         }
         else if( action == "DEATH" && action != activeAction )
         {
