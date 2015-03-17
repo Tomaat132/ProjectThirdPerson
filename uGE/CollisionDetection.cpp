@@ -95,7 +95,8 @@ namespace uGE{
             }
     }
 
-    void CollisionDetection::checkAABBcollision(AABBcollision * box1, AABBcollision * box2){
+    void CollisionDetection::checkAABBcollision(AABBcollision * box1, AABBcollision * box2)
+    {
         float maxRightSide1 = box1->getPosition().x + box1->getMaxBounds().x;
         float maxLeftSide1 = box1->getPosition().x + box1->getMinBounds().x;
         float maxRightSide2 = box2->getPosition().x + box2->getMaxBounds().x;
@@ -126,8 +127,8 @@ namespace uGE{
         }//end of 4 checks for collision
     }//end of checkAABBCollision
 
-    void CollisionDetection::checkSphereAABB(SphereCollider * sphere , AABBcollision * box){
-
+    void CollisionDetection::checkSphereAABB(SphereCollider * sphere , AABBcollision * box)
+    {
         float maxRightSide = box->getPosition().x + box->getMaxBounds().x;
         float maxLeftSide = box->getPosition().x + box->getMinBounds().x;
         float maxUpSide = box->getPosition().z + box->getMaxBounds().z;
