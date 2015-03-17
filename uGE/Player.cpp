@@ -7,14 +7,13 @@
 #include "Logger.h"
 
 #include <iostream>
-#include <map>
 
 namespace uGE
 {
     Player::Player()
     :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 60.f )
     {
-        idle.push_back( AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
+        idle.push_back( AssetManager::loadMesh( "Assets/Animations/Character_animation.obj" ) );
         //walk.push_back( AssetManager::loadMesh( "Assets/Models/teapot.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Animations/Character_animation.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Animations/fthyhhf.obj" ) );
@@ -76,7 +75,8 @@ namespace uGE
 		addCrumbs();
 
         time += Time::step();
-		while( time > .1f ) {
+		while( time > .1f )
+        {
             time -= .1f;
             updateFrame();
         }
@@ -109,12 +109,12 @@ namespace uGE
     void Player::updateFrame()
     {
         ++frame;
-        Logger::print( Logger::INFO, "Frame: " + to_s(frame) );
+        //Logger::print( Logger::INFO, "Frame: " + to_s(frame) );
         if(frame >= currentAnim.size()) frame = 0;
         this->getBody()->setMesh(currentAnim[frame]);
     }
 
-    //Player::currentlyPlaying for switching between animations
+    //Player::playNow for switching between animations
     void Player::playNow( std::string action )
     {
         if( action == "IDLE" && action != activeAction )
@@ -126,6 +126,16 @@ namespace uGE
         {
             activeAction = "WALK";
             currentAnim = walk;
+        }
+        else if( action == "MELEE" && action != activeAction )
+        {
+            activeAction = "MELEE";
+            currentAnim = melee;
+        }
+        else if( action == "DEATH" && action != activeAction )
+        {
+            activeAction = "DEATH";
+            currentAnim = death;
         }
     }
 
