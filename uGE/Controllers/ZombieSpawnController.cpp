@@ -27,8 +27,9 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 1.10f;
+	    _spawnTime = 1.5f;
         srand(time(NULL));
+        _maxZombies = 30;
 
 	}
 
@@ -43,7 +44,7 @@ namespace uGE {
 
 
 		//spawn zombie
-        if(_timeTillSpawn <= 0 && zombies.size() < 2)
+        if(_timeTillSpawn <= 0 && zombies.size() < _maxZombies)
         {
             for(auto i = 0; i < 1; i++)
                 spawn();

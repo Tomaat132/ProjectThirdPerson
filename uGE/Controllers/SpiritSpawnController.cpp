@@ -56,7 +56,7 @@ namespace uGE {
         uGE::Spirit * spirit = new uGE::Spirit( "Spirit");
             uGE::Body * spiritBody = new uGE::Body( spirit );
                 spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj"));
-                spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bricks.jpg") );
+                spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );
                 spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
             spirit->setBody( spiritBody );
 

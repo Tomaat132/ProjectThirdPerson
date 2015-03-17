@@ -13,6 +13,8 @@ namespace uGE {
 			GameObject * _followee;
 			float _timeTillSpawn;
 			float _spawnTime;
+			float _maxZombies;
+
         public:
             static std::vector< Zombie* > zombies;
         private:

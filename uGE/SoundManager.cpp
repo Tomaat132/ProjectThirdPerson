@@ -22,6 +22,7 @@ namespace uGE
         getSFX("Launch");
         getSFX("Sucking");
         getSFX("Zombie");
+        getSFX("ZombieDie");
 
         for( unsigned int i = 0; i < 64; ++i ) {
             sounds.push_back( new sf::Sound );
