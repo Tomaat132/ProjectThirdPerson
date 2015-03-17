@@ -46,9 +46,6 @@ bool MyGame::load()
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
 
-    uGE::LevelLoader loader = uGE::LevelLoader();
-    loader.loadLevel( "week 5 level" );
-
     uGE::Player * player = new uGE::Player();
         uGE::Body * playerBody = new uGE::Body( player );
             playerBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/suzanna.obj" ) );
@@ -59,6 +56,10 @@ bool MyGame::load()
         player->setCollider( new uGE::SphereCollider( player, 1.75f ) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+    uGE::SceneManager::_player = player;
+
+    uGE::LevelLoader loader = uGE::LevelLoader();
+    loader.loadLevel( "week 5 level" );
 
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));
@@ -71,7 +72,6 @@ bool MyGame::load()
 
 	uGE::SceneManager::add( camera );
 	uGE::SceneManager::add( light );
-	uGE::SceneManager::_player = player;
 	uGE::SceneManager::add( zombieSpawn );
 	uGE::SceneManager::add( spiritSpawn );
 

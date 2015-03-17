@@ -1,5 +1,6 @@
 // Originally created for use in Project Lycoris (by Karanum)
 // Do not use in any other projects without permission.
+// Thomas has permission for his entire life ^-^
 
 #include "Logger.h"
 

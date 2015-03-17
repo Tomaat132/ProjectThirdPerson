@@ -24,6 +24,7 @@
 #include "Collider.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
+#include "Logger.h"
 
 #include "SoundManager.hpp"
 
@@ -196,6 +197,11 @@ namespace uGE {
     {
         if( result->colliderTypeB == Collider::BOX ) {
             _parent->setPosition( _parent->getPosition() - result->overlap );
+        }
+        if( result->colliderTypeB == Collider::SPHERE ) {
+            if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
+                _parent->setPosition( _parent->getPosition() - result->overlap );
+            }
         }
     }
 }
