@@ -117,7 +117,14 @@ namespace uGE {
 			_parent->playNow("IDLE");
 			//_parent->getBody()->getAnimation()->StopAnimation();
 		}
-	}
+		//checks here if the zombie is able to hit again Should have made this into a function, really...
+		zombieHitTime -=Time::step();
+		if(zombieHitTime <= 0){
+                zombieHitTime = -1;
+		//and makes sure it stay's put at a certain position in time.
+		}
+		regenerate();
+	}//end of update function
 
 	void PlayerController::vacuum()
 	{
@@ -151,7 +158,7 @@ namespace uGE {
                     if(zombie->getViking())
                     {
                         SceneManager::del(zombie);
-                        _parent->addScore( 1 );
+                        _parent->addScore( 100 );
                         break;
                     }
                 }
@@ -189,6 +196,15 @@ namespace uGE {
         }
 	}
 
+	void PlayerController::regenerate(){
+	regenerateHpT -=Time::step();
+        if(regenerateHpT<= -1){
+        regenerateHpT = regenerateMax;
+        _parent->changeHealth(+5);
+        }
+
+	}
+
     void PlayerController::onCollision( CollisionResult * result )
     {
         if( result->colliderTypeB == Collider::BOX ) {
@@ -199,6 +215,18 @@ namespace uGE {
                 _parent->setPosition( _parent->getPosition() - result->overlap );
             }
         }
+        if( result->colliderTypeB == Collider::SPHERE ) {
+            if( result->colliderB == "zombieHitbox"){//check for zombie
+                _parent->setPosition( _parent->getPosition() - result->overlap );//prevent overlapping 2 objects
+
+                if(zombieHitTime <= 0 ){//hits player every second
+                zombieHitTime = zombieHitReset;
+                _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+                }
+
+            }
+        }
+        //add stuff
     }
 }
 

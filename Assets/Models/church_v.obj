@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib church_v_3.mtl
+mtllib church_v.mtl
 g default
 v -5.602770 4.427174 -3.765381
 v -5.877917 4.426685 -3.765381

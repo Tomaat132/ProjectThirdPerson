@@ -87,7 +87,7 @@ namespace uGE
 
         if (health <= 0)
         {
-            //std::cout<<"HOLY SHIT IT'S 0"<<std::endl;
+            //std::cout<<"Health reached 0"<<std::endl;
             playNow("DEATH");
         }
 		addCrumbs();

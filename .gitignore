@@ -29,3 +29,5 @@
 # Code::Blocks files
 *.depend
 *.layout
+
+bin/

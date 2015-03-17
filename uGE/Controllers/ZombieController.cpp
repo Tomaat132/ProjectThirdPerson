@@ -52,6 +52,7 @@ namespace uGE{
 				   _idleTimer = 1.f; // how many seconds till next direction
 				}
 				move(_eightDir);
+
 				_zombieParent->playNow("WALK");
 				checkPlayerRange();//it checks every second compared to the update of every 2 seconds in player;
 
@@ -81,25 +82,6 @@ namespace uGE{
 				break;
         }
         //if(rotate != glm::vec3(0,0,0)) _parent->setDirection(glm::normalize(rotate));
-
-		//int direction = rand() %10+1;//INITIALISE RANDOM DIRECTION between 10 and 0
-		//this shows that a random number is constantly generated //std::cout<<direction<<std::endl;
-
-
-		/*float speed = 40.f * Time::step();
-		//std::cout<<"startup"<<std::endl;
-        glm::mat4 & transform = _parent->transform;
-        glm::vec3 rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-
-        bool keyI = sf::Keyboard::isKeyPressed( sf::Keyboard::Up );
-        bool keyK = sf::Keyboard::isKeyPressed( sf::Keyboard::Down );
-        bool keyJ = sf::Keyboard::isKeyPressed( sf::Keyboard::Left );
-        bool keyL = sf::Keyboard::isKeyPressed( sf::Keyboard::Right );
-		if ( keyI ) rotate[2] = 1.0f;
-		if ( keyK ) rotate[2] = -1.0f;//vTranslate.z -= speed;//glm::vec3( 0, 0, speed );
-		if ( keyJ ) rotate[0] = 1.f;  //hTranslate.x += speed;
-		if ( keyL ) rotate[0] = -1.f;
-		*/
     }
 
     void ZombieController::checkPlayerRange(){
@@ -112,7 +94,9 @@ namespace uGE{
                 //std::cout<<tempVec.size()<<std::endl; //this holds 1
                 SphereCollider* sphere = dynamic_cast<SphereCollider *>(tempVec[i]);
                 //glm::vec3 closestPoint = sphere->getPosition();
+
                     glm::vec3 diff = SceneManager::_player->getPosition() - sphere->getPosition();
+                    //glm::vec3 diff = sphere->getPosition() - SceneManager::_player->getPosition();
                     float dist = glm::length(diff);
 
                         if(sphere->getRadius() > dist){
@@ -132,9 +116,7 @@ namespace uGE{
                         return;
                     }
                     //glm::vec3 difference = closestPoint - sphere->getPosition();
-
                 //SphereCollider * colliderA = dynamic_cast <SphereCollider *>(colliderArray[i]);
-
             }
     }
     void ZombieController::chaseCrumb(glm::vec3 crumb){
@@ -171,7 +153,9 @@ namespace uGE{
 
     void ZombieController::onCollision( CollisionResult* result)
     {
+
         if( result->colliderTypeB == Collider::SPHERE ) {
+
 
             if(result->colliderA == "zombieHitbox"){
                 if(result->objectB->getName() == "Bullet") {
@@ -179,7 +163,8 @@ namespace uGE{
                         _state = TRANSFORM;
                         _transformTimer = 3.f;
                     }
-					SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+                    SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+
                 }
 
                 if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
