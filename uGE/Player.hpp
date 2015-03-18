@@ -49,7 +49,7 @@ namespace uGE{
             Body * _body;
 
         private:
-            float time = 0.f;
+            float time;
             unsigned int frame = 0;
             std::string activeAction;
             Anim idle;

@@ -206,13 +206,17 @@ namespace uGE {
         }
 	}
 
-	void PlayerController::regenerate(){
-	regenerateHpT -=Time::step();
-        if(regenerateHpT<= -1){
-        regenerateHpT = regenerateMax;
-        _parent->changeHealth(+5);
-        }
+	void PlayerController::regenerate()
+	{
+	    if( _parent->getHealth() >= 100 ) {
+            return;
+	    }
 
+        regenerateHpT -= Time::step();
+        if( regenerateHpT<= -1 ) {
+            regenerateHpT = regenerateMax;
+            _parent->changeHealth( 5 );
+        }
 	}
 
     void PlayerController::onCollision( CollisionResult * result )
@@ -227,11 +231,11 @@ namespace uGE {
         }
         if( result->colliderTypeB == Collider::SPHERE ) {
             if( result->colliderB == "zombieHitbox"){//check for zombie
-                _parent->setPosition( _parent->getPosition() - result->overlap );//prevent overlapping 2 objects
+                result->objectB->setPosition( result->objectB->getPosition() + result->overlap );//prevent overlapping 2 objects
 
-                if(zombieHitTime <= 0 ){//hits player every second
-                zombieHitTime = zombieHitReset;
-                _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+                if(zombieHitTime <= 0 ) { //hits player every second
+                    zombieHitTime = zombieHitReset;
+                    _parent->changeHealth( -10 ); //lowers health by 10 every second they touch.
                 }
 
             }
@@ -239,4 +243,3 @@ namespace uGE {
         //add stuff
     }
 }
-

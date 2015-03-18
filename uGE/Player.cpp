@@ -5,13 +5,15 @@
 #include "Utils/glm.hpp"
 #include "Time.hpp"
 #include "Logger.h"
+#include "SceneManager.hpp"
+#include "Hud.hpp"
 
 #include <iostream>
 
 namespace uGE
 {
     Player::Player()
-    :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 60.f )
+    :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 300.f ), time( 0.f )
     {
         idle.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_Idle.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_1.obj" ) );
@@ -93,17 +95,19 @@ namespace uGE
 			resetTime();
 			reset = false;
 		}
-		if( _timeLeft <= 0.f ) { /* Do timey stuff */ }
+		if( _timeLeft <= 0.f ) {
+            SceneManager::_hud->setEndGame( "Time's Up" );
+        }
 
-        if (health <= 0)
+        if (health <= 0) {
             //Make sure that PlayerController's keyboard controls get disabled!!!
             playNow("DEATH");
+            SceneManager::_hud->setEndGame( "Game Over" );
         }
-		addCrumbs();
+		//addCrumbs();
 
         time += Time::step();
-		while( time > .1f )
-        {
+		while( time > .1f ) {
             time -= .1f;
             updateFrame();
         }
