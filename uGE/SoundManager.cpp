@@ -23,7 +23,7 @@ namespace uGE
         getSFX("Sucking");
         getSFX("Zombie");
         getSFX("ZombieDie");
-
+        getSFX("PlayerHit");
         for( unsigned int i = 0; i < 64; ++i ) {
             sounds.push_back( new sf::Sound );
         }
@@ -45,6 +45,7 @@ namespace uGE
             return;
         }
         bgm->play();
+        bgm->setLoop(true);
     }//end of getBGM function
 
     void SoundManager::getSFX(std::string iFilename)

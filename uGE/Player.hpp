@@ -27,6 +27,7 @@ namespace uGE{
             virtual ~Player();
             //add public stuff underneath
             int getHealth();
+            void setHealth(int value);
             void addScore( int value );
             int getScore();
             int getTimeLeft();

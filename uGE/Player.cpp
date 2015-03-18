@@ -54,6 +54,9 @@ namespace uGE
     int Player::getHealth(){
         return health;
     }
+    void Player::setHealth(int newHealth){
+        health = newHealth;
+    }
     void Player::resetTime(){
         _timeLeft = 60.f;
     }
@@ -95,7 +98,7 @@ namespace uGE
 		}
 		if( _timeLeft <= 0.f ) { /* Do timey stuff */ }
 
-        if (health <= 0)
+        if (health <= 0){
             //Make sure that PlayerController's keyboard controls get disabled!!!
             playNow("DEATH");
         }

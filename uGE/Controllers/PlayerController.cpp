@@ -96,7 +96,7 @@ namespace uGE {
 			    _isAttacking = true;
                 _parent->playNow("MELEE");
 				attack();
-                _shootTime = 0.3f;
+                _shootTime = 0.5f;
 			} else {
                 _isAttacking = false;
 			}
@@ -139,6 +139,8 @@ namespace uGE {
 	void PlayerController::vacuum()
 	{
         SoundManager::playSFX( "Sucking" );
+        //---- Spawn particles ----
+        //---- End Spawn  ------
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
@@ -209,8 +211,9 @@ namespace uGE {
 	void PlayerController::regenerate(){
 	regenerateHpT -=Time::step();
         if(regenerateHpT<= -1){
-        regenerateHpT = regenerateMax;
-        _parent->changeHealth(+5);
+            regenerateHpT = regenerateMax;
+            _parent->changeHealth(+5);
+            if(_parent->getHealth() > 100) _parent->setHealth(100);
         }
 
 	}
@@ -231,6 +234,8 @@ namespace uGE {
 
                 if(zombieHitTime <= 0 ){//hits player every second
                 zombieHitTime = zombieHitReset;
+                SoundManager::playSFX( "PlayerHit" );
+
                 _parent->changeHealth(-10);//lowers health by 10 every second they touch.
                 }
 

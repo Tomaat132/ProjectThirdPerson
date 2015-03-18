@@ -28,6 +28,7 @@
 #include "uGE/Controllers/ParticleController.hpp"
 #include "uGE/Controllers/ZombieSpawnController.hpp"
 #include "uGE/Controllers/SpiritSpawnController.hpp"
+#include "uGE/SoundManager.hpp"
 
 
 MyGame::MyGame()
@@ -42,6 +43,7 @@ MyGame::~MyGame()
 
 bool MyGame::load()
 {
+
 	uGE::SceneManager::add( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs") );
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
@@ -77,7 +79,7 @@ bool MyGame::load()
 
 	uGE::SceneManager::_hud = new uGE::Hud();
     uGE::SoundManager::init();
-
+    uGE::SoundManager::getBGM("background_sound");
 	return true;
 }
 
