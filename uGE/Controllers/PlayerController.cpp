@@ -174,7 +174,6 @@ namespace uGE {
                         break;
                     }
                 }
-
             }
         }
         //particle
