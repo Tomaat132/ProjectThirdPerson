@@ -46,13 +46,13 @@ namespace uGE{
         switch(_state)
         {
 			case IDLE:
-			    _zombieParent->playNow("IDLE");
+			    //_zombieParent->playNow("IDLE");
 				if(_idleTimer <= 0.f){
 				   _eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
 				   _idleTimer = 1.f; // how many seconds till next direction
 				}
 				move(_eightDir);
-				_zombieParent->playNow("WALK");
+				//_zombieParent->playNow("WALK");
 				checkPlayerRange();//it checks every second compared to the update of every 2 seconds in player;
 
 				_idleTimer -= Time::step();
@@ -69,7 +69,7 @@ namespace uGE{
 					_transformIntervalTimer = 0.05f;
 				}
 				move(_eightDir);
-				_zombieParent->playNow("WALK");
+				//_zombieParent->playNow("WALK");
 
 				_transformTimer -= Time::step();
 				_transformIntervalTimer -= Time::step();
@@ -160,6 +160,10 @@ namespace uGE{
 
         if( glm::length(rotate) > 0 ) {
             rotate = glm::normalize(rotate);
+            _zombieParent->playNow("WALK");
+        }
+        else if(_state == State::IDLE) {
+            _zombieParent->playNow("IDLE");
         }
 
         if(rotate != glm::vec3(0,0,0)){ _parent->setDirection(glm::normalize(rotate));}
