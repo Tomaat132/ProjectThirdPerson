@@ -57,7 +57,7 @@ namespace uGE
         return health;
     }
     void Player::resetTime(){
-        _timeLeft = 60.f;
+        _timeLeft = 300.f;
     }
     int Player::getTimeLeft(){
         int timeLeft = (int) _timeLeft;
