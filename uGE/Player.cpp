@@ -140,7 +140,7 @@ namespace uGE
     void Player::updateFrame()
     {
         ++frame;
-        Logger::print( Logger::INFO, "Anim: " + activeAction + ", Frame: " + to_s(frame) );
+        //Logger::print( Logger::INFO, "Anim: " + activeAction + ", Frame: " + to_s(frame) );
         if(frame >= currentAnim.size()) frame = 0;
         this->getBody()->setMesh(currentAnim[frame]);
     }
