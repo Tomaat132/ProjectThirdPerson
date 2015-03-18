@@ -162,7 +162,7 @@ namespace uGE {
 	{
 	    for( unsigned int i = 0; i < ZombieSpawnController::zombies.size(); i++){
             Zombie* zombie = ZombieSpawnController::zombies[i];
-            if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 10.f)
+            if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 8.f)
             {
                 if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.5f)
                 {
@@ -178,7 +178,7 @@ namespace uGE {
             }
         }
         //particle
-        uGE::GameObject * particle = new uGE::GameObject( "Particle" );
+        /*uGE::GameObject * particle = new uGE::GameObject( "Particle" );
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
                 particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star.png") );
@@ -188,7 +188,7 @@ namespace uGE {
 
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera, glm::vec3(0.f, 0.f, 1.f), 1.f) );
             particle->setPosition( _parent->getPosition() +_parent->getDirection()*4.f);
-           uGE::SceneManager::add( particle );
+           uGE::SceneManager::add( particle );*/
 	}
 
 	void PlayerController::shoot()
