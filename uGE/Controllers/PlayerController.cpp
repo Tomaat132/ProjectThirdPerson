@@ -144,8 +144,8 @@ namespace uGE {
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
-            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 12.f){
-                if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.7f ||  glm::distance( spirit->getPosition(), _parent->getPosition()) < 4.f){
+            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 14.f){
+                if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.5f ||  glm::distance( spirit->getPosition(), _parent->getPosition()) < 4.f){
                     spirit->isTargeted( true );
                     break;
                 }
@@ -164,7 +164,7 @@ namespace uGE {
             Zombie* zombie = ZombieSpawnController::zombies[i];
             if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 10.f)
             {
-                if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
+                if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.5f)
                 {
                     //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
                     if(zombie->getViking())
@@ -209,13 +209,12 @@ namespace uGE {
 	}
 
 	void PlayerController::regenerate(){
-	regenerateHpT -=Time::step();
+        regenerateHpT -=Time::step();
         if(regenerateHpT<= -1){
             regenerateHpT = regenerateMax;
             _parent->changeHealth(+5);
             if(_parent->getHealth() > 100) _parent->setHealth(100);
         }
-
 	}
 
     void PlayerController::onCollision( CollisionResult * result )
@@ -230,13 +229,14 @@ namespace uGE {
         }
         if( result->colliderTypeB == Collider::SPHERE ) {
             if( result->colliderB == "zombieHitbox"){//check for zombie
-                _parent->setPosition( _parent->getPosition() - result->overlap );//prevent overlapping 2 objects
+                result->objectB->setPosition( result->objectB->getPosition() + result->overlap );//prevent overlapping 2 objects
 
                 if(zombieHitTime <= 0 ){//hits player every second
-                zombieHitTime = zombieHitReset;
-                SoundManager::playSFX( "PlayerHit" );
+                    zombieHitTime = zombieHitReset;
+                    SoundManager::playSFX( "PlayerHit" );
 
-                _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+                    _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+
                 }
 
             }
@@ -244,4 +244,3 @@ namespace uGE {
         //add stuff
     }
 }
-

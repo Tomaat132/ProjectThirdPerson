@@ -8,16 +8,19 @@
 #include "ZombieSpawnController.hpp"
 #include "Hud.hpp"
 #include "Logger.h"
+#include "Time.hpp"
 
 namespace uGE
 {
 
     Hud::Hud()
+    : gameEnd( false ), endAlpha( 0.f ), endAlpha2( 0.f ), scoreCounter( 0 )
     {
         healthImg.loadFromFile( "Assets/Textures/Hud/life hud.png" );
         spiritImg.loadFromFile( "Assets/Textures/Hud/spirit hud.png" );
         timeImg.loadFromFile( "Assets/Textures/Hud/time hud.png" );
         scoreImg.loadFromFile( "Assets/Textures/Hud/score hud.png" );
+        endImg.loadFromFile( "Assets/Textures/Hud/end screen thing.png" );
 
         healthSprite.setTexture( healthImg );
         healthSprite.setPosition( 448, 20 );
@@ -30,6 +33,11 @@ namespace uGE
 
         scoreSprite.setTexture( scoreImg );
         scoreSprite.setPosition( 876, 640 );
+
+        endSprite.setTexture( endImg );
+        endSprite.scale( .75f, .75f );
+        endSprite.setColor( sf::Color( 255, 255, 255, 0 ) );
+        endSprite.setPosition( 128, 96 );
 
         font.loadFromFile( "Assets/VIKING-N.ttf" );
 
@@ -52,6 +60,16 @@ namespace uGE
         scoreText.setColor( sf::Color::White );
         scoreText.setFont( font );
         scoreText.setPosition( 936, 694 );
+
+        endText.setCharacterSize( 72 );
+        endText.setFont( font );
+        endText.setPosition( 200, 250 );
+        endText.setColor( sf::Color( 255, 255, 255, 0 ) );
+
+        endScoreText.setCharacterSize( 24 );
+        endScoreText.setFont( font );
+        endScoreText.setPosition( 200, 540 );
+        endScoreText.setColor( sf::Color( 255, 255, 255, 0 ) );
     }
 
     Hud::~Hud()
@@ -79,6 +97,23 @@ namespace uGE
         drawWithOutline( &timeText, window );
         drawWithOutline( &scoreText, window );
 
+        if( gameEnd ) {
+            endAlpha = glm::min( 255.f, endAlpha + 100.f * Time::step() );
+            if( endAlpha >= 255.f ) {
+                endAlpha2 = glm::min( 255.f, endAlpha2 + 200.f * Time::step() );
+                if( endAlpha2 >= 255.f ) {
+                    scoreCounter = glm::min( SceneManager::_player->getScore(), scoreCounter + (int) glm::ceil( 500.f * Time::step() ) );
+                }
+            }
+
+            endSprite.setColor( sf::Color( 255, 255, 255, endAlpha ) );
+            endScoreText.setString( "Your score:   " + to_s( scoreCounter ) );
+
+            window->draw( endSprite );
+            drawWithOutline( &endText, window, sf::Color( 255, 255, 255, endAlpha ), 2 );
+            drawWithOutline( &endScoreText, window, sf::Color( 255, 255, 255, endAlpha2 ) );
+        }
+
         window->popGLStates();
         glEnable( GL_CULL_FACE );
     }
@@ -95,20 +130,31 @@ namespace uGE
     }
 
 
-    void Hud::drawWithOutline( sf::Text* text, sf::RenderWindow* window, sf::Color color )
+    void Hud::drawWithOutline( sf::Text* text, sf::RenderWindow* window, sf::Color color, int lineSize )
     {
-        text->setColor( sf::Color::Black );
-        text->move( -1, -1 );
+        sf::Color backColor = sf::Color::Black;
+        backColor.a = color.a;
+
+        text->setColor( backColor );
+        text->move( -lineSize, -lineSize );
         window->draw( *text );
-        text->move( 2, 0 );
+        text->move( 2 * lineSize, 0 );
         window->draw( *text );
-        text->move( -2, 2 );
+        text->move( -2 * lineSize, 2 * lineSize );
         window->draw( *text );
-        text->move( 2, 0 );
+        text->move( 2 * lineSize, 0 );
         window->draw( *text );
-        text->move( -1, -1 );
+        text->move( -lineSize, -lineSize );
 
         text->setColor( color );
         window->draw( *text );
+    }
+
+
+    void Hud::setEndGame( std::string text ) {
+        gameEnd = true;
+        endText.setString( text );
+
+        SceneManager::paused = true;
     }
 }
