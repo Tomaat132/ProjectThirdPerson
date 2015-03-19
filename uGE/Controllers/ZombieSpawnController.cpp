@@ -61,7 +61,7 @@ namespace uGE {
                 zombieBody->getMaterial()->setBlendMode( Material::BlendMode::NORMAL );
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
-            zombie->setCollider( new uGE::SphereCollider(zombie, 20.0f));
+            zombie->setCollider( new uGE::SphereCollider(zombie, 25.0f));
             zombie->setCollider( new uGE::SphereCollider(zombie, 1.25f, "zombieHitbox"));
 
            auto temp = uGE::SceneManager::_zombieSpawnLocations.size();

@@ -22,6 +22,7 @@ namespace uGE {
 	Mesh * AssetManager::loadMesh( std::string filename ) {
 		auto found = meshes.find( filename );
 		if ( found != meshes.end() ) {
+            if(filename == "Assets/Models/Undertaker_walk/U_W_Idle.obj")std::cout<< filename << " = " <<found->second << std::endl;
 			return found->second;
 		} else {
 			Mesh * mesh = Mesh::load( filename );

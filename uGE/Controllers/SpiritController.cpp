@@ -3,6 +3,7 @@
 #include "SpiritController.hpp"
 #include "SceneManager.hpp"
 #include "AssetManager.hpp"
+#include "SoundManager.hpp"
 #include "ParticleController.hpp"
 #include "GameObject.hpp"
 #include "Player.hpp"
@@ -91,9 +92,10 @@ namespace uGE {
 	{
 	    if(_targeted ) _percentSucked += Time::step()*80.f + _percentSucked/15;
 	    else if(_percentSucked > 0) _percentSucked -= (Time::step()*80.f + _percentSucked/15);
-	    if(_percentSucked >= 98)
+	    if(_percentSucked >= 96)
         {
             _followee->changeShootable(1);
+            SoundManager::playSFX("SpiritCollect");
             die();//DIE
         }
 	}

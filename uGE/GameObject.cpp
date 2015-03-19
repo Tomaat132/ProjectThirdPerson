@@ -14,6 +14,7 @@ namespace uGE {
 	: transform( _transform ), _name( name ), _colliders( 0 ), _body( 0 ), _controller( 0 )
 	{
 	    //_direction = glm::vec3(1f, 0f, 0f);
+	    _transform = glm::mat4( 1 );
 	}
 
 	GameObject::~GameObject()

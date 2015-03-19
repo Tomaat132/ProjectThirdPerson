@@ -39,6 +39,7 @@ namespace uGE
                 objName.pop_back();
             }
 
+
             if( objName == "group" ) {
                 parseGroup( object );
                 object = object->NextSiblingElement( "node" );
@@ -70,7 +71,7 @@ namespace uGE
             }
 
             //Compose the GameObject
-            if( objName == "watervv" ) {
+            if( objName == "watervv" || objName == "pasted__group" ) {
                 /*GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
 
@@ -87,13 +88,16 @@ namespace uGE
                 continue;
             }
 
-            if( objName == "groundff" || objName == "bridge_msize" || objName == "bridge_vsize" || objName == "Skull_m" ) {
+            if( objName == "groundff" || objName == "bridge_msize" || objName == "bridge_vsize" || objName == "Skull_m" || objName == "grass") {
+                //std::cout<< objName << std::endl;
                 GameObject * obj = new GameObject( objName );
                 obj->transform = matrix;
 
                 Body * body = new Body( obj );
                 body->setMesh( AssetManager::loadMesh( "Assets/Models/" + objName + ".obj" ) );
                 body->setTexture( AssetManager::loadTexture( "Assets/Textures/" + objName + ".png" ) );
+                if(objName == "grass") body->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
+
                 obj->setBody( body );
 
                 uGE::SceneManager::add( obj );

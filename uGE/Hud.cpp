@@ -59,7 +59,7 @@ namespace uGE
         scoreText.setCharacterSize( 32 );
         scoreText.setColor( sf::Color::White );
         scoreText.setFont( font );
-        scoreText.setPosition( 936, 694 );
+        scoreText.setPosition( 928, 694 );
 
         endText.setCharacterSize( 72 );
         endText.setFont( font );

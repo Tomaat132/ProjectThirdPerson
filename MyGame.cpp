@@ -43,7 +43,7 @@ MyGame::~MyGame()
 
 bool MyGame::load()
 {
-
+    uGE::AssetManager::loadTexture( "Assets/Textures/viking.png" ); // Load texture beforehand. So it won't do it ingame which causes lag
 	uGE::SceneManager::add( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs") );
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );
     uGE::Light * light = new uGE::Light( "Sun" );
@@ -62,6 +62,8 @@ bool MyGame::load()
 
     uGE::LevelLoader loader = uGE::LevelLoader();
     loader.loadLevel( "week 5 level tuesday" );
+
+    //loader.loadLevel( "last level" );
 
     uGE::GameObject * zombieSpawn = new uGE::GameObject( "ZombieSpawn" );
         zombieSpawn->setController(new uGE::ZombieSpawnController( zombieSpawn, camera ));

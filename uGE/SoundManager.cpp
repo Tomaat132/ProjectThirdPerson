@@ -24,6 +24,8 @@ namespace uGE
         getSFX("Zombie");
         getSFX("ZombieDie");
         getSFX("PlayerHit");
+        getSFX("PlayerAtk");
+        getSFX("SpiritCollect");
         for( unsigned int i = 0; i < 64; ++i ) {
             sounds.push_back( new sf::Sound );
         }

@@ -52,7 +52,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    float speed = 30.f * Time::step();
+	    float speed = 26.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
         if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
@@ -82,7 +82,6 @@ namespace uGE {
 				spirit->isTargeted( false );
 			}
 		}
-
         if(!_isSucking)
         {
             if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
@@ -95,8 +94,9 @@ namespace uGE {
 			{
 			    _isAttacking = true;
                 _parent->playNow("MELEE");
+                SoundManager::playSFX("PlayerAtk");
 				attack();
-                _shootTime = 0.5f;
+                _shootTime = 0.3f;
 			} else {
                 _isAttacking = false;
 			}
