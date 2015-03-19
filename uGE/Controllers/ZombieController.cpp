@@ -60,13 +60,13 @@ namespace uGE{
 			case TRANSFORM:
 				if(_transformTimer <= 0.f){
 					//can use nice animation here
-					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/bricks.jpg" ) );
+					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/viking.png" ) );
 					_zombieParent->setViking(true);
 					_state = IDLE;
 				}
 				if(_transformIntervalTimer <= 0.f){
 					_eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
-					_transformIntervalTimer = 0.05f;
+					_transformIntervalTimer = 0.03f;
 				}
 				move(_eightDir);
 				//_zombieParent->playNow("WALK");

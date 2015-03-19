@@ -96,7 +96,7 @@ namespace uGE {
 			    _isAttacking = true;
                 _parent->playNow("MELEE");
 				attack();
-                _shootTime = 0.3f;
+                _shootTime = 0.5f;
 			} else {
                 _isAttacking = false;
 			}
@@ -139,11 +139,13 @@ namespace uGE {
 	void PlayerController::vacuum()
 	{
         SoundManager::playSFX( "Sucking" );
+        //---- Spawn particles ----
+        //---- End Spawn  ------
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
-            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 12.f){
-                if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.7f ||  glm::distance( spirit->getPosition(), _parent->getPosition()) < 4.f){
+            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 14.f){
+                if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.5f ||  glm::distance( spirit->getPosition(), _parent->getPosition()) < 4.f){
                     spirit->isTargeted( true );
                     break;
                 }
@@ -160,9 +162,9 @@ namespace uGE {
 	{
 	    for( unsigned int i = 0; i < ZombieSpawnController::zombies.size(); i++){
             Zombie* zombie = ZombieSpawnController::zombies[i];
-            if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 10.f)
+            if(glm::distance(zombie->getPosition(), _parent->getPosition()) < 8.f)
             {
-                if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.6f)
+                if(glm::dot(glm::normalize(zombie->getPosition()- _parent->getPosition()), _parent->getDirection()) >= 0.5f)
                 {
                     //std::cout<< glm::dot(_parent->getDirection(), glm::normalize(spirit->getPosition()- _parent->getPosition() )) << std::endl;
                     if(zombie->getViking())
@@ -172,11 +174,10 @@ namespace uGE {
                         break;
                     }
                 }
-
             }
         }
         //particle
-        uGE::GameObject * particle = new uGE::GameObject( "Particle" );
+        /*uGE::GameObject * particle = new uGE::GameObject( "Particle" );
              uGE::Body * particleBody = new uGE::Body( particle );
                 particleBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/particles.obj" ) );
                 particleBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/star.png") );
@@ -186,7 +187,7 @@ namespace uGE {
 
             particle->setController( new uGE::ParticleController( particle, SceneManager::_camera, glm::vec3(0.f, 0.f, 1.f), 1.f) );
             particle->setPosition( _parent->getPosition() +_parent->getDirection()*4.f);
-           uGE::SceneManager::add( particle );
+           uGE::SceneManager::add( particle );*/
 	}
 
 	void PlayerController::shoot()
@@ -206,16 +207,12 @@ namespace uGE {
         }
 	}
 
-	void PlayerController::regenerate()
-	{
-	    if( _parent->getHealth() >= 100 ) {
-            return;
-	    }
-
-        regenerateHpT -= Time::step();
-        if( regenerateHpT<= -1 ) {
+	void PlayerController::regenerate(){
+        regenerateHpT -=Time::step();
+        if(regenerateHpT<= -1){
             regenerateHpT = regenerateMax;
-            _parent->changeHealth( 5 );
+            _parent->changeHealth(+5);
+            if(_parent->getHealth() > 100) _parent->setHealth(100);
         }
 	}
 
@@ -233,9 +230,12 @@ namespace uGE {
             if( result->colliderB == "zombieHitbox"){//check for zombie
                 result->objectB->setPosition( result->objectB->getPosition() + result->overlap );//prevent overlapping 2 objects
 
-                if(zombieHitTime <= 0 ) { //hits player every second
+                if(zombieHitTime <= 0 ){//hits player every second
                     zombieHitTime = zombieHitReset;
-                    _parent->changeHealth( -10 ); //lowers health by 10 every second they touch.
+                    SoundManager::playSFX( "PlayerHit" );
+
+                    _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+
                 }
 
             }
