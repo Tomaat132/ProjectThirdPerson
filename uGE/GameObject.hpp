@@ -49,7 +49,7 @@ namespace uGE {
 			Controller* getController();
 			void setAnimTransform( glm::mat4 & animTransform );
 
-			virtual void render( Shader * shader, glm::mat4 & parentTransform );
+            virtual void render( Shader * shader, glm::mat4 & parentTransform );
 			virtual void update();
 
 			void setPosition( glm::vec3 position );
