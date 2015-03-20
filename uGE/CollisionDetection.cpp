@@ -8,6 +8,7 @@
 #include "Controller.hpp"
 #include "SceneManager.hpp"
 #include "utils/glm.hpp"
+#include "Logger.h"
 
 #include <iostream>
 #include <vector>
@@ -43,7 +44,10 @@ namespace uGE{
         colliderArray.insert(colliderArray.end(),tempArray.begin(),tempArray.end());
 
         for (unsigned int i = 0; i<colliderArray.size(); i++) {
+            if( colliderArray[i] == nullptr ) { continue; }
+
             for (unsigned int j = i+1; j<colliderArray.size() ; j++ ) {
+                if( colliderArray[j] == nullptr ) { continue; }
                 if( colliderArray[i]->getParent() == colliderArray[j]->getParent() ){
                     continue;
                 }
@@ -85,7 +89,8 @@ namespace uGE{
             glm::vec3 difference = sphere2->getPosition() -  sphere1->getPosition();
 
             float dist2 = glm::length2(difference);
-            if( dist2 <= glm::pow2(sumOfRadius) ) {
+            if( dist2 <= glm::pow2(sumOfRadius) )
+            {
                 CollisionResult * res = new CollisionResult();
                 res->objectA = sphere1->getParent();
                 res->objectB = sphere2->getParent();
@@ -95,10 +100,10 @@ namespace uGE{
                 res->colliderTypeB = sphere2->getColliderType();
                 res->overlap = glm::normalize( difference ) * ( sumOfRadius - glm::length( difference ) ); //glm::vec3 with distance and size of overlap
 
-                if( res->objectA->getController() ) {
+                if( res->objectA && res->objectA->getController() ) {
                     res->objectA->getController()->onCollision( res ); //Run onCollision in the controller of the first GameObject
                 }
-                if( res->objectB->getController() ) {
+                if( res->objectB && res->objectB->getController() ) {
                     res->objectB->getController()->onCollision( inverseResult(res) );
                 }
             }
@@ -203,10 +208,10 @@ namespace uGE{
                     res->colliderTypeB = box2->getColliderType();
                     res->overlap = box2->getPosition() - box1->getPosition();
 
-                    if( res->objectA->getController() ) {
+                    if( res->objectA && res->objectA->getController() ) {
                         res->objectA->getController()->onCollision( res );
                     }
-                    if( res->objectB->getController() ) {
+                    if( res->objectB && res->objectB->getController() ) {
                         res->objectB->getController()->onCollision( inverseResult(res) );
                     }
                     return;
@@ -255,10 +260,10 @@ namespace uGE{
                 res->colliderTypeB = box->getColliderType();
                 res->overlap = glm::normalize( glm::vec3(closestDiff.x, 0, closestDiff.y) ) * ( sphere->getRadius() - glm::length( closestDiff ) );
 
-                if( res->objectA->getController() ) {
+                if( res->objectA && res->objectA->getController() ) {
                     res->objectA->getController()->onCollision( res );
                 }
-                if( res->objectB->getController() ) {
+                if( res->objectB && res->objectB->getController() ) {
                     res->objectB->getController()->onCollision( inverseResult(res) );
                 }
             }

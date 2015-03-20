@@ -29,7 +29,7 @@ namespace uGE {
 	    _timeTillSpawn = 1.0f;
 	    _spawnTime = 1.5f;
         srand(time(NULL));
-        _maxZombies = 30;
+        _maxZombies = 20;
 
 	}
 

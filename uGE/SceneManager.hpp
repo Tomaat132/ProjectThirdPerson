@@ -14,16 +14,13 @@ namespace uGE {
 	class Shader;
 	class Player;
 	class Hud;
-
 	class CollisionDetection;
 
-	//empty space to add classes above
 	class SceneManager
 	{
 		private:
 			static std::vector< GameObject * > _objects;
 			static std::vector< GameObject * > _deleteQueue;
-
 
 			static CollisionDetection * _collision;
 
@@ -38,6 +35,7 @@ namespace uGE {
 			static Player * _player;
 
 			static bool paused;
+			static bool fullscreen;
 
             static std::vector< glm::vec3 > _spawnLocations;
             static std::vector< glm::vec3 > _zombieSpawnLocations;
@@ -50,7 +48,7 @@ namespace uGE {
 			static void addZombieSpawnLoc( glm::vec3 aSpawnLoc );
 			static std::vector< glm::vec3 >& getSpawnLoc();
 
-			static bool control( sf::Window * window );
+			static bool control( sf::RenderWindow * window );
 
 			static void render( sf::RenderWindow * window );
 			static void update();

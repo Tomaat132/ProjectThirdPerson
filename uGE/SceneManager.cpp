@@ -33,6 +33,7 @@ namespace uGE {
     std::vector< glm::vec3 > SceneManager::_zombieSpawnLocations;
 	CollisionDetection * SceneManager::_collision;
 	bool SceneManager::paused = false;
+	bool SceneManager::fullscreen = false;
 
 	SceneManager::SceneManager()
 	{
@@ -82,7 +83,7 @@ namespace uGE {
 		_deleteQueue.push_back( object );
 	}
 
-	bool SceneManager::control( sf::Window * window )
+	bool SceneManager::control( sf::RenderWindow * window )
 	{
 		sf::Event event;
 		while( window->pollEvent( event ) ) { // we must empty the event queue
@@ -100,8 +101,23 @@ namespace uGE {
                     return false;
                 }
 
-                if( event.key.code == sf::Keyboard::P ) {
+                else if( event.key.code == sf::Keyboard::P ) {
                     paused = !paused;
+                }
+
+                else if( event.key.code == sf::Keyboard::F11 ) {
+                    paused = true;
+                    fullscreen = !fullscreen;
+                    if( fullscreen ) {
+                        window->create( sf::VideoMode( 1024, 768 ), "Redemption", sf::Style::Fullscreen );
+                    } else {
+                        window->create( sf::VideoMode( 1024, 768 ), "Redemption" );
+                    }
+                    glEnable( GL_DEPTH_TEST );
+                    glEnable( GL_CULL_FACE );
+                    glEnable( GL_BLEND );
+                    glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
+                    paused = false;
                 }
 			}
 		}
@@ -121,7 +137,9 @@ namespace uGE {
 
         for ( auto i = _objects.begin(); i != _objects.end(); ++i ) {
             GameObject * object = (GameObject*) *i;
-            object->render( _shader, parent );
+            if( object != nullptr ) {
+                object->render( _shader, parent );
+            }
         }
 
         Renderer::StartRender( window, "Game" );
@@ -143,7 +161,9 @@ namespace uGE {
 
             for ( unsigned int i = 0; i < _objects.size(); i++ ) {
                 GameObject * object = _objects[i];
-                object->update();
+                if( object != nullptr ) {
+                    object->update();
+                }
                 //std::cout << object->getName() << std::endl;
             }
 	    }

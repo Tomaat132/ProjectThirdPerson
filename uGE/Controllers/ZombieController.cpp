@@ -16,7 +16,7 @@
 #include "Collider.hpp"
 #include "SphereCollider.hpp"
 #include "CollisionDetection.hpp"
-
+#include "Logger.h"
 
 #include "utils/glm.hpp"
 
@@ -156,23 +156,34 @@ namespace uGE{
 
     void ZombieController::onCollision( CollisionResult* result)
     {
+        if( result->objectB == nullptr ) {
+            return;
+        }
+
+        if( result->colliderTypeB == Collider::BOX ) {
+            if( result->colliderA == "zombieHitbox" ) {
+                _parent->setPosition( _parent->getPosition() - result->overlap );
+            }
+        }
 
         if( result->colliderTypeB == Collider::SPHERE ) {
-
-
             if(result->colliderA == "zombieHitbox"){
                 if(result->objectB->getName() == "Bullet") {
                     if(_state != TRANSFORM && !_zombieParent->getViking()){   //ZOMBIE BEHAVIOUR:
                         _state = TRANSFORM;
                         SoundManager::playSFX( "ZombieDie" );
-
                         _transformTimer = 1.3f;
                     }
-					SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+                    SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
+                    //delete result->objectB;
                 }
 
-                if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
+                else if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
                     _parent->setPosition( _parent->getPosition() - result->overlap );
+                }
+
+                else if( result->objectB->getName() == "Zombie" && result->colliderB == "zombieHitbox" ) {
+                    _parent->setPosition( _parent->getPosition() - ( 0.5f * result->overlap ) );
                 }
             }
 
