@@ -156,7 +156,7 @@ namespace uGE {
     void PlayerController::releaseButton()
     {
 
-    }
+}
 
 	void PlayerController::attack()
 	{
