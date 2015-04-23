@@ -14,7 +14,7 @@ namespace uGE {
 			float _timeTillSpawn;
 			float _spawnTime;
 			float _maxZombies;
-
+            float _zombieLvlUpTimer;
         public:
             static std::vector< Zombie* > zombies;
         private:

@@ -38,7 +38,8 @@ namespace uGE {
 
 	void SpiritController::update()
 	{
-
+	    glm::mat4 & transform = _parent->transform;
+        transform = glm::rotate( transform, -1.3f*Time::step(), glm::vec3( 0,1,0 ) );
 
          _timeTillEmit -= Time::step();
         if(_percentSucked >= 0) {//_velocity = (_followee->getPosition()-_parent->getPosition())*_percentSucked/100.f ;
@@ -50,7 +51,7 @@ namespace uGE {
             _particles.clear();
             // std::cout<< _followee->getPosition() << " --- " << _startPos <<std::endl;
 
-            for(auto i = 0; i < 4; i++)
+            for(auto i = 0; i < 2; i++)
             {
                 //distortion around a position
                 float angle = (float(rand())/ float(RAND_MAX))*2.f* _PI;

@@ -33,9 +33,9 @@ namespace uGE
         shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_5.obj" ) );
         shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_6.obj" ) );
         shoot.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_shoot/U_shoot_7.obj" ) );
-        suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_1.obj" ) );
+        //suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_1.obj" ) );
         suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_2.obj" ) );
-        suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_3.obj" ) );
+        //suck.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_suck/U_Suck_3.obj" ) );
         death.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_death/U_D_1.obj" ) );
         death.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_death/U_D_2.obj" ) );
         activeAction = "IDLE";
