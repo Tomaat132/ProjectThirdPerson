@@ -57,7 +57,7 @@ namespace uGE {
             uGE::Body * spiritBody = new uGE::Body( spirit );
                 spiritBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj"));
                 spiritBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );
-                spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
+                spiritBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
             spirit->setBody( spiritBody );
 
            auto temp = uGE::SceneManager::getSpawnLoc().size();

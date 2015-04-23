@@ -52,8 +52,9 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
-	    glm::vec3 oldPosition = _parent->getPosition();
 	    float speed = 10.f * Time::step();
+	    glm::vec3 oldPosition = _parent->getPosition();
+
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
         if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
@@ -201,8 +202,8 @@ namespace uGE {
             SoundManager::playSFX( "Launch" );
             uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
                 uGE::Body * bulletBody = new uGE::Body( bullet );
-                    bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );  //change model
-                    bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );     //change texture
+                    bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" ) );  //change model
+                    bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/bullet.png") );     //change texture
                     bulletBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
 
                 bullet->setBody( bulletBody );
@@ -242,8 +243,9 @@ namespace uGE {
                 if(zombieHitTime <= 0 ){//hits player every second
                     zombieHitTime = zombieHitReset;
                     SoundManager::playSFX( "PlayerHit" );
-
                     _parent->changeHealth(-10);//lowers health by 10 every second they touch.
+                    if(SceneManager::zombieLevel > 5 ) _parent->changeHealth(-2);//lowers health by 10 every second they touch.
+                    if(SceneManager::zombieLevel > 10 ) _parent->changeHealth(-3);//lowers health by 10 every second they touch.
                     _parent->getBody()->setTexture(uGE::AssetManager::loadTexture( "Assets/Textures/hitUV.png"));
                 }
 

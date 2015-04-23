@@ -43,6 +43,7 @@ namespace uGE{
 
     void ZombieController::update()
     {
+        if( _speed < 10.f) _speed = 5.0f + SceneManager::zombieLevel/2;
         switch(_state)
         {
 			case IDLE:
@@ -67,7 +68,7 @@ namespace uGE{
 
 				if(_transformIntervalTimer <= 0.f){
 					_eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
-					_transformIntervalTimer = 0.03f;    // time the zombie is walking in a direction
+					_transformIntervalTimer = 0.015f;    // time the zombie is walking in a direction
 				}
 				move(_eightDir);
 				//_zombieParent->playNow("WALK");

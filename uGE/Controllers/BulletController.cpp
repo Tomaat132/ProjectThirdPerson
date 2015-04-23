@@ -19,8 +19,14 @@ namespace uGE {
 
 	void BulletController::update()
 	{
+	    glm::mat4 & transform = _parent->transform;
+	    //transform = glm::rotate( transform, 1.f*Time::step(), glm::vec3( 0,0,1 ) );
+
+	    _parent->setRotation(_direction );
+
+
 	    _destroyTime -= Time::step();
-	    _parent->transform = glm::translate( _parent->transform, _direction * _speed * Time::step() );
+	    _parent->transform = glm::translate( _parent->transform, glm::vec3( sin(_destroyTime*15)/5, 0 ,1 ) * _speed * Time::step() );
         if( _destroyTime <= 0.0f ) {
 			uGE::SceneManager::del(_parent);
 		}
