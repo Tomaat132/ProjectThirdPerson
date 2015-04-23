@@ -16,7 +16,8 @@ namespace uGE{
         private:
 			float _timeCrumb = 0;
             int health = 100;
-            int maxHealth = 150;
+            int maxHealth = 250;
+            int _scoreTimer;
             int _shootable;
             int _score;
             float _timeLeft;

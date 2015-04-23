@@ -14,13 +14,14 @@ namespace uGE
 {
 
     Hud::Hud()
-    : gameEnd( false ), endAlpha( 0.f ), endAlpha2( 0.f ), scoreCounter( 0 )
+    : gameEnd( false ), gamePaused( true ), endAlpha( 0.f ), endAlpha2( 0.f ), scoreCounter( 0 )
     {
         healthImg.loadFromFile( "Assets/Textures/Hud/life hud.png" );
         spiritImg.loadFromFile( "Assets/Textures/Hud/spirit hud.png" );
         timeImg.loadFromFile( "Assets/Textures/Hud/time hud.png" );
         scoreImg.loadFromFile( "Assets/Textures/Hud/score hud.png" );
         endImg.loadFromFile( "Assets/Textures/Hud/end screen thing.png" );
+        startImg.loadFromFile( "Assets/Textures/Hud/Start_manual.png" );
 
         healthSprite.setTexture( healthImg );
         healthSprite.setPosition( 12, 20 );
@@ -39,6 +40,11 @@ namespace uGE
         endSprite.setColor( sf::Color( 255, 255, 255, 0 ) );
         endSprite.setPosition( 128, 96 );
 
+        startSprite.setTexture( startImg );
+        startSprite.scale( .75f, .75f );
+        startSprite.setColor( sf::Color( 255, 255, 255, 1 ) );
+        startSprite.setPosition( 128, 96 );
+
         font.loadFromFile( "Assets/VIKING-N.ttf" );
 
         healthText.setCharacterSize( 48 );
@@ -48,7 +54,8 @@ namespace uGE
 
         waveText.setCharacterSize( 19 );
         waveText.setColor( sf::Color::White );
-        waveText.setFont( font );
+        waveText.setFont( font );            sf::Texture endImg;
+
         waveText.setPosition( 740, 30 );
 
         timeText.setCharacterSize( 40 );
@@ -113,6 +120,26 @@ namespace uGE
             drawWithOutline( &endText, window, sf::Color( 255, 255, 255, endAlpha ), 2 );
             drawWithOutline( &endScoreText, window, sf::Color( 255, 255, 255, endAlpha2 ) );
         }
+        if( gamePaused ) {
+
+
+            //pauseSprite.setColor( sf::Color( 255, 255, 255, endAlpha ) );
+
+            //startSprite.setColor( sf::Color( 255, 255, 255, endAlpha ) );
+            endAlpha = glm::min( 255.f, endAlpha + 100.f * Time::step() );
+            if( endAlpha >= 255.f ) {
+                endAlpha2 = glm::min( 255.f, endAlpha2 + 200.f * Time::step() );
+                if( endAlpha2 >= 255.f ) {
+                    scoreCounter = glm::min( SceneManager::_player->getScore(), scoreCounter + (int) glm::ceil( 500.f * Time::step() ) );
+                }
+            }
+            startSprite.setColor( sf::Color( 255, 255, 255, endAlpha ) );
+
+            window->draw( startSprite );
+
+            //drawWithOutline( &endText, window, sf::Color( 255, 255, 255, endAlpha ), 2 );
+            //drawWithOutline( &endScoreText, window, sf::Color( 255, 255, 255, endAlpha2 ) );
+        }
 
         window->popGLStates();
         glEnable( GL_CULL_FACE );
@@ -156,5 +183,11 @@ namespace uGE
         endText.setString( text );
 
         SceneManager::paused = true;
+    }
+
+    void Hud::setPause(){
+        gamePaused = !gamePaused;
+        //SceneManager::paused = gamePaused;
+
     }
 }

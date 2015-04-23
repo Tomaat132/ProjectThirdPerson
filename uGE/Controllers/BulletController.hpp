@@ -18,6 +18,7 @@ namespace uGE {
 			virtual ~BulletController();
 
 			void update();
+			void onCollision( CollisionResult * result);
 	};
 }
 #endif // BULLETCONTROLLER_H

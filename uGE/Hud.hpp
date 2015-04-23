@@ -14,6 +14,7 @@ namespace uGE
 
             void draw( sf::RenderWindow * window );
             void setEndGame( std::string text );
+            void setPause(  );
         protected:
         private:
             sf::Texture healthImg;
@@ -21,12 +22,14 @@ namespace uGE
             sf::Texture timeImg;
             sf::Texture scoreImg;
             sf::Texture endImg;
+            sf::Texture startImg;
 
             sf::Sprite healthSprite;
             sf::Sprite spiritSprite;
             sf::Sprite timeSprite;
             sf::Sprite scoreSprite;
             sf::Sprite endSprite;
+            sf::Sprite startSprite;
 
             sf::Font font;
             sf::Text healthText;
@@ -37,6 +40,7 @@ namespace uGE
             sf::Text endScoreText;
 
             bool gameEnd;
+            bool gamePaused;
             float endAlpha;
             float endAlpha2;
             int scoreCounter;

@@ -43,6 +43,12 @@ MyGame::~MyGame()
 
 bool MyGame::load()
 {
+    uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png");
+    uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" );  //change model
+    uGE::AssetManager::loadTexture( "Assets/Textures/bullet.png");     //change texture
+    uGE::AssetManager::loadTexture( "Assets/Textures/hitUV.png");
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_1.obj" ) ;
+    uGE::AssetManager::loadTexture( "Assets/Models/Zombie_walk/zombie 1 texture1.png");
     uGE::AssetManager::loadTexture( "Assets/Textures/viking.png" ); // Load texture beforehand. So it won't do it ingame which causes lag
 	uGE::SceneManager::add( uGE::Shader::load( "Shaders/diffuse.vs", "Shaders/diffuse.fs") );
     uGE::Camera * camera = new uGE::Camera( "Camera", glm::vec3( 0, 10, -12 ) );

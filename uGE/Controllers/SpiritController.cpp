@@ -95,7 +95,7 @@ namespace uGE {
 	    else if(_percentSucked > 0) _percentSucked -= (Time::step()*80.f + _percentSucked/15);
 	    if(_percentSucked >= 96)
         {
-            _followee->changeHealth( 5 );
+            _followee->changeHealth( 20 );
             SoundManager::playSFX("SpiritCollect");
             die();//DIE
         }

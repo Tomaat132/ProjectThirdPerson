@@ -2,7 +2,8 @@
 #include "GameObject.hpp"
 #include "SceneManager.hpp"
 #include "Time.hpp"
-
+#include "Collider.hpp"
+#include "CollisionDetection.hpp"
 namespace uGE {
 	BulletController::BulletController( GameObject * parent, GameObject * shooter)
 	:	Controller( parent ), _shooter( shooter )
@@ -31,4 +32,15 @@ namespace uGE {
 			uGE::SceneManager::del(_parent);
 		}
 	}
+	void BulletController::onCollision( CollisionResult * result )
+    {
+        if( result->colliderTypeB == Collider::BOX ) {
+            uGE::SceneManager::del(_parent);
+        }
+        if( result->colliderTypeB == Collider::SPHERE ) {
+            if( result->objectB->getName() == "Cone_tree" || result->objectB->getName() == "Tree_dead" ) {
+                uGE::SceneManager::del(_parent);
+            }
+        }
+    }
 }
