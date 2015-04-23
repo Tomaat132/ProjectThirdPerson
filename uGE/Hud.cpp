@@ -88,7 +88,7 @@ namespace uGE
         window->draw( scoreSprite );
 
         healthText.setString( to_s( SceneManager::_player->getHealth() ) );
-        waveText.setString( "Wave: "+ to_s( SceneManager::_player->getShootable() )+ "\nNext in: 5" );
+        waveText.setString( "Level: "+ to_s( uGE::SceneManager::zombieLevel ) );
         timeText.setString( formatTime( SceneManager::_player->getTimeLeft() ) );
         scoreText.setString( to_s( SceneManager::_player->getScore() ) );
 
