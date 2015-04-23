@@ -26,8 +26,8 @@ namespace uGE {
 	ZombieSpawnController::ZombieSpawnController( GameObject * parent, GameObject * followee )
 	:	Controller( parent ), _followee( followee )
 	{
-	    _timeTillSpawn = 1.0f;
-	    _spawnTime = 1.5f;
+	    _timeTillSpawn = 15.0f;
+	    _spawnTime = 5.0f;
         srand(time(NULL));
         _maxZombies = 20;
 
@@ -40,13 +40,13 @@ namespace uGE {
 
 	void ZombieSpawnController::update()
 	{
-	    _timeTillSpawn -= Time::step();
+	    if( zombies.size() == 0 ) _timeTillSpawn -= Time::step();
 
 
 		//spawn zombie
         if(_timeTillSpawn <= 0 && zombies.size() < _maxZombies)
         {
-            for(auto i = 0; i < 1; i++)
+            for(auto i = 0; i < 5; i++)
                 spawn();
             _timeTillSpawn = _spawnTime;
         }

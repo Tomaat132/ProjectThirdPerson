@@ -53,7 +53,7 @@ namespace uGE {
 	void PlayerController::update()
 	{
 	    glm::vec3 oldPosition = _parent->getPosition();
-	    float speed = 26.f * Time::step();
+	    float speed = 10.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
         if( _vikingTime > 0) { _vikingTime -= Time::step(); }
 
@@ -90,7 +90,7 @@ namespace uGE {
 			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
 
             //Melee Controls
-			if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
+			/*if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
 			{
 			    _isAttacking = true;
                 _parent->playNow("MELEE");
@@ -99,7 +99,7 @@ namespace uGE {
                 _shootTime = 0.3f;
 			} else {
                 _isAttacking = false;
-			}
+			}*/
 
 			//Shooting controls
 			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
@@ -129,11 +129,15 @@ namespace uGE {
 		}
 		//checks here if the zombie is able to hit again Should have made this into a function, really...
 		zombieHitTime -=Time::step();
+		if(zombieHitTime <= 0.5f){
+                _parent->getBody()->setTexture(uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png"));
+		}
 		if(zombieHitTime <= 0){
+                //_parent->getBody()->setTexture(uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png"));
                 zombieHitTime = -1;
 		//and makes sure it stay's put at a certain position in time.
 		}
-		regenerate();
+		//regenerate();
 	}//end of update function
 
 	void PlayerController::vacuum()
@@ -145,7 +149,7 @@ namespace uGE {
         for( unsigned int i = 0; i < SpiritSpawnController::spirits.size(); i++){
             Spirit* spirit = SpiritSpawnController::spirits[i];
             glm::vec3 distanceVec = spirit->getPosition() - _parent->getPosition();
-            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 14.f){
+            if( glm::distance( spirit->getPosition(), _parent->getPosition()) < 8.f){
                 if(glm::dot( _parent->getDirection(), glm::normalize(distanceVec) ) > 0.5f ||  glm::distance( spirit->getPosition(), _parent->getPosition()) < 4.f){
                     spirit->isTargeted( true );
                     break;
@@ -193,19 +197,23 @@ namespace uGE {
 
 	void PlayerController::shoot()
 	{
-        if(_parent->getShootable() > 0 ) {
+        //if(_parent->getShootable() > 0 ) {
             SoundManager::playSFX( "Launch" );
             uGE::GameObject * bullet = new uGE::GameObject( "Bullet");
                 uGE::Body * bulletBody = new uGE::Body( bullet );
                     bulletBody->setMesh( uGE::AssetManager::loadMesh( "Assets/Models/spirit.obj" ) );  //change model
                     bulletBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Textures/spirit.png") );     //change texture
+                    bulletBody->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
+
                 bullet->setBody( bulletBody );
                 bullet->setCollider(new uGE::SphereCollider(bullet ,1.45f));
                 bullet->setController( new uGE::BulletController( bullet, _parent ) );
                 bullet->setPosition( _parent->getPosition() );
                uGE::SceneManager::add( bullet );
-               _parent->changeShootable(-1);
-        }
+             //bullet->getMaterial()->setBlendMode( uGE::Material::BlendMode::ALPHA );
+
+               //_parent->changeShootable(-1);
+       // }
 	}
 
 	void PlayerController::regenerate(){
@@ -236,7 +244,7 @@ namespace uGE {
                     SoundManager::playSFX( "PlayerHit" );
 
                     _parent->changeHealth(-10);//lowers health by 10 every second they touch.
-
+                    _parent->getBody()->setTexture(uGE::AssetManager::loadTexture( "Assets/Textures/hitUV.png"));
                 }
 
             }

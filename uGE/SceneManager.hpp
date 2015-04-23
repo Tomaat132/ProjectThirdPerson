@@ -36,7 +36,7 @@ namespace uGE {
 
 			static bool paused;
 			static bool fullscreen;
-
+            static int waveCount;
             static std::vector< glm::vec3 > _spawnLocations;
             static std::vector< glm::vec3 > _zombieSpawnLocations;
 			static void add( Camera * camera );

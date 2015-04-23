@@ -23,7 +23,7 @@
 namespace uGE{
 
     ZombieController::ZombieController( uGE::GameObject * parent, uGE::GameObject * followee)
-	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformTimer( 0 ), _transformIntervalTimer( 0 ), _speed( 5.f ), _eightDir( 0 )
+	:	Controller( parent ), _followee( followee ), _idleTimer( 0 ), _transformTimer( 0 ), _transformIntervalTimer( 0 ), _speed( 6.f ), _eightDir( 0 )
     {
         _state = IDLE;
         srand(time(NULL));
@@ -61,12 +61,13 @@ namespace uGE{
 				if(_transformTimer <= 0.f){
 					//can use nice animation here
 					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/viking.png" ) );
-					_zombieParent->setViking(true);
-					_state = IDLE;
+                    SceneManager::del(_parent);
+                    SceneManager::_player->addScore( 100 );
 				}
+
 				if(_transformIntervalTimer <= 0.f){
 					_eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
-					_transformIntervalTimer = 0.03f;
+					_transformIntervalTimer = 0.03f;    // time the zombie is walking in a direction
 				}
 				move(_eightDir);
 				//_zombieParent->playNow("WALK");
@@ -172,7 +173,7 @@ namespace uGE{
                     if(_state != TRANSFORM && !_zombieParent->getViking()){   //ZOMBIE BEHAVIOUR:
                         _state = TRANSFORM;
                         SoundManager::playSFX( "ZombieDie" );
-                        _transformTimer = 1.3f;
+                        _transformTimer = 1.2f;
                     }
                     SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
                     //delete result->objectB;

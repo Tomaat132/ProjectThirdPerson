@@ -34,6 +34,7 @@ namespace uGE {
 	CollisionDetection * SceneManager::_collision;
 	bool SceneManager::paused = false;
 	bool SceneManager::fullscreen = false;
+	int SceneManager::waveCount = 0;
 
 	SceneManager::SceneManager()
 	{
