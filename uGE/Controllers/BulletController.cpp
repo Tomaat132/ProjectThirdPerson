@@ -26,7 +26,7 @@ namespace uGE {
 
 
 	    _destroyTime -= Time::step();
-	    _parent->transform = glm::translate( _parent->transform, glm::vec3( sin(_destroyTime*15)/5, 0 ,1 ) * _speed * Time::step() );
+	    transform = glm::translate( _parent->transform, glm::vec3( sin(_destroyTime*15)/5, 0 ,1 ) * _speed * Time::step() );
         if( _destroyTime <= 0.0f ) {
 			uGE::SceneManager::del(_parent);
 		}

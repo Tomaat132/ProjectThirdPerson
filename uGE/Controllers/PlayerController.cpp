@@ -42,6 +42,7 @@ namespace uGE {
 	    _shootTime = 0.0f;
 		_vikingTime = 0.0f;
 	    _parent->setDirection(glm::vec3(-1.f, 0.f, 0.f));
+	    _isWalking = false;
 	    _isSucking = false;
 	}
 
@@ -85,10 +86,30 @@ namespace uGE {
 		}
         if(!_isSucking)
         {
-            if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) rotate[2] = 1.0f;
-			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) rotate[2] = -1.0f;
-			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) rotate[0] = 1.f;
-			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) rotate[0] = -1.f;
+            if ( sf::Keyboard::isKeyPressed( sf::Keyboard::W ) ) {
+                rotate[2] = 1.0f;
+                _isWalking = true;
+            }
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::S ) ) {
+                rotate[2] = -1.0f;
+                _isWalking = true;
+            }
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::A ) ) {
+                rotate[0] = 1.f;
+                _isWalking = true;
+            }
+			if ( sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) {
+                rotate[0] = -1.f;
+                _isWalking = true;
+            }
+
+            if(!sf::Keyboard::isKeyPressed( sf::Keyboard::W ) && !sf::Keyboard::isKeyPressed( sf::Keyboard::S ) && !sf::Keyboard::isKeyPressed( sf::Keyboard::A ) && !sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) {
+                _isWalking = false;
+            }
+
+			if(_isWalking) {
+                _parent->playNow("WALK");
+			}
 
             //Melee Controls
 			/*if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
@@ -120,10 +141,9 @@ namespace uGE {
 			transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
 			_parent->setDirection( rotate );
 			_parent->setRotation( rotate );
-			_parent->playNow("WALK");
 			//_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
 		}
-		else if( _parent->getPosition() == oldPosition && !sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
+		else if( _parent->getPosition() == oldPosition && !sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && !_isWalking && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
 		{
 			_parent->playNow("IDLE");
 			//_parent->getBody()->getAnimation()->StopAnimation();
