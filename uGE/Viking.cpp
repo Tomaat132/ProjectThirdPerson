@@ -20,7 +20,7 @@ namespace uGE {
     void Viking::startWinSeq()
     {
         std::cout << "You beat the game!" << std::endl;
-        WinSequence * winSeq = new WinSequence();
+//        WinSequence * winSeq = new WinSequence();
     }
 
 }

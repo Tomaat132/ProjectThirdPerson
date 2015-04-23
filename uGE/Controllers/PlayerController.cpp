@@ -52,6 +52,7 @@ namespace uGE {
 
 	void PlayerController::update()
 	{
+	    glm::vec3 oldPosition = _parent->getPosition();
 	    float speed = 26.f * Time::step();
         if( _shootTime > 0 ) { _shootTime -= Time::step(); }
         if( _vikingTime > 0) { _vikingTime -= Time::step(); }
@@ -65,7 +66,6 @@ namespace uGE {
 		if( sf::Keyboard::isKeyPressed( sf::Keyboard::L ) ) {
 			if ( _isSucking == false ) {// begin event
 				_isSucking = true;      // By setting _isSucking on true, previous frame is separated from current frame.
-				_parent->playNow("SUCK");
 				_shootTime = 0.5f;
 				vacuum();
 			}
@@ -122,7 +122,7 @@ namespace uGE {
 			_parent->playNow("WALK");
 			//_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
 		}
-		else if(glm::length(rotate) <= 0 && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
+		else if( _parent->getPosition() == oldPosition && !sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
 		{
 			_parent->playNow("IDLE");
 			//_parent->getBody()->getAnimation()->StopAnimation();
@@ -138,6 +138,7 @@ namespace uGE {
 
 	void PlayerController::vacuum()
 	{
+        _parent->playNow("SUCK");
         SoundManager::playSFX( "Sucking" );
         //---- Spawn particles ----
         //---- End Spawn  ------
