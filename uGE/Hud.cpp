@@ -23,7 +23,7 @@ namespace uGE
         endImg.loadFromFile( "Assets/Textures/Hud/end screen thing.png" );
 
         healthSprite.setTexture( healthImg );
-        healthSprite.setPosition( 448, 20 );
+        healthSprite.setPosition( 12, 20 );
 
         spiritSprite.setTexture( spiritImg );
         spiritSprite.setPosition( 20, 20 );
@@ -44,12 +44,12 @@ namespace uGE
         healthText.setCharacterSize( 48 );
         healthText.setColor( sf::Color::White );
         healthText.setFont( font );
-        healthText.setPosition( 480, 52 );
+        healthText.setPosition( 52, 56 );
 
-        spiritText.setCharacterSize( 40 );
-        spiritText.setColor( sf::Color::White );
-        spiritText.setFont( font );
-        spiritText.setPosition( 52, 96 );
+        waveText.setCharacterSize( 19 );
+        waveText.setColor( sf::Color::White );
+        waveText.setFont( font );
+        waveText.setPosition( 740, 30 );
 
         timeText.setCharacterSize( 40 );
         timeText.setColor( sf::Color::White );
@@ -83,17 +83,17 @@ namespace uGE
         window->pushGLStates();
 
         window->draw( healthSprite );
-        window->draw( spiritSprite );
+        //window->draw( spiritSprite );
         window->draw( timeSprite );
         window->draw( scoreSprite );
 
         healthText.setString( to_s( SceneManager::_player->getHealth() ) );
-        spiritText.setString( to_s( SceneManager::_player->getShootable() ) );
+        waveText.setString( "Wave: "+ to_s( SceneManager::_player->getShootable() )+ "\nNext in: 5" );
         timeText.setString( formatTime( SceneManager::_player->getTimeLeft() ) );
         scoreText.setString( to_s( SceneManager::_player->getScore() ) );
 
         drawWithOutline( &healthText, window );
-        drawWithOutline( &spiritText, window, sf::Color::Cyan );
+        drawWithOutline( &waveText, window, sf::Color::White );
         drawWithOutline( &timeText, window );
         drawWithOutline( &scoreText, window );
 

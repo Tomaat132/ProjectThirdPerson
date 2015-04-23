@@ -30,7 +30,7 @@ namespace uGE
 
             sf::Font font;
             sf::Text healthText;
-            sf::Text spiritText;
+            sf::Text waveText;
             sf::Text timeText;
             sf::Text scoreText;
             sf::Text endText;

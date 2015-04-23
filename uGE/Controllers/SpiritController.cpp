@@ -26,7 +26,7 @@ namespace uGE {
 	    _velocity = glm::vec3(0.f, 4.f, 0.f);
         srand(time(NULL));
 	    _targeted = false;
-	    _innerLength = 2.f;
+	    _innerLength = 0.5f;
       //  _startPos = _parent->getPosition();
 
 	}
@@ -56,11 +56,11 @@ namespace uGE {
                 float angle = (float(rand())/ float(RAND_MAX))*2.f* _PI;
                 float disX;
                 float disZ;
-                float particleSpeed = 1.f + float(rand())/ float(RAND_MAX) *2;
+                float particleSpeed = 0.5f + float(rand())/ float(RAND_MAX) ;
                 disX = (1.0f * float(rand())/ float(RAND_MAX) -0.5f);
                 disZ = (1.0f * float(rand())/ float(RAND_MAX) -0.5f);
                 _distortion = (glm::vec3 ( disX + glm::cos(angle)*_innerLength, (5.0f * float(rand())/ float(RAND_MAX) -2.5f), disZ + glm::sin(angle)*_innerLength ));
-                if(_percentSucked >= 0) _velocity = glm::vec3(0.f, 0.f, 0.f);//(_followee->getPosition()-_parent->getPosition())*_percentSucked/100.f ;
+                if(_percentSucked >= 0) _velocity = glm::vec3(0.f, 0.f, 0.f);//(_followee->getPosition(7)-_parent->getPosition())*_percentSucked/100.f ;
                 emit(glm::vec3(glm::cos(angle), 0.f, glm::sin(angle)), particleSpeed);
             }
             _timeTillEmit = _emitTime;
@@ -90,11 +90,11 @@ namespace uGE {
     }
 	void SpiritController::getSucked()
 	{
-	    if(_targeted ) _percentSucked += Time::step()*80.f + _percentSucked/15;
+	    if(_targeted ) _percentSucked += Time::step()*150.f + _percentSucked/15;
 	    else if(_percentSucked > 0) _percentSucked -= (Time::step()*80.f + _percentSucked/15);
 	    if(_percentSucked >= 96)
         {
-            _followee->changeShootable(1);
+            _followee->changeHealth( 5 );
             SoundManager::playSFX("SpiritCollect");
             die();//DIE
         }
