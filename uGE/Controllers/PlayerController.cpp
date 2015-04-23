@@ -135,7 +135,7 @@ namespace uGE {
 		if(zombieHitTime <= 0){
                 //_parent->getBody()->setTexture(uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png"));
                 zombieHitTime = -1;
-		//and makes sure it stay's put at a certain position in time.
+		//and makes sure it stays put at a certain position in time.
 		}
 		//regenerate();
 	}//end of update function
