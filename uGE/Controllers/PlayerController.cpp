@@ -22,6 +22,7 @@
 #include "SceneManager.hpp"
 #include "Camera.hpp"
 #include "Collider.hpp"
+#include "Hud.hpp"
 #include "CollisionDetection.hpp"
 #include "Time.hpp"
 #include "Logger.h"
@@ -50,9 +51,16 @@ namespace uGE {
 	{
         //dtor
 	}
-
-	void PlayerController::update()
+    float _scoreTimer = 5.f;
+    void PlayerController::update()
 	{
+
+	     _scoreTimer -= Time::step();
+	    if(_scoreTimer <= 0.f) {
+                _scoreTimer += 5.f;
+                _parent->addScore( 30 );
+	    }
+
 	    float speed = 10.f * Time::step();
 	    glm::vec3 oldPosition = _parent->getPosition();
 
@@ -160,7 +168,8 @@ namespace uGE {
 		}
 		//regenerate();
 	}//end of update function
-
+#include "Collider.hpp"
+#include "CollisionDetection.hpp"
 	void PlayerController::vacuum()
 	{
         _parent->playNow("SUCK");

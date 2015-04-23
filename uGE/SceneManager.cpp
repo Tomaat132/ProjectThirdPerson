@@ -32,7 +32,7 @@ namespace uGE {
     std::vector< glm::vec3 > SceneManager::_spawnLocations;
     std::vector< glm::vec3 > SceneManager::_zombieSpawnLocations;
 	CollisionDetection * SceneManager::_collision;
-	bool SceneManager::paused = false;
+	bool SceneManager::paused = true;
 	bool SceneManager::fullscreen = false;
 	int SceneManager::zombieLevel = 0;
 
@@ -103,6 +103,7 @@ namespace uGE {
                 }
 
                 else if( event.key.code == sf::Keyboard::P ) {
+                    _hud->setPause();
                     paused = !paused;
                 }
 

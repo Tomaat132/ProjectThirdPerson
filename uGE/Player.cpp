@@ -13,7 +13,7 @@
 namespace uGE
 {
     Player::Player()
-    :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 300.f ), time( 0.f )
+    :GameObject( "Player" ), _shootable( 5 ), _score( 0 ), _timeLeft( 300.f ), time( 0.f ), _scoreTimer ( 5.f )
     {
         idle.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_Idle.obj" ) );
         walk.push_back( AssetManager::loadMesh( "Assets/Models/Undertaker_walk/U_W_1.obj" ) );
@@ -91,6 +91,7 @@ namespace uGE
    // }
     void Player::update()
 	{
+
         GameObject::update();
 
 		_timeLeft -= Time::step();

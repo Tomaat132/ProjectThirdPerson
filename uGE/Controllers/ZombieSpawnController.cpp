@@ -27,10 +27,10 @@ namespace uGE {
 	:	Controller( parent ), _followee( followee )
 	{
 	    _timeTillSpawn = 5.0f;
-	    _spawnTime = 2.0f;
+	    _spawnTime = 1.5f;
         srand(time(NULL));
-        _maxZombies = 25;
-        _zombieLvlUpTimer = 20.f;
+        _maxZombies = 30;
+        _zombieLvlUpTimer = 15.f;
 
 	}
 

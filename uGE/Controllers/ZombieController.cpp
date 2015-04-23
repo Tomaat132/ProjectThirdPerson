@@ -63,7 +63,6 @@ namespace uGE{
 					//can use nice animation here
 					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/viking.png" ) );
                     SceneManager::del(_parent);
-                    SceneManager::_player->addScore( 100 );
 				}
 
 				if(_transformIntervalTimer <= 0.f){
@@ -151,7 +150,6 @@ namespace uGE{
 
         if(rotate != glm::vec3(0,0,0)){ _parent->setDirection(glm::normalize(rotate));}
 
-
         if( aDir > -1) {transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * _speed * Time::step());}
 		if(rotate != glm::vec3(0,0,0)) {_parent->setRotation(glm::normalize(rotate));}
     }
@@ -175,7 +173,9 @@ namespace uGE{
                         _state = TRANSFORM;
                         SoundManager::playSFX( "ZombieDie" );
                         _transformTimer = 1.2f;
+                        SceneManager::_player->addScore( 100 );
                     }
+
                     SceneManager::del( result->objectB );//->setPosition( _parent->getPosition() - result->overlap );
                     //delete result->objectB;
                 }
