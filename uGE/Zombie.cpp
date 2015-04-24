@@ -31,6 +31,7 @@ namespace uGE {
 	    attack.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_attack/Z_A_1.obj" ) );
 	    attack.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_attack/Z_A_2.obj" ) );
         death.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_1.obj" ) );
+        death.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_3.obj" ) );
         death.push_back( AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_2.obj" ) );
         activeAction = "IDLE";
         currentAnim = idle;
@@ -58,10 +59,7 @@ namespace uGE {
 	void Zombie::updateFrame()
 	{
 	    if( activeAction != "DEATH" ) ++frame;
-	    else {
-	        frame = 0;
-            if(frame < currentAnim.size()) ++frame;
-        }
+	    else { if(frame < ( currentAnim.size() - 1)) ++frame; }
         Logger::print( Logger::INFO, "Anim: " + activeAction + ", Frame: " + to_s(frame) );
 	    if( activeAction != "DEATH" ) { if(frame >= currentAnim.size()) frame = 0; }
 	    this->getBody()->setMesh(currentAnim[frame]);
@@ -89,6 +87,7 @@ namespace uGE {
         {
             activeAction = "DEATH";
             currentAnim = death;
+            frame = 0;
         }
 	}
 

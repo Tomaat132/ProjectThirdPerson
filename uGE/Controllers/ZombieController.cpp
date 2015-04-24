@@ -64,6 +64,7 @@ namespace uGE{
 					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/viking.png" ) );
                     SceneManager::del(_parent);
 				}
+				if(_parent->getColliders().size() > 0) _parent->removeCollider();
                 _zombieParent->playNow("DEATH");
 				/*if(_transformIntervalTimer <= 0.f){
 					_eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0

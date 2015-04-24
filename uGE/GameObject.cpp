@@ -86,6 +86,11 @@ namespace uGE {
 		_colliders.push_back( collider );
 	}
 
+	void GameObject::removeCollider()
+	{
+	    _colliders.clear();
+	}
+
 	std::vector<Collider *> GameObject::getColliders()
 	{
         return _colliders;

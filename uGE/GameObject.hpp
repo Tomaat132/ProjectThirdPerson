@@ -44,6 +44,7 @@ namespace uGE {
 			void setRotation( glm::vec3 rotation );
 			Material * getMaterial();
 			void setCollider( Collider * collider );
+			void removeCollider(  );
 			std::vector<Collider *> getColliders();
 			void setController( Controller * controller );
 			Controller* getController();
