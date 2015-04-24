@@ -70,7 +70,7 @@ namespace uGE {
             zombie->setBody( zombieBody );
             zombie->setController( new uGE::ZombieController( zombie, _followee) );
             zombie->setCollider( new uGE::SphereCollider(zombie, 25.0f));
-            zombie->setCollider( new uGE::SphereCollider(zombie, 1.25f, "zombieHitbox"));
+            zombie->setCollider( new uGE::SphereCollider(zombie, 0.75f, "zombieHitbox"));
 
            auto temp = uGE::SceneManager::_zombieSpawnLocations.size();
             unsigned int r = rand() % temp;//uGE::SceneManager::getSpawnLoc().end();
