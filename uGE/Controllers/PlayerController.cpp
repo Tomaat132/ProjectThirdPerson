@@ -119,9 +119,6 @@ namespace uGE {
 			} else {
                 _parent->playNow("IDLE");
 			}
-			else {
-                _parent->playNow("IDLE");
-			}
 
             //Melee Controls
 			/*if( sf::Keyboard::isKeyPressed( sf::Keyboard::J ) && _shootTime <= 0.f )
