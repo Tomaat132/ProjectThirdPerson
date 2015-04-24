@@ -43,6 +43,20 @@ MyGame::~MyGame()
 
 bool MyGame::load()
 {
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Zombie_idle.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_1.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_2.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_3.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_4.obj" );
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_5.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_6.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_7.obj" );
+    uGE:: AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_8.obj" );
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_walk/Z_W_9.obj" );
+	uGE::AssetManager::loadMesh( "Assets/Models/Zombie_attack/Z_A_1.obj" );
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_attack/Z_A_2.obj" );
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_1.obj" );
+    uGE::AssetManager::loadMesh( "Assets/Models/Zombie_death/Z_D_2.obj" );
     uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png");
     uGE::AssetManager::loadMesh( "Assets/Models/bullet.obj" );  //change model
     uGE::AssetManager::loadTexture( "Assets/Textures/bullet.png");     //change texture
@@ -61,7 +75,7 @@ bool MyGame::load()
             playerBody->setTexture( uGE::AssetManager::loadTexture( "Assets/Models/Undertaker_walk/UV_texture.png") );
         player->setBody( playerBody );
         //player->setCollider( new uGE::BoxCollider(player) );
-        player->setCollider( new uGE::SphereCollider( player, 1.75f ) );
+        player->setCollider( new uGE::SphereCollider( player, 0.75f ) );
         player->setController( new uGE::PlayerController( player ) );
         player->getMaterial()->setBlendMode( uGE::Material::BlendMode::NORMAL );
     uGE::SceneManager::_player = player;

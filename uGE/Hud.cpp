@@ -43,7 +43,7 @@ namespace uGE
         startSprite.setTexture( startImg );
         startSprite.scale( .75f, .75f );
         startSprite.setColor( sf::Color( 255, 255, 255, 1 ) );
-        startSprite.setPosition( 128, 96 );
+        startSprite.setPosition( 64, 96 );
 
         font.loadFromFile( "Assets/VIKING-N.ttf" );
 
@@ -73,7 +73,7 @@ namespace uGE
         endText.setPosition( 200, 250 );
         endText.setColor( sf::Color( 255, 255, 255, 0 ) );
 
-        endScoreText.setCharacterSize( 24 );
+        endScoreText.setCharacterSize( 30 );
         endScoreText.setFont( font );
         endScoreText.setPosition( 200, 540 );
         endScoreText.setColor( sf::Color( 255, 255, 255, 0 ) );

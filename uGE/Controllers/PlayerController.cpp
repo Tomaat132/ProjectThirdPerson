@@ -114,9 +114,11 @@ namespace uGE {
             if(!sf::Keyboard::isKeyPressed( sf::Keyboard::W ) && !sf::Keyboard::isKeyPressed( sf::Keyboard::S ) && !sf::Keyboard::isKeyPressed( sf::Keyboard::A ) && !sf::Keyboard::isKeyPressed( sf::Keyboard::D ) ) {
                 _isWalking = false;
             }
-
 			if(_isWalking) {
                 _parent->playNow("WALK");
+			}
+			else {
+                _parent->playNow("IDLE");
 			}
 
             //Melee Controls
@@ -130,7 +132,6 @@ namespace uGE {
 			} else {
                 _isAttacking = false;
 			}*/
-
 			//Shooting controls
 			if(sf::Keyboard::isKeyPressed( sf::Keyboard::K ) && _shootTime <= 0.f)
 			{
@@ -146,12 +147,14 @@ namespace uGE {
 
 		if( glm::length(rotate) > 0 ) {
 			rotate = glm::normalize(rotate);
+            _parent->setRotation( rotate );
 			transform = glm::translate( transform, glm::vec3(0, 0, 1.f) * speed );
 			_parent->setDirection( rotate );
-			_parent->setRotation( rotate );
+			//_parent->setRotation( rotate );
 			//_parent->getBody()->getAnimation()->PlayAnimation(_parent, "true");
 		}
-		else if( _parent->getPosition() == oldPosition && !sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && !_isWalking && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
+		//else
+        if( _parent->getPosition() == oldPosition && !sf::Keyboard::isKeyPressed( sf::Keyboard::L ) && !_isWalking && !_isAttacking && !_isShooting && _parent->getHealth() > 0)
 		{
 			_parent->playNow("IDLE");
 			//_parent->getBody()->getAnimation()->StopAnimation();
@@ -168,8 +171,7 @@ namespace uGE {
 		}
 		//regenerate();
 	}//end of update function
-#include "Collider.hpp"
-#include "CollisionDetection.hpp"
+
 	void PlayerController::vacuum()
 	{
         _parent->playNow("SUCK");
