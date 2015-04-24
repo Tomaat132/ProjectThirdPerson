@@ -64,12 +64,12 @@ namespace uGE{
 					_zombieParent->getBody()->setTexture( AssetManager::loadTexture( "Assets/Textures/viking.png" ) );
                     SceneManager::del(_parent);
 				}
-
-				if(_transformIntervalTimer <= 0.f){
+                _zombieParent->playNow("DEATH");
+				/*if(_transformIntervalTimer <= 0.f){
 					_eightDir = rand() %8;//INITIALISE RANDOM DIRECTION between 7 and 0
 					_transformIntervalTimer = 0.015f;    // time the zombie is walking in a direction
 				}
-				move(_eightDir);
+				move(_eightDir);*/
 				//_zombieParent->playNow("WALK");
 
 				_transformTimer -= Time::step();

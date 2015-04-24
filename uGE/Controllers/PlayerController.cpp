@@ -117,6 +117,8 @@ namespace uGE {
 
 			if(_isWalking) {
                 _parent->playNow("WALK");
+			} else {
+                _parent->playNow("IDLE");
 			}
 
             //Melee Controls

@@ -57,9 +57,13 @@ namespace uGE {
 
 	void Zombie::updateFrame()
 	{
-	    ++frame;
-        //Logger::print( Logger::INFO, "Anim: " + activeAction + ", Frame: " + to_s(frame) );
-	    if(frame >= currentAnim.size()) frame = 0;
+	    if( activeAction != "DEATH" ) ++frame;
+	    else {
+	        frame = 0;
+            if(frame < currentAnim.size()) ++frame;
+        }
+        Logger::print( Logger::INFO, "Anim: " + activeAction + ", Frame: " + to_s(frame) );
+	    if( activeAction != "DEATH" ) { if(frame >= currentAnim.size()) frame = 0; }
 	    this->getBody()->setMesh(currentAnim[frame]);
 	}
 
